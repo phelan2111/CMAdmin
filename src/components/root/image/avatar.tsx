@@ -7,7 +7,7 @@ interface IAvatarProps {
 	onClick?: VoidFunction;
 }
 
-function Avatar({ className = '', ...props }: IAvatarProps) {
+function Avatar({ className = 'h-8 w-8 ', ...props }: IAvatarProps) {
 	if (props.children) {
 		return (
 			<div
@@ -22,7 +22,7 @@ function Avatar({ className = '', ...props }: IAvatarProps) {
 		<img
 			onClick={props.onClick}
 			aria-hidden
-			className={`h-8 w-8 rounded-full object-cover ${className}`}
+			className={`rounded-full object-cover ${className}`}
 			src={props.src}
 			alt={props.src}
 		/>

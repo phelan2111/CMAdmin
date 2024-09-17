@@ -10,8 +10,8 @@ import { PATH } from '@/routes/config';
 function SignIn() {
 	const { redirectPage } = useRedirect();
 	return (
-		<div className='hidden lg:flex m-auto p-6 relative z-10 w-full items-center justify-center h-fit'>
-			<section className='flex bg-white/10 backdrop-blur-2xl p-6 rounded-2xl gap-6 max-w-96 w-full text-white'>
+		<div className='lg:flex m-auto p-6 relative z-10 w-full items-center justify-center h-fit'>
+			<section className='flex bg-white/10 backdrop-blur-2xl m-auto p-6 rounded-2xl gap-6 max-w-96 w-full text-white'>
 				<article className='flex flex-col gap-10 w-full'>
 					<div className='flex flex-col gap-1'>
 						<h4 className='text-3xl uppercase font-semibold'>

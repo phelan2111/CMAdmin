@@ -1,4 +1,4 @@
-import { isIntoView } from '@/utils/helper';
+import { Helper } from '@/utils/helper';
 import { Fragment, ReactNode, useEffect } from 'react';
 
 interface IAnimationScrollElementProps {
@@ -20,14 +20,14 @@ function AnimationScrollElement(props: IAnimationScrollElementProps) {
 			elementScroll.addEventListener('scroll', () => {
 				if (element) {
 					if (props.animation) {
-						if (isIntoView(element)) {
+						if (Helper.isIntoView(element)) {
 							element.classList.add(props.animation);
 						} else {
 							element.classList.remove(props.animation);
 						}
 					}
 					if (props.onScroll) {
-						props.onScroll(isIntoView(element));
+						props.onScroll(Helper.isIntoView(element));
 					}
 				}
 			});

@@ -10,9 +10,7 @@ function AuthWrapper() {
 			className='w-screen h-screen flex justify-center bg-wrapperAuth relative overflow-hidden bg-cover'>
 			<div className='max-w-[1920px] m-auto w-full lg:flex lg:p-6 lg:gap-6'>
 				<div className='flex w-full gap-6'>
-					<div className='w-full lg:flex lg:gap-6 lg:flex-col'>
-						<Outlet />
-					</div>
+					<Outlet />
 				</div>
 			</div>
 		</main>
