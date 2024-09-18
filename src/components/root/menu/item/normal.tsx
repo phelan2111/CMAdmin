@@ -4,10 +4,11 @@ interface IMenuItemProps {
 	children?: ReactNode;
 	renderExpandedProps?: () => ReactNode;
 	onClick?: VoidFunction;
+	className?: string;
 }
-function MenuItem(props: IMenuItemProps) {
+function MenuItem({ className = '', ...props }: IMenuItemProps) {
 	return (
-		<li aria-hidden onClick={props.onClick} className='cursor-pointer pl-3'>
+		<li aria-hidden onClick={props.onClick} className={`cursor-pointer pl-3 ${className}`}>
 			{props.children}
 		</li>
 	);

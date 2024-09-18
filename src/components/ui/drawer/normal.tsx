@@ -1,148 +1,149 @@
 import LogoComponent from '../common/logo';
 import Menu from '@/components/root/menu/normal';
 import MenuItem from '@/components/root/menu/item/normal';
-import {
-	GoBook,
-	GoChevronDown,
-	GoCopilot,
-	GoStack,
-	GoChevronRight,
-	GoHome,
-} from 'react-icons/go';
+import { GoBook, GoChevronDown, GoCopilot, GoStack, GoHome, GoHubot } from 'react-icons/go';
 import { ReactNode, useMemo, useState } from 'react';
 import { Helper } from '@/utils/helper';
 import { PATH } from '@/routes/config';
-enum LAYER {
-	parents = 0,
-	child,
-}
+import Localize from '@/langs';
+
 interface IItemDrawer {
 	icon?: ReactNode;
 	text: string;
 	id: string;
 	path: string;
 	children?: IItemDrawer[];
-	layer: LAYER;
+	classTargeted?: string;
+	classTargetedItem?: string;
 }
 const drawer: IItemDrawer[] = [
 	{
 		id: Helper.randomKey(),
 		path: PATH.HOME,
-		text: 'Home',
+		text: 'HOME',
 		icon: <GoHome className='text-xl' />,
-		layer: LAYER.parents,
+		classTargeted: 'bg-white/20',
 	},
 	{
 		id: Helper.randomKey(),
 		path: PATH.HOME,
-		text: 'Music',
+		text: 'ACCOUNT',
+		icon: <GoHubot className='text-xl' />,
+		classTargeted: 'bg-white/20',
+	},
+	{
+		id: Helper.randomKey(),
+		path: PATH.HOME,
+		text: 'MUSIC',
 		icon: <GoStack className='text-xl' />,
-		layer: LAYER.parents,
+		classTargetedItem: 'h-[132px]',
 		children: [
 			{
 				id: Helper.randomKey(),
 				path: PATH.HOME,
-				text: 'Album',
+				text: 'ALBUM',
 				icon: <GoStack className='text-xl' />,
-				layer: LAYER.child,
+				classTargeted: 'bg-white/20',
 			},
 			{
 				id: Helper.randomKey(),
 				path: PATH.HOME,
-				text: 'Playlist',
+				text: 'PLAYLIST',
 				icon: <GoStack className='text-xl' />,
-				layer: LAYER.child,
+				classTargeted: 'bg-white/20',
 			},
 		],
 	},
 	{
 		id: Helper.randomKey(),
 		path: PATH.HOME,
-		text: 'Artists',
+		text: 'ARTIST',
 		icon: <GoCopilot className='text-xl' />,
-		layer: LAYER.parents,
+		classTargeted: 'bg-white/20',
 	},
 	{
 		id: Helper.randomKey(),
 		path: PATH.HOME,
-		text: 'Podcast',
+		text: 'PODCAST',
 		icon: <GoBook className='text-xl' />,
-		layer: LAYER.parents,
+		classTargeted: 'bg-white/20',
 	},
 ];
 
 function DrawerNormal() {
 	const [state, setState] = useState<[string, string]>(['', '']); // [parentsId, childrenId]
 
-	const idItemDrawerList: [string, string] = useMemo(
-		() => [...state],
-		[state],
-	);
+	const idItemDrawerList: [string, string] = useMemo(() => [...state], [state]);
 
-	const handleParentExist = (id: string) => {
-		const index = idItemDrawerList.findIndex((i) => i === id);
+	const handleClickParents = (dataParents: IItemDrawer) => {
+		const index = idItemDrawerList.findIndex((i) => i === dataParents.id);
 		const isExist = index !== -1;
 		if (isExist) {
 			idItemDrawerList[0] = '';
 		} else {
-			idItemDrawerList[0] = id;
+			idItemDrawerList[0] = dataParents.id;
 		}
+		if (!dataParents.children?.length) {
+			idItemDrawerList[1] = '';
+		}
+		setState(idItemDrawerList);
 	};
-	const handleClick = (dataItem: IItemDrawer) => {
-		const isParents = dataItem.layer === LAYER.parents;
-		if (isParents) {
-			handleParentExist(dataItem.id);
-		} else {
-			idItemDrawerList[1] = dataItem.id;
-		}
+	const handleClickChild = (idParents: string, idChild: string) => {
+		idItemDrawerList[0] = idParents;
+		idItemDrawerList[1] = idChild;
 		setState(idItemDrawerList);
 	};
 
 	return (
 		<aside className='h-full bg-white/10 backdrop-blur-2xl flex flex-col gap-4 rounded-l-2xl'>
 			<div className='p-4 h-20 overflow-hidden flex items-center justify-between'>
-				<div className='scale-50 -translate-y-0 -translate-x-10 cursor-pointer'>
+				<div className='scale-50 -translate-y-0 cursor-pointer'>
 					<LogoComponent />
-				</div>
-				<div className='w-7 h-7 cursor-pointer transition-all duration-500 text-white rounded-full flex items-center justify-center hover:bg-yellow-50 hover:text-primary_dark-20'>
-					<GoChevronRight />
 				</div>
 			</div>
 			<nav className='pr-3'>
 				<Menu>
-					{drawer.map((item) => {
-						const isChild = item.children;
+					{drawer.map((child) => {
+						const isChild = child.children;
+						const isParentsTargeted = child.id === state[0];
 						return (
 							<MenuItem
-								onClick={() => {
-									handleClick(item);
-								}}
-								key={item.id}>
-								<div className='flex items-center justify-between gap-2 text-md w-full rounded-2xl text-white py-2 px-3 hover:bg-white/10 transition-colors duration-500'>
+								className={`overflow-hidden transition-all duration-500 ${isParentsTargeted ? child.classTargetedItem : 'h-11'}`}
+								key={child.id}>
+								<div
+									aria-hidden
+									onClick={() => {
+										handleClickParents(child);
+									}}
+									className={`flex items-center justify-between gap-2 text-md w-full rounded-2xl text-white py-2 px-3 hover:bg-white/10 transition-colors duration-500 ${
+										isParentsTargeted && child.classTargeted
+									}`}>
 									<div className='flex items-center gap-2'>
-										{item.icon}
+										{child.icon}
 										<div className='pt-1'>
-											<p>{item.text}</p>
+											<p>{Localize(child.text)}</p>
 										</div>
 									</div>
 									{isChild && <GoChevronDown />}
 								</div>
 								{isChild && (
 									<Menu gap='gap-0'>
-										{item.children?.map((child) => {
+										{child.children?.map((subChild) => {
+											const isChildTargeted = subChild.id === state[1];
 											return (
 												<MenuItem
 													onClick={() => {
-														handleClick(child);
+														handleClickChild(child.id, subChild.id);
 													}}
 													key={child.id}>
-													<div className='flex items-center justify-between gap-2 text-md w-full rounded-2xl text-white py-2 px-3 hover:bg-white/10 transition-colors duration-500'>
+													<div
+														className={`flex items-center justify-between gap-2 text-md w-full rounded-2xl text-white py-2 px-3 hover:bg-white/10 transition-colors duration-500 ${
+															isChildTargeted && subChild.classTargeted
+														}`}>
 														<div className='flex items-center gap-2'>
 															<div className='w-2 h-2' />
 															<div className='pt-1'>
-																<p>
-																	{child.text}
-																</p>
+																<p>{Localize(subChild.text)}</p>
 															</div>
 														</div>
 													</div>

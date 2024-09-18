@@ -48,24 +48,15 @@ export default {
         screen: '100dvw'
       },
       height: {
-        home: 'calc(100dvh - 230px)',
-        desktopWrapper: 'calc(100dvh - 345px)',
-        album: 'calc(100dvh - 170px)',
-        albumDk: 'calc(100dvh - 240px)',
-        podcasts: 'calc(100dvh - 210px)',
-        yourLibrary: 'calc(100dvh - 250px)',
-        yourLibraryDk: 'calc(100dvh - 315px)',
-        screen: '100dvh',
-        addAccount: 'calc(100dvh - 44px)',
-        tool: 'calc(100dvh - 160px)',
+        content: 'calc(100dvh - 192px)'
       },
       keyframes: {
         translateRight: {
-          '0%': { transform: 'translateX(-100px)', opacity: 0 },
+          '0%': { transform: 'translateX(-20px)', opacity: 0 },
           '100%': { transform: 'translateX(0px)', opacity: 1 },
         },
         translateLeft: {
-          '0%': { transform: 'translateX(100px)', opacity: 0 },
+          '0%': { transform: 'translateX(10px)', opacity: 0 },
           '100%': { transform: 'translateX(0px)', opacity: 1 },
         },
         translateToTry: {
