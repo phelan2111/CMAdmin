@@ -6,6 +6,7 @@ import { ReactNode, useMemo, useState } from 'react';
 import { Helper } from '@/utils/helper';
 import { PATH } from '@/routes/config';
 import Localize from '@/langs';
+import { useRedirect } from '@/hooks/useRedirect';
 
 interface IItemDrawer {
 	icon?: ReactNode;
@@ -19,14 +20,14 @@ interface IItemDrawer {
 const drawer: IItemDrawer[] = [
 	{
 		id: Helper.randomKey(),
-		path: PATH.HOME,
-		text: 'HOME',
+		path: PATH.DASHBOARD,
+		text: 'DASHBOARD',
 		icon: <GoHome className='text-xl' />,
 		classTargeted: 'bg-white/20',
 	},
 	{
 		id: Helper.randomKey(),
-		path: PATH.HOME,
+		path: PATH.ACCOUNT,
 		text: 'ACCOUNT',
 		icon: <GoHubot className='text-xl' />,
 		classTargeted: 'bg-white/20',
@@ -72,26 +73,31 @@ const drawer: IItemDrawer[] = [
 
 function DrawerNormal() {
 	const [state, setState] = useState<[string, string]>(['', '']); // [parentsId, childrenId]
+	const { redirectPage } = useRedirect();
 
 	const idItemDrawerList: [string, string] = useMemo(() => [...state], [state]);
 
 	const handleClickParents = (dataParents: IItemDrawer) => {
 		const index = idItemDrawerList.findIndex((i) => i === dataParents.id);
 		const isExist = index !== -1;
-		if (isExist) {
-			idItemDrawerList[0] = '';
-		} else {
+		if (!isExist) {
 			idItemDrawerList[0] = dataParents.id;
 		}
 		if (!dataParents.children?.length) {
 			idItemDrawerList[1] = '';
+			redirectPage(dataParents.path);
+		} else {
+			if (isExist) {
+				idItemDrawerList[0] = '';
+			}
 		}
 		setState(idItemDrawerList);
 	};
-	const handleClickChild = (idParents: string, idChild: string) => {
-		idItemDrawerList[0] = idParents;
-		idItemDrawerList[1] = idChild;
+	const handleClickChild = (itemParents: IItemDrawer, itemChild: IItemDrawer) => {
+		idItemDrawerList[0] = itemParents.id;
+		idItemDrawerList[1] = itemChild.id;
 		setState(idItemDrawerList);
+		redirectPage(itemChild.path);
 	};
 
 	return (
@@ -133,7 +139,7 @@ function DrawerNormal() {
 											return (
 												<MenuItem
 													onClick={() => {
-														handleClickChild(child.id, subChild.id);
+														handleClickChild(child, subChild);
 													}}
 													key={child.id}>
 													<div

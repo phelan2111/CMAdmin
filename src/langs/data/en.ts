@@ -19,4 +19,7 @@ export const dataLocalizeEN: Record<string, string> = {
 	ALBUM: 'Album',
 	PLAYLIST: 'Playlist',
 	ARTIST: 'Artists',
+	DASHBOARD: 'Dashboard',
+	10: '10',
+	15: '15',
 };

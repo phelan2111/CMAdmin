@@ -8,8 +8,8 @@ interface IMenuItemProps {
 }
 function MenuItem({ className = '', ...props }: IMenuItemProps) {
 	return (
-		<li aria-hidden onClick={props.onClick} className={`cursor-pointer pl-3 ${className}`}>
-			{props.children}
+		<li aria-hidden onClick={props.onClick} className={`cursor-pointer`}>
+			<div className={`px-3 py-2 transition-all duration-300 ${className}`}>{props.children}</div>
 		</li>
 	);
 }
