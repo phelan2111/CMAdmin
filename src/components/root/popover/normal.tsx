@@ -9,7 +9,7 @@ interface IPopoverProps {
 	className?: string;
 	renderContent?: (renderContentProps: RenderContentProps) => ReactNode;
 }
-function Popover({ className = 'bg-white text-primary_dark py-2 rounded-sm', ...props }: IPopoverProps) {
+function Popover({ className = 'bg-white text-primary_dark py-2 rounded-sm -bottom-1 left-0', ...props }: IPopoverProps) {
 	const [open, setOpen] = useState<boolean>(false);
 	const handleOpen = () => {
 		setOpen(true);
@@ -25,8 +25,8 @@ function Popover({ className = 'bg-white text-primary_dark py-2 rounded-sm', ...
 					{props.children}
 				</div>
 				<div
-					className={`absolute -bottom-1 w-full min-w-fit left-0 transition-all duration-500 z-10 translate-y-full ${
-						open ? 'opacity-100 translate-x-0' : 'opacity-0  translate-x-8  pointer-events-none'
+					className={`absolute w-full min-w-fit transition-all duration-500 z-10 translate-y-full ${
+						open ? 'opacity-100 translate-x-0' : 'opacity-0  translate-x-8 pointer-events-none'
 					} ${className}`}>
 					{props.renderContent?.({
 						onClose: handleClose,

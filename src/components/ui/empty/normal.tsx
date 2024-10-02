@@ -11,7 +11,7 @@ function Empty(props: EmptyProps) {
 	if (!props.isEmpty) {
 		return <Fragment>{props.children}</Fragment>;
 	}
-	return <div>{props.componentEmpty?.() ?? <EmptyComponent />}</div>;
+	return <Fragment>{props.componentEmpty?.() ?? <EmptyComponent />}</Fragment>;
 }
 
 export default Empty;

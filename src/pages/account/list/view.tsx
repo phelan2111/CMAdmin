@@ -9,7 +9,7 @@ function View() {
 					<h1 className='text-5xl font-semibold'>{Localize('ACCOUNT')}</h1>
 					<p>It is list of accounts in the system</p>
 				</div>
-				<div className='flex flex-col gap-4'>
+				<div className='flex flex-col gap-4 h-full'>
 					<TableAccount />
 				</div>
 			</section>

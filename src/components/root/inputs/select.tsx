@@ -7,6 +7,7 @@ import Empty from '@/components/ui/empty/normal';
 import Localize from '@/langs';
 import { Helper } from '@/utils/helper';
 import { IoIosArrowDown } from 'react-icons/io';
+import EmptySelect from '@/components/ui/empty/select';
 type SelectProps = {
 	className?: string;
 	label?: string;
@@ -14,6 +15,7 @@ type SelectProps = {
 	classNameInput?: string;
 	data: ItemSelect[];
 	defaultSelect?: ItemSelect;
+	onChange?: (dataItem: ItemSelect) => void;
 };
 type RenderLabelItemProps = {
 	label: string;
@@ -21,7 +23,7 @@ type RenderLabelItemProps = {
 	value: string | number;
 };
 
-type ItemSelect = {
+export type ItemSelect = {
 	value: string | number;
 	label: string;
 	renderLabel?: (renderProps: RenderLabelItemProps) => ReactNode;
@@ -31,6 +33,7 @@ function Select({ className = '', classNameInput = '!text-white text-center', ..
 
 	const handleSelect = (dataItem: ItemSelect) => {
 		setDataSelectState(dataItem);
+		props.onChange?.(dataItem);
 	};
 
 	return (
@@ -47,7 +50,11 @@ function Select({ className = '', classNameInput = '!text-white text-center', ..
 				className={className}
 				renderContent={({ onClose }) => {
 					return (
-						<Empty isEmpty={props.data.length === 0}>
+						<Empty
+							componentEmpty={() => {
+								return <EmptySelect />;
+							}}
+							isEmpty={props.data.length === 0}>
 							<Menu className='bg-white/10' gap='gap-0'>
 								{props.data.map((item, index) => {
 									const { isEqual } = Helper.compareItem(item, 'value', dataSelectState?.value ?? '');
@@ -69,11 +76,13 @@ function Select({ className = '', classNameInput = '!text-white text-center', ..
 					);
 				}}>
 				<div className='pointer-events-none bg-white/20 flex items-center px-2 rounded-sm'>
-					<TextField
-						value={dataSelectState?.value}
-						className='!bg-transparent hover:!shadow-none focus-within:!shadow-none'
-						classNameInput={classNameInput}
-					/>
+					<div className='pb-1'>
+						<TextField
+							value={dataSelectState?.value}
+							className='!bg-transparent hover:!shadow-none focus-within:!shadow-none'
+							classNameInput={classNameInput}
+						/>
+					</div>
 					<div>
 						<IoIosArrowDown />
 					</div>
