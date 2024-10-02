@@ -6,6 +6,7 @@ import MenuItem from '../menu/item/normal';
 import Empty from '@/components/ui/empty/normal';
 import Localize from '@/langs';
 import { Helper } from '@/utils/helper';
+import { IoIosArrowDown } from 'react-icons/io';
 type SelectProps = {
 	className?: string;
 	label?: string;
@@ -25,7 +26,7 @@ type ItemSelect = {
 	label: string;
 	renderLabel?: (renderProps: RenderLabelItemProps) => ReactNode;
 };
-function Select({ className = '', ...props }: SelectProps) {
+function Select({ className = '', classNameInput = '!text-white text-center', ...props }: SelectProps) {
 	const [dataSelectState, setDataSelectState] = useState<ItemSelect | undefined>(props.defaultSelect);
 
 	const handleSelect = (dataItem: ItemSelect) => {
@@ -33,19 +34,27 @@ function Select({ className = '', ...props }: SelectProps) {
 	};
 
 	return (
-		<div className='w-fit'>
+		<div className='w-fit flex flex-col gap-1'>
+			{props.label && (
+				<div>
+					<p>
+						{Localize(props.label)} {props.required && <span className='text-red-300'>(*)</span>}
+					</p>
+				</div>
+			)}
+
 			<Popover
 				className={className}
 				renderContent={({ onClose }) => {
 					return (
 						<Empty isEmpty={props.data.length === 0}>
-							<Menu gap='gap-0'>
+							<Menu className='bg-white/10' gap='gap-0'>
 								{props.data.map((item, index) => {
 									const { isEqual } = Helper.compareItem(item, 'value', dataSelectState?.value ?? '');
 
 									return (
 										<MenuItem
-											className={isEqual ? 'bg-primary_dark text-primary_light' : 'bg-primary_light text-primary_dark'}
+											className={isEqual ? 'bg-white/10' : 'text-primary_dark'}
 											onClick={() => {
 												handleSelect(item);
 												onClose();
@@ -59,8 +68,15 @@ function Select({ className = '', ...props }: SelectProps) {
 						</Empty>
 					);
 				}}>
-				<div className='pointer-events-none'>
-					<TextField value={'1'} className='!bg-white/20 hover:!shadow-none focus-within:!shadow-none' classNameInput='!text-white text-center' />
+				<div className='pointer-events-none bg-white/20 flex items-center px-2 rounded-sm'>
+					<TextField
+						value={dataSelectState?.value}
+						className='!bg-transparent hover:!shadow-none focus-within:!shadow-none'
+						classNameInput={classNameInput}
+					/>
+					<div>
+						<IoIosArrowDown />
+					</div>
 				</div>
 			</Popover>
 		</div>

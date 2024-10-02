@@ -1,4 +1,6 @@
-import Select from '../inputs/select';
+import Paging from '@/components/ui/common/paging/paging';
+import Localize from '@/langs';
+import { Helper } from '@/utils/helper';
 
 function Grid() {
 	return (
@@ -103,19 +105,15 @@ function Grid() {
 					</tr>
 				</tbody>
 			</table>
-			<div>
-				<Select
-					data={[
-						{
-							label: '10',
-							value: 10,
-						},
-						{
-							label: '15',
-							value: 15,
-						},
-					]}
-				/>
+			<div className='flex items-center justify-between'>
+				<div className='flex items-center gap-2'>
+					<p>{Localize('SHOWING')}</p>
+					<b>{Helper.formatNumber(2)}</b>
+					<span>
+						{Localize('OF')} {Helper.formatNumber(1123)}
+					</span>
+				</div>
+				<Paging />
 			</div>
 		</div>
 	);

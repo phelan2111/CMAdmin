@@ -22,4 +22,7 @@ export const dataLocalizeEN: Record<string, string> = {
 	DASHBOARD: 'Dashboard',
 	10: '10',
 	15: '15',
+	SHOWING: 'Showing',
+	LINES_PER_PAGE: 'Lines per page',
+	OF: 'of',
 };
