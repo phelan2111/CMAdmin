@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode, useLayoutEffect, useRef, useState } from 'react';
 type RenderContentProps = {
 	onClose: VoidFunction;
 	onOpen: VoidFunction;
@@ -11,6 +11,9 @@ interface IPopoverProps {
 }
 function Popover({ className = 'bg-white text-primary_dark py-2 rounded-sm -bottom-1 left-0', ...props }: IPopoverProps) {
 	const [open, setOpen] = useState<boolean>(false);
+	const ref = useRef<HTMLDivElement>(null);
+	const refPopper = useRef<HTMLDivElement>(null);
+
 	const handleOpen = () => {
 		setOpen(true);
 	};
@@ -18,15 +21,44 @@ function Popover({ className = 'bg-white text-primary_dark py-2 rounded-sm -bott
 		setOpen(false);
 	};
 
+	useLayoutEffect(() => {
+		const element = ref.current;
+		const popperElement = refPopper.current;
+		const wrapperElement = document.getElementById('wrapper');
+
+		if (wrapperElement && element && popperElement) {
+			const rect = element.getBoundingClientRect();
+			const heightScreen = document.body.clientHeight;
+			const isCondition = rect.bottom + 128 > heightScreen;
+			if (isCondition) {
+				popperElement.style.bottom = '0px';
+				if (open) {
+					popperElement.style.transform = `translateY(-${element.clientHeight + 4}px) translateX(0px)`;
+				} else {
+					popperElement.style.transform = `translateY(-${element.clientHeight + 4}px) translateX(24px)`;
+				}
+			} else {
+				popperElement.style.top = '0px';
+				if (open) {
+					popperElement.style.transform = `translateY(${element.clientHeight + 4}px) translateX(0px)`;
+				} else {
+					popperElement.style.transform = `translateY(${element.clientHeight + 4}px) translateX(24px)`;
+				}
+			}
+			return () => {};
+		}
+	}, [ref, open]);
+
 	return (
-		<div className='relative'>
+		<div>
 			<div className='relative' aria-hidden>
-				<div className='cursor-pointer' aria-hidden onClick={handleOpen}>
+				<div ref={ref} className='cursor-pointer' aria-hidden onClick={handleOpen}>
 					{props.children}
 				</div>
 				<div
-					className={`absolute w-full min-w-fit transition-all duration-500 z-10 translate-y-full ${
-						open ? 'opacity-100 translate-x-0' : 'opacity-0  translate-x-8 pointer-events-none'
+					ref={refPopper}
+					className={`absolute w-full min-w-fit transition-all duration-500 z-10 ${
+						open ? 'opacity-100' : 'opacity-0 pointer-events-none'
 					} ${className}`}>
 					{props.renderContent?.({
 						onClose: handleClose,

@@ -9,8 +9,8 @@ function View() {
 			<Wrapper className='flex flex-col gap-20'>
 				<div className='flex justify-between items-end animate-translateRight'>
 					<div className='leading-10'>
-						<h1 className='text-5xl font-semibold'>{Localize('ACCOUNT')}</h1>
-						<p>It is list of accounts in the system</p>
+						<h1 className='text-5xl font-semibold'>{Localize('BROWSE')}</h1>
+						<p>It is list of browse in the system</p>
 					</div>
 					<div className='w-40'>
 						<Button className='!bg-white/80 w-full text-primary_dark !rounded-md hover:!bg-white/50'>Create</Button>

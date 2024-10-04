@@ -1,7 +1,7 @@
 import Controller from './controller';
 
-function AccountListPage() {
+function BrowsePage() {
 	return <Controller />;
 }
 
-export default AccountListPage;
+export default BrowsePage;

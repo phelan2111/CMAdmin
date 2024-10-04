@@ -4,9 +4,18 @@ import { lazy } from 'react';
 import AuthWrapper from '@/components/ui/wrapper/auth';
 import ThemeColor from '@/components/root/themes/color';
 import AdminWrapper from '@/components/ui/wrapper/admin';
+
+//KYC
 const SignIn = lazy(() => import('@/pages/kyc/signIn'));
+
+//DASHBOARD
 const Dashboard = lazy(() => import('@/pages/dashboard'));
+
+//ACCOUNT
 const AccountList = lazy(() => import('@/pages/account/list'));
+
+//BROWSE
+const BrowseList = lazy(() => import('@/pages/browse/list'));
 
 const router = createBrowserRouter([
 	{
@@ -34,6 +43,10 @@ const router = createBrowserRouter([
 					{
 						path: PATH.ACCOUNT,
 						element: <AccountList />,
+					},
+					{
+						path: PATH.BROWSE,
+						element: <BrowseList />,
 					},
 				],
 			},

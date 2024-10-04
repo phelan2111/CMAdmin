@@ -55,13 +55,13 @@ function Select({ className = '', classNameInput = '!text-white text-center', ..
 								return <EmptySelect />;
 							}}
 							isEmpty={props.data.length === 0}>
-							<Menu className='bg-white/10' gap='gap-0'>
+							<Menu className='bg-white/10 rounded-md overflow-hidden' gap='gap-0'>
 								{props.data.map((item, index) => {
 									const { isEqual } = Helper.compareItem(item, 'value', dataSelectState?.value ?? '');
 
 									return (
 										<MenuItem
-											className={isEqual ? 'bg-white/10' : 'text-primary_dark'}
+											className={`px-2 py-1 ${isEqual ? 'bg-white/10' : 'text-primary_dark'}`}
 											onClick={() => {
 												handleSelect(item);
 												onClose();
@@ -75,7 +75,7 @@ function Select({ className = '', classNameInput = '!text-white text-center', ..
 						</Empty>
 					);
 				}}>
-				<div className='pointer-events-none bg-white/20 flex items-center px-2 rounded-sm'>
+				<div className='pointer-events-none bg-white/20 flex items-center px-2 rounded-md'>
 					<div className='pb-1'>
 						<TextField
 							value={dataSelectState?.value}

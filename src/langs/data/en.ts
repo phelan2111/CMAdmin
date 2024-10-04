@@ -37,4 +37,5 @@ export const dataLocalizeEN: Record<string, string> = {
 	AUTHORIZED: 'Authorized',
 	PENDING: 'Pending',
 	DECLINED: 'Declined',
+	BROWSE: 'Browse',
 };

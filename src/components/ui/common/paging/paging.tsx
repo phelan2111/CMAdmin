@@ -1,7 +1,9 @@
 import { PagingState } from '@/components/root/grid/types';
 import Skip from './skip';
 import Take from './take';
-import { useState } from 'react';
+import { Fragment, useMemo, useState } from 'react';
+import Localize from '@/langs';
+import { Helper } from '@/utils/helper';
 type PagingProps = {
 	onChange?: (dataPaging: PagingState) => void;
 	totalRecord: number;
@@ -11,6 +13,14 @@ function Paging(props: PagingProps) {
 		skip: 0,
 		take: 5,
 	});
+
+	const showing = useMemo(() => {
+		const showTotal = (paging.skip + 1) * paging.take;
+		if (showTotal > props.totalRecord) {
+			return props.totalRecord;
+		}
+		return showTotal;
+	}, [paging.skip, paging.take, props.totalRecord]);
 
 	const handleChangeSkip = (skip: number) => {
 		setPaging((prev) => ({ ...prev, skip }));
@@ -26,10 +36,19 @@ function Paging(props: PagingProps) {
 	};
 
 	return (
-		<div className='flex items-center gap-14'>
-			<Skip totalRecord={props.totalRecord} paging={paging} onChange={handleChangeSkip} />
-			<Take take={paging.take} onChange={handleChangeTake} />
-		</div>
+		<Fragment>
+			<div className='flex items-center gap-2'>
+				<p>{Localize('SHOWING')}</p>
+				<b>{Helper.formatNumber(showing)}</b>
+				<span>
+					{Localize('OF')} {Helper.formatNumber(props.totalRecord)}
+				</span>
+			</div>
+			<div className='flex items-center gap-14'>
+				<Skip totalRecord={props.totalRecord} paging={paging} onChange={handleChangeSkip} />
+				<Take take={paging.take} onChange={handleChangeTake} />
+			</div>
+		</Fragment>
 	);
 }
 

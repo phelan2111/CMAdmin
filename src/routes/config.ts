@@ -6,5 +6,6 @@ export const PATH = {
 	},
 	HOME: '/',
 	DASHBOARD: '/dashboard',
-	ACCOUNT: '/account'
+	ACCOUNT: '/account',
+	BROWSE: '/browse',
 };

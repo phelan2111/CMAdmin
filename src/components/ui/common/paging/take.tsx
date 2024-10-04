@@ -30,13 +30,7 @@ function Take(props: TakeProps) {
 				<p>{Localize('LINES_PER_PAGE')}</p>
 			</div>
 			<div className='w-20'>
-				<Select
-					onChange={handleOnChange}
-					defaultSelect={dataTake[0]}
-					className='-top-1 -translate-y-full'
-					classNameInput='!h-8 text-white'
-					data={dataTake}
-				/>
+				<Select onChange={handleOnChange} defaultSelect={dataTake[0]} classNameInput='!h-8 text-white' data={dataTake} />
 			</div>
 		</div>
 	);

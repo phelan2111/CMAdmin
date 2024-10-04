@@ -1,7 +1,7 @@
 import LogoComponent from '../common/logo';
 import Menu from '@/components/root/menu/normal';
 import MenuItem from '@/components/root/menu/item/normal';
-import { GoBook, GoChevronDown, GoCopilot, GoStack, GoHome, GoHubot } from 'react-icons/go';
+import { GoBook, GoChevronDown, GoCopilot, GoStack, GoHome, GoHubot, GoContainer } from 'react-icons/go';
 import { ReactNode, useMemo, useState } from 'react';
 import { Helper } from '@/utils/helper';
 import { PATH } from '@/routes/config';
@@ -69,6 +69,13 @@ const drawer: IItemDrawer[] = [
 		icon: <GoBook className='text-xl' />,
 		classTargeted: 'bg-white/20',
 	},
+	{
+		id: Helper.randomKey(),
+		path: PATH.BROWSE,
+		text: 'BROWSE',
+		icon: <GoContainer className='text-xl' />,
+		classTargeted: 'bg-white/20',
+	},
 ];
 
 function DrawerNormal() {
@@ -107,14 +114,14 @@ function DrawerNormal() {
 					<LogoComponent />
 				</div>
 			</div>
-			<nav className='pr-3'>
+			<nav className=''>
 				<Menu>
 					{drawer.map((child) => {
 						const isChild = child.children;
 						const isParentsTargeted = child.id === state[0];
 						return (
 							<MenuItem
-								className={`overflow-hidden transition-all duration-500 ${isParentsTargeted ? child.classTargetedItem : 'h-11'}`}
+								className={`overflow-hidden transition-all duration-500 mx-4 ${isParentsTargeted ? child.classTargetedItem : 'h-11'}`}
 								key={child.id}>
 								<div
 									aria-hidden
@@ -138,6 +145,7 @@ function DrawerNormal() {
 											const isChildTargeted = subChild.id === state[1];
 											return (
 												<MenuItem
+													className='ml-4'
 													onClick={() => {
 														handleClickChild(child, subChild);
 													}}

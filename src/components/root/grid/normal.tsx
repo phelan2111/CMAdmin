@@ -1,6 +1,5 @@
 import Paging from '@/components/ui/common/paging/paging';
 import Localize from '@/langs';
-import { Helper } from '@/utils/helper';
 import { GridProps } from './types';
 import Empty from '@/components/ui/empty/normal';
 import EmptyTable from '@/components/ui/empty/table';
@@ -57,13 +56,6 @@ function Grid(props: GridProps) {
 				</tbody>
 			</table>
 			<div className='flex items-center justify-between'>
-				<div className='flex items-center gap-2'>
-					<p>{Localize('SHOWING')}</p>
-					<b>{Helper.formatNumber(2)}</b>
-					<span>
-						{Localize('OF')} {Helper.formatNumber(props.total)}
-					</span>
-				</div>
 				<Paging totalRecord={props.total} onChange={props.onChangePaging} />
 			</div>
 		</div>
