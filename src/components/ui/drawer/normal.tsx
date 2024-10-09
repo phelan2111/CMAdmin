@@ -57,7 +57,7 @@ const drawer: IItemDrawer[] = [
 	},
 	{
 		id: Helper.randomKey(),
-		path: PATH.HOME,
+		path: PATH.ARTIST,
 		text: 'ARTIST',
 		icon: <GoCopilot className='text-xl' />,
 		classTargeted: 'bg-white/20',

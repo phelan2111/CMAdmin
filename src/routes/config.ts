@@ -8,4 +8,5 @@ export const PATH = {
 	DASHBOARD: '/dashboard',
 	ACCOUNT: '/account',
 	BROWSE: '/browse',
+	ARTIST: '/artist',
 };

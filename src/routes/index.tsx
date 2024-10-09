@@ -17,6 +17,9 @@ const AccountList = lazy(() => import('@/pages/account/list'));
 //BROWSE
 const BrowseList = lazy(() => import('@/pages/browse/list'));
 
+//ARTIST
+const ArtistList = lazy(() => import('@/pages/artist/list'));
+
 const router = createBrowserRouter([
 	{
 		path: PATH.HOME,
@@ -47,6 +50,10 @@ const router = createBrowserRouter([
 					{
 						path: PATH.BROWSE,
 						element: <BrowseList />,
+					},
+					{
+						path: PATH.ARTIST,
+						element: <ArtistList />,
 					},
 				],
 			},
