@@ -1,14 +1,9 @@
 import Localize from '@/langs';
-import { HTMLInputTypeAttribute, ReactNode, useState } from 'react';
+import { Helper } from '@/utils/helper';
+import { HTMLInputTypeAttribute, ReactNode, useMemo, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 
-export interface ITextFieldProps
-	extends Omit<
-		React.DetailedHTMLProps<
-			React.InputHTMLAttributes<HTMLInputElement>,
-			HTMLInputElement
-		>,
-		'onChange' | 'autoFocus'
-	> {
+export interface ITextFieldProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onChange' | 'autoFocus'> {
 	label?: string;
 	classNameInput?: string;
 	placeholder?: string;
@@ -22,16 +17,19 @@ export interface ITextFieldProps
 		node: ReactNode;
 	};
 	autoFocus?: boolean;
+	messageError?: string;
 }
 
-function TextField({
-	classNameInput = '',
-	className = '',
-	name = '',
-	type = 'text',
-	...props
-}: ITextFieldProps) {
-	const [value, setValue] = useState<string>(props.defaultValue ?? '');
+function TextField({ classNameInput = '', className = '', name = '', type = 'text', defaultValue = '', ...props }: ITextFieldProps) {
+	const { formState, getValues, register } = useFormContext();
+	const initialValue = useMemo(() => {
+		return getValues()?.name ?? defaultValue;
+	}, [defaultValue, getValues]);
+	const messageError = useMemo(() => {
+		return formState.errors?.[name] ?? props.messageError;
+	}, [formState.errors, name, props.messageError]);
+
+	const [value, setValue] = useState<string>(initialValue);
 
 	const isIconStart = props.icon?.direction === 'start';
 	const isIconEnd = props.icon?.direction === 'end';
@@ -39,6 +37,7 @@ function TextField({
 	const handleChange = (valueInput: string) => {
 		setValue(valueInput);
 	};
+
 	return (
 		<div className='flex flex-col gap-0.5'>
 			{props.label && <p className='text-sm'>{Localize(props.label)}</p>}
@@ -48,6 +47,7 @@ function TextField({
 				<input
 					value={value}
 					type={type}
+					{...register(name)}
 					name={name}
 					placeholder={props.placeholder}
 					className={`w-full outline-none bg-transparent h-11 text-primary_dark text-base ${classNameInput}`}
@@ -59,9 +59,7 @@ function TextField({
 				/>
 				{isIconEnd && props.icon && props.icon.node}
 			</div>
-			{/* <p className='text-xs text-red-300 px-2 py-0.5 rounded-3xl italic text-end'>
-				error
-			</p> */}
+			{!Helper.isEmpty(messageError) && <p className='text-xs text-red-300 px-2 py-0.5 rounded-3xl italic text-end'>{messageError?.toString()}</p>}
 		</div>
 	);
 }

@@ -1,6 +1,6 @@
 {
     "api": {
-        "host": "localhost:8000",
+        "host": "localhost:4000",
         "artist": "/singer",
         "user": {
             "login": "/user/login",

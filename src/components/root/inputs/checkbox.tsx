@@ -11,34 +11,26 @@ interface ICheckboxProps {
 	name?: string;
 }
 
-function Checkbox({ className = '', name = '', ...props }: ICheckboxProps) {
+function Checkbox(props: ICheckboxProps) {
 	const isVertical = props.label?.direction === 'vertical';
 	const [isChecked, setIsChecked] = useState<boolean>(false);
 
-	console.log('className', className, isChecked, name);
 	const handleChange = () => {
 		setIsChecked((prev) => !prev);
 	};
 	return (
-		<div
-			className={`flex ${
-				isVertical ? 'flex-col gap-0.5' : 'flex-row gap-2 items-end'
-			}`}>
+		<div className={`flex ${isVertical ? 'flex-col gap-0.5' : 'flex-row gap-2 items-end'}`}>
 			<div
 				aria-hidden='true'
 				onClick={() => {
 					handleChange();
 				}}
 				className={`w-4 h-4 border border-white rounded-sm flex justify-center items-center transition-colors duration-500 cursor-pointer ${
-					isChecked
-						? 'bg-white text-primary_dark'
-						: 'text-transparent'
+					isChecked ? 'bg-white text-primary_dark' : 'text-transparent'
 				}`}>
 				<HiCheck className='text-xs' />
 			</div>
-			{props.label && (
-				<p className='text-xs'>{Localize(props.label.text)}</p>
-			)}
+			{props.label && <p className='text-xs'>{Localize(props.label.text)}</p>}
 		</div>
 	);
 }

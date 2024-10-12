@@ -61,7 +61,6 @@ function Form({ validator = {}, defaultValues = {}, ...props }: IFormProps) {
 			<form aria-hidden onSubmit={methods.handleSubmit(onSubmit as never)} onKeyDown={handleKeyDown} onKeyUp={handleKeyUp}>
 				{props.render ? RenderForm(props.render) : props.children}
 			</form>
-			;
 		</FormProvider>
 	);
 }

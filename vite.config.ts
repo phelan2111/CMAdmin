@@ -2,6 +2,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import path from 'path';
+// eslint-disable-next-line import/default
 import eslint from 'vite-plugin-eslint';
 
 // https://vitejs.dev/config/
@@ -20,6 +21,8 @@ export default defineConfig({
 			hook: `${path.resolve(__dirname, './src/hooks/')}`,
 
 			context: `${path.resolve(__dirname, './src/context/')}`,
+
+			config: `${path.resolve(__dirname, './src/config/')}`,
 
 			styles: `${path.resolve(__dirname, './src/styles/')}`,
 

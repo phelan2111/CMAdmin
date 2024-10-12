@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import { v4 as uuuid } from 'uuid';
+import bcrypt from 'bcryptjs';
 
 export class Helper {
 	static formatNumber(number: number) {
@@ -8,6 +9,16 @@ export class Helper {
 		}).format(number);
 
 		return numberConvert;
+	}
+	static isEmpty(value: unknown): boolean {
+		return (
+			value === undefined ||
+			value === null ||
+			value === undefined ||
+			value === '' ||
+			(Object.keys(value).length === 0 && Object.getPrototypeOf(value) === Object.prototype) ||
+			(Array.isArray(value) && value.length === 0)
+		);
 	}
 	static isIntoView(el: Element) {
 		const rect = el.getBoundingClientRect();
@@ -39,5 +50,9 @@ export class Helper {
 	) {
 		const isEqual = dataItem?.[field] === itemCompare;
 		return { isEqual };
+	}
+	static async hasPassword(password: string) {
+		const hasPassword = bcrypt.hash(password, 10);
+		return hasPassword;
 	}
 }

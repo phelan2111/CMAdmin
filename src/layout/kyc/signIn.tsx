@@ -24,8 +24,8 @@ function SignIn(props: SignInProps) {
 							render={() => {
 								return (
 									<div className='flex flex-col gap-4'>
-										<TextField label='USER_NAME' />
-										<InputPassword label='PASSWORD' />
+										<TextField name='email' label='USER_NAME' />
+										<InputPassword name='password' label='PASSWORD' />
 										<div className='flex justify-between items-center'>
 											<Checkbox
 												label={{
@@ -38,7 +38,7 @@ function SignIn(props: SignInProps) {
 											</p>
 										</div>
 										<div className='pt-6 w-full'>
-											<Button text='SIGN_IN' />
+											<Button type='submit' text='SIGN_IN' />
 										</div>
 									</div>
 								);

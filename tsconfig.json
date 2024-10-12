@@ -30,7 +30,8 @@
 			"context/*": ["src/context/*"],
 			"styles/*": ["src/styles/*"],
 			"utils/*": ["src/utils/*"],
-			"pages/*": ["src/pages/*"]
+			"pages/*": ["src/pages/*"],
+			"config/*": ["src/config/*"]
 		}
 	},
 	"include": ["src"],

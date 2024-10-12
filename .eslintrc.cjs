@@ -27,6 +27,7 @@ module.exports = {
 					['utils', './src/util/'],
 					['pages', './src/pages/'],
 					['ui', './src/ui/'],
+					['config', './src/config/'],
 				],
 			},
 			node: {
@@ -40,8 +41,11 @@ module.exports = {
 	rules: {
 		'react/react-in-jsx-scope': 'off',
 		'import/no-unresolved': 'off',
-		'jsx-a11y/no-autofocus': [ 2, {
-            'ignoreNonDOM': true
-        }],
+		'jsx-a11y/no-autofocus': [
+			2,
+			{
+				ignoreNonDOM: true,
+			},
+		],
 	},
 };
