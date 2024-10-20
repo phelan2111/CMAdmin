@@ -1,45 +1,64 @@
-import { DataResponse, useRequest } from '@/hooks/useRequest';
+import { useRequest } from '@/hooks/useRequest';
 import { AxiosRequestConfig } from 'axios';
 import { useContext, useMemo } from 'react';
-import { ResponseHasResponseProps } from '../types';
+import { ResponseHasResponseProps, ResponseRequest } from '../types';
 import { Logger } from '@/utils/logger';
 import config from 'config/api.json';
 import { CODE, parseCodeToNameFunc } from '@/config/responseCode';
 import { Helper } from '@/utils/helper';
 import { ToastContext, ToastType } from '@/contexts/toast';
 import Localize from '@/langs';
+import AuthService from '@/utils/auth';
+import { Role } from '@/utils/enums';
 
-type PayloadLogin = {
+export type ResponseGetUser = {
+	_id: string;
 	email: string;
 	password: string;
-};
-export type ResponseLogin = {
-	email: string;
 	firstName: string;
 	lastName: string;
+	status: number;
+	role: Role;
+	createdAt: Date;
+	updatedAt: Date;
+	__v: number;
 	token: string;
-	role: number;
+	address?: string;
+	avatar?: string;
 };
 
-function ServiceUserLogin(props?: ResponseHasResponseProps[]) {
+function ServiceGetListUser(props?: ResponseHasResponseProps[]) {
 	const { onToast } = useContext(ToastContext);
+	const auth = AuthService.getPackageAuth();
 
 	const request: AxiosRequestConfig[] = [
 		{
-			url: config.api.user.login,
-			method: 'post',
+			url: config.api.user._,
+			method: 'get',
+			headers: {
+				token: auth?.token,
+			},
 		},
 	];
 
-	const { mutate, data, isPending } = useRequest({
-		keyQuery: ['LOGIN'],
+	const {
+		mutate,
+		data = [
+			{
+				list: [],
+				total: 0,
+			},
+		],
+		isSuccess,
+	} = useRequest({
+		keyQuery: ['GET_LIST_USER'],
 		request,
 	});
 
-	const handleMutate = (payload: PayloadLogin) => {
-		mutate(payload, {
+	const handleMutate = () => {
+		mutate(undefined, {
 			onSuccess: (data) => {
-				Logger.debug('ServiceUserLogin execute handleMutate success', data);
+				Logger.debug('ServiceGetListUser execute handleMutate success', data);
 				props?.map((o, index) => {
 					const funcName = parseCodeToNameFunc[data[index].code as unknown as CODE];
 					const hasFunc = Helper.isEmpty(o?.[funcName as string]);
@@ -51,7 +70,7 @@ function ServiceUserLogin(props?: ResponseHasResponseProps[]) {
 				});
 			},
 			onError: (error) => {
-				Logger.error('ServiceUserLogin execute handleMutate success', error.toString());
+				Logger.error('ServiceGetListUser execute handleMutate success', error.toString());
 				props?.map((o) => {
 					o.onError?.();
 				});
@@ -60,12 +79,12 @@ function ServiceUserLogin(props?: ResponseHasResponseProps[]) {
 	};
 
 	return {
-		onLogin: handleMutate,
-		isLoadingLoginService: isPending,
+		onGetListUser: handleMutate,
+		isLoadingGetListUserService: !isSuccess,
 		response: useMemo(() => {
-			return data as unknown as DataResponse<ResponseLogin>;
+			return data.map((i) => i.data) as ResponseRequest<ResponseGetUser>[];
 		}, [data]),
 	};
 }
 
-export default ServiceUserLogin;
+export default ServiceGetListUser;

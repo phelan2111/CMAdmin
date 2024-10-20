@@ -20,10 +20,11 @@ export function useRequest(props: UseRequestProps) {
 				return await axios({
 					...ax,
 					data,
-					baseURL: config.api.host,
+					url: `${config.api.host}${ax.url}`,
+					timeout: 10000,
 				})
 					.then((res) => {
-						return { data: res.data, code: res.status, message: res.statusText };
+						return res.data;
 					})
 					.catch((err) => {
 						Logger.error('useRequest execute axios error', err);

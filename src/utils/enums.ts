@@ -14,3 +14,8 @@ export enum EnumStatusAccount {
 	authorized = 1,
 	pending,
 }
+
+export enum Role {
+	admin = 0,
+	user,
+}

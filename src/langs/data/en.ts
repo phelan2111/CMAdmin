@@ -38,4 +38,13 @@ export const dataLocalizeEN: Record<string, string> = {
 	PENDING: 'Pending',
 	DECLINED: 'Declined',
 	BROWSE: 'Browse',
+	SOMETHING_WERE_WRONG: 'Something were wrong!',
+	SYSTEM_ERROR: 'System Error!',
+	ACCOUNT_WRONG: 'Account Wrong',
+	USERNAME_OR_PASSWORD: 'Account or password wrong',
+	USER_ID: 'User Id',
+	USERNAME: 'Username',
+	ADMIN: 'Admin',
+	USER: 'User',
+	ROLE: 'ROLE',
 };

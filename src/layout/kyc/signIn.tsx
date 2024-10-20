@@ -26,16 +26,13 @@ function SignIn(props: SignInProps) {
 									<div className='flex flex-col gap-4'>
 										<TextField name='email' label='USER_NAME' />
 										<InputPassword name='password' label='PASSWORD' />
-										<div className='flex justify-between items-center'>
+										<div className='flex justify-between items-center mt-2'>
 											<Checkbox
 												label={{
 													direction: 'horizontal',
 													text: 'REMEMBER_FOR_30DAYS',
 												}}
 											/>
-											<p className='text-xs underline cursor-pointer hover:text-white/70 transition-colors duration-300'>
-												{Localize('FORGOT_PASSWORD')}
-											</p>
 										</div>
 										<div className='pt-6 w-full'>
 											<Button type='submit' text='SIGN_IN' />

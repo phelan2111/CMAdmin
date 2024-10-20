@@ -10,7 +10,7 @@ function AdminWrapper() {
 				backgroundImage: `url(${background})`,
 			}}
 			className='w-screen h-screen flex justify-center bg-wrapperAuth relative overflow-hidden bg-cover p-8'>
-			<div className='max-w-[1920px] m-auto w-full bg-white/10 backdrop-blur-2xl rounded-2xl relative h-full z-20'>
+			<div className='max-w-[1920px] overflow-hidden m-auto w-full bg-white/10 backdrop-blur-2xl rounded-2xl relative h-full z-20'>
 				<div className='flex w-full h-full'>
 					<DrawerNormal />
 					<section className='w-full flex flex-col'>

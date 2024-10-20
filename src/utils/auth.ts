@@ -3,8 +3,8 @@ import config from '@/config/api.json';
 
 export type IAuthService = {
 	token?: string;
-	expireAt: number;
-	refreshAt: number;
+	expireAt?: number;
+	refreshAt?: number;
 };
 
 export type IProfileUser = {
@@ -28,7 +28,7 @@ class AuthService {
 		};
 		cookie.set(config.cookie.profile, profile, options);
 	}
-	static getPackageAuth() {
+	static getPackageAuth(): IAuthService {
 		const cookie = new Cookies();
 		return cookie.get(config.cookie.auth);
 	}

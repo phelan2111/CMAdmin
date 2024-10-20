@@ -21,13 +21,14 @@ export interface ITextFieldProps extends Omit<React.DetailedHTMLProps<React.Inpu
 }
 
 function TextField({ classNameInput = '', className = '', name = '', type = 'text', defaultValue = '', ...props }: ITextFieldProps) {
-	const { formState, getValues, register } = useFormContext();
+	const form = useFormContext();
+
 	const initialValue = useMemo(() => {
-		return getValues()?.name ?? defaultValue;
-	}, [defaultValue, getValues]);
+		return form?.getValues()?.name ?? defaultValue;
+	}, [defaultValue, form]);
 	const messageError = useMemo(() => {
-		return formState.errors?.[name] ?? props.messageError;
-	}, [formState.errors, name, props.messageError]);
+		return form?.formState.errors?.[name] ?? props.messageError;
+	}, [form?.formState.errors, name, props.messageError]);
 
 	const [value, setValue] = useState<string>(initialValue);
 
@@ -47,7 +48,7 @@ function TextField({ classNameInput = '', className = '', name = '', type = 'tex
 				<input
 					value={value}
 					type={type}
-					{...register(name)}
+					{...form?.register(name)}
 					name={name}
 					placeholder={props.placeholder}
 					className={`w-full outline-none bg-transparent h-11 text-primary_dark text-base ${classNameInput}`}

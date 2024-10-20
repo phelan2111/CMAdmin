@@ -114,7 +114,7 @@ function DrawerNormal() {
 					<LogoComponent />
 				</div>
 			</div>
-			<nav className=''>
+			<nav>
 				<Menu>
 					{drawer.map((child) => {
 						const isChild = child.children;
@@ -149,7 +149,7 @@ function DrawerNormal() {
 													onClick={() => {
 														handleClickChild(child, subChild);
 													}}
-													key={child.id}>
+													key={subChild.id}>
 													<div
 														className={`flex items-center justify-between gap-2 text-md w-full rounded-2xl text-white py-2 px-3 hover:bg-white/10 transition-colors duration-500 ${
 															isChildTargeted && subChild.classTargeted

@@ -5,6 +5,7 @@ export const PATH = {
 		SIGN_UP: '/kyc/signUp',
 	},
 	HOME: '/',
+	PRIVATE: '/private',
 	DASHBOARD: '/dashboard',
 	ACCOUNT: '/account',
 	BROWSE: '/browse',

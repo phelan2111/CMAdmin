@@ -4,6 +4,15 @@ export type ResponseHasNotResponseProps = {
 };
 
 export type ResponseHasResponseProps = {
-	onSuccess?: (res: unknown) => void;
-	onError?: VoidFunction;
+	[name: string]: (res?: unknown) => void;
+};
+
+export type ResponseRequest<T> = {
+	list: T[];
+	total: number;
+};
+
+export const initialResponseRequest: ResponseRequest<unknown> = {
+	list: [],
+	total: 0,
 };

@@ -2,10 +2,11 @@ import Grid from '@/components/root/grid/normal';
 import { GridColumn } from '@/components/root/grid/types';
 import Avatar from '@/components/root/image/avatar';
 import StatusAccount from '@/components/ui/status/account';
-import data from '@/pages/account/list/data.json';
+import { ResponseGetUser } from '@/services/user/getList';
+import { parseEnumRole } from '@/utils/prase';
 import dayjs from 'dayjs';
 
-const gridColumTableAccount: GridColumn<IDataFake>[] = [
+const gridColumTableAccount: GridColumn<ResponseGetUser>[] = [
 	{
 		title: 'STATUS',
 		field: 'status',
@@ -14,8 +15,12 @@ const gridColumTableAccount: GridColumn<IDataFake>[] = [
 		},
 	},
 	{
-		title: 'CLIENT',
-		field: 'client',
+		title: 'USER_ID',
+		field: '_id',
+	},
+	{
+		title: 'USERNAME',
+		field: 'email',
 	},
 	{
 		title: 'ASSIGNED_TO',
@@ -23,8 +28,10 @@ const gridColumTableAccount: GridColumn<IDataFake>[] = [
 		cell: ({ dataItem }) => {
 			return (
 				<div className='flex gap-2 items-center'>
-					<Avatar className='h-10 w-10' src={dataItem.avatar} />
-					<p>{dataItem.assignedTo}</p>
+					<Avatar className='h-10 w-10' src={'https://i.pinimg.com/736x/91/7e/b4/917eb4db2442cbd47392138e68d4b684.jpg'} />
+					<p>
+						{dataItem.lastName} {dataItem.firstName}
+					</p>
 				</div>
 			);
 		},
@@ -35,39 +42,32 @@ const gridColumTableAccount: GridColumn<IDataFake>[] = [
 		cell: ({ dataItem }) => {
 			return (
 				<div className='font-semibold'>
-					<p className='text-lg'>{dayjs(dataItem.date).format('DD.MM.YYYY')}</p>
-					<p className='text-sm'>{dayjs(dataItem.date).format('hh:mm:ss')}</p>
+					<p className='text-lg'>{dayjs(dataItem.createdAt).format('DD.MM.YYYY')}</p>
+					<p className='text-sm'>{dayjs(dataItem.createdAt).format('hh:mm:ss')}</p>
 				</div>
 			);
 		},
 	},
 	{
-		title: 'RO',
+		title: 'ROLE',
 		field: 'ro',
-	},
-	{
-		title: 'CLAIM_NUMBER',
-		field: 'claimNumber',
-	},
-	{
-		title: 'AMOUNT',
-		field: 'amount',
+		cell: ({ dataItem }) => {
+			return (
+				<div className='font-semibold'>
+					<p className='text-lg'>{parseEnumRole[dataItem.role]}</p>
+				</div>
+			);
+		},
 	},
 ];
 
-type IDataFake = {
-	status: number;
-	client: string;
-	assignedTo: string;
-	date: number;
-	ro: string;
-	claimNumber: string;
-	amount: number;
-	avatar: string;
+type TableAccountProps = {
+	total: number;
+	data: ResponseGetUser[];
 };
 
-function TableAccount() {
-	return <Grid total={16} data={data} gridColum={gridColumTableAccount} />;
+function TableAccount(props: TableAccountProps) {
+	return <Grid total={props.total} data={props.data} gridColum={gridColumTableAccount} />;
 }
 
 export default TableAccount;

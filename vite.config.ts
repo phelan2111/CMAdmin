@@ -50,7 +50,7 @@ export default defineConfig({
 	},
 	server: {
 		open: true,
-		port: 8000,
+		port: 3000,
 		host: true,
 	},
 });

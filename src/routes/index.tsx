@@ -4,6 +4,8 @@ import { lazy } from 'react';
 import AuthWrapper from '@/components/ui/wrapper/auth';
 import ThemeColor from '@/components/root/themes/color';
 import AdminWrapper from '@/components/ui/wrapper/admin';
+import PrivateRoute from './private';
+import PublicRoute from './public';
 
 //KYC
 const SignIn = lazy(() => import('@/pages/kyc/signIn'));
@@ -27,7 +29,11 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: PATH.KYC._,
-				element: <AuthWrapper />,
+				element: (
+					<PublicRoute>
+						<AuthWrapper />
+					</PublicRoute>
+				),
 				children: [
 					{
 						path: PATH.KYC.SIGN_IN,
@@ -37,7 +43,11 @@ const router = createBrowserRouter([
 			},
 			{
 				path: PATH.HOME,
-				element: <AdminWrapper />,
+				element: (
+					<PrivateRoute>
+						<AdminWrapper />
+					</PrivateRoute>
+				),
 				children: [
 					{
 						path: PATH.DASHBOARD,
