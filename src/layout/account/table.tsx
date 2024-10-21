@@ -64,10 +64,11 @@ const gridColumTableAccount: GridColumn<ResponseGetUser>[] = [
 type TableAccountProps = {
 	total: number;
 	data: ResponseGetUser[];
+	isLoading?: boolean;
 };
 
 function TableAccount(props: TableAccountProps) {
-	return <Grid total={props.total} data={props.data} gridColum={gridColumTableAccount} />;
+	return <Grid isLoading={props.isLoading} total={props.total} data={props.data} gridColum={gridColumTableAccount} />;
 }
 
 export default TableAccount;

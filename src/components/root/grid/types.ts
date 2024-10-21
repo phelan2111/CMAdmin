@@ -7,6 +7,7 @@ export type GridProps = {
 	data: ItemData[];
 	total: number;
 	onChangePaging?: (dataPaging: PagingState) => void;
+	isLoading?: boolean;
 };
 export type HeadersGird = {
 	title: string;

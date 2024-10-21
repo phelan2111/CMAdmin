@@ -26,10 +26,10 @@ export default class Controller extends Component<PropsController, StateControll
 		};
 	}
 
-	componentDidMount(): void {
+	componentDidUpdate(previousProps: PropsController): void {
 		const { data } = this.props;
 		const { allState } = this.state;
-		if (data?.list) {
+		if (previousProps.isLoading !== this.props.isLoading) {
 			allState.user = data;
 			this.setState({ allState });
 		}
@@ -37,7 +37,8 @@ export default class Controller extends Component<PropsController, StateControll
 
 	render() {
 		const { allState } = this.state;
+		const { isLoading } = this.props;
 
-		return <View data={allState.user} />;
+		return <View isLoading={isLoading} data={allState.user} />;
 	}
 }

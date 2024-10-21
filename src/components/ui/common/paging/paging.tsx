@@ -44,7 +44,7 @@ function Paging(props: PagingProps) {
 					{Localize('OF')} {Helper.formatNumber(props.totalRecord)}
 				</span>
 			</div>
-			<div className='flex items-center gap-14'>
+			<div className='flex items-center gap-6'>
 				<Skip totalRecord={props.totalRecord} paging={paging} onChange={handleChangeSkip} />
 				<Take take={paging.take} onChange={handleChangeTake} />
 			</div>

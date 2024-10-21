@@ -47,4 +47,5 @@ export const dataLocalizeEN: Record<string, string> = {
 	ADMIN: 'Admin',
 	USER: 'User',
 	ROLE: 'ROLE',
+	LOADING: 'Loading....',
 };

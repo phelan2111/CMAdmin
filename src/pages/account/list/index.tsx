@@ -1,7 +1,6 @@
 import ServiceGetListUser from '@/services/user/getList';
 import Controller from './controller';
 import { useLayoutEffect } from 'react';
-import Loading from '@/components/root/loading/normal';
 
 function AccountListPage() {
 	const { isLoadingGetListUserService, onGetListUser, response } = ServiceGetListUser();
@@ -10,11 +9,7 @@ function AccountListPage() {
 		onGetListUser();
 	}, []);
 
-	return (
-		<Loading isLoading={isLoadingGetListUserService}>
-			<Controller key={`${isLoadingGetListUserService}`} isLoading={isLoadingGetListUserService} data={response[0]} />
-		</Loading>
-	);
+	return <Controller isLoading={isLoadingGetListUserService} data={response[0]} />;
 }
 
 export default AccountListPage;

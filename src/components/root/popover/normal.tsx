@@ -41,6 +41,7 @@ function Popover({ className = 'bg-white text-primary_dark py-2 rounded-sm -bott
 				popperElement.style.top = '0px';
 				if (open) {
 					popperElement.style.transform = `translateY(${element.clientHeight + 4}px) translateX(0px)`;
+					popperElement.style.height = '0px';
 				} else {
 					popperElement.style.transform = `translateY(${element.clientHeight + 4}px) translateX(24px)`;
 				}
@@ -67,7 +68,7 @@ function Popover({ className = 'bg-white text-primary_dark py-2 rounded-sm -bott
 					})}
 				</div>
 			</div>
-			{open && <div aria-hidden onClick={handleClose} className='fixed z-0 bg-transparent w-screen h-screen -bottom-8 -left-8' />}
+			{open && <div aria-hidden onClick={handleClose} className='fixed z-0 bg-transparent w-screen h-screen -bottom-0 -left-0' />}
 		</div>
 	);
 }

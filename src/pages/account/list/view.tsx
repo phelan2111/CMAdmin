@@ -7,6 +7,7 @@ import { ResponseGetUser } from '@/services/user/getList';
 
 type ViewProps = {
 	data: ResponseRequest<ResponseGetUser>;
+	isLoading: boolean;
 };
 
 function View(props: ViewProps) {
@@ -23,7 +24,7 @@ function View(props: ViewProps) {
 					</div>
 				</div>
 				<div className='flex flex-col gap-4 h-full animate-translateRight'>
-					<TableAccount data={props.data.list} total={props.data.total} />
+					<TableAccount isLoading={props.isLoading} data={props.data.list} total={props.data.total} />
 				</div>
 			</Wrapper>
 		</div>
