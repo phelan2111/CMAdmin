@@ -1,7 +1,6 @@
 import Button from '@/components/root/button';
 import Wrapper from '@/components/ui/wrapper/normal';
 import Localize from '@/langs';
-import TableAccount from '@/layout/account/table';
 
 function View() {
 	return (
@@ -16,9 +15,7 @@ function View() {
 						<Button className='!bg-white/80 w-full text-primary_dark !rounded-md hover:!bg-white/50'>Create</Button>
 					</div>
 				</div>
-				<div className='flex flex-col gap-4 h-full animate-translateRight'>
-					<TableAccount />
-				</div>
+				<div className='flex flex-col gap-4 h-full animate-translateRight'>Table</div>
 			</Wrapper>
 		</div>
 	);
