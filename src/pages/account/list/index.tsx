@@ -7,6 +7,7 @@ function AccountListPage() {
 
 	useLayoutEffect(() => {
 		onGetListUser();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return <Controller isLoading={isLoadingGetListUserService} data={response[0]} />;

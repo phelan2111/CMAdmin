@@ -3,9 +3,10 @@ import { Helper } from '@/utils/helper';
 import { HTMLInputTypeAttribute, ReactNode, useMemo, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
-export interface ITextFieldProps extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onChange' | 'autoFocus'> {
+export interface ITextAreaFieldProps
+	extends Omit<React.DetailedHTMLProps<React.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>, 'onChange' | 'autoFocus'> {
 	label?: string;
-	classNameInput?: string;
+	classNameTextArea?: string;
 	placeholder?: string;
 	className?: string;
 	name?: string;
@@ -20,7 +21,7 @@ export interface ITextFieldProps extends Omit<React.DetailedHTMLProps<React.Inpu
 	messageError?: string;
 }
 
-function TextField({ classNameInput = '', className = '', name = '', type = 'text', defaultValue = '', ...props }: ITextFieldProps) {
+function TextAreaField({ classNameTextArea = '', className = '', name = '', defaultValue = '', ...props }: ITextAreaFieldProps) {
 	const form = useFormContext();
 
 	const initialValue = useMemo(() => {
@@ -45,13 +46,12 @@ function TextField({ classNameInput = '', className = '', name = '', type = 'tex
 			<div
 				className={`relative flex h-fit bg-white/10 items-center gap-1 hover:bg-white/40 transition-all duration-500 focus-within:bg-white/40 px-2 rounded-sm ${className}`}>
 				{isIconStart && props.icon && props.icon.node}
-				<input
+				<textarea
 					value={value}
-					type={type}
 					{...form?.register(name)}
 					name={name}
 					placeholder={props.placeholder}
-					className={`w-full outline-none bg-transparent h-11 text-primary_light text-base ${classNameInput}`}
+					className={`w-full outline-none bg-transparent h-40 text-primary_light text-base ${classNameTextArea}`}
 					{...props}
 					onChange={(e) => {
 						handleChange(e.currentTarget.value);
@@ -65,4 +65,4 @@ function TextField({ classNameInput = '', className = '', name = '', type = 'tex
 	);
 }
 
-export default TextField;
+export default TextAreaField;

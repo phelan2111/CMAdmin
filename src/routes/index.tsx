@@ -6,21 +6,13 @@ import ThemeColor from '@/components/root/themes/color';
 import AdminWrapper from '@/components/ui/wrapper/admin';
 import PrivateRoute from './private';
 import PublicRoute from './public';
+import { routeBrowse } from './browse';
+import { routeArtist } from './artist';
+import { routeAccount } from './account';
+import { routeOther } from './other';
 
 //KYC
 const SignIn = lazy(() => import('@/pages/kyc/signIn'));
-
-//DASHBOARD
-const Dashboard = lazy(() => import('@/pages/dashboard'));
-
-//ACCOUNT
-const AccountList = lazy(() => import('@/pages/account/list'));
-
-//BROWSE
-const BrowseList = lazy(() => import('@/pages/browse/list'));
-
-//ARTIST
-const ArtistList = lazy(() => import('@/pages/artist/list'));
 
 const router = createBrowserRouter([
 	{
@@ -48,24 +40,7 @@ const router = createBrowserRouter([
 						<AdminWrapper />
 					</PrivateRoute>
 				),
-				children: [
-					{
-						path: PATH.DASHBOARD,
-						element: <Dashboard />,
-					},
-					{
-						path: PATH.ACCOUNT,
-						element: <AccountList />,
-					},
-					{
-						path: PATH.BROWSE,
-						element: <BrowseList />,
-					},
-					{
-						path: PATH.ARTIST,
-						element: <ArtistList />,
-					},
-				],
+				children: [...routeOther, ...routeAccount, ...routeArtist, ...routeBrowse],
 			},
 		],
 	},

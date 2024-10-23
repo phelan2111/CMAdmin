@@ -7,7 +7,23 @@ export const PATH = {
 	HOME: '/',
 	PRIVATE: '/private',
 	DASHBOARD: '/dashboard',
-	ACCOUNT: '/account',
-	BROWSE: '/browse',
-	ARTIST: '/artist',
+	ACCOUNT: {
+		_: '/account',
+	},
+	BROWSE: {
+		_: '/browse',
+		CREATE: '/browse/create',
+		GENRE: {
+			_: '/genre',
+			CREATE: '/genre/create',
+		},
+		TOPIC: {
+			_: '/topic',
+			CREATE: '/topic/create',
+		},
+	},
+	ARTIST: {
+		_: '/artist',
+		CREATE: '/artist/create',
+	},
 };

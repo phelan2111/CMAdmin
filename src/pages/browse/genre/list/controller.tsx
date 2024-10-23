@@ -1,15 +1,15 @@
 import { Component } from 'react';
 import View from './view';
-import { ResponseGetListArtist } from '@/services/artist/getSinger';
 import { ResponseRequest } from '@/services/types';
+import { ResponseGetBrowse } from '@/services/browse/getList';
 
 type PropsController = {
-	data: ResponseRequest<ResponseGetListArtist>;
+	data: ResponseRequest<ResponseGetBrowse>;
 	isLoading: boolean;
 };
 type StateController = {
 	allState: {
-		user: ResponseRequest<ResponseGetListArtist>;
+		user: ResponseRequest<ResponseGetBrowse>;
 	};
 };
 

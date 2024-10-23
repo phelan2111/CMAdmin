@@ -1,21 +1,21 @@
 import Grid from '@/components/root/grid/normal';
 import { GridColumn } from '@/components/root/grid/types';
 import Avatar from '@/components/root/image/avatar';
-import StatusAccount from '@/components/ui/status/account';
-import data from '@/pages/account/list/data.json';
+import StatusArtist from '@/components/ui/status/artist';
+import { ResponseGetListArtist } from '@/services/artist/getSinger';
 import dayjs from 'dayjs';
 
-const gridColumTableArtist: GridColumn<IDataFake>[] = [
+const gridColumTableArtist: GridColumn<ResponseGetListArtist>[] = [
 	{
 		title: 'STATUS',
 		field: 'status',
 		cell: ({ dataItem }) => {
-			return <StatusAccount status={dataItem.status} />;
+			return <StatusArtist status={dataItem.status} />;
 		},
 	},
 	{
-		title: 'CLIENT',
-		field: 'client',
+		title: 'ARTIST_ID',
+		field: '_id',
 	},
 	{
 		title: 'ASSIGNED_TO',
@@ -23,51 +23,57 @@ const gridColumTableArtist: GridColumn<IDataFake>[] = [
 		cell: ({ dataItem }) => {
 			return (
 				<div className='flex gap-2 items-center'>
-					<Avatar className='h-10 w-10' src={dataItem.avatar} />
-					<p>{dataItem.assignedTo}</p>
+					<Avatar className='h-10 w-10' src={dataItem.singerAvatar} />
+					<p>{dataItem.singerName}</p>
 				</div>
 			);
 		},
 	},
 	{
-		title: 'DATE',
-		field: 'date',
+		title: 'CREATE_AT',
+		field: 'createAt',
 		cell: ({ dataItem }) => {
 			return (
 				<div className='font-semibold'>
-					<p className='text-lg'>{dayjs(dataItem.date).format('DD.MM.YYYY')}</p>
-					<p className='text-sm'>{dayjs(dataItem.date).format('hh:mm:ss')}</p>
+					<p className='text-lg'>{dayjs(dataItem.createdAt).format('DD.MM.YYYY')}</p>
+					<p className='text-sm'>{dayjs(dataItem.createdAt).format('hh:mm:ss')}</p>
 				</div>
 			);
 		},
 	},
 	{
-		title: 'RO',
-		field: 'ro',
+		title: 'UPDATE_AT',
+		field: 'updateAt',
+		cell: ({ dataItem }) => {
+			return (
+				<div className='font-semibold'>
+					<p className='text-lg'>{dayjs(dataItem.updatedAt).format('DD.MM.YYYY')}</p>
+					<p className='text-sm'>{dayjs(dataItem.updatedAt).format('hh:mm:ss')}</p>
+				</div>
+			);
+		},
 	},
 	{
-		title: 'CLAIM_NUMBER',
-		field: 'claimNumber',
-	},
-	{
-		title: 'AMOUNT',
-		field: 'amount',
+		title: 'FOLLOWERS',
+		field: 'followers',
+		cell: ({ dataItem }) => {
+			return (
+				<div className='font-semibold'>
+					<p className='text-sm'>{dataItem.followers} followers</p>
+				</div>
+			);
+		},
 	},
 ];
 
-type IDataFake = {
-	status: number;
-	client: string;
-	assignedTo: string;
-	date: number;
-	ro: string;
-	claimNumber: string;
-	amount: number;
-	avatar: string;
+type TableArtistProps = {
+	total: number;
+	data: ResponseGetListArtist[];
+	isLoading?: boolean;
 };
 
-function TableArtist() {
-	return <Grid total={16} data={data} gridColum={gridColumTableArtist} />;
+function TableArtist(props: TableArtistProps) {
+	return <Grid isLoading={props.isLoading} total={props.total} data={props.data} gridColum={gridColumTableArtist} />;
 }
 
 export default TableArtist;

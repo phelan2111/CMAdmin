@@ -10,9 +10,20 @@ export enum TypeToTry {
 }
 
 export enum EnumStatusAccount {
-	declined = 0,
-	authorized = 1,
-	pending,
+	lock = 0,
+	active = 1,
+	inactive,
+}
+
+export enum EnumStatusArtist {
+	lock = 0,
+	active = 1,
+	inactive,
+}
+
+export enum EnumStatusBrowse {
+	hidden = 0,
+	display = 1,
 }
 
 export enum Role {

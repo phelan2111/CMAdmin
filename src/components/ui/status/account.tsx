@@ -10,17 +10,17 @@ type ParseUiStatusAccount = {
 	text: string;
 };
 const parseUiStatusAccount: Record<EnumStatusAccount, ParseUiStatusAccount> = {
-	[EnumStatusAccount.authorized]: {
+	[EnumStatusAccount.active]: {
 		className: 'bg-green-500',
-		text: 'AUTHORIZED',
+		text: 'ACTIVE',
 	},
-	[EnumStatusAccount.declined]: {
+	[EnumStatusAccount.lock]: {
 		className: 'bg-red-500',
-		text: 'DECLINED',
+		text: 'LOCK',
 	},
-	[EnumStatusAccount.pending]: {
-		className: 'bg-yellow-500',
-		text: 'PENDING',
+	[EnumStatusAccount.inactive]: {
+		className: 'bg-gray-500',
+		text: 'INACTIVE',
 	},
 };
 function StatusAccount(props: StatusAccountProps) {

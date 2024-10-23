@@ -27,7 +27,7 @@ const drawer: IItemDrawer[] = [
 	},
 	{
 		id: Helper.randomKey(),
-		path: PATH.ACCOUNT,
+		path: PATH.ACCOUNT._,
 		text: 'ACCOUNT',
 		icon: <GoHubot className='text-xl' />,
 		classTargeted: 'bg-white/20',
@@ -57,7 +57,7 @@ const drawer: IItemDrawer[] = [
 	},
 	{
 		id: Helper.randomKey(),
-		path: PATH.ARTIST,
+		path: PATH.ARTIST._,
 		text: 'ARTIST',
 		icon: <GoCopilot className='text-xl' />,
 		classTargeted: 'bg-white/20',
@@ -71,10 +71,26 @@ const drawer: IItemDrawer[] = [
 	},
 	{
 		id: Helper.randomKey(),
-		path: PATH.BROWSE,
+		path: PATH.BROWSE._,
 		text: 'BROWSE',
 		icon: <GoContainer className='text-xl' />,
-		classTargeted: 'bg-white/20',
+		classTargetedItem: 'h-[132px]',
+		children: [
+			{
+				id: Helper.randomKey(),
+				path: PATH.BROWSE.GENRE._,
+				text: 'GENRE',
+				icon: <GoStack className='text-xl' />,
+				classTargeted: 'bg-white/20',
+			},
+			{
+				id: Helper.randomKey(),
+				path: PATH.BROWSE.TOPIC._,
+				text: 'TOPIC',
+				icon: <GoStack className='text-xl' />,
+				classTargeted: 'bg-white/20',
+			},
+		],
 	},
 ];
 

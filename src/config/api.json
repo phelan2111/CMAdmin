@@ -1,13 +1,18 @@
 {
     "api": {
         "host": "http://localhost:8000",
-        "artist": "/singer",
+        "artist": {
+            "_": "/singer"
+        },
         "user": {
             "_": "/user",
             "login": "/user/login",
             "verifyUserName": "/user/verifyUsername",
             "verifyOTP": "/user/verifyOTP",
             "register": "/user/register"
+        },
+        "browse": {
+            "_": "/browse"
         }
     },
     "cookie": {

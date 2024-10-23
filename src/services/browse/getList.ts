@@ -9,31 +9,26 @@ import { Helper } from '@/utils/helper';
 import { ToastContext, ToastType } from '@/contexts/toast';
 import Localize from '@/langs';
 import AuthService from '@/utils/auth';
-import { EnumStatusAccount, Role } from '@/utils/enums';
+import { EnumStatusBrowse } from '@/utils/enums';
 
-export type ResponseGetUser = {
+export type ResponseGetBrowse = {
 	_id: string;
-	email: string;
-	password: string;
-	firstName: string;
-	lastName: string;
-	status: EnumStatusAccount;
-	role: Role;
+	nameBrowse: string;
+	imageBrowse: string;
+	playlistId: string[];
+	status: EnumStatusBrowse;
 	createdAt: Date;
 	updatedAt: Date;
 	__v: number;
-	token: string;
-	address?: string;
-	avatar?: string;
 };
 
-function ServiceGetListUser(props?: ResponseHasResponseProps[]) {
+function ServiceGetListBrowse(props?: ResponseHasResponseProps[]) {
 	const { onToast } = useContext(ToastContext);
 	const auth = AuthService.getPackageAuth();
 
 	const request: AxiosRequestConfig[] = [
 		{
-			url: config.api.user._,
+			url: config.api.browse._,
 			method: 'get',
 			headers: {
 				token: auth?.token,
@@ -51,14 +46,14 @@ function ServiceGetListUser(props?: ResponseHasResponseProps[]) {
 		],
 		isSuccess,
 	} = useRequest({
-		keyQuery: ['GET_LIST_USER'],
+		keyQuery: ['GET_LIST_BROWSE'],
 		request,
 	});
 
 	const handleMutate = () => {
 		mutate(undefined, {
 			onSuccess: (data) => {
-				Logger.debug('ServiceGetListUser execute handleMutate success', data);
+				Logger.debug('ServiceGetListBrowse execute handleMutate success', data);
 				props?.map((o, index) => {
 					const funcName = parseCodeToNameFunc[data[index].code as unknown as CODE];
 					const hasFunc = Helper.isEmpty(o?.[funcName as string]);
@@ -70,7 +65,7 @@ function ServiceGetListUser(props?: ResponseHasResponseProps[]) {
 				});
 			},
 			onError: (error) => {
-				Logger.error('ServiceGetListUser execute handleMutate success', error.toString());
+				Logger.error('ServiceGetListBrowse execute handleMutate success', error.toString());
 				props?.map((o) => {
 					o.onError?.();
 				});
@@ -79,12 +74,12 @@ function ServiceGetListUser(props?: ResponseHasResponseProps[]) {
 	};
 
 	return {
-		onGetListUser: handleMutate,
-		isLoadingGetListUserService: !isSuccess,
+		onGetListBrowse: handleMutate,
+		isLoadingGetListBrowseService: !isSuccess,
 		response: useMemo(() => {
-			return data.map((i) => i.data) as ResponseRequest<ResponseGetUser>[];
+			return data.map((i) => i.data) as ResponseRequest<ResponseGetBrowse>[];
 		}, [data]),
 	};
 }
 
-export default ServiceGetListUser;
+export default ServiceGetListBrowse;

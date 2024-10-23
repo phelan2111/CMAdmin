@@ -1,7 +1,7 @@
 import Controller from './controller';
 
-function BrowsePage() {
+function CreateBrowse() {
 	return <Controller />;
 }
 
-export default BrowsePage;
+export default CreateBrowse;
