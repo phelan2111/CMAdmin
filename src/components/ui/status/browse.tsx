@@ -12,12 +12,12 @@ type ParseUiStatusBrowse = {
 const parseUiStatusBrowse: Record<EnumStatusBrowse, ParseUiStatusBrowse> = {
 	[EnumStatusBrowse.display]: {
 		className: 'bg-green-500',
-		text: 'DISPLAY',
+		text: 'ACTIVE',
 	},
 	[EnumStatusBrowse.hidden]: {
 		className: 'bg-red-500',
 		text: 'HIDDEN',
-	},  
+	},
 };
 function StatusBrowse(props: StatusBrowseProps) {
 	const statusItem = parseUiStatusBrowse[props.status];

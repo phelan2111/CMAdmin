@@ -11,11 +11,11 @@ function LoaderTable(props: LoaderTableProps) {
 			<td colSpan={props.colSpan}>
 				<div
 					style={{
-						height: 'calc(100dvh - 435px)',
+						height: 'calc(100dvh - 535px)',
 					}}
 					className='w-full flex flex-col gap-6 items-center justify-center'>
 					<EmptyComponent />
-					<p className='uppercase'>{Localize('LOADING')}</p>
+					<p className='uppercase animate-translateRight'>{Localize('LOADING')}</p>
 				</div>
 			</td>
 		</tr>

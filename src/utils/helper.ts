@@ -55,4 +55,9 @@ export class Helper {
 		const hasPassword = bcrypt.hash(password, 10);
 		return hasPassword;
 	}
+	static findItem(dataItem: Array<Record<string, unknown>>, field: string, data: string | number) {
+		const index = dataItem.findIndex((item) => (item?.[field] as string) === data);
+		const isExist = index !== -1;
+		return { isExist, index };
+	}
 }

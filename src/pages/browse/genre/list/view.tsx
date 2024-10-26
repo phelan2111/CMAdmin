@@ -2,13 +2,13 @@ import Button from '@/components/root/button';
 import Wrapper from '@/components/ui/wrapper/normal';
 import { useRedirect } from '@/hooks/useRedirect';
 import Localize from '@/langs';
-import TableBrowse from '@/layout/browse/table';
+import TableGenre from '@/layout/browse/table/genre';
 import { PATH } from '@/routes/config';
-import { ResponseGetBrowse } from '@/services/browse/getList';
+import { ResponseGetGenreOfBrowse } from '@/services/browse/genre/getList';
 import { ResponseRequest } from '@/services/types';
 
 type ViewProps = {
-	data: ResponseRequest<ResponseGetBrowse>;
+	data: ResponseRequest<ResponseGetGenreOfBrowse>;
 	isLoading: boolean;
 };
 
@@ -34,7 +34,7 @@ function View(props: ViewProps) {
 					</div>
 				</div>
 				<div className='flex flex-col gap-4 h-full animate-translateRight'>
-					<TableBrowse isLoading={props.isLoading} data={props.data.list} total={props.data.total} />
+					<TableGenre isLoading={props.isLoading} data={props.data.list} total={props.data.total} />
 				</div>
 			</Wrapper>
 		</div>

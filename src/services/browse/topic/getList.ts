@@ -1,7 +1,7 @@
 import { useRequest } from '@/hooks/useRequest';
 import { AxiosRequestConfig } from 'axios';
 import { useContext, useMemo } from 'react';
-import { ResponseHasResponseProps, ResponseRequest } from '../types';
+import { PayloadRequestList, ResponseHasResponseProps, ResponseRequest } from '../../types';
 import { Logger } from '@/utils/logger';
 import config from 'config/api.json';
 import { CODE, parseCodeToNameFunc } from '@/config/responseCode';
@@ -11,49 +11,43 @@ import Localize from '@/langs';
 import AuthService from '@/utils/auth';
 import { EnumStatusBrowse } from '@/utils/enums';
 
-export type ResponseGetBrowse = {
+export type ResponseGetTopicOfBrowse = {
 	_id: string;
-	nameBrowse: string;
-	imageBrowse: string;
-	playlistId: string[];
+	topicName: string;
 	status: EnumStatusBrowse;
 	createdAt: Date;
 	updatedAt: Date;
 	__v: number;
 };
 
-function ServiceGetListBrowse(props?: ResponseHasResponseProps[]) {
+function ServiceGetListTopicOfBrowse(props?: ResponseHasResponseProps[]) {
 	const { onToast } = useContext(ToastContext);
 	const auth = AuthService.getPackageAuth();
 
-	const request: AxiosRequestConfig[] = [
-		{
-			url: config.api.browse._,
-			method: 'get',
-			headers: {
-				token: auth?.token,
-			},
+	const request: AxiosRequestConfig = {
+		url: config.api.browse.topic._,
+		method: 'get',
+		headers: {
+			token: auth?.token,
 		},
-	];
+	};
 
 	const {
 		mutate,
-		data = [
-			{
-				list: [],
-				total: 0,
-			},
-		],
+		data = {
+			list: [],
+			total: 0,
+		},
 		isSuccess,
 	} = useRequest({
-		keyQuery: ['GET_LIST_BROWSE'],
+		keyQuery: ['GET_LIST_BROWSE_TOPIC'],
 		request,
 	});
 
-	const handleMutate = () => {
-		mutate(undefined, {
+	const handleMutate = (params: PayloadRequestList) => {
+		mutate(params, {
 			onSuccess: (data) => {
-				Logger.debug('ServiceGetListBrowse execute handleMutate success', data);
+				Logger.debug('ServiceGetListTopicOfBrowse execute handleMutate success', data);
 				props?.map((o, index) => {
 					const funcName = parseCodeToNameFunc[data[index].code as unknown as CODE];
 					const hasFunc = Helper.isEmpty(o?.[funcName as string]);
@@ -65,7 +59,7 @@ function ServiceGetListBrowse(props?: ResponseHasResponseProps[]) {
 				});
 			},
 			onError: (error) => {
-				Logger.error('ServiceGetListBrowse execute handleMutate success', error.toString());
+				Logger.error('ServiceGetListTopicOfBrowse execute handleMutate success', error.toString());
 				props?.map((o) => {
 					o.onError?.();
 				});
@@ -74,12 +68,12 @@ function ServiceGetListBrowse(props?: ResponseHasResponseProps[]) {
 	};
 
 	return {
-		onGetListBrowse: handleMutate,
-		isLoadingGetListBrowseService: !isSuccess,
+		onGetListTopicOfBrowse: handleMutate,
+		isLoadingGetListTopicOfBrowseService: !isSuccess,
 		response: useMemo(() => {
-			return data.map((i) => i.data) as ResponseRequest<ResponseGetBrowse>[];
+			return data.data as ResponseRequest<ResponseGetTopicOfBrowse>;
 		}, [data]),
 	};
 }
 
-export default ServiceGetListBrowse;
+export default ServiceGetListTopicOfBrowse;

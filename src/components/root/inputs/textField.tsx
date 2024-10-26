@@ -18,16 +18,25 @@ export interface ITextFieldProps extends Omit<React.DetailedHTMLProps<React.Inpu
 	};
 	autoFocus?: boolean;
 	messageError?: string;
+	classHelperText?: string;
 }
 
-function TextField({ classNameInput = '', className = '', name = '', type = 'text', defaultValue = '', ...props }: ITextFieldProps) {
+function TextField({
+	classNameInput = '',
+	className = '',
+	name = '',
+	classHelperText = 'text-red-300',
+	type = 'text',
+	defaultValue = '',
+	...props
+}: ITextFieldProps) {
 	const form = useFormContext();
 
 	const initialValue = useMemo(() => {
 		return form?.getValues()?.name ?? defaultValue;
 	}, [defaultValue, form]);
 	const messageError = useMemo(() => {
-		return form?.formState.errors?.[name] ?? props.messageError;
+		return form?.formState.errors?.[name]?.message ?? props.messageError;
 	}, [form?.formState.errors, name, props.messageError]);
 
 	const [value, setValue] = useState<string>(initialValue);
@@ -40,7 +49,7 @@ function TextField({ classNameInput = '', className = '', name = '', type = 'tex
 	};
 
 	return (
-		<div className='flex flex-col gap-1'>
+		<div className='flex flex-col gap-1 relative'>
 			{props.label && <p className='text-base'>{Localize(props.label)}</p>}
 			<div
 				className={`relative flex h-fit bg-white/10 items-center gap-1 hover:bg-white/40 transition-all duration-500 focus-within:bg-white/40 px-2 rounded-sm ${className}`}>
@@ -60,7 +69,11 @@ function TextField({ classNameInput = '', className = '', name = '', type = 'tex
 				/>
 				{isIconEnd && props.icon && props.icon.node}
 			</div>
-			{!Helper.isEmpty(messageError) && <p className='text-xs text-red-300 px-2 py-0.5 rounded-3xl italic text-end'>{messageError?.toString()}</p>}
+			{!Helper.isEmpty(messageError) && (
+				<p className={`text-xs px-2 py-0.5 rounded-3xl italic text-end absolute bottom-0 right-0 translate-y-full ${classHelperText}`}>
+					{messageError?.toString()}
+				</p>
+			)}
 		</div>
 	);
 }

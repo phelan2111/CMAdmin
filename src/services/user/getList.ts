@@ -31,15 +31,13 @@ function ServiceGetListUser(props?: ResponseHasResponseProps[]) {
 	const { onToast } = useContext(ToastContext);
 	const auth = AuthService.getPackageAuth();
 
-	const request: AxiosRequestConfig[] = [
-		{
-			url: config.api.user._,
-			method: 'get',
-			headers: {
-				token: auth?.token,
-			},
+	const request: AxiosRequestConfig = {
+		url: config.api.user._,
+		method: 'get',
+		headers: {
+			token: auth?.token,
 		},
-	];
+	};
 
 	const {
 		mutate,
@@ -82,7 +80,7 @@ function ServiceGetListUser(props?: ResponseHasResponseProps[]) {
 		onGetListUser: handleMutate,
 		isLoadingGetListUserService: !isSuccess,
 		response: useMemo(() => {
-			return data.map((i) => i.data) as ResponseRequest<ResponseGetUser>[];
+			return data.data as ResponseRequest<ResponseGetUser>;
 		}, [data]),
 	};
 }

@@ -4,14 +4,15 @@ import Take from './take';
 import { Fragment, useMemo, useState } from 'react';
 import Localize from '@/langs';
 import { Helper } from '@/utils/helper';
+import { FROM, LIMIT } from '@/utils/variables';
 type PagingProps = {
 	onChange?: (dataPaging: PagingState) => void;
 	totalRecord: number;
 };
 function Paging(props: PagingProps) {
 	const [paging, setPaging] = useState<PagingState>({
-		skip: 0,
-		take: 5,
+		skip: FROM,
+		take: LIMIT,
 	});
 
 	const showing = useMemo(() => {

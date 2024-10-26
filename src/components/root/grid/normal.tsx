@@ -6,12 +6,12 @@ import EmptyTable from '@/components/ui/empty/table';
 import Loading from '@/components/root/loading/normal';
 import LoaderTable from '@/components/ui/loader/table';
 
-function Grid(props: GridProps) {
+function Grid({ data = [], ...props }: GridProps) {
 	return (
 		<div className='flex flex-col gap-6'>
 			<div
 				style={{
-					minHeight: 'calc(100dvh - 380px)',
+					minHeight: 'calc(100dvh - 480px)',
 				}}>
 				<table className='w-full'>
 					<thead className='w-full sticky top-0'>
@@ -39,7 +39,7 @@ function Grid(props: GridProps) {
 									return <EmptyTable totalColumn={props.gridColum.length} />;
 								}}
 								isEmpty={props.total === 0}>
-								{props.data.map((item, index) => {
+								{data.map((item, index) => {
 									return (
 										<tr key={`tableRoot_${index}`} className='group h-fit border-white/10 last:border-transparent'>
 											{props.gridColum.map((column, indexColumn) => {

@@ -42,7 +42,7 @@ function Toast() {
 
 	return (
 		<div
-			className={`fixed top-4 bg-white/10 backdrop-blur-2xl rounded-lg transition-all duration-500 ${
+			className={`fixed top-4 bg-white/10 backdrop-blur-2xl rounded-lg transition-all z-50 min-w-72 duration-500 ${
 				hasToast ? 'translate-x-0 right-4 opacity-100' : 'translate-x-full right-0 opacity-0'
 			}`}>
 			{data.renderComponent?.() ?? (

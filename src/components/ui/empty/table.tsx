@@ -8,11 +8,11 @@ function EmptyTable(props: EmptyTableProps) {
 			<td colSpan={props.totalColumn}>
 				<div
 					style={{
-						height: 'calc(100dvh - 435px)',
+						height: 'calc(100dvh - 535px)',
 					}}
 					className='bg-white/10 p-4 flex flex-col justify-center items-center gap-6 rounded-md'>
 					<EmptyComponent />
-					<p>NO DATA</p>
+					<p className='animate-translateRight'>NO DATA</p>
 				</div>
 			</td>
 		</tr>

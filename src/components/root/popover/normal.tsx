@@ -29,13 +29,16 @@ function Popover({ className = 'bg-white text-primary_dark py-2 rounded-sm -bott
 		if (wrapperElement && element && popperElement) {
 			const rect = element.getBoundingClientRect();
 			const heightScreen = document.body.clientHeight;
+			const widthHalfScreen = document.body.clientWidth / 2;
 			const isCondition = rect.bottom + 128 > heightScreen;
+			const isConditionLeft = rect.left > widthHalfScreen;
+
 			if (isCondition) {
 				popperElement.style.bottom = '0px';
 				if (open) {
 					popperElement.style.transform = `translateY(-${element.clientHeight + 4}px) translateX(0px)`;
 				} else {
-					popperElement.style.transform = `translateY(-${element.clientHeight + 4}px) translateX(24px)`;
+					popperElement.style.transform = `translateY(-${element.clientHeight + 4}px) translateX(${isConditionLeft ? '-24px' : '24px'})`;
 				}
 			} else {
 				popperElement.style.top = '0px';
@@ -43,7 +46,7 @@ function Popover({ className = 'bg-white text-primary_dark py-2 rounded-sm -bott
 					popperElement.style.transform = `translateY(${element.clientHeight + 4}px) translateX(0px)`;
 					popperElement.style.height = '0px';
 				} else {
-					popperElement.style.transform = `translateY(${element.clientHeight + 4}px) translateX(24px)`;
+					popperElement.style.transform = `translateY(${element.clientHeight + 4}px) translateX(${isConditionLeft ? '-24px' : '24px'})`;
 				}
 			}
 			return () => {};

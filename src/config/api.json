@@ -12,7 +12,13 @@
             "register": "/user/register"
         },
         "browse": {
-            "_": "/browse"
+            "_": "/browse",
+            "genre": {
+                "_": "/browse/genre"
+            },
+            "topic": {
+                "_": "/browse/topic"
+            }
         }
     },
     "cookie": {

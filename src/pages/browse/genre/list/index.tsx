@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import ServiceGetListBrowse from '@/services/browse/getList';
 import Controller from './controller';
 import { useLayoutEffect } from 'react';
+import ServiceGetListGenreOfBrowse from '@/services/browse/genre/getList';
 
 function GenreOfBrowsePage() {
-	const { response, isLoadingGetListBrowseService, onGetListBrowse } = ServiceGetListBrowse();
+	const { response, isLoadingGetListGenreOfBrowseService, onGetListGenreOfBrowse } = ServiceGetListGenreOfBrowse();
 
 	useLayoutEffect(() => {
-		onGetListBrowse();
+		onGetListGenreOfBrowse();
 	}, []);
 
-	return <Controller data={response[0]} isLoading={isLoadingGetListBrowseService} />;
+	return <Controller data={response} isLoading={isLoadingGetListGenreOfBrowseService} />;
 }
 
 export default GenreOfBrowsePage;

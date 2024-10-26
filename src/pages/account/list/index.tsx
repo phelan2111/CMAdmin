@@ -10,7 +10,7 @@ function AccountListPage() {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	return <Controller isLoading={isLoadingGetListUserService} data={response[0]} />;
+	return <Controller isLoading={isLoadingGetListUserService} data={response} />;
 }
 
 export default AccountListPage;

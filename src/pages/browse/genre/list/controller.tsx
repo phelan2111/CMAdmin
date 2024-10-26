@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import View from './view';
 import { ResponseRequest } from '@/services/types';
-import { ResponseGetBrowse } from '@/services/browse/getList';
+import { ResponseGetBrowse } from '@/services/browse/genre/getList';
 
 type PropsController = {
 	data: ResponseRequest<ResponseGetBrowse>;

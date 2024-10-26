@@ -35,16 +35,13 @@ function ServiceArtistGetList(props?: ResponseHasResponseProps[]) {
 	const { onToast } = useContext(ToastContext);
 	const auth = AuthService.getPackageAuth();
 
-	const request: AxiosRequestConfig[] = [
-		{
-			url: config.api.artist._,
-			method: 'get',
-			headers: {
-				token: auth?.token,
-			},
+	const request: AxiosRequestConfig = {
+		url: config.api.artist._,
+		method: 'get',
+		headers: {
+			token: auth?.token,
 		},
-	];
-
+	};
 	const {
 		mutate,
 		data = [
@@ -86,7 +83,7 @@ function ServiceArtistGetList(props?: ResponseHasResponseProps[]) {
 		onGetListArtist: handleMutate,
 		isLoadingGetListArtistService: !isSuccess,
 		response: useMemo(() => {
-			return data.map((i) => i.data) as ResponseRequest<ResponseGetListArtist>[];
+			return data.data as ResponseRequest<ResponseGetListArtist>;
 		}, [data]),
 	};
 }

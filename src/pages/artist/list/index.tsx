@@ -9,7 +9,7 @@ function ArtistPage() {
 	useLayoutEffect(() => {
 		onGetListArtist();
 	}, []);
-	return <Controller data={response[0]} isLoading={isLoadingGetListArtistService} />;
+	return <Controller data={response} isLoading={isLoadingGetListArtistService} />;
 }
 
 export default ArtistPage;

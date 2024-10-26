@@ -8,18 +8,21 @@ import { Suspense } from 'react';
 import LoaderScreen from './components/ui/loader/screen';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import ToastProvider from './contexts/toast';
+import ModalProvider from './contexts/modal';
 
 function App() {
 	const queryClient = new QueryClient();
 	return (
 		<Provider store={store}>
-			<ToastProvider>
-				<QueryClientProvider client={queryClient}>
-					<Suspense fallback={<LoaderScreen />}>
-						<RouterProvider router={router} fallbackElement={<>Not Founds 404</>} />
-					</Suspense>
-				</QueryClientProvider>
-			</ToastProvider>
+			<ModalProvider>
+				<ToastProvider>
+					<QueryClientProvider client={queryClient}>
+						<Suspense fallback={<LoaderScreen />}>
+							<RouterProvider router={router} fallbackElement={<>Not Founds 404</>} />
+						</Suspense>
+					</QueryClientProvider>
+				</ToastProvider>
+			</ModalProvider>
 		</Provider>
 	);
 }

@@ -12,28 +12,26 @@ function SignIn() {
 	const { onToast } = useContext(ToastContext);
 	const { redirectPage } = useRedirect();
 
-	const { onLogin, isLoadingLoginService } = ServiceUserLogin([
-		{
-			onSuccess: (dataItem) => {
-				const res = dataItem as ResponseLogin;
-				const expireAt = dayjs().unix() * 180000;
-				AuthService.setPackageAuth(
-					{
-						token: res.token,
-					},
-					dayjs().unix() * 18000,
-				);
-				AuthService.setPackageProfile(res, expireAt);
-				redirectPage(PATH.HOME);
-			},
-			onWrongPassword: () => {
-				onToast({ theme: ToastType.error, label: 'ACCOUNT_WRONG', content: 'USERNAME_OR_PASSWORD' });
-			},
-			onSystemError: () => {
-				onToast({ theme: ToastType.error, label: 'SYSTEM_ERROR', content: 'SOMETHING_WERE_WRONG' });
-			},
+	const { onLogin, isLoadingLoginService } = ServiceUserLogin({
+		onSuccess: (dataItem) => {
+			const res = dataItem as ResponseLogin;
+			const expireAt = dayjs().unix() * 180000;
+			AuthService.setPackageAuth(
+				{
+					token: res.token,
+				},
+				dayjs().unix() * 18000,
+			);
+			AuthService.setPackageProfile(res, expireAt);
+			redirectPage(PATH.HOME);
 		},
-	]);
+		onWrongPassword: () => {
+			onToast({ theme: ToastType.error, label: 'ACCOUNT_WRONG', content: 'USERNAME_OR_PASSWORD' });
+		},
+		onSystemError: () => {
+			onToast({ theme: ToastType.error, label: 'SYSTEM_ERROR', content: 'SOMETHING_WERE_WRONG' });
+		},
+	});
 	const handleLogin = (dataForm: DataFormSignIn) => {
 		onLogin(dataForm);
 	};

@@ -66,4 +66,11 @@ export const dataLocalizeEN: Record<string, string> = {
 	SINGE_DESCRIPTION: 'Singer description',
 	GENRE: 'Genre',
 	TOPIC: 'Topic',
+	TOPIC_NAME: 'Topic name',
+	CREATE_TOPIC: 'Create Topic',
+	CREATE_TOPIC_DESCRIPTION: 'You are creating topic, topic decide form of entertainment.',
+	SUBMIT: 'Submit',
+	CREATE_SUCCESSFUL_TOPIC: 'Create successful topic',
+	TOPIC_ID: 'Topic Id',
+	SEARCH: 'Search',
 };

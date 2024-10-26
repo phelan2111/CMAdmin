@@ -2,10 +2,10 @@ import Grid from '@/components/root/grid/normal';
 import { GridColumn } from '@/components/root/grid/types';
 import Avatar from '@/components/root/image/avatar';
 import StatusBrowse from '@/components/ui/status/browse';
-import { ResponseGetBrowse } from '@/services/browse/getList';
+import { ResponseGetGenreOfBrowse } from '@/services/browse/genre/getList';
 import dayjs from 'dayjs';
 
-const gridColumTableBrowse: GridColumn<ResponseGetBrowse>[] = [
+const gridColumTableGenre: GridColumn<ResponseGetGenreOfBrowse>[] = [
 	{
 		title: 'STATUS',
 		field: 'status',
@@ -23,8 +23,8 @@ const gridColumTableBrowse: GridColumn<ResponseGetBrowse>[] = [
 		cell: ({ dataItem }) => {
 			return (
 				<div className='flex gap-2 items-center'>
-					<Avatar className='h-10 w-10 rounded-md' src={dataItem.imageBrowse} />
-					<p>{dataItem.nameBrowse}</p>
+					<Avatar className='h-10 w-10 rounded-md' src={dataItem.imageGenre} />
+					<p>{dataItem.nameGenre}</p>
 				</div>
 			);
 		},
@@ -43,14 +43,14 @@ const gridColumTableBrowse: GridColumn<ResponseGetBrowse>[] = [
 	},
 ];
 
-type TableBrowseProps = {
+type TableGenreProps = {
 	total: number;
-	data: ResponseGetBrowse[];
+	data: ResponseGetGenreOfBrowse[];
 	isLoading?: boolean;
 };
 
-function TableBrowse(props: TableBrowseProps) {
-	return <Grid isLoading={props.isLoading} total={props.total} data={props.data} gridColum={gridColumTableBrowse} />;
+function TableGenre(props: TableGenreProps) {
+	return <Grid isLoading={props.isLoading} total={props.total} data={props.data} gridColum={gridColumTableGenre} />;
 }
 
-export default TableBrowse;
+export default TableGenre;

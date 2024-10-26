@@ -21,15 +21,13 @@ export type ResponseLogin = {
 	role: number;
 };
 
-function ServiceUserLogin(props?: ResponseHasResponseProps[]) {
+function ServiceUserLogin(props?: ResponseHasResponseProps) {
 	const { onToast } = useContext(ToastContext);
 
-	const request: AxiosRequestConfig[] = [
-		{
-			url: config.api.user.login,
-			method: 'post',
-		},
-	];
+	const request: AxiosRequestConfig = {
+		url: config.api.user.login,
+		method: 'post',
+	};
 
 	const { mutate, data, isPending } = useRequest({
 		keyQuery: ['LOGIN'],
@@ -40,21 +38,17 @@ function ServiceUserLogin(props?: ResponseHasResponseProps[]) {
 		mutate(payload, {
 			onSuccess: (data) => {
 				Logger.debug('ServiceUserLogin execute handleMutate success', data);
-				props?.map((o, index) => {
-					const funcName = parseCodeToNameFunc[data[index].code as unknown as CODE];
-					const hasFunc = Helper.isEmpty(o?.[funcName as string]);
-					if (hasFunc) {
-						onToast({ theme: ToastType.error, label: Localize('SYSTEM_ERROR'), content: Localize('SOMETHING_WERE_WRONG') });
-					} else {
-						o?.[funcName as string](data[index]?.data);
-					}
-				});
+				const funcName = parseCodeToNameFunc[data.code as unknown as CODE];
+				const hasFunc = Helper.isEmpty(props?.[funcName as string]);
+				if (hasFunc) {
+					onToast({ theme: ToastType.error, label: Localize('SYSTEM_ERROR'), content: Localize('SOMETHING_WERE_WRONG') });
+				} else {
+					props?.[funcName as string](data?.data);
+				}
 			},
 			onError: (error) => {
 				Logger.error('ServiceUserLogin execute handleMutate success', error.toString());
-				props?.map((o) => {
-					o.onError?.();
-				});
+				props?.onError?.();
 			},
 		});
 	};
