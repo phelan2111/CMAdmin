@@ -46,7 +46,12 @@ function Grid({ data = [], ...props }: GridProps) {
 												const itemColumn = item[column.field] as string | number;
 												return (
 													<td key={`${column}_${indexColumn}_${index}`} className='p-0 h-fit border-b border-inherit'>
-														<div className='h-20 flex items-center transition-all py-2 px-4 cursor-pointer duration-300 group-hover:bg-white/5 font-semibold'>
+														<div
+															aria-hidden
+															onClick={() => {
+																props.onClickRow?.(item as never);
+															}}
+															className='h-20 flex items-center transition-all py-2 px-4 cursor-pointer duration-300 group-hover:bg-white/5 font-semibold'>
 															{column.cell?.({
 																dataItem: item as never,
 																field: column.field,

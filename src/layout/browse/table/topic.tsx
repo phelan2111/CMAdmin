@@ -39,10 +39,20 @@ type TableTopicProps = {
 	data: ResponseGetTopicOfBrowse[];
 	isLoading?: boolean;
 	onChangePaging?: (dataPaging: PagingState) => void;
+	onClickRow: (dataItem: ResponseGetTopicOfBrowse) => void;
 };
 
 function TableTopic(props: TableTopicProps) {
-	return <Grid onChangePaging={props.onChangePaging} isLoading={props.isLoading} total={props.total} data={props.data} gridColum={gridColumTableTopic} />;
+	return (
+		<Grid
+			onClickRow={props.onClickRow}
+			onChangePaging={props.onChangePaging}
+			isLoading={props.isLoading}
+			total={props.total}
+			data={props.data}
+			gridColum={gridColumTableTopic}
+		/>
+	);
 }
 
 export default TableTopic;

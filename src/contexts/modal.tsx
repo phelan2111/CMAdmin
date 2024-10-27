@@ -4,7 +4,8 @@ type ModalContextData = {
 	hasModal: boolean;
 	data: unknown;
 	onCloseModal: VoidFunction;
-	onModal: (dataItem: unknown, component: ReactNode) => void;
+	onModal: (component: ReactNode) => void;
+	onSetData: (dataItem: unknown) => void;
 	component: ReactNode;
 };
 
@@ -14,6 +15,7 @@ const initialModalContext: ModalContextData = {
 	onCloseModal: () => {},
 	onModal: () => {},
 	component: <Fragment />,
+	onSetData: () => {},
 };
 
 export const ModalContext = createContext(initialModalContext);
@@ -24,15 +26,21 @@ type ModalProviderProps = {
 function ModalProvider(props: ModalProviderProps) {
 	const [state, setState] = useState<Omit<ModalContextData, 'onCloseModal' | 'onModal'>>(initialModalContext);
 
-	const handleModal = (dataItem: unknown, component: ReactNode) => {
-		setState({
-			data: dataItem,
+	const handleModal = (component: ReactNode) => {
+		setState((prev) => ({
+			...prev,
 			hasModal: true,
 			component,
-		});
+		}));
 	};
 	const handleCloseModal = () => {
 		setState((prev) => ({ ...prev, hasModal: false }));
+	};
+	const handleSetData = (dataItem: unknown) => {
+		setState((prev) => ({
+			...prev,
+			data: dataItem,
+		}));
 	};
 
 	const value = useMemo(
@@ -40,6 +48,7 @@ function ModalProvider(props: ModalProviderProps) {
 			...state,
 			onCloseModal: handleCloseModal,
 			onModal: handleModal,
+			onSetData: handleSetData,
 		}),
 		[state],
 	);

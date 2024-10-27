@@ -26,7 +26,7 @@ function CreateTopicService(props?: ResponseHasResponseProps) {
 		},
 	};
 
-	const { mutate } = useRequest({
+	const { mutate, isPending } = useRequest({
 		keyQuery: ['GET_CREATE_BROWSE_TOPIC'],
 		request,
 	});
@@ -51,6 +51,7 @@ function CreateTopicService(props?: ResponseHasResponseProps) {
 	};
 
 	return {
+		isLoadingCreateTopic: isPending,
 		onCreateTopicOfBrowse: handleMutate,
 	};
 }

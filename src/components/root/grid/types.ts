@@ -6,8 +6,9 @@ export type GridProps = {
 	gridColum: GridColumn<never>[];
 	data: ItemData[];
 	total: number;
-	onChangePaging?: (dataPaging: PagingState) => void;
 	isLoading?: boolean;
+	onChangePaging?: (dataPaging: PagingState) => void;
+	onClickRow?: (dataItem: never) => void;
 };
 export type HeadersGird = {
 	title: string;

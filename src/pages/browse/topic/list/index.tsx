@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import Controller from './controller';
 import ServiceGetListTopicOfBrowse from '@/services/browse/topic/getList';
 

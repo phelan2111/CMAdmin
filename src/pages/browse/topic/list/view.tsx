@@ -8,9 +8,10 @@ import { FucCreateTopicProps } from '../types';
 import CreateTopic from '../create';
 import { PagingState } from '@/components/root/grid/types';
 import FilterStatusTool, { FilterStatusItem } from '@/components/ui/common/tool/filter/status';
-import { Helper } from '@/utils/helper';
-import { EnumStatusBrowse } from '@/utils/enums';
 import SearchTool from '@/components/ui/common/tool/search/normal';
+import { dataFilter } from 'pages/browse/variables';
+import { useRedirect } from '@/hooks/useRedirect';
+import { PATH } from '@/routes/config';
 
 type ViewProps = {
 	isLoading: boolean;
@@ -21,22 +22,9 @@ type ViewProps = {
 	onChangeFilterStatus: (dataItem: FilterStatusItem) => void;
 };
 
-const dataFilter: FilterStatusItem[] = [
-	{
-		id: Helper.randomKey(),
-		text: 'ACTIVE',
-		value: EnumStatusBrowse.display,
-		className: 'bg-green-500',
-	},
-	{
-		id: Helper.randomKey(),
-		text: 'HIDDEN',
-		value: EnumStatusBrowse.hidden,
-		className: 'bg-red-500',
-	},
-];
-
 function View(props: ViewProps) {
+	const { redirectPage } = useRedirect();
+
 	return (
 		<div className='pr-4 py-8'>
 			<Wrapper className='flex flex-col !gap-6'>
@@ -53,16 +41,24 @@ function View(props: ViewProps) {
 								});
 							}}
 							className='!bg-white/80 w-full text-primary_dark !rounded-md hover:!bg-white/50'>
-							Create
+							{Localize('CREATE_TOPIC')}
 						</Button>
 					</div>
 				</div>
-				<div className='rounded-xl px-3 py-3 flex items-center justify-between'>
+				<div className='rounded-xl px-3 py-3 flex items-center justify-between animate-translateRight'>
 					<FilterStatusTool onChange={props.onChangeFilterStatus} data={dataFilter} />
 					<SearchTool onChange={props.onChangeSearch} />
 				</div>
 				<div className='flex flex-col gap-4 h-full animate-translateRight'>
-					<TableTopic onChangePaging={props.onChangePaging} isLoading={props.isLoading} data={props.data.list} total={props.data.total} />
+					<TableTopic
+						isLoading={props.isLoading}
+						data={props.data.list}
+						total={props.data.total}
+						onChangePaging={props.onChangePaging}
+						onClickRow={(dataItem) => {
+							redirectPage(`${PATH.BROWSE.TOPIC._}/${dataItem._id}`);
+						}}
+					/>
 				</div>
 			</Wrapper>
 		</div>

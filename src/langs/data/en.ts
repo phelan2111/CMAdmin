@@ -73,4 +73,12 @@ export const dataLocalizeEN: Record<string, string> = {
 	CREATE_SUCCESSFUL_TOPIC: 'Create successful topic',
 	TOPIC_ID: 'Topic Id',
 	SEARCH: 'Search',
+	TOPIC_DETAILS: 'Topic Details',
+	INFORMATION_BASIC: 'Information basic',
+	HIDDEN_TOPIC_TITLE: 'Are you sure about hiding this topic?',
+	HIDDEN_TOPIC_DESCRIPTION: 'Hidden topics will remove all data relate to them ',
+	DISPLAY_TOPIC_TITLE: 'Are you sure about displaying this topic?',
+	DISPLAY_TOPIC_DESCRIPTION: 'Display topics will active all data relate to them ',
+	UPDATE_STATUS: 'Update status topic',
+	UPDATE_SUCCESSFUL_TOPIC: 'Update successful topic',
 };

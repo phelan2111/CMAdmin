@@ -16,9 +16,9 @@ type FilterStatusToolProps = {
 
 function FilterStatusTool(props: FilterStatusToolProps) {
 	const [filter, setFilter] = useState<FilterStatusItem>(props.data[0]);
-	const classLeft: string = useMemo(() => {
+	const left: number = useMemo(() => {
 		const { index } = Helper.findItem(props.data, 'id', filter.id);
-		return `left-${index * 24}`;
+		return index * 96;
 	}, [filter.id, props.data]);
 
 	const handleSelectStatus = (dataItem: FilterStatusItem) => {
@@ -31,7 +31,10 @@ function FilterStatusTool(props: FilterStatusToolProps) {
 			<div>{Localize('STATUS')}</div>
 			<div className='bg-white/10 rounded-2xl flex relative'>
 				<div
-					className={`w-24 p-2 h-full transition-all duration-500 absolute bg-gradient-to-r from-indigo-500 ${classLeft} to-indigo-500/30 top-0 rounded-2xl`}
+					style={{
+						left,
+					}}
+					className={'w-24 p-2 h-full transition-all duration-500 absolute bg-gradient-to-r from-indigo-500 to-indigo-500/30 top-0 rounded-2xl'}
 				/>
 				{props.data.map((item) => {
 					return (

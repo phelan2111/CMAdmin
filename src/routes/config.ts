@@ -20,6 +20,7 @@ export const PATH = {
 		TOPIC: {
 			_: '/topic',
 			CREATE: '/topic/create',
+			DETAILS: '/topic/:topicId',
 		},
 	},
 	ARTIST: {

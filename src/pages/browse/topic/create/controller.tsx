@@ -4,7 +4,6 @@ import { DataFormCreate } from '../types';
 import { PayloadCreateTopic } from '@/services/browse/topic/create';
 
 type PropsController = {
-	loading: boolean;
 	onCreate: (payload: PayloadCreateTopic) => void;
 };
 type StateController = {

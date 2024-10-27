@@ -17,7 +17,8 @@
                 "_": "/browse/genre"
             },
             "topic": {
-                "_": "/browse/topic"
+                "_": "/browse/topic",
+                "details": "/browse/topic/details"
             }
         }
     },

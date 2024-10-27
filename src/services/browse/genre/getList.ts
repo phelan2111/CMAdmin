@@ -1,7 +1,7 @@
 import { useRequest } from '@/hooks/useRequest';
 import { AxiosRequestConfig } from 'axios';
 import { useContext, useMemo } from 'react';
-import { ResponseHasResponseProps, ResponseRequest } from '../../types';
+import { PayloadRequestList, ResponseHasResponseProps, ResponseRequest } from '../../types';
 import { Logger } from '@/utils/logger';
 import config from 'config/api.json';
 import { CODE, parseCodeToNameFunc } from '@/config/responseCode';
@@ -48,8 +48,8 @@ function ServiceGetListGenreOfBrowse(props?: ResponseHasResponseProps[]) {
 		request,
 	});
 
-	const handleMutate = () => {
-		mutate(undefined, {
+	const handleMutate = (params: PayloadRequestList) => {
+		mutate(params, {
 			onSuccess: (data) => {
 				Logger.debug('ServiceGetListGenreOfBrowse execute handleMutate success', data);
 				props?.map((o, index) => {

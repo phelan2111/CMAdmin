@@ -55,7 +55,7 @@ export default class Controller extends Component<PropsController, StateControll
 	}
 	handleCreateTopic(dataItem: FucCreateTopicProps) {
 		const { onModal } = this.context;
-		onModal({}, dataItem.renderComponent);
+		onModal(dataItem.renderComponent);
 	}
 
 	handleChangePagingAndReRequest(dataItem: PagingState) {
