@@ -20,6 +20,7 @@ type ViewProps = {
 	onChangePaging?: (dataPaging: PagingState) => void;
 	onChangeSearch: (dataItem: string) => void;
 	onChangeFilterStatus: (dataItem: FilterStatusItem) => void;
+	onRefreshRequest: VoidFunction;
 };
 
 function View(props: ViewProps) {
@@ -37,7 +38,7 @@ function View(props: ViewProps) {
 						<Button
 							onClick={() => {
 								props.onCreateTopic({
-									renderComponent: <CreateTopic />,
+									renderComponent: <CreateTopic onRefreshRequest={props.onRefreshRequest} />,
 								});
 							}}
 							className='!bg-white/80 w-full text-primary_dark !rounded-md hover:!bg-white/50'>

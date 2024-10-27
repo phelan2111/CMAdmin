@@ -81,4 +81,11 @@ export const dataLocalizeEN: Record<string, string> = {
 	DISPLAY_TOPIC_DESCRIPTION: 'Display topics will active all data relate to them ',
 	UPDATE_STATUS: 'Update status topic',
 	UPDATE_SUCCESSFUL_TOPIC: 'Update successful topic',
+	GENRE_NAME: 'Genre name',
+	CREATE_GENRE: 'Create Genre',
+	CREATE_GENRE_DESCRIPTION: 'You are creating genre, genre decide form of entertainment.',
+	FILE_UPLOAD: 'Drop your files(S) here or',
+	MAX_FILE_SIZE: '500 MB max file size.',
+	IMAGE_GENRE: 'Image genre',
+	NO_DATA: 'No Data',
 };

@@ -1,5 +1,21 @@
-function Upload() {
-	return <div>Upload</div>;
+import Upload from '@/components/root/upload/normal';
+import DefaultUpload from '@/components/ui/upload/default/normal';
+import RenderUpload from '@/components/ui/upload/render/normal';
+
+function UploadBrowse() {
+	return (
+		<Upload
+			renderDefault={() => {
+				return <DefaultUpload />;
+			}}
+			label='IMAGE_GENRE'
+			required
+			renderUpload={(renderProps) => {
+				return <RenderUpload {...renderProps} />;
+			}}
+			name='imageGenre'
+		/>
+	);
 }
 
-export default Upload;
+export default UploadBrowse;

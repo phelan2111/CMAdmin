@@ -1,10 +1,16 @@
-import BallLoader from '../loader/ball';
+import LoadingModal from '@/components/root/loading/modal';
+import LoaderScreen from '../loader/screen';
+import { ReactNode } from 'react';
+type LoadingDialogProps = {
+	loading: boolean;
+	children: ReactNode;
+};
 
-function LoadingDialog() {
+function LoadingDialog(props: LoadingDialogProps) {
 	return (
-		<div className='flex flex-col justify-center items-center'>
-			<BallLoader />
-		</div>
+		<LoadingModal loading={props.loading} loader={<LoaderScreen />}>
+			{props.children}
+		</LoadingModal>
 	);
 }
 

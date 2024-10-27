@@ -13,27 +13,27 @@ function Grid({ data = [], ...props }: GridProps) {
 				style={{
 					minHeight: 'calc(100dvh - 480px)',
 				}}>
-				<table className='w-full'>
-					<thead className='w-full sticky top-0'>
-						<tr className='w-full bg-white text-primary_dark-20'>
-							{props.gridColum.map((headers, index) => {
-								return (
-									<th key={headers.field} className='overflow-hidden first:rounded-l-md last:rounded-r-md'>
-										{headers.headers?.({
-											index,
-											title: headers.title,
-										}) ?? (
-											<div className='text-start uppercase font-normal text-base py-3 px-4'>
-												<p className='truncate'>{Localize(headers.title)}</p>
-											</div>
-										)}
-									</th>
-								);
-							})}
-						</tr>
-					</thead>
-					<tbody className='w-full'>
-						<Loading renderProps={() => <LoaderTable colSpan={props.gridColum.length} />} isLoading={props.isLoading}>
+				<Loading renderProps={() => <LoaderTable />} isLoading={props.isLoading}>
+					<table className='w-full'>
+						<thead className='w-full sticky top-0'>
+							<tr className='w-full bg-white text-primary_dark-20'>
+								{props.gridColum.map((headers, index) => {
+									return (
+										<th key={headers.field} className='overflow-hidden first:rounded-l-md last:rounded-r-md'>
+											{headers.headers?.({
+												index,
+												title: headers.title,
+											}) ?? (
+												<div className='text-start uppercase font-normal text-base py-3 px-4'>
+													<p className='truncate'>{Localize(headers.title)}</p>
+												</div>
+											)}
+										</th>
+									);
+								})}
+							</tr>
+						</thead>
+						<tbody className='w-full'>
 							<Empty
 								componentEmpty={() => {
 									return <EmptyTable totalColumn={props.gridColum.length} />;
@@ -65,9 +65,9 @@ function Grid({ data = [], ...props }: GridProps) {
 									);
 								})}
 							</Empty>
-						</Loading>
-					</tbody>
-				</table>
+						</tbody>
+					</table>
+				</Loading>
 			</div>
 			<div className='flex items-center justify-between'>
 				<Paging totalRecord={props.total} onChange={props.onChangePaging} />

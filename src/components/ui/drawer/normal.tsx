@@ -2,11 +2,12 @@ import LogoComponent from '../common/logo';
 import Menu from '@/components/root/menu/normal';
 import MenuItem from '@/components/root/menu/item/normal';
 import { GoBook, GoChevronDown, GoCopilot, GoStack, GoHome, GoHubot, GoContainer } from 'react-icons/go';
-import { ReactNode, useMemo, useState } from 'react';
+import { ReactNode, useEffect, useMemo, useState } from 'react';
 import { Helper } from '@/utils/helper';
 import { PATH } from '@/routes/config';
 import Localize from '@/langs';
 import { useRedirect } from '@/hooks/useRedirect';
+import { useLocation } from 'react-router-dom';
 
 interface IItemDrawer {
 	icon?: ReactNode;
@@ -95,6 +96,8 @@ const drawer: IItemDrawer[] = [
 ];
 
 function DrawerNormal() {
+	const location = useLocation();
+
 	const [state, setState] = useState<[string, string]>(['', '']); // [parentsId, childrenId]
 	const { redirectPage } = useRedirect();
 
@@ -122,6 +125,27 @@ function DrawerNormal() {
 		setState(idItemDrawerList);
 		redirectPage(itemChild.path);
 	};
+
+	useEffect(() => {
+		for (let index = 0; index < drawer.length; index++) {
+			const item = drawer[index];
+			const hasItemParent = item.path === location.pathname;
+
+			if (hasItemParent) {
+				setState([item.id, '']);
+			} else {
+				if (item.children) {
+					for (let index = 0; index < item.children.length; index++) {
+						const child = item.children[index];
+						const hasItemChild = child.path === location.pathname;
+						if (hasItemChild) {
+							setState([item.id, child.id]);
+						}
+					}
+				}
+			}
+		}
+	}, [location.pathname]);
 
 	return (
 		<aside className='h-full bg-white/10 backdrop-blur-2xl flex flex-col gap-4 rounded-l-2xl'>

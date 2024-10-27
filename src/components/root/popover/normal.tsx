@@ -2,7 +2,7 @@ import { ReactNode, useLayoutEffect, useRef, useState } from 'react';
 type RenderContentProps = {
 	onClose: VoidFunction;
 	onOpen: VoidFunction;
-	open: boolean;
+	open: boolean | undefined;
 };
 interface IPopoverProps {
 	children?: ReactNode;
@@ -10,7 +10,7 @@ interface IPopoverProps {
 	renderContent?: (renderContentProps: RenderContentProps) => ReactNode;
 }
 function Popover({ className = 'bg-white text-primary_dark py-2 rounded-sm -bottom-1 left-0', ...props }: IPopoverProps) {
-	const [open, setOpen] = useState<boolean>(false);
+	const [open, setOpen] = useState<boolean | undefined>(undefined);
 	const ref = useRef<HTMLDivElement>(null);
 	const refPopper = useRef<HTMLDivElement>(null);
 
@@ -35,18 +35,27 @@ function Popover({ className = 'bg-white text-primary_dark py-2 rounded-sm -bott
 
 			if (isCondition) {
 				popperElement.style.bottom = '0px';
-				if (open) {
-					popperElement.style.transform = `translateY(-${element.clientHeight + 4}px) translateX(0px)`;
-				} else {
+				if (open === undefined) {
 					popperElement.style.transform = `translateY(-${element.clientHeight + 4}px) translateX(${isConditionLeft ? '-24px' : '24px'})`;
+				} else {
+					if (open) {
+						popperElement.style.transform = `translateY(-${element.clientHeight + 4}px) translateX(0px)`;
+					} else {
+						popperElement.style.transform = `translateY(-${element.clientHeight + 4}px) translateX(${isConditionLeft ? '-24px' : '24px'})`;
+					}
 				}
 			} else {
 				popperElement.style.top = '0px';
-				if (open) {
-					popperElement.style.transform = `translateY(${element.clientHeight + 4}px) translateX(0px)`;
-					popperElement.style.height = '0px';
-				} else {
+				if (open === undefined) {
 					popperElement.style.transform = `translateY(${element.clientHeight + 4}px) translateX(${isConditionLeft ? '-24px' : '24px'})`;
+				} else {
+					if (open) {
+						popperElement.style.transform = `translateY(${element.clientHeight + 4}px) translateX(0px)`;
+						popperElement.style.height = '100%';
+					} else {
+						popperElement.style.transform = `translateY(${element.clientHeight + 4}px) translateX(${isConditionLeft ? '-24px' : '24px'})`;
+						popperElement.style.height = '0px';
+					}
 				}
 			}
 			return () => {};
@@ -54,14 +63,14 @@ function Popover({ className = 'bg-white text-primary_dark py-2 rounded-sm -bott
 	}, [ref, open]);
 
 	return (
-		<div>
-			<div className='relative' aria-hidden>
-				<div ref={ref} className='cursor-pointer' aria-hidden onClick={handleOpen}>
+		<div className='w-full'>
+			<div className='relative w-full' aria-hidden>
+				<div ref={ref} className='cursor-pointer w-full' aria-hidden onClick={handleOpen}>
 					{props.children}
 				</div>
 				<div
 					ref={refPopper}
-					className={`absolute w-full min-w-fit transition-all duration-500 z-10 ${
+					className={`absolute w-full min-w-fit overflow-y-auto scrollHiddenY transition-all duration-500 z-10 ${
 						open ? 'opacity-100' : 'opacity-0 pointer-events-none'
 					} ${className}`}>
 					{props.renderContent?.({

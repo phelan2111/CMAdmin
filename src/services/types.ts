@@ -9,7 +9,7 @@ export type ResponseHasResponseProps = {
 
 export type PayloadRequestList = {
 	from: number;
-	limit: number;
+	limit?: number;
 	search?: string;
 	[name: string]: unknown;
 };

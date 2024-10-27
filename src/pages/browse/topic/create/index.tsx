@@ -2,10 +2,13 @@ import CreateTopicService, { PayloadCreateTopic } from '@/services/browse/topic/
 import Controller from './controller';
 import { ToastType } from '@/contexts/toast';
 import { useModal, useToast } from '@/hooks/useContext';
-import LoadingModal from '@/components/root/loading/modal';
-import LoaderScreen from '@/components/ui/loader/screen';
+import LoadingDialog from '@/components/ui/loading/dialog';
 
-function CreateTopic() {
+type CreateTopicProps = {
+	onRefreshRequest: VoidFunction;
+};
+
+function CreateTopic(props: CreateTopicProps) {
 	const { onToast } = useToast();
 	const { onCloseModal } = useModal();
 
@@ -13,6 +16,7 @@ function CreateTopic() {
 		onSuccess: () => {
 			onToast({ theme: ToastType.success, label: 'CREATE_TOPIC', content: 'CREATE_SUCCESSFUL_TOPIC' });
 			onCloseModal();
+			props.onRefreshRequest();
 		},
 		onSystemError: () => {
 			onToast({ theme: ToastType.error, label: 'SYSTEM_ERROR', content: 'SOMETHING_WERE_WRONG' });
@@ -24,9 +28,9 @@ function CreateTopic() {
 	};
 
 	return (
-		<LoadingModal loading={isLoadingCreateTopic} loader={<LoaderScreen />}>
+		<LoadingDialog loading={isLoadingCreateTopic}>
 			<Controller onCreate={handleCreate} />;
-		</LoadingModal>
+		</LoadingDialog>
 	);
 }
 

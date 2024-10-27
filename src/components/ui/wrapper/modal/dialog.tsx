@@ -1,7 +1,7 @@
 import { ModalContext } from '@/contexts/modal';
 import Localize from '@/langs';
 import { ReactNode, useContext } from 'react';
-import { IoCloseCircleOutline } from 'react-icons/io5';
+import CloseButton from '../../button/close';
 
 type DialogWrapperProps = {
 	children: ReactNode;
@@ -21,12 +21,7 @@ function DialogWrapper({ className = '', ...props }: DialogWrapperProps) {
 					{props.title && <p className='font-semibold text-xl'>{Localize(props.title)}</p>}
 					{props.description && <p className='text-sm text-[#3C3D37]'>{Localize(props.description)}</p>}
 				</div>
-				<div
-					aria-hidden
-					onClick={onCloseModal}
-					className='w-6 h-6 flex items-center justify-center rounded-full transition-colors duration-300 hover:bg-black cursor-pointer hover:text-white'>
-					<IoCloseCircleOutline className='text-2xl' />
-				</div>
+				<CloseButton onClick={onCloseModal} />
 			</div>
 			{props.children}
 		</div>

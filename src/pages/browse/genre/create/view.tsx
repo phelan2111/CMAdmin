@@ -1,32 +1,46 @@
+import Button from '@/components/root/button';
 import Form from '@/components/root/form';
-import TextAreaField from '@/components/root/inputs/textarea';
-import TextField from '@/components/root/inputs/textField';
-import Wrapper from '@/components/ui/wrapper/normal';
+import InputDialog from '@/components/ui/input/dialog';
+import DialogWrapper from '@/components/ui/wrapper/modal/dialog';
 import Localize from '@/langs';
+import UploadBrowse from '@/layout/browse/upload';
+import { array, string } from 'yup';
+import { FromStateCreateGenre } from '../types';
+import SelectDialog from '@/components/ui/select/dialog';
+import { ItemSelect } from '@/components/root/inputs/select';
 
-function View() {
+type ViewProps = {
+	onSubmit: (dataForm: FromStateCreateGenre) => void;
+	dataTopic: ItemSelect[];
+};
+
+function View(props: ViewProps) {
 	return (
-		<div className='pr-4 py-8'>
-			<Wrapper className='flex flex-col gap-20'>
-				<div className='flex justify-between items-end animate-translateRight'>
-					<div className='leading-10'>
-						<h1 className='text-5xl font-semibold'>{Localize('CREATE_BROWSE')}</h1>
-						<p>It is list of browse in the system</p>
-					</div>
-				</div>
-				<div className='flex flex-col gap-4 h-full animate-translateRight'>
-					<Form
-						render={() => {
-							return (
-								<div className='flex flex-col gap-4'>
-									<TextField label='SINGE_NAME' className='bg-white/30' name='singerName' />
-									<TextAreaField label='SINGE_DESCRIPTION' className='bg-white/30' name='singerName' />
-								</div>
-							);
-						}}
-					/>
-				</div>
-			</Wrapper>
+		<div className='pr-4 py-8 animate-translateRight'>
+			<DialogWrapper title='CREATE_GENRE' description='CREATE_GENRE_DESCRIPTION'>
+				<Form
+					onSubmit={props.onSubmit}
+					defaultValues={{
+						imageGenre: [],
+					}}
+					validator={{
+						genreName: string().required(),
+						imageGenre: array().required(),
+					}}
+					render={() => {
+						return (
+							<div className='flex flex-col gap-8'>
+								<InputDialog required label='GENRE_NAME' name='genreName' />
+								<UploadBrowse />
+								<SelectDialog classNamePopper='!h-40' data={props.dataTopic} name='topic' />
+								<Button type='submit' className='text-white rounded-[6px] h-14'>
+									{Localize('SUBMIT')}
+								</Button>
+							</div>
+						);
+					}}
+				/>
+			</DialogWrapper>
 		</div>
 	);
 }

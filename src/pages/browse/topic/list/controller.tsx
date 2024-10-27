@@ -20,6 +20,13 @@ type StateController = {
 	};
 };
 
+const initialPayloadState: PayloadRequestList = {
+	from: FROM,
+	limit: LIMIT,
+	createdAt: SORT.DESC,
+	search: '',
+	status: EnumStatusBrowse.display,
+};
 export default class Controller extends Component<PropsController, StateController> {
 	static contextType = ModalContext;
 	declare context: React.ContextType<typeof ModalContext>;
@@ -28,13 +35,7 @@ export default class Controller extends Component<PropsController, StateControll
 		super(props);
 		this.state = {
 			allState: {
-				payload: {
-					from: FROM,
-					limit: LIMIT,
-					createdAt: SORT.DESC,
-					search: '',
-					status: EnumStatusBrowse.display,
-				},
+				payload: initialPayloadState,
 			},
 		};
 		this.handleCreateTopic = this.handleCreateTopic.bind(this);
@@ -85,6 +86,12 @@ export default class Controller extends Component<PropsController, StateControll
 		this.setState({ allState });
 		this.handleReRequest();
 	}
+	handleRefreshRequest() {
+		const { allState } = this.state;
+		allState.payload = initialPayloadState;
+		this.setState({ allState });
+		this.handleReRequest();
+	}
 
 	render() {
 		const { isLoading, data = initialResponseRequest as ResponseRequest<ResponseGetTopicOfBrowse> } = this.props;
@@ -97,6 +104,7 @@ export default class Controller extends Component<PropsController, StateControll
 				onChangePaging={this.handleChangePagingAndReRequest}
 				onChangeSearch={this.handleOnChangeSearch}
 				onChangeFilterStatus={this.handleFilterStatus}
+				onRefreshRequest={this.handleReRequest}
 			/>
 		);
 	}

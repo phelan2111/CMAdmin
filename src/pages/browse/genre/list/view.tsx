@@ -37,7 +37,7 @@ function View(props: ViewProps) {
 								});
 							}}
 							className='!bg-white/80 w-full text-primary_dark !rounded-md hover:!bg-white/50'>
-							Create
+							{Localize('CREATE_GENRE')}
 						</Button>
 					</div>
 				</div>
