@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import TextField from '@/components/root/inputs/textField';
 import { useDebounce } from '@/hooks/useDebounce';
 import Localize from '@/langs';
@@ -23,7 +24,6 @@ function SearchTool(props: SearchToolProps) {
 
 	useEffect(() => {
 		props.onChange?.(value);
-
 		return () => {};
 	}, [value]);
 

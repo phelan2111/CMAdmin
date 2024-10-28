@@ -9,7 +9,8 @@
             "login": "/user/login",
             "verifyUserName": "/user/verifyUsername",
             "verifyOTP": "/user/verifyOTP",
-            "register": "/user/register"
+            "register": "/user/register",
+            "details": "/user/details"
         },
         "browse": {
             "_": "/browse",

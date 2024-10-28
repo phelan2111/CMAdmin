@@ -1,5 +1,6 @@
 import { FilterStatusItem } from '@/components/ui/common/tool/filter/status';
-import { EnumStatusAccount } from '@/utils/enums';
+import { ResponseGetUserDetails } from '@/services/user/getDetails';
+import { EnumStatusAccount, Role } from '@/utils/enums';
 import { Helper } from '@/utils/helper';
 
 export const dataFilterAccount: FilterStatusItem[] = [
@@ -22,3 +23,14 @@ export const dataFilterAccount: FilterStatusItem[] = [
 		className: 'bg-red-500',
 	},
 ];
+
+export const initialUserDetails: ResponseGetUserDetails = {
+	createdAt: '',
+	email: '',
+	firstName: '',
+	lastName: '',
+	role: Role.admin,
+	status: EnumStatusAccount.active,
+	updatedAt: '',
+	userId: '',
+};

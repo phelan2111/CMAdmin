@@ -9,6 +9,8 @@ import { PagingState } from '@/components/root/grid/types';
 import FilterStatusTool, { FilterStatusItem } from '@/components/ui/common/tool/filter/status';
 import SearchTool from '@/components/ui/common/tool/search/normal';
 import { dataFilterAccount } from '../variables';
+import { useRedirect } from '@/hooks/useRedirect';
+import { PATH } from '@/routes/config';
 
 type ViewProps = {
 	data: ResponseRequest<ResponseGetUser>;
@@ -20,6 +22,8 @@ type ViewProps = {
 };
 
 function View(props: ViewProps) {
+	const { redirectPage } = useRedirect();
+
 	return (
 		<div className='pr-4 py-8'>
 			<Wrapper className='flex flex-col gap-20'>
@@ -29,7 +33,7 @@ function View(props: ViewProps) {
 						<p>It is list of accounts in the system</p>
 					</div>
 					<div className='w-40'>
-						<Button className='!bg-white/80 w-full text-primary_dark !rounded-md hover:!bg-white/50'>Create</Button>
+						<Button className='!bg-white/80 w-full text-primary_dark !rounded-md hover:!bg-white/50'>{Localize('CREATE_ACCOUNT')}</Button>
 					</div>
 				</div>
 				<div className='rounded-xl px-3 py-3 flex items-center justify-between animate-translateRight'>
@@ -37,7 +41,14 @@ function View(props: ViewProps) {
 					<SearchTool onChange={props.onChangeSearch} />
 				</div>
 				<div className='flex flex-col gap-4 h-full animate-translateRight'>
-					<TableAccount isLoading={props.isLoading} data={props.data.list} total={props.data.total} />
+					<TableAccount
+						onClickRow={(dataItem) => {
+							redirectPage(`${PATH.ACCOUNT._}/${dataItem._id}`);
+						}}
+						isLoading={props.isLoading}
+						data={props.data.list}
+						total={props.data.total}
+					/>
 				</div>
 			</Wrapper>
 		</div>

@@ -1,5 +1,5 @@
 import Grid from '@/components/root/grid/normal';
-import { GridColumn } from '@/components/root/grid/types';
+import { GridColumn, TableProps } from '@/components/root/grid/types';
 import Avatar from '@/components/root/image/avatar';
 import StatusAccount from '@/components/ui/status/account';
 import { ResponseGetUser } from '@/services/user/getList';
@@ -61,14 +61,8 @@ const gridColumTableAccount: GridColumn<ResponseGetUser>[] = [
 	},
 ];
 
-type TableAccountProps = {
-	total: number;
-	data: ResponseGetUser[];
-	isLoading?: boolean;
-};
-
-function TableAccount(props: TableAccountProps) {
-	return <Grid isLoading={props.isLoading} total={props.total} data={props.data} gridColum={gridColumTableAccount} />;
+function TableAccount(props: TableProps<ResponseGetUser>) {
+	return <Grid {...props} gridColum={gridColumTableAccount} />;
 }
 
 export default TableAccount;

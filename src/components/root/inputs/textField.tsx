@@ -47,7 +47,7 @@ function TextField({
 
 	const handleChange = (valueInput: string) => {
 		setValue(valueInput);
-		form.setValue(name, valueInput, { shouldValidate: true, shouldDirty: true, shouldTouch: true });
+		form?.setValue(name, valueInput, { shouldValidate: true, shouldDirty: true, shouldTouch: true });
 	};
 
 	return (

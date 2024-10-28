@@ -9,19 +9,20 @@ export const PATH = {
 	DASHBOARD: '/dashboard',
 	ACCOUNT: {
 		_: '/account',
+		DETAILS: '/account/:userId',
 	},
 	BROWSE: {
 		_: '/browse',
 		CREATE: '/browse/create',
 		GENRE: {
-			_: '/genre',
-			CREATE: '/genre/create',
-			DETAILS: '/genre/:genreId',
+			_: '/browse/genre',
+			CREATE: '/browse/genre/create',
+			DETAILS: '/browse/genre/:genreId',
 		},
 		TOPIC: {
-			_: '/topic',
-			CREATE: '/topic/create',
-			DETAILS: '/topic/:topicId',
+			_: '/browse/topic',
+			CREATE: '/browse/topic/create',
+			DETAILS: '/browse/topic/:topicId',
 		},
 	},
 	ARTIST: {
