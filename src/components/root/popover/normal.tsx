@@ -70,9 +70,7 @@ function Popover({ className = 'bg-white text-primary_dark py-2 rounded-sm -bott
 				</div>
 				<div
 					ref={refPopper}
-					className={`absolute w-full min-w-fit overflow-y-auto scrollHiddenY transition-all duration-500 z-10 ${
-						open ? 'opacity-100' : 'opacity-0 pointer-events-none'
-					} ${className}`}>
+					className={`absolute w-full transition-all duration-500 z-10 ${open ? 'opacity-100' : 'opacity-0 pointer-events-none'} ${className}`}>
 					{props.renderContent?.({
 						onClose: handleClose,
 						onOpen: handleOpen,

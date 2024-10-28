@@ -6,7 +6,7 @@ type ImageProps = {
 };
 
 function Image({ className = 'size-[180px]', alt = 'image', ...props }: ImageProps) {
-	return <img className={`${className} rounded-xl`} src={props.src} alt={alt} />;
+	return <img className={`${className} rounded-xl object-cover`} src={props.src} alt={alt} />;
 }
 
 export default Image;

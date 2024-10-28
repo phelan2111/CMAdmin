@@ -10,6 +10,8 @@ import FilterStatusTool, { FilterStatusItem } from '@/components/ui/common/tool/
 import SearchTool from '@/components/ui/common/tool/search/normal';
 import { dataFilter } from 'pages/browse/variables';
 import CreateGenreOfBrowse from '../create';
+import { useRedirect } from '@/hooks/useRedirect';
+import { PATH } from '@/routes/config';
 
 type ViewProps = {
 	data: ResponseRequest<ResponseGetGenreOfBrowse>;
@@ -18,22 +20,25 @@ type ViewProps = {
 	onChangePaging?: (dataPaging: PagingState) => void;
 	onChangeSearch: (dataItem: string) => void;
 	onChangeFilterStatus: (dataItem: FilterStatusItem) => void;
+	onRefreshRequest: VoidFunction;
 };
 
 function View(props: ViewProps) {
+	const { redirectPage } = useRedirect();
+
 	return (
 		<div className='pr-4 py-8'>
 			<Wrapper className='flex flex-col gap-20'>
 				<div className='flex justify-between items-end animate-translateRight'>
 					<div className='leading-10'>
-						<h1 className='text-5xl font-semibold'>{Localize('BROWSE')}</h1>
+						<h1 className='text-5xl font-semibold'>{Localize('GENRE')}</h1>
 						<p>It is list of browse in the system</p>
 					</div>
 					<div className='w-40'>
 						<Button
 							onClick={() => {
 								props.onCreateGenre({
-									renderComponent: <CreateGenreOfBrowse />,
+									renderComponent: <CreateGenreOfBrowse onRefreshRequest={props.onRefreshRequest} />,
 								});
 							}}
 							className='!bg-white/80 w-full text-primary_dark !rounded-md hover:!bg-white/50'>
@@ -46,7 +51,15 @@ function View(props: ViewProps) {
 					<SearchTool onChange={props.onChangeSearch} />
 				</div>
 				<div className='flex flex-col gap-4 h-full animate-translateRight'>
-					<TableGenre isLoading={props.isLoading} data={props.data.list} total={props.data.total} />
+					<TableGenre
+						onClickRow={(dataItem) => {
+							redirectPage(`${PATH.BROWSE.GENRE._}/${dataItem._id}`);
+						}}
+						onChangePaging={props.onChangePaging}
+						isLoading={props.isLoading}
+						data={props.data.list}
+						total={props.data.total}
+					/>
 				</div>
 			</Wrapper>
 		</div>

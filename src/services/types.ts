@@ -23,3 +23,9 @@ export const initialResponseRequest: ResponseRequest<unknown> = {
 	list: [],
 	total: 0,
 };
+
+export type ResponseUpload = {
+	link: string;
+	name: string;
+	createAt: number;
+};

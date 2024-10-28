@@ -52,8 +52,12 @@ function Upload({ defaultValue = [], multiple = false, length = 1, name = '', re
 			const takeUploadData: DataUpload[] = cellUploadData.splice(0, length);
 
 			setUploadData(takeUploadData);
-			props.onChange?.({ values: uploadData });
-			form.setValue(name, uploadData);
+			props.onChange?.({ values: takeUploadData });
+			form.setValue(name, takeUploadData, {
+				shouldValidate: true,
+				shouldDirty: true,
+				shouldTouch: true,
+			});
 		}
 	};
 	const handleDeleteFile = (dataItem: DataUpload) => {
@@ -63,6 +67,11 @@ function Upload({ defaultValue = [], multiple = false, length = 1, name = '', re
 			URL.revokeObjectURL(valueCurrent[index].src);
 			valueCurrent.splice(index, 1);
 		}
+		form.setValue(name, valueCurrent, {
+			shouldValidate: true,
+			shouldDirty: true,
+			shouldTouch: true,
+		});
 		setUploadData(valueCurrent);
 	};
 
@@ -79,6 +88,7 @@ function Upload({ defaultValue = [], multiple = false, length = 1, name = '', re
 						{props.renderDefault?.({
 							onDelete: handleDeleteFile,
 							data: uploadData,
+							messageError,
 						})}
 						<input
 							className='absolute w-full h-full top-0 left-0 bg-transparent opacity-0'

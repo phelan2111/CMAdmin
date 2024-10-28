@@ -1,19 +1,19 @@
 import { Component } from 'react';
 import View from './view';
 import { UpdateStatusProps } from '.';
-import { ResponseGetTopicDetailsOfBrowse } from '@/services/browse/topic/getDetails';
-import { initialStateItemTopic } from '../../variables';
-import { PayloadTopicUpdateStatus } from '@/services/browse/topic/updateStatus';
+import { initialStateItemGenre } from '../../variables';
 import { EnumStatusBrowse } from '@/utils/enums';
+import { ResponseGetGenreDetailsOfBrowse } from '@/services/browse/genre/getDetails';
+import { PayloadGenreUpdateStatus } from '@/services/browse/genre/updateStatus';
 
 type ControllerState = {
 	allState: {
-		details: ResponseGetTopicDetailsOfBrowse;
+		details: ResponseGetGenreDetailsOfBrowse;
 	};
 };
 
 interface ControllerProps extends UpdateStatusProps {
-	onUpdateStatus: (dataItem: PayloadTopicUpdateStatus) => void;
+	onUpdateStatus: (dataItem: PayloadGenreUpdateStatus) => void;
 }
 
 export default class Controller extends Component<ControllerProps, ControllerState> {
@@ -21,7 +21,7 @@ export default class Controller extends Component<ControllerProps, ControllerSta
 		super(props);
 		this.state = {
 			allState: {
-				details: initialStateItemTopic,
+				details: initialStateItemGenre,
 			},
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -38,12 +38,12 @@ export default class Controller extends Component<ControllerProps, ControllerSta
 		if (isHiddenStatus) {
 			this.props.onUpdateStatus({
 				status: EnumStatusBrowse.display,
-				topicId: this.state.allState.details.topicId,
+				genreId: this.state.allState.details.genreId,
 			});
 		} else {
 			this.props.onUpdateStatus({
 				status: EnumStatusBrowse.hidden,
-				topicId: this.state.allState.details.topicId,
+				genreId: this.state.allState.details.genreId,
 			});
 		}
 	}

@@ -1,5 +1,5 @@
 import Grid from '@/components/root/grid/normal';
-import { GridColumn, PagingState } from '@/components/root/grid/types';
+import { GridColumn, TableProps } from '@/components/root/grid/types';
 import StatusBrowse from '@/components/ui/status/browse';
 import { ResponseGetTopicOfBrowse } from '@/services/browse/topic/getList';
 import dayjs from 'dayjs';
@@ -34,25 +34,8 @@ const gridColumTableTopic: GridColumn<ResponseGetTopicOfBrowse>[] = [
 	},
 ];
 
-type TableTopicProps = {
-	total: number;
-	data: ResponseGetTopicOfBrowse[];
-	isLoading?: boolean;
-	onChangePaging?: (dataPaging: PagingState) => void;
-	onClickRow: (dataItem: ResponseGetTopicOfBrowse) => void;
-};
-
-function TableTopic(props: TableTopicProps) {
-	return (
-		<Grid
-			onClickRow={props.onClickRow}
-			onChangePaging={props.onChangePaging}
-			isLoading={props.isLoading}
-			total={props.total}
-			data={props.data}
-			gridColum={gridColumTableTopic}
-		/>
-	);
+function TableTopic(props: TableProps<ResponseGetTopicOfBrowse>) {
+	return <Grid {...props} gridColum={gridColumTableTopic} />;
 }
 
 export default TableTopic;

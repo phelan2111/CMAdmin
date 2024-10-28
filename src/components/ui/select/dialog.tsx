@@ -11,7 +11,10 @@ function SelectDialog(props: ISelectDialogProps) {
 				classActive='bg-gray-200'
 				classItem='bg-white'
 				className='bg-white'
+				classHelperText='font-medium text-red-600'
 				classNameEmpty='bg-white'
+				classNamePopper='overflow-y-auto scrollHiddenY !h-40'
+				classMenuItem='px-3 py-2'
 				{...props}
 			/>
 		</div>

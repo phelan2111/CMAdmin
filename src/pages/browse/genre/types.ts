@@ -1,3 +1,4 @@
+import { ItemSelect } from '@/components/root/inputs/select';
 import { DataUpload } from '@/components/root/upload/normal';
 import { ReactNode } from 'react';
 
@@ -12,4 +13,5 @@ export type DataFormCreate = {
 export type FromStateCreateGenre = {
 	genreName: string;
 	imageGenre: DataUpload[];
+	topic: ItemSelect;
 };

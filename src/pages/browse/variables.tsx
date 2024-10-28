@@ -1,4 +1,5 @@
 import { FilterStatusItem } from '@/components/ui/common/tool/filter/status';
+import { ResponseGetGenreDetailsOfBrowse } from '@/services/browse/genre/getDetails';
 import { ResponseGetTopicDetailsOfBrowse } from '@/services/browse/topic/getDetails';
 import { EnumStatusBrowse } from '@/utils/enums';
 import { Helper } from '@/utils/helper';
@@ -19,10 +20,19 @@ export const dataFilter: FilterStatusItem[] = [
 ];
 
 export const initialStateItemTopic: ResponseGetTopicDetailsOfBrowse = {
-	_id: '',
+	topicId: '',
 	topicName: '',
 	status: EnumStatusBrowse.display,
 	createdAt: '',
 	updatedAt: '',
-	__v: 0,
+};
+
+export const initialStateItemGenre: ResponseGetGenreDetailsOfBrowse = {
+	createdAt: '',
+	imageGenre: '',
+	nameGenre: '',
+	status: EnumStatusBrowse.display,
+	genreId: '',
+	updatedAt: '',
+	topic: initialStateItemTopic,
 };

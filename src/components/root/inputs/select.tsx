@@ -18,6 +18,7 @@ export type SelectProps = {
 	classActive?: string;
 	classNameEmpty?: string;
 	classNamePopper?: string;
+	classMenuItem?: string;
 	data: ItemSelect[];
 	defaultSelect?: ItemSelect;
 	onChange?: (dataItem: ItemSelect) => void;
@@ -43,6 +44,7 @@ function Select({
 	classItem = 'bg-white/10',
 	name = '',
 	classActive = 'bg-white/10',
+	classMenuItem = 'px-2 py-1',
 	...props
 }: SelectProps) {
 	const form = useFormContext();
@@ -56,11 +58,15 @@ function Select({
 	const handleSelect = (dataItem: ItemSelect) => {
 		setDataSelectState(dataItem);
 		props.onChange?.(dataItem);
-		form.setValue(name, dataSelectState);
+		form?.setValue(name, dataItem, {
+			shouldValidate: true,
+			shouldDirty: true,
+			shouldTouch: true,
+		});
 	};
 
 	return (
-		<div className='w-full flex flex-col gap-1'>
+		<div className='w-full flex flex-col gap-1 relative'>
 			{props.label && (
 				<div>
 					<p>
@@ -83,7 +89,7 @@ function Select({
 
 									return (
 										<MenuItem
-											className={`px-2 py-1 ${isEqual ? classActive : 'text-primary_dark'}`}
+											className={`${classMenuItem} ${isEqual ? classActive : 'text-primary_dark'}`}
 											onClick={() => {
 												handleSelect(item);
 												onClose();

@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { ReactNode } from 'react';
+import { Fragment, ReactNode } from 'react';
 import { DefaultValues, FormProvider, UseFormGetFieldState, UseFormGetValues, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
@@ -37,8 +37,10 @@ function RenderForm(render: (formRenderProps: IFormRenderProps) => ReactNode): R
 
 function Form({ validator = {}, defaultValues = {}, ...props }: IFormProps) {
 	const methods = useForm({
-		resolver: yupResolver(yup.object().shape(validator)),
 		defaultValues,
+		mode: 'onChange',
+		reValidateMode: 'onChange',
+		resolver: yupResolver(yup.object().shape(validator)),
 	});
 
 	const onSubmit = (data: never) => {
@@ -59,7 +61,14 @@ function Form({ validator = {}, defaultValues = {}, ...props }: IFormProps) {
 	return (
 		<FormProvider {...methods}>
 			<form aria-hidden onSubmit={methods.handleSubmit(onSubmit as never)} onKeyDown={handleKeyDown} onKeyUp={handleKeyUp}>
-				{props.render ? RenderForm(props.render) : props.children}
+				{props.render
+					? RenderForm(() => {
+							if (props.render) {
+								return props.render(methods.formState as unknown as IFormRenderProps);
+							}
+							return <Fragment />;
+					  })
+					: props.children}
 			</form>
 		</FormProvider>
 	);

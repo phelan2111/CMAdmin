@@ -4,7 +4,7 @@ import InputDialog from '@/components/ui/input/dialog';
 import DialogWrapper from '@/components/ui/wrapper/modal/dialog';
 import Localize from '@/langs';
 import UploadBrowse from '@/layout/browse/upload';
-import { array, string } from 'yup';
+import { array, object, string } from 'yup';
 import { FromStateCreateGenre } from '../types';
 import SelectDialog from '@/components/ui/select/dialog';
 import { ItemSelect } from '@/components/root/inputs/select';
@@ -22,18 +22,20 @@ function View(props: ViewProps) {
 					onSubmit={props.onSubmit}
 					defaultValues={{
 						imageGenre: [],
+						genreName: '',
 					}}
 					validator={{
-						genreName: string().required(),
-						imageGenre: array().required(),
+						genreName: string().required(Localize('GENRE_NAME_REQUIRED')),
+						imageGenre: array().length(1, Localize('IMAGE_REQUIRED_ONE')).required('IMAGE_REQUIRED'),
+						topic: object().required(Localize('TOPIC_REQUIRED')),
 					}}
-					render={() => {
+					render={(renderProps) => {
 						return (
 							<div className='flex flex-col gap-8'>
 								<InputDialog required label='GENRE_NAME' name='genreName' />
 								<UploadBrowse />
-								<SelectDialog classNamePopper='!h-40' data={props.dataTopic} name='topic' />
-								<Button type='submit' className='text-white rounded-[6px] h-14'>
+								<SelectDialog data={props.dataTopic} name='topic' />
+								<Button disabled={!renderProps.isValid} type='submit' className='text-white rounded-[6px] h-14'>
 									{Localize('SUBMIT')}
 								</Button>
 							</div>

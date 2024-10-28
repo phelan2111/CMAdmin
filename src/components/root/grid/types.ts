@@ -30,3 +30,11 @@ export type PagingState = {
 	take: number;
 	skip: number;
 };
+
+export type TableProps<T> = {
+	total: number;
+	data: T[];
+	isLoading?: boolean;
+	onClickRow: (dataItem: T) => void;
+	onChangePaging?: (dataPaging: PagingState) => void;
+};

@@ -27,7 +27,7 @@ function View(props: ViewProps) {
 								<h1 className='text-5xl font-semibold'>{Localize('TOPIC_DETAILS')}</h1>
 								<StatusBrowse status={props.topicDetails.status} />
 							</div>
-							<p>#{props.topicDetails._id}</p>
+							<p>#{props.topicDetails.topicId}</p>
 						</div>
 						<ActionBrowse
 							status={props.topicDetails.status}

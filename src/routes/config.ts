@@ -16,6 +16,7 @@ export const PATH = {
 		GENRE: {
 			_: '/genre',
 			CREATE: '/genre/create',
+			DETAILS: '/genre/:genreId',
 		},
 		TOPIC: {
 			_: '/topic',

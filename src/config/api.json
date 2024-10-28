@@ -14,7 +14,9 @@
         "browse": {
             "_": "/browse",
             "genre": {
-                "_": "/browse/genre"
+                "_": "/browse/genre",
+                "upload": "/browse/genre/uploadImage",
+                "details": "/browse/genre/details"
             },
             "topic": {
                 "_": "/browse/topic",

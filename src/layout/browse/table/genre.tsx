@@ -1,5 +1,5 @@
 import Grid from '@/components/root/grid/normal';
-import { GridColumn } from '@/components/root/grid/types';
+import { GridColumn, TableProps } from '@/components/root/grid/types';
 import Avatar from '@/components/root/image/avatar';
 import StatusBrowse from '@/components/ui/status/browse';
 import { ResponseGetGenreOfBrowse } from '@/services/browse/genre/getList';
@@ -14,7 +14,7 @@ const gridColumTableGenre: GridColumn<ResponseGetGenreOfBrowse>[] = [
 		},
 	},
 	{
-		title: 'BROWSE_ID',
+		title: 'GENRE_ID',
 		field: '_id',
 	},
 	{
@@ -43,14 +43,8 @@ const gridColumTableGenre: GridColumn<ResponseGetGenreOfBrowse>[] = [
 	},
 ];
 
-type TableGenreProps = {
-	total: number;
-	data: ResponseGetGenreOfBrowse[];
-	isLoading?: boolean;
-};
-
-function TableGenre(props: TableGenreProps) {
-	return <Grid isLoading={props.isLoading} total={props.total} data={props.data} gridColum={gridColumTableGenre} />;
+function TableGenre(props: TableProps<ResponseGetGenreOfBrowse>) {
+	return <Grid {...props} gridColum={gridColumTableGenre} />;
 }
 
 export default TableGenre;

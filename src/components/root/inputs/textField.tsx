@@ -25,7 +25,7 @@ function TextField({
 	classNameInput = '',
 	className = '',
 	name = '',
-	classHelperText = 'text-red-300',
+	classHelperText = 'text-red-500',
 	type = 'text',
 	required = false,
 	defaultValue = '',
@@ -53,6 +53,7 @@ function TextField({
 
 	const handleChange = (valueInput: string) => {
 		setValue(valueInput);
+		form.setValue(name, valueInput, { shouldValidate: true, shouldDirty: true, shouldTouch: true });
 	};
 
 	return (

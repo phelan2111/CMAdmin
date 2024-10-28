@@ -20,6 +20,13 @@ type StateController = {
 	};
 };
 
+const initialPayload: PayloadRequestList = {
+	from: FROM,
+	limit: LIMIT,
+	createdAt: SORT.DESC,
+	search: '',
+	status: EnumStatusBrowse.display,
+};
 export default class Controller extends Component<PropsController, StateController> {
 	static contextType = ModalContext;
 	declare context: React.ContextType<typeof ModalContext>;
@@ -28,35 +35,36 @@ export default class Controller extends Component<PropsController, StateControll
 		super(props);
 		this.state = {
 			allState: {
-				payload: {
-					from: FROM,
-					limit: LIMIT,
-					createdAt: SORT.DESC,
-					search: '',
-					status: EnumStatusBrowse.display,
-				},
+				payload: initialPayload,
 			},
 		};
 		this.handleCreateGenre = this.handleCreateGenre.bind(this);
 		this.handleChangePagingAndReRequest = this.handleChangePagingAndReRequest.bind(this);
-		this.handleReRequest = this.handleReRequest.bind(this);
+		this.handleRequest = this.handleRequest.bind(this);
 		this.handleOnChangeSearch = this.handleOnChangeSearch.bind(this);
 		this.handleFilterStatus = this.handleFilterStatus.bind(this);
+		this.handleRefreshRequest = this.handleRefreshRequest.bind(this);
 	}
 
 	componentDidMount(): void {
-		this.handleReRequest();
+		this.handleRequest();
 	}
-	handleReRequest() {
+	handleRequest() {
 		const { allState } = this.state;
 		const { onRequestListGenre } = this.props;
 		onRequestListGenre(allState.payload);
+	}
+	handleRefreshRequest() {
+		const { allState } = this.state;
+		allState.payload = initialPayload;
+		this.setState({ allState });
+		const { onRequestListGenre } = this.props;
+		onRequestListGenre(initialPayload);
 	}
 	handleCreateGenre(dataItem: FucCreateGenreProps) {
 		const { onModal } = this.context;
 		onModal(dataItem.renderComponent);
 	}
-
 	handleChangePagingAndReRequest(dataItem: PagingState) {
 		const { allState } = this.state;
 
@@ -64,7 +72,7 @@ export default class Controller extends Component<PropsController, StateControll
 		allState.payload.limit = dataItem.take;
 
 		this.setState({ allState });
-		this.handleReRequest();
+		this.handleRequest();
 	}
 	handleOnChangeSearch(dataItem: string) {
 		const { allState } = this.state;
@@ -73,7 +81,7 @@ export default class Controller extends Component<PropsController, StateControll
 			allState.payload.search = dataItem;
 
 			this.setState({ allState });
-			this.handleReRequest();
+			this.handleRequest();
 		}
 	}
 	handleFilterStatus(dataItem: FilterStatusItem) {
@@ -82,7 +90,7 @@ export default class Controller extends Component<PropsController, StateControll
 		allState.payload.status = dataItem.value;
 
 		this.setState({ allState });
-		this.handleReRequest();
+		this.handleRequest();
 	}
 
 	render() {
@@ -95,6 +103,8 @@ export default class Controller extends Component<PropsController, StateControll
 				onChangeFilterStatus={this.handleFilterStatus}
 				onChangeSearch={this.handleOnChangeSearch}
 				onCreateGenre={this.handleCreateGenre}
+				onRefreshRequest={this.handleRefreshRequest}
+				onChangePaging={this.handleChangePagingAndReRequest}
 			/>
 		);
 	}

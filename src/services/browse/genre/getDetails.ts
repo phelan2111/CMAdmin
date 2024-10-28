@@ -7,24 +7,26 @@ import config from 'config/api.json';
 import { CODE, parseCodeToNameFunc } from '@/config/responseCode';
 import { Helper } from '@/utils/helper';
 import AuthService from '@/utils/auth';
-import { EnumStatusBrowse } from '@/utils/enums';
 import { initialStateItemTopic } from '@/pages/browse/variables';
+import { ResponseGetTopicDetailsOfBrowse } from '../topic/getDetails';
 
-export type ResponseGetTopicDetailsOfBrowse = {
-	topicId: string;
-	topicName: string;
-	status: EnumStatusBrowse;
+export type ResponseGetGenreDetailsOfBrowse = {
+	genreId: string;
+	nameGenre: string;
+	imageGenre: string;
+	status: number;
 	createdAt: string;
 	updatedAt: string;
+	topic: ResponseGetTopicDetailsOfBrowse;
 };
-export type PayloadTopicDetails = {
-	topicId: string;
+export type PayloadGenreDetails = {
+	genreId: string;
 };
-function ServiceGetDetailsTopicOfBrowse(props?: ResponseHasResponseProps) {
+function ServiceGetDetailsGenreOfBrowse(props?: ResponseHasResponseProps) {
 	const auth = AuthService.getPackageAuth();
 
 	const request: AxiosRequestConfig = {
-		url: config.api.browse.topic.details,
+		url: config.api.browse.genre.details,
 		method: 'get',
 		headers: {
 			token: auth?.token,
@@ -36,14 +38,14 @@ function ServiceGetDetailsTopicOfBrowse(props?: ResponseHasResponseProps) {
 		data = initialStateItemTopic,
 		isSuccess,
 	} = useRequest({
-		keyQuery: ['GET_BROWSE_TOPIC_DETAILS'],
+		keyQuery: ['GET_BROWSE_GENRE_DETAILS'],
 		request,
 	});
 
-	const handleMutate = (params: PayloadTopicDetails) => {
+	const handleMutate = (params: PayloadGenreDetails) => {
 		mutate(params, {
 			onSuccess: (data) => {
-				Logger.debug('ServiceGetDetailsTopicOfBrowse execute handleMutate success', data);
+				Logger.debug('ServiceGetDetailsGenreOfBrowse execute handleMutate success', data);
 				const funcName = parseCodeToNameFunc[data.code as unknown as CODE];
 				if (!Helper.isEmpty(props)) {
 					const hasFunc = Helper.isEmpty(props?.[funcName as string]);
@@ -55,7 +57,7 @@ function ServiceGetDetailsTopicOfBrowse(props?: ResponseHasResponseProps) {
 				}
 			},
 			onError: (error) => {
-				Logger.error('ServiceGetDetailsTopicOfBrowse execute handleMutate error', error.toString());
+				Logger.error('ServiceGetDetailsGenreOfBrowse execute handleMutate error', error.toString());
 				props?.onError?.();
 			},
 		});
@@ -65,9 +67,9 @@ function ServiceGetDetailsTopicOfBrowse(props?: ResponseHasResponseProps) {
 		onGetListTopicDetailsOfBrowse: handleMutate,
 		isLoadingGetListTopicDetailsOfBrowseService: !isSuccess,
 		response: useMemo(() => {
-			return data.data as ResponseGetTopicDetailsOfBrowse;
+			return data.data as ResponseGetGenreDetailsOfBrowse;
 		}, [data]),
 	};
 }
 
-export default ServiceGetDetailsTopicOfBrowse;
+export default ServiceGetDetailsGenreOfBrowse;

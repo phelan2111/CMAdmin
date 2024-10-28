@@ -3,12 +3,15 @@ import View from './view';
 import { FromStateCreateGenre } from '../types';
 import { ItemSelect } from '@/components/root/inputs/select';
 import { ResponseGetTopicOfBrowse } from '@/services/browse/topic/getList';
+import { PayloadCreateGenre } from '@/services/browse/genre/create';
+import { ResponseUpload } from '@/services/types';
 import { Helper } from '@/utils/helper';
 
 type ControllerProps = {
-	onCreateGenre: VoidFunction;
-	onUploadImage: VoidFunction;
+	onCreateGenre: (dataItem: PayloadCreateGenre) => void;
+	onUploadImage: (dataItem: FormData) => void;
 	response: ResponseGetTopicOfBrowse[];
+	responseUpload: ResponseUpload;
 };
 type ControllerState = {
 	allState: {
@@ -24,6 +27,10 @@ export default class Controller extends Component<ControllerProps, ControllerSta
 				formState: {
 					genreName: '',
 					imageGenre: [],
+					topic: {
+						label: '',
+						value: '',
+					},
 				},
 				dataTopicState: [],
 			},
@@ -31,10 +38,18 @@ export default class Controller extends Component<ControllerProps, ControllerSta
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	componentDidMount(): void {
+	componentDidUpdate(prevProps: Readonly<ControllerProps>): void {
 		const { allState } = this.state;
+		const { responseUpload, onCreateGenre } = this.props;
 
-		if (!Helper.isEmpty(this.props.response)) {
+		if (prevProps.responseUpload !== this.props.responseUpload && !Helper.isEmpty(responseUpload.link)) {
+			onCreateGenre({
+				imageGenre: responseUpload.link,
+				nameGenre: this.state.allState.formState.genreName,
+				topicId: this.state.allState.formState.topic.value as string,
+			});
+		}
+		if (prevProps.response !== this.props.response) {
 			const convertIItemSelect: ItemSelect[] = this.props.response.map((i) => ({
 				label: i.topicName,
 				value: i._id,
@@ -47,7 +62,18 @@ export default class Controller extends Component<ControllerProps, ControllerSta
 			this.setState({ allState });
 		}
 	}
-	handleSubmit() {}
+	handleSubmit(dataItem: FromStateCreateGenre) {
+		const { allState } = this.state;
+		allState.formState = dataItem;
+		this.setState({ allState });
+
+		const { onUploadImage } = this.props;
+		const formData = new FormData();
+		if (dataItem.imageGenre[0].file) {
+			formData.append('file', dataItem.imageGenre[0].file);
+		}
+		onUploadImage(formData);
+	}
 
 	render() {
 		return <View onSubmit={this.handleSubmit} dataTopic={this.state.allState.dataTopicState} />;

@@ -8,15 +8,23 @@ import { Helper } from '@/utils/helper';
 import AuthService from '@/utils/auth';
 import { EnumStatusBrowse } from '@/utils/enums';
 
-export type PayloadTopicUpdateStatus = {
-	topicId: string;
+export type ResponseGetTopicDetailsOfBrowse = {
+	_id: string;
+	topicName: string;
+	status: EnumStatusBrowse;
+	createdAt: string;
+	updatedAt: string;
+	__v: number;
+};
+export type PayloadGenreUpdateStatus = {
+	genreId: string;
 	status: EnumStatusBrowse;
 };
-function ServiceUpdateStatusTopicOfBrowse(props?: ResponseHasResponseProps) {
+function ServiceUpdateStatusGenreOfBrowse(props?: ResponseHasResponseProps) {
 	const auth = AuthService.getPackageAuth();
 
 	const request: AxiosRequestConfig = {
-		url: config.api.browse.topic._,
+		url: config.api.browse.genre._,
 		method: 'delete',
 		headers: {
 			token: auth?.token,
@@ -24,14 +32,14 @@ function ServiceUpdateStatusTopicOfBrowse(props?: ResponseHasResponseProps) {
 	};
 
 	const { mutate, isPending } = useRequest({
-		keyQuery: ['UPDATE_STATUS_BROWSE_TOPIC'],
+		keyQuery: ['UPDATE_STATUS_BROWSE_GENRE'],
 		request,
 	});
 
-	const handleMutate = (params: PayloadTopicUpdateStatus) => {
+	const handleMutate = (params: PayloadGenreUpdateStatus) => {
 		mutate(params, {
 			onSuccess: (data) => {
-				Logger.debug('ServiceUpdateStatusTopicOfBrowse execute handleMutate success', data);
+				Logger.debug('ServiceUpdateStatusGenreOfBrowse execute handleMutate success', data);
 				const funcName = parseCodeToNameFunc[data.code as unknown as CODE];
 				if (!Helper.isEmpty(props)) {
 					const hasFunc = Helper.isEmpty(props?.[funcName as string]);
@@ -43,16 +51,16 @@ function ServiceUpdateStatusTopicOfBrowse(props?: ResponseHasResponseProps) {
 				}
 			},
 			onError: (error) => {
-				Logger.error('ServiceUpdateStatusTopicOfBrowse execute handleMutate error', error.toString());
+				Logger.error('ServiceUpdateStatusGenreOfBrowse execute handleMutate error', error.toString());
 				props?.onError?.();
 			},
 		});
 	};
 
 	return {
-		onUpdateTopicDetailsOfBrowse: handleMutate,
-		isLoadingUpdateTopicDetailsOfBrowseService: isPending,
+		onUpdateGenreDetailsOfBrowse: handleMutate,
+		isLoadingUpdateGenreDetailsOfBrowseService: isPending,
 	};
 }
 
-export default ServiceUpdateStatusTopicOfBrowse;
+export default ServiceUpdateStatusGenreOfBrowse;
