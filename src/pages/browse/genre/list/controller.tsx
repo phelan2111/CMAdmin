@@ -35,7 +35,7 @@ export default class Controller extends Component<PropsController, StateControll
 		super(props);
 		this.state = {
 			allState: {
-				payload: initialPayload,
+				payload: { ...initialPayload },
 			},
 		};
 		this.handleCreateGenre = this.handleCreateGenre.bind(this);

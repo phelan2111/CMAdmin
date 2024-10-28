@@ -14,8 +14,8 @@ function ActionBrowse(props: ActionBrowseProps) {
 
 	if (isDisplay) {
 		return (
-			<Button onClick={props.onHidden} className='!bg-transparent w-fit border border-[#FF8A8A] !rounded-3xl text-[#FF8A8A] hover:!bg-[#FF8A8A]/10'>
-				<div className='flex gap-2 px-4 items-center'>
+			<Button onClick={props.onHidden} className='!bg-[#F94C66]/70 w-fit !rounded-3xl text-white hover:!bg-[#F94C66]/50'>
+				<div className='flex gap-2 px-4 items-center font-medium'>
 					<RxEyeClosed />
 					{Localize('HIDDEN')}
 				</div>
@@ -23,7 +23,7 @@ function ActionBrowse(props: ActionBrowseProps) {
 		);
 	}
 	return (
-		<Button onClick={props.onDisplay} className='!bg-transparent w-fit border border-[#41B3A2] !rounded-3xl text-[#41B3A2] hover:!bg-[#41B3A2]/10'>
+		<Button onClick={props.onDisplay} className='!bg-[#41B3A2]/70 w-fit !rounded-3xl text-white hover:!bg-[#41B3A2]/50'>
 			<div className='flex gap-2 px-4 items-center'>
 				<RxEyeOpen />
 				{Localize('DISPLAY')}

@@ -6,14 +6,16 @@ import Localize from '@/langs';
 import ActionBrowse from '@/layout/browse/action';
 import dayjs from 'dayjs';
 import { FucCreateGenreProps } from '../types';
-import UpdateStatus from '../update';
+import UpdateStatus from '../update/status';
 import { ResponseGetGenreDetailsOfBrowse } from '@/services/browse/genre/getDetails';
 import Image from '@/components/root/image/normal';
+import UpdateButton from '@/components/ui/button/update';
+import UpdateInformation from '../update/information';
 
 type ViewProps = {
 	isLoading: boolean;
 	genreDetails: ResponseGetGenreDetailsOfBrowse;
-	onHiddenTopic: (dataItem: FucCreateGenreProps) => void;
+	onUpdateTopic: (dataItem: FucCreateGenreProps) => void;
 	onFreshRequest: VoidFunction;
 };
 
@@ -30,33 +32,49 @@ function View(props: ViewProps) {
 							</div>
 							<p>#{props.genreDetails.genreId}</p>
 						</div>
-						<ActionBrowse
-							status={props.genreDetails.status}
-							onDisplay={() => {
-								props.onHiddenTopic({
-									renderComponent: (
-										<UpdateStatus
-											onSuccess={props.onFreshRequest}
-											content='DISPLAY_GENRE_TITLE'
-											title='DISPLAY_GENRE_DESCRIPTION'
-											details={props.genreDetails}
-										/>
-									),
-								});
-							}}
-							onHidden={() => {
-								props.onHiddenTopic({
-									renderComponent: (
-										<UpdateStatus
-											onSuccess={props.onFreshRequest}
-											content='HIDDEN_GENRE_DESCRIPTION'
-											title='HIDDEN_GENRE_TITLE'
-											details={props.genreDetails}
-										/>
-									),
-								});
-							}}
-						/>
+						<div className='flex items-center gap-4'>
+							<ActionBrowse
+								status={props.genreDetails.status}
+								onDisplay={() => {
+									props.onUpdateTopic({
+										renderComponent: (
+											<UpdateStatus
+												onSuccess={props.onFreshRequest}
+												content='DISPLAY_GENRE_TITLE'
+												title='DISPLAY_GENRE_DESCRIPTION'
+												details={props.genreDetails}
+											/>
+										),
+									});
+								}}
+								onHidden={() => {
+									props.onUpdateTopic({
+										renderComponent: (
+											<UpdateStatus
+												onSuccess={props.onFreshRequest}
+												content='HIDDEN_GENRE_DESCRIPTION'
+												title='HIDDEN_GENRE_TITLE'
+												details={props.genreDetails}
+											/>
+										),
+									});
+								}}
+							/>
+							<UpdateButton
+								onClick={() => {
+									props.onUpdateTopic({
+										renderComponent: (
+											<UpdateInformation
+												onSuccess={props.onFreshRequest}
+												content='UPDATE_GENRE_DESCRIPTION'
+												title='UPDATE_GENRE'
+												details={props.genreDetails}
+											/>
+										),
+									});
+								}}
+							/>
+						</div>
 					</div>
 					<div className='grid grid-cols-2 gap-6'>
 						<div className='flex flex-col gap-8 animate-translateRight bg-white/10 h-fit rounded-xl p-6'>

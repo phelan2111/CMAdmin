@@ -1,6 +1,6 @@
 import { Component, memo } from 'react';
 import View from './view';
-import { DataFormCreate } from '../types';
+import { DataFormTopic } from '../types';
 import { PayloadCreateTopic } from '@/services/browse/topic/create';
 
 type PropsController = {
@@ -8,7 +8,7 @@ type PropsController = {
 };
 type StateController = {
 	allState: {
-		formData: DataFormCreate;
+		formData: DataFormTopic;
 	};
 };
 
@@ -25,7 +25,7 @@ class Controller extends Component<PropsController, StateController> {
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	handleSubmit(dataItem: DataFormCreate) {
+	handleSubmit(dataItem: DataFormTopic) {
 		this.props.onCreate(dataItem);
 	}
 

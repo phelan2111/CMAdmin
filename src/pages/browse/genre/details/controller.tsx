@@ -28,7 +28,7 @@ export default class Controller extends Component<ControllerProps, ControllerSta
 				genreDetails: initialStateItemGenre,
 			},
 		};
-		this.handleUpdateStatus = this.handleUpdateStatus.bind(this);
+		this.handleUpdate = this.handleUpdate.bind(this);
 		this.handleFreshRequest = this.handleFreshRequest.bind(this);
 		this.handleRequest = this.handleRequest.bind(this);
 	}
@@ -47,7 +47,7 @@ export default class Controller extends Component<ControllerProps, ControllerSta
 		const { onGetTopicDetails, genreId } = this.props;
 		onGetTopicDetails({ genreId });
 	}
-	handleUpdateStatus(dataItem: FucCreateGenreProps) {
+	handleUpdate(dataItem: FucCreateGenreProps) {
 		const { onModal } = this.context;
 		onModal(dataItem.renderComponent);
 	}
@@ -60,7 +60,7 @@ export default class Controller extends Component<ControllerProps, ControllerSta
 			<View
 				isLoading={this.props.isLoading}
 				genreDetails={this.state.allState.genreDetails}
-				onHiddenTopic={this.handleUpdateStatus}
+				onUpdateTopic={this.handleUpdate}
 				onFreshRequest={this.handleFreshRequest}
 			/>
 		);

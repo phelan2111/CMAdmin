@@ -10,7 +10,7 @@ export type DataFormCreate = {
 	topicName: string;
 };
 
-export type FromStateCreateGenre = {
+export type FromStateGenre = {
 	genreName: string;
 	imageGenre: DataUpload[];
 	topic: ItemSelect;

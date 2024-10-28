@@ -34,17 +34,11 @@ function TextField({
 	const form = useFormContext();
 
 	const initialValue = useMemo(() => {
-		return form?.getValues()?.name ?? defaultValue;
-	}, [defaultValue, form]);
+		return form?.getValues()?.[name] ?? defaultValue;
+	}, [defaultValue, form, name]);
 	const messageError = useMemo(() => {
 		return form?.formState.errors?.[name]?.message ?? props.messageError;
 	}, [form?.formState.errors, name, props.messageError]);
-	const register = useMemo(() => {
-		if (Helper.isEmpty(name)) {
-			return {};
-		}
-		return { ...form?.register(name) };
-	}, [form, name]);
 
 	const [value, setValue] = useState<string>(initialValue);
 
@@ -70,7 +64,6 @@ function TextField({
 					value={value}
 					type={type}
 					name={name}
-					{...register}
 					placeholder={props.placeholder}
 					className={`w-full outline-none bg-transparent h-11 text-primary_light text-base ${classNameInput}`}
 					{...props}

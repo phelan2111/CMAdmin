@@ -53,7 +53,11 @@ function Select({
 		return form?.formState.errors?.[name]?.message?.toString() ?? '';
 	}, [form?.formState.errors, name]);
 
-	const [dataSelectState, setDataSelectState] = useState<ItemSelect | undefined>(props.defaultSelect);
+	const initialValue = useMemo(() => {
+		return form?.getValues()?.[name] ?? props.defaultSelect;
+	}, [props.defaultSelect, form, name]);
+
+	const [dataSelectState, setDataSelectState] = useState<ItemSelect | undefined>(initialValue);
 
 	const handleSelect = (dataItem: ItemSelect) => {
 		setDataSelectState(dataItem);

@@ -101,4 +101,11 @@ export const dataLocalizeEN: Record<string, string> = {
 	DISPLAY_GENRE_TITLE: 'Are you sure about displaying this genre?',
 	DISPLAY_GENRE_DESCRIPTION: 'Display genres will active all data relate to them ',
 	GENRE_ID: 'Genre ID',
+	UPDATE: 'Update',
+	UPDATE_TOPIC: 'Update Topic',
+	UPDATE_TOPIC_DESCRIPTION: 'You are changing data of topic.',
+	UPDATE_TOPIC_INFORMATION: 'Update topic information',
+	UPDATE_GENRE: 'Update Genre',
+	UPDATE_GENRE_DESCRIPTION: 'You are changing data of genre.',
+	UPDATE_GENRE_INFORMATION: 'Update genre information',
 };

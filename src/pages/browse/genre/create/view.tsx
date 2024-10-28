@@ -5,12 +5,12 @@ import DialogWrapper from '@/components/ui/wrapper/modal/dialog';
 import Localize from '@/langs';
 import UploadBrowse from '@/layout/browse/upload';
 import { array, object, string } from 'yup';
-import { FromStateCreateGenre } from '../types';
+import { FromStateGenre } from '../types';
 import SelectDialog from '@/components/ui/select/dialog';
 import { ItemSelect } from '@/components/root/inputs/select';
 
 type ViewProps = {
-	onSubmit: (dataForm: FromStateCreateGenre) => void;
+	onSubmit: (dataForm: FromStateGenre) => void;
 	dataTopic: ItemSelect[];
 };
 

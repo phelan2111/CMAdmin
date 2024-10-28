@@ -1,21 +1,25 @@
+import DialogWrapper from '@/components/ui/wrapper/modal/dialog';
 import Button from '@/components/root/button';
+import Localize from '@/langs';
+import { string } from 'yup';
 import Form from '@/components/root/form';
 import InputDialog from '@/components/ui/input/dialog';
-import DialogWrapper from '@/components/ui/wrapper/modal/dialog';
-import Localize from '@/langs';
-import { DataFormTopic } from '../types';
-import { string } from 'yup';
+import { UpdateInformationProps } from '.';
+import { DataFormTopic } from '../../types';
 
-type ViewProps = {
+interface IViewProps extends UpdateInformationProps {
 	onSubmit: (dataItem: DataFormTopic) => void;
-};
+}
 
-function View(props: ViewProps) {
+function View(props: IViewProps) {
 	return (
-		<DialogWrapper title='CREATE_TOPIC' description='CREATE_TOPIC_DESCRIPTION'>
+		<DialogWrapper className='w-[480px]' title={props.title} description={props.content}>
 			<Form
 				validator={{
 					topicName: string().required(),
+				}}
+				defaultValues={{
+					topicName: props.details.topicName,
 				}}
 				onSubmit={props.onSubmit}
 				render={() => {

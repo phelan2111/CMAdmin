@@ -4,6 +4,6 @@ export type FucCreateTopicProps = {
 	renderComponent: ReactNode;
 };
 
-export type DataFormCreate = {
+export type DataFormTopic = {
 	topicName: string;
 };

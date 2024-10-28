@@ -31,11 +31,14 @@ type UploadProps = {
 function Upload({ defaultValue = [], multiple = false, length = 1, name = '', required = false, ...props }: UploadProps) {
 	const form = useFormContext();
 
+	const initialValue = useMemo(() => {
+		return form?.getValues()?.[name] ?? defaultValue;
+	}, [defaultValue, form, name]);
 	const messageError: string = useMemo(() => {
 		return form?.formState.errors?.[name]?.message?.toString() ?? '';
 	}, [form?.formState.errors, name]);
 
-	const [uploadData, setUploadData] = useState<DataUpload[]>(form?.getValues()?.name ?? defaultValue);
+	const [uploadData, setUploadData] = useState<DataUpload[]>(initialValue);
 
 	const handleOnChange = (dataItem: ChangeEvent<HTMLInputElement>) => {
 		const fileList = dataItem.currentTarget.files;
@@ -78,7 +81,7 @@ function Upload({ defaultValue = [], multiple = false, length = 1, name = '', re
 	return (
 		<div className='flex flex-col gap-1'>
 			{props.label && (
-				<p className='text-base'>
+				<p className='text-base animate-translateRight'>
 					{Localize(props.label)} {required && <span className='text-red-500'>(*)</span>}
 				</p>
 			)}

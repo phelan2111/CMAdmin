@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Controller from './controller';
 import LoadingDialog from '@/components/ui/loading/dialog';
 import { useEffect, useMemo } from 'react';

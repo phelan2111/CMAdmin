@@ -28,7 +28,7 @@ export default class Controller extends Component<ControllerProps, ControllerSta
 				topicDetails: initialStateItemTopic,
 			},
 		};
-		this.handleUpdateStatus = this.handleUpdateStatus.bind(this);
+		this.handleUpdate = this.handleUpdate.bind(this);
 		this.handleFreshRequest = this.handleFreshRequest.bind(this);
 		this.handleRequest = this.handleRequest.bind(this);
 	}
@@ -47,7 +47,7 @@ export default class Controller extends Component<ControllerProps, ControllerSta
 		const { onGetTopicDetails, topicId } = this.props;
 		onGetTopicDetails({ topicId });
 	}
-	handleUpdateStatus(dataItem: FucCreateTopicProps) {
+	handleUpdate(dataItem: FucCreateTopicProps) {
 		const { onModal } = this.context;
 		onModal(dataItem.renderComponent);
 	}
@@ -60,7 +60,7 @@ export default class Controller extends Component<ControllerProps, ControllerSta
 			<View
 				isLoading={this.props.isLoading}
 				topicDetails={this.state.allState.topicDetails}
-				onHiddenTopic={this.handleUpdateStatus}
+				onUpdateTopic={this.handleUpdate}
 				onFreshRequest={this.handleFreshRequest}
 			/>
 		);

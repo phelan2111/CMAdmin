@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import View from './view';
-import { FromStateCreateGenre } from '../types';
+import { FromStateGenre } from '../types';
 import { ItemSelect } from '@/components/root/inputs/select';
 import { ResponseGetTopicOfBrowse } from '@/services/browse/topic/getList';
 import { PayloadCreateGenre } from '@/services/browse/genre/create';
@@ -15,7 +15,7 @@ type ControllerProps = {
 };
 type ControllerState = {
 	allState: {
-		formState: FromStateCreateGenre;
+		formState: FromStateGenre;
 		dataTopicState: ItemSelect[];
 	};
 };
@@ -62,7 +62,7 @@ export default class Controller extends Component<ControllerProps, ControllerSta
 			this.setState({ allState });
 		}
 	}
-	handleSubmit(dataItem: FromStateCreateGenre) {
+	handleSubmit(dataItem: FromStateGenre) {
 		const { allState } = this.state;
 		allState.formState = dataItem;
 		this.setState({ allState });

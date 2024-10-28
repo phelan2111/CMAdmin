@@ -35,7 +35,7 @@ export default class Controller extends Component<PropsController, StateControll
 		super(props);
 		this.state = {
 			allState: {
-				payload: initialPayloadState,
+				payload: { ...initialPayloadState },
 			},
 		};
 		this.handleCreateTopic = this.handleCreateTopic.bind(this);

@@ -7,12 +7,14 @@ import ActionBrowse from '@/layout/browse/action';
 import { ResponseGetTopicDetailsOfBrowse } from '@/services/browse/topic/getDetails';
 import dayjs from 'dayjs';
 import { FucCreateTopicProps } from '../types';
-import UpdateStatus from '../update';
+import UpdateStatus from '../update/status';
+import UpdateButton from '@/components/ui/button/update';
+import UpdateInformation from '../update/information';
 
 type ViewProps = {
 	isLoading: boolean;
 	topicDetails: ResponseGetTopicDetailsOfBrowse;
-	onHiddenTopic: (dataItem: FucCreateTopicProps) => void;
+	onUpdateTopic: (dataItem: FucCreateTopicProps) => void;
 	onFreshRequest: VoidFunction;
 };
 
@@ -29,33 +31,49 @@ function View(props: ViewProps) {
 							</div>
 							<p>#{props.topicDetails.topicId}</p>
 						</div>
-						<ActionBrowse
-							status={props.topicDetails.status}
-							onDisplay={() => {
-								props.onHiddenTopic({
-									renderComponent: (
-										<UpdateStatus
-											onSuccess={props.onFreshRequest}
-											content='DISPLAY_TOPIC_TITLE'
-											title='DISPLAY_TOPIC_DESCRIPTION'
-											details={props.topicDetails}
-										/>
-									),
-								});
-							}}
-							onHidden={() => {
-								props.onHiddenTopic({
-									renderComponent: (
-										<UpdateStatus
-											onSuccess={props.onFreshRequest}
-											content='HIDDEN_TOPIC_DESCRIPTION'
-											title='HIDDEN_TOPIC_TITLE'
-											details={props.topicDetails}
-										/>
-									),
-								});
-							}}
-						/>
+						<div className='flex items-center gap-4'>
+							<ActionBrowse
+								status={props.topicDetails.status}
+								onDisplay={() => {
+									props.onUpdateTopic({
+										renderComponent: (
+											<UpdateStatus
+												onSuccess={props.onFreshRequest}
+												content='DISPLAY_TOPIC_TITLE'
+												title='DISPLAY_TOPIC_DESCRIPTION'
+												details={props.topicDetails}
+											/>
+										),
+									});
+								}}
+								onHidden={() => {
+									props.onUpdateTopic({
+										renderComponent: (
+											<UpdateStatus
+												onSuccess={props.onFreshRequest}
+												content='HIDDEN_TOPIC_DESCRIPTION'
+												title='HIDDEN_TOPIC_TITLE'
+												details={props.topicDetails}
+											/>
+										),
+									});
+								}}
+							/>
+							<UpdateButton
+								onClick={() => {
+									props.onUpdateTopic({
+										renderComponent: (
+											<UpdateInformation
+												onSuccess={props.onFreshRequest}
+												content='UPDATE_TOPIC_DESCRIPTION'
+												title='UPDATE_TOPIC'
+												details={props.topicDetails}
+											/>
+										),
+									});
+								}}
+							/>
+						</div>
 					</div>
 					<div className='flex flex-col gap-8 animate-translateRight bg-white/10 h-fit rounded-xl p-6'>
 						<p className='text-2xl font-medium capitalize'>{Localize('INFORMATION_BASIC')}</p>
