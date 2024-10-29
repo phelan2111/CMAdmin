@@ -1,7 +1,9 @@
+import { ItemRadio } from '@/components/root/inputs/radio';
 import { FilterStatusItem } from '@/components/ui/common/tool/filter/status';
 import { ResponseGetUserDetails } from '@/services/user/getDetails';
-import { EnumStatusAccount, Role } from '@/utils/enums';
+import { EnumStatusAccount, Gender, Role } from '@/utils/enums';
 import { Helper } from '@/utils/helper';
+import { parseGender } from '@/utils/prase';
 
 export const dataFilterAccount: FilterStatusItem[] = [
 	{
@@ -34,3 +36,16 @@ export const initialUserDetails: ResponseGetUserDetails = {
 	updatedAt: '',
 	userId: '',
 };
+
+export const genderRadio: ItemRadio[] = [
+	{
+		value: Gender.female,
+		id: Helper.randomKey(),
+		label: parseGender[Gender.female],
+	},
+	{
+		value: Gender.male,
+		id: Helper.randomKey(),
+		label: parseGender[Gender.male],
+	},
+];

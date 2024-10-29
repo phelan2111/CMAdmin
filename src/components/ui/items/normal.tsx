@@ -11,7 +11,7 @@ type ItemProps = {
 
 function Item({ classLabel = 'min-w-60', ...props }: ItemProps) {
 	return (
-		<div className='flex items-center gap-6'>
+		<div className='flex items-start gap-6'>
 			<p className={classLabel}>{Localize(props.label)}</p>
 			{props.renderContent?.() ?? <p className='font-semibold'>{Helper.isEmpty(props.content) ? '-' : props.content}</p>}
 		</div>

@@ -10,7 +10,8 @@
             "verifyUserName": "/user/verifyUsername",
             "verifyOTP": "/user/verifyOTP",
             "register": "/user/register",
-            "details": "/user/details"
+            "details": "/user/details",
+            "upload": "/user/upload"
         },
         "browse": {
             "_": "/browse",

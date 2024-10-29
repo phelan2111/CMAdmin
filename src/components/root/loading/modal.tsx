@@ -12,7 +12,7 @@ function LoadingModal({ loading = false, ...props }: LoadingModalProps) {
 	return (
 		<div className={loading ? 'opacity-40' : 'opacity-100'}>
 			{loading && (
-				<div className='w-full h-full absolute top-0 right-0 flex justify-center items-center rounded-lg z-10'>
+				<div className='w-full h-full absolute top-0 right-0 flex justify-center items-center rounded-lg z-20'>
 					<div className='w-28 h-28 shadow-insetAllSide rounded-full flex items-center justify-center'>{props.loader}</div>
 				</div>
 			)}

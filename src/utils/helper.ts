@@ -2,6 +2,8 @@ import dayjs from 'dayjs';
 import { v4 as uuuid } from 'uuid';
 import bcrypt from 'bcryptjs';
 
+type ObjectType = Record<string, unknown>;
+
 export class Helper {
 	static formatNumber(number: number) {
 		const numberConvert = new Intl.NumberFormat('en-IN', {
@@ -59,5 +61,13 @@ export class Helper {
 		const index = dataItem.findIndex((item) => (item?.[field] as string) === data);
 		const isExist = index !== -1;
 		return { isExist, index };
+	}
+	static cleanObject(obj: ObjectType) {
+		for (const propName in obj) {
+			if (Helper.isEmpty(obj[propName])) {
+				delete obj[propName];
+			}
+		}
+		return obj;
 	}
 }
