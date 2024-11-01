@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import modalReducer from './slice/modal';
 import langueReducer from './slice/langue';
+import breadcrumbReducer from './slice/breadcrumb';
 
 export const store = configureStore({
 	reducer: {
-		modal: modalReducer,
 		langue: langueReducer,
+		breadcrumb: breadcrumbReducer,
 	},
 });
 

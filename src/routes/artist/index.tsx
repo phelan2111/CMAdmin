@@ -5,6 +5,7 @@ import { lazy } from 'react';
 //ARTIST
 const ArtistList = lazy(() => import('@/pages/artist/list'));
 const ArtistCreate = lazy(() => import('@/pages/artist/create'));
+const ArtistDetails = lazy(() => import('@/pages/artist/details'));
 
 export const routeArtist: RouteObject[] = [
 	{
@@ -14,5 +15,9 @@ export const routeArtist: RouteObject[] = [
 	{
 		path: PATH.ARTIST.CREATE,
 		element: <ArtistCreate />,
+	},
+	{
+		path: PATH.ARTIST.DETAILS,
+		element: <ArtistDetails />,
 	},
 ];

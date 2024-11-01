@@ -1,12 +1,8 @@
 import Skeleton from '@/components/root/skeleton/normal';
-import { Fragment, ReactNode } from 'react';
+import { Fragment } from 'react';
+import { SkeletonProps } from './types';
 
-type SkeletonDetailsProps = {
-	children: ReactNode;
-	isSkeleton: boolean;
-};
-
-function SkeletonDetails(props: SkeletonDetailsProps) {
+function SkeletonDetails(props: SkeletonProps) {
 	if (!props.isSkeleton) {
 		return <Fragment>{props.children}</Fragment>;
 	}

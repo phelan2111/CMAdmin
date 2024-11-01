@@ -5,6 +5,8 @@ import ServiceUploadUser from '@/services/user/upload';
 import ServiceUpdateInformationUser from '@/services/user/updateInformation';
 import LoadingDialog from '@/components/ui/loading/dialog';
 import { useMemo } from 'react';
+import { Helper } from '@/utils/helper';
+import { useBreadcrumb } from '@/hooks/useBreadcrumb';
 
 function AccountDetails() {
 	const params = useParams();
@@ -17,6 +19,18 @@ function AccountDetails() {
 	const loading = useMemo(() => {
 		return isLoadingUpdateUserService || isLoadingUploadUserService;
 	}, [isLoadingUpdateUserService, isLoadingUploadUserService]);
+
+	useBreadcrumb([
+		{
+			id: Helper.randomKey(),
+			text: 'Account',
+			hasPrev: true,
+		},
+		{
+			id: Helper.randomKey(),
+			text: response?.userId,
+		},
+	]);
 
 	return (
 		<LoadingDialog loading={loading}>

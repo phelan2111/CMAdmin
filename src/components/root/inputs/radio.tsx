@@ -20,7 +20,7 @@ function Radio({
 	className = 'flex-row',
 	classRadio = 'bg-transparent',
 	classHelperText = 'text-red-500',
-	classSelected = 'bg-pink-300',
+	classSelected = '!bg-pink-300',
 	required = false,
 	...props
 }: RadioProps) {

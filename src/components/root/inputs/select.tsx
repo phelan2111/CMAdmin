@@ -52,9 +52,8 @@ function Select({
 	const messageError: string = useMemo(() => {
 		return form?.formState.errors?.[name]?.message?.toString() ?? '';
 	}, [form?.formState.errors, name]);
-
 	const initialValue = useMemo(() => {
-		return form?.getValues()?.[name] ?? props.defaultSelect;
+		return props.defaultSelect ?? form?.getValues()?.[name];
 	}, [props.defaultSelect, form, name]);
 
 	const [dataSelectState, setDataSelectState] = useState<ItemSelect | undefined>(initialValue);
@@ -87,7 +86,7 @@ function Select({
 								return <EmptySelect className={props.classNameEmpty} />;
 							}}
 							isEmpty={props.data.length === 0}>
-							<Menu className={`rounded-md overflow-hidden ${classItem}`} gap='gap-0'>
+							<Menu className={`rounded-md shadow-materialDesign overflow-hidden ${classItem}`} gap='gap-0'>
 								{props.data.map((item, index) => {
 									const { isEqual } = Helper.compareItem(item, 'value', dataSelectState?.value ?? '');
 
@@ -106,19 +105,24 @@ function Select({
 							</Menu>
 						</Empty>
 					);
-				}}>
-				<div className={`pointer-events-none flex w-full items-center px-2 rounded-md ${className}`}>
-					<div className='pb-1 w-full'>
-						<TextField
-							key={`${dataSelectState?.label}`}
-							defaultValue={dataSelectState?.label}
-							className='!bg-transparent hover:!shadow-none focus-within:!shadow-none'
-							classNameInput={classNameInput}
-						/>
-					</div>
-					<IoIosArrowDown />
-				</div>
-			</Popover>
+				}}
+				renderChildren={({ open }) => {
+					return (
+						<div className={`pointer-events-none flex w-full items-center px-2 rounded-md ${className}`}>
+							<div className='pb-1 w-full'>
+								<TextField
+									key={`${dataSelectState?.label}`}
+									defaultValue={dataSelectState?.label}
+									className='!bg-transparent hover:!shadow-none focus-within:!shadow-none'
+									classNameInput={classNameInput}
+								/>
+							</div>
+							<div className={`transition-all duration-500 ${open ? 'rotate-180' : 'rotate-0'}`}>
+								<IoIosArrowDown className='text-primary_dark' />
+							</div>
+						</div>
+					);
+				}}></Popover>
 			{!Helper.isEmpty(messageError) && (
 				<p className={`text-xs px-2 py-0.5 rounded-3xl italic text-end absolute bottom-0 right-0 translate-y-full ${classHelperText}`}>
 					{messageError?.toString()}

@@ -33,7 +33,14 @@ function View(props: ViewProps) {
 					</div>
 				</div>
 				<div className='flex flex-col gap-4 h-full animate-translateRight'>
-					<TableArtist data={props.data.list} total={props.data.total} isLoading={props.isLoading} />
+					<TableArtist
+						onClickRow={(dataItem) => {
+							redirectPage(`${PATH.ARTIST._}/${dataItem._id}`);
+						}}
+						data={props.data.list}
+						total={props.data.total}
+						isLoading={props.isLoading}
+					/>
 				</div>
 			</Wrapper>
 		</div>

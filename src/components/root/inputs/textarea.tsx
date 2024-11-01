@@ -21,7 +21,7 @@ export interface ITextAreaFieldProps
 	messageError?: string;
 }
 
-function TextAreaField({ classNameTextArea = '', className = '', name = '', defaultValue = '', ...props }: ITextAreaFieldProps) {
+function TextAreaField({ classNameTextArea = '', className = '', name = '', required = false, defaultValue = '', ...props }: ITextAreaFieldProps) {
 	const form = useFormContext();
 
 	const initialValue = useMemo(() => {
@@ -42,7 +42,11 @@ function TextAreaField({ classNameTextArea = '', className = '', name = '', defa
 
 	return (
 		<div className='flex flex-col gap-1'>
-			{props.label && <p className='text-base'>{Localize(props.label)}</p>}
+			{props.label && (
+				<p className='text-base'>
+					{Localize(props.label)} {required && <span className='text-red-500'>(*)</span>}
+				</p>
+			)}
 			<div
 				className={`relative flex h-fit bg-white/10 items-center gap-1 hover:bg-white/40 transition-all duration-500 focus-within:bg-white/40 px-2 rounded-sm ${className}`}>
 				{isIconStart && props.icon && props.icon.node}

@@ -4,7 +4,8 @@ export type ResponseHasNotResponseProps = {
 };
 
 export type ResponseHasResponseProps = {
-	[name: string]: (res?: unknown) => void;
+	onSuccess: (res: unknown) => void;
+	[name: string]: (res?: never) => void;
 };
 
 export type PayloadRequestList = {

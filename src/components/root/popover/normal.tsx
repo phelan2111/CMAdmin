@@ -8,6 +8,7 @@ interface IPopoverProps {
 	children?: ReactNode;
 	className?: string;
 	renderContent?: (renderContentProps: RenderContentProps) => ReactNode;
+	renderChildren?: (renderContentProps: RenderContentProps) => ReactNode;
 }
 function Popover({ className = 'bg-white text-primary_dark py-2 rounded-sm -bottom-1 left-0', ...props }: IPopoverProps) {
 	const [open, setOpen] = useState<boolean | undefined>(undefined);
@@ -66,11 +67,16 @@ function Popover({ className = 'bg-white text-primary_dark py-2 rounded-sm -bott
 		<div className='w-full'>
 			<div className='relative w-full' aria-hidden>
 				<div ref={ref} className='cursor-pointer w-full' aria-hidden onClick={handleOpen}>
-					{props.children}
+					{props.children ??
+						props.renderChildren?.({
+							onClose: handleClose,
+							onOpen: handleOpen,
+							open,
+						})}
 				</div>
 				<div
 					ref={refPopper}
-					className={`absolute w-full transition-all duration-500 z-10 ${open ? 'opacity-100' : 'opacity-0 pointer-events-none'} ${className}`}>
+					className={`absolute w-full transition-all duration-500 z-20 ${open ? 'opacity-100' : 'opacity-0 pointer-events-none'} ${className}`}>
 					{props.renderContent?.({
 						onClose: handleClose,
 						onOpen: handleOpen,
@@ -78,7 +84,7 @@ function Popover({ className = 'bg-white text-primary_dark py-2 rounded-sm -bott
 					})}
 				</div>
 			</div>
-			{open && <div aria-hidden onClick={handleClose} className='fixed z-0 bg-transparent w-screen h-screen -bottom-0 -left-0' />}
+			{open && <div aria-hidden onClick={handleClose} className='fixed z-10 bg-transparent w-screen h-screen -bottom-0 -left-0' />}
 		</div>
 	);
 }

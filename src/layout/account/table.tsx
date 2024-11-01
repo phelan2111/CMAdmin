@@ -28,7 +28,7 @@ const gridColumTableAccount: GridColumn<ResponseGetUser>[] = [
 		cell: ({ dataItem }) => {
 			return (
 				<div className='flex gap-2 items-center'>
-					<Avatar className='h-10 w-10' src={'https://i.pinimg.com/736x/91/7e/b4/917eb4db2442cbd47392138e68d4b684.jpg'} />
+					<Avatar className='h-10 w-10' src={dataItem.avatar} />
 					<p>
 						{dataItem.lastName} {dataItem.firstName}
 					</p>

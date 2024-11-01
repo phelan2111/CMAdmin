@@ -8,14 +8,6 @@ import { Helper } from '@/utils/helper';
 import AuthService from '@/utils/auth';
 import { EnumStatusBrowse } from '@/utils/enums';
 
-export type ResponseGetTopicDetailsOfBrowse = {
-	_id: string;
-	topicName: string;
-	status: EnumStatusBrowse;
-	createdAt: string;
-	updatedAt: string;
-	__v: number;
-};
 export type PayloadGenreUpdateStatus = {
 	genreId: string;
 	status: EnumStatusBrowse;

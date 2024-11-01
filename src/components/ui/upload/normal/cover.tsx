@@ -5,13 +5,12 @@ import Localize from '@/langs';
 import { Helper } from '@/utils/helper';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { MdOutlineFileUpload, MdOutlineSaveAlt } from 'react-icons/md';
+import { UploadAccountProps } from '../../../../layout/account/upload/types';
 
-type UploadCoverAccountProps = {
-	src?: string;
-	onChange: (dataItem: DataUpload) => void;
-};
-
-function UploadCoverAccount({ src = '', ...props }: UploadCoverAccountProps) {
+function UploadCoverAccount({
+	src = 'http://res.cloudinary.com/dkvhfe4uu/image/upload/v1730217804/user/image/pexels-vishnurnair-1105666_qf6gvs.jpg',
+	...props
+}: UploadAccountProps) {
 	const [uploadData, setUploadData] = useState<DataUpload>({
 		src,
 		uploadId: Helper.randomKey(),
@@ -43,14 +42,14 @@ function UploadCoverAccount({ src = '', ...props }: UploadCoverAccountProps) {
 	return (
 		<div className='relative'>
 			<CoverImage className='border-2 border-white w-full h-72' src={uploadData.src} />
-			<div className='absolute bottom-8 right-8 z-10 flex w-fit gap-2'>
+			<div className='absolute top-8 right-8 z-10 flex w-fit gap-2'>
 				<UpdateButton
 					disabled={Helper.isEmpty(uploadData.file)}
 					className='font-semibold text-base !w-32 buttonFollow'
 					icon={<MdOutlineSaveAlt className='text-2xl' />}
 					text='SAVE'
 					onClick={() => {
-						props.onChange(uploadData);
+						props.onChange?.(uploadData);
 					}}
 				/>
 				<label className='buttonFollow group !rounded-full' htmlFor='cover'>

@@ -33,7 +33,13 @@ function View(props: ViewProps) {
 						<p>It is list of accounts in the system</p>
 					</div>
 					<div className='w-40'>
-						<Button className='!bg-white/80 w-full text-primary_dark !rounded-md hover:!bg-white/50'>{Localize('CREATE_ACCOUNT')}</Button>
+						<Button
+							onClick={() => {
+								redirectPage(PATH.ACCOUNT.CREATE);
+							}}
+							className='!bg-white/80 w-full text-primary_dark !rounded-md hover:!bg-white/50'>
+							{Localize('CREATE_ACCOUNT')}
+						</Button>
 					</div>
 				</div>
 				<div className='rounded-xl px-3 py-3 flex items-center justify-between animate-translateRight'>

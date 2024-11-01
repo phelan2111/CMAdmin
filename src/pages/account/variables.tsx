@@ -1,9 +1,8 @@
-import { ItemRadio } from '@/components/root/inputs/radio';
+import { IItemBreadcrumb } from '@/components/root/breadcrumb/normal';
 import { FilterStatusItem } from '@/components/ui/common/tool/filter/status';
 import { ResponseGetUserDetails } from '@/services/user/getDetails';
-import { EnumStatusAccount, Gender, Role } from '@/utils/enums';
+import { EnumStatusAccount, Role } from '@/utils/enums';
 import { Helper } from '@/utils/helper';
-import { parseGender } from '@/utils/prase';
 
 export const dataFilterAccount: FilterStatusItem[] = [
 	{
@@ -37,15 +36,25 @@ export const initialUserDetails: ResponseGetUserDetails = {
 	userId: '',
 };
 
-export const genderRadio: ItemRadio[] = [
+export const initialStateItemUser: ResponseGetUserDetails = {
+	createdAt: '',
+	updatedAt: '',
+	email: '',
+	firstName: '',
+	lastName: '',
+	role: Role.admin,
+	status: EnumStatusAccount.active,
+	userId: '',
+};
+
+export const breadcrumbCreateAccount: IItemBreadcrumb[] = [
 	{
-		value: Gender.female,
 		id: Helper.randomKey(),
-		label: parseGender[Gender.female],
+		text: 'Account',
+		hasPrev: true,
 	},
 	{
-		value: Gender.male,
 		id: Helper.randomKey(),
-		label: parseGender[Gender.male],
+		text: 'Create Account',
 	},
 ];

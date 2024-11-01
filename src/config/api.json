@@ -2,7 +2,10 @@
     "api": {
         "host": "http://localhost:8000",
         "artist": {
-            "_": "/singer"
+            "_": "/singer",
+            "details": "/singer/details",
+            "upload": "/singer/uploadAvatar",
+            "uploadMulti": "/singer/uploadCovers"
         },
         "user": {
             "_": "/user",

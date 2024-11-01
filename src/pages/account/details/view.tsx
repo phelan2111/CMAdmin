@@ -15,9 +15,10 @@ import UpdateButton from '@/components/ui/button/update';
 import { Helper } from '@/utils/helper';
 import { Gender } from '@/utils/enums';
 import UpdateInformation from '../update/information';
-import UploadCoverAccount from '@/layout/account/upload/cover';
+import UploadCoverAccount from '@/components/ui/upload/normal/cover';
 import { DataUpload } from '@/components/root/upload/normal';
-import AvatarUploadAccount from '@/layout/account/upload/avatar';
+import AvatarUploadAccount from '@/components/ui/upload/normal/avatar';
+import UpdateStatus from '../update/status';
 
 type ViewProps = {
 	isLoading: boolean;
@@ -36,12 +37,38 @@ function View(props: ViewProps) {
 					<div className='flex justify-between items-center animate-translateRight'>
 						<div className='leading-10 flex flex-col gap-2'>
 							<div className='flex items-end gap-4'>
-								<h1 className='text-5xl font-semibold'>{Localize('GENRE_DETAILS')}</h1>
+								<h1 className='text-5xl font-semibold'>{Localize('DETAILS_ACCOUNT')}</h1>
 								<StatusAccount status={props.userDetails.status} />
 							</div>
 							<p>#{props.userDetails.userId}</p>
 						</div>
-						<ActionAccount onActive={() => {}} onLock={() => {}} status={props.userDetails.status} />
+						<ActionAccount
+							onActive={() => {
+								props.onUpdateUser({
+									renderComponent: (
+										<UpdateStatus
+											onSuccess={props.onFreshRequest}
+											content='UNLOCK_ACCOUNT_DESCRIPTION'
+											title='UNLOCK_ACCOUNT'
+											details={props.userDetails}
+										/>
+									),
+								});
+							}}
+							onLock={() => {
+								props.onUpdateUser({
+									renderComponent: (
+										<UpdateStatus
+											onSuccess={props.onFreshRequest}
+											content='LOCK_ACCOUNT_DESCRIPTION'
+											title='LOCK_ACCOUNT'
+											details={props.userDetails}
+										/>
+									),
+								});
+							}}
+							status={props.userDetails.status}
+						/>
 					</div>
 					<div className='animate-translateRight'>
 						<div className='h-72'>
@@ -86,7 +113,7 @@ function View(props: ViewProps) {
 						<div className='w-2/3 p-4 rounded-xl flex flex-col gap-6 h-fit'>
 							<p className='text-2xl font-semibold'>{Localize('PLAYLIST')}</p>
 							<Empty
-								isEmpty={false}
+								isEmpty={true}
 								componentEmpty={() => {
 									return (
 										<div className='w-full flex flex-col gap-4 items-center justify-center'>

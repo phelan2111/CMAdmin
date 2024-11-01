@@ -3,11 +3,11 @@ import { UpdateInformationProps } from '.';
 import Form from '@/components/root/form';
 import InputDialog from '@/components/ui/input/dialog';
 import Radio from '@/components/root/inputs/radio';
-import { genderRadio } from '../../variables';
 import Localize from '@/langs';
 import { string } from 'yup';
 import Button from '@/components/root/button';
 import { DataFormUpdate } from '../../types';
+import { genderRadio } from '@/utils/variables';
 
 interface IViewProps extends UpdateInformationProps {
 	onSubmit: (dataItem: DataFormUpdate) => void;

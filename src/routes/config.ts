@@ -10,6 +10,7 @@ export const PATH = {
 	ACCOUNT: {
 		_: '/account',
 		DETAILS: '/account/:userId',
+		CREATE: '/account/create',
 	},
 	BROWSE: {
 		_: '/browse',
@@ -28,5 +29,6 @@ export const PATH = {
 	ARTIST: {
 		_: '/artist',
 		CREATE: '/artist/create',
+		DETAILS: '/artist/:artistId',
 	},
 };

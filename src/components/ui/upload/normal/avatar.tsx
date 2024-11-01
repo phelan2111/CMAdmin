@@ -5,12 +5,12 @@ import Localize from '@/langs';
 import { Helper } from '@/utils/helper';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { MdOutlineFileUpload, MdOutlineSaveAlt } from 'react-icons/md';
+import { UploadAccountProps } from '../../../../layout/account/upload/types';
 
-type AvatarUploadAccountProps = {
-	src?: string;
-	onChange: (dataItem: DataUpload) => void;
-};
-function AvatarUploadAccount({ src = '', ...props }: AvatarUploadAccountProps) {
+function AvatarUploadAccount({
+	src = 'http://res.cloudinary.com/dkvhfe4uu/image/upload/v1730217712/user/image/pexels-pixabay-161154_sclyji.jpg',
+	...props
+}: UploadAccountProps) {
 	const [uploadData, setUploadData] = useState<DataUpload>({
 		src,
 		uploadId: Helper.randomKey(),
@@ -51,7 +51,7 @@ function AvatarUploadAccount({ src = '', ...props }: AvatarUploadAccountProps) {
 							icon={<MdOutlineSaveAlt className='text-2xl' />}
 							text='SAVE'
 							onClick={() => {
-								props.onChange(uploadData);
+								props.onChange?.(uploadData);
 							}}
 						/>
 						<label className='buttonFollow group !rounded-full' htmlFor='avatar'>

@@ -2,6 +2,7 @@ import { IoCloseCircleOutline } from 'react-icons/io5';
 
 type CloseButtonProps = {
 	onClick: VoidFunction;
+	className?: string;
 };
 
 function CloseButton(props: CloseButtonProps) {

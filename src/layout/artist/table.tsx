@@ -1,5 +1,5 @@
 import Grid from '@/components/root/grid/normal';
-import { GridColumn } from '@/components/root/grid/types';
+import { GridColumn, TableProps } from '@/components/root/grid/types';
 import Avatar from '@/components/root/image/avatar';
 import StatusArtist from '@/components/ui/status/artist';
 import { ResponseGetListArtist } from '@/services/artist/getSinger';
@@ -66,14 +66,8 @@ const gridColumTableArtist: GridColumn<ResponseGetListArtist>[] = [
 	},
 ];
 
-type TableArtistProps = {
-	total: number;
-	data: ResponseGetListArtist[];
-	isLoading?: boolean;
-};
-
-function TableArtist(props: TableArtistProps) {
-	return <Grid isLoading={props.isLoading} total={props.total} data={props.data} gridColum={gridColumTableArtist} />;
+function TableArtist(props: TableProps<ResponseGetListArtist>) {
+	return <Grid gridColum={gridColumTableArtist} {...props} />;
 }
 
 export default TableArtist;

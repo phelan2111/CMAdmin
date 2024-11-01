@@ -5,6 +5,7 @@ import { lazy } from 'react';
 //ACCOUNT
 const AccountList = lazy(() => import('@/pages/account/list'));
 const AccountDetails = lazy(() => import('@/pages/account/details'));
+const AccountCreate = lazy(() => import('@/pages/account/create'));
 
 export const routeAccount: RouteObject[] = [
 	{
@@ -14,5 +15,9 @@ export const routeAccount: RouteObject[] = [
 	{
 		path: PATH.ACCOUNT.DETAILS,
 		element: <AccountDetails />,
+	},
+	{
+		path: PATH.ACCOUNT.CREATE,
+		element: <AccountCreate />,
 	},
 ];

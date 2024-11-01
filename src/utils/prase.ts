@@ -1,8 +1,8 @@
 import { Gender, Role } from './enums';
 
 export const parseEnumRole: Record<Role, string> = {
-	[Role.admin]: 'Admin',
-	[Role.user]: 'User',
+	[Role.admin]: 'ADMIN',
+	[Role.user]: 'USER',
 };
 
 export const parseGender: Record<Gender, string> = {
