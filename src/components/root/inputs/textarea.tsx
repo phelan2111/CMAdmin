@@ -21,12 +21,12 @@ export interface ITextAreaFieldProps
 	messageError?: string;
 }
 
-function TextAreaField({ classNameTextArea = '', className = '', name = '', required = false, defaultValue = '', ...props }: ITextAreaFieldProps) {
+function TextAreaField({ classNameTextArea = '', className = '', name = '', required = false, ...props }: ITextAreaFieldProps) {
 	const form = useFormContext();
 
 	const initialValue = useMemo(() => {
-		return form?.getValues()?.name ?? defaultValue;
-	}, [defaultValue, form]);
+		return props.defaultValue ?? form?.getValues()?.name;
+	}, [props.defaultValue, form]);
 	const messageError = useMemo(() => {
 		return form?.formState.errors?.[name] ?? props.messageError;
 	}, [form?.formState.errors, name, props.messageError]);
@@ -55,7 +55,7 @@ function TextAreaField({ classNameTextArea = '', className = '', name = '', requ
 					{...form?.register(name)}
 					name={name}
 					placeholder={props.placeholder}
-					className={`w-full outline-none bg-transparent h-40 text-primary_light text-base ${classNameTextArea}`}
+					className={`w-full outline-none py-2 bg-transparent h-40 text-primary_light text-base ${classNameTextArea}`}
 					{...props}
 					onChange={(e) => {
 						handleChange(e.currentTarget.value);

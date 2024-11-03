@@ -3,25 +3,25 @@ import Avatar from '@/components/root/image/avatar';
 import { DataUpload } from '@/components/root/upload/normal';
 import Localize from '@/langs';
 import { Helper } from '@/utils/helper';
-import { ChangeEvent, useEffect, useMemo, useState } from 'react';
-import { MdOutlineFileUpload } from 'react-icons/md';
-import { UploadAccountProps } from '../../../../../layout/account/upload/types';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { MdOutlineFileUpload, MdOutlineSaveAlt } from 'react-icons/md';
+import { UploadAvatarProps } from '../../../../../layout/account/upload/types';
 import { ResponseUpload } from '@/services/types';
 import BallLoader from '@/components/ui/loader/ball';
 import { useFormContext } from 'react-hook-form';
 import ServiceUploadSinger from '@/services/artist/upload';
+import UpdateButton from '@/components/ui/button/update';
 
 function AvatarUploadRequestSinger({
 	name = '',
 	src = 'http://res.cloudinary.com/dkvhfe4uu/image/upload/v1730217712/user/image/pexels-pixabay-161154_sclyji.jpg',
-}: UploadAccountProps) {
+	isDetails = false,
+	...props
+}: UploadAvatarProps) {
 	const form = useFormContext();
 
-	const srcValue = useMemo(() => {
-		return src ?? form?.getValues()?.[name];
-	}, [src, form, name]);
 	const [uploadData, setUploadData] = useState<DataUpload>({
-		src: srcValue,
+		src,
 		uploadId: Helper.randomKey(),
 	});
 	const { isLoadingUploadSingerService, onUploadSinger } = ServiceUploadSinger({
@@ -62,7 +62,18 @@ function AvatarUploadRequestSinger({
 				)}
 				<Avatar className='size-52 border-4 border-white relative z-10' src={uploadData.src} />
 				<div className='absolute top-16 left-0 translate-x-44'>
-					<div className='bg-white py-4 px-6 w-[200px] flex justify-end rounded-r-full'>
+					<div className={`bg-white py-4 px-6 transition-all duration-500 flex justify-end rounded-r-full ${isDetails ? 'w-[300px]' : 'w-[200px]'}`}>
+						{isDetails && (
+							<UpdateButton
+								disabled={uploadData.src === src}
+								className='font-semibold text-base !w-32 buttonFollow'
+								icon={<MdOutlineSaveAlt className='text-2xl' />}
+								text='SAVE'
+								onClick={() => {
+									props.onChange?.(uploadData);
+								}}
+							/>
+						)}
 						<label className='buttonFollow group !rounded-full' htmlFor='avatar'>
 							<p className='bg-primary_dark text-primary_light flex items-center w-32 group-hover:bg-primary_dark/10 transition-all duration-500 gap-2 px-4 py-3 rounded-full text-base font-semibold'>
 								<MdOutlineFileUpload className='text-2xl' />

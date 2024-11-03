@@ -48,6 +48,7 @@ function View(props: ViewProps) {
 				</div>
 				<div className='flex flex-col gap-4 h-full animate-translateRight'>
 					<TableAccount
+						onChangePaging={props.onChangePaging}
 						onClickRow={(dataItem) => {
 							redirectPage(`${PATH.ACCOUNT._}/${dataItem._id}`);
 						}}

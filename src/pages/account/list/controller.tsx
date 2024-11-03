@@ -95,6 +95,7 @@ export default class Controller extends Component<PropsController, StateControll
 				onChangeFilterStatus={this.handleFilterStatus}
 				onChangeSearch={this.handleOnChangeSearch}
 				onCreateAccount={this.handleCreateAccount}
+				onChangePaging={this.handleChangePagingAndReRequest}
 			/>
 		);
 	}

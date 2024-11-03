@@ -10,7 +10,7 @@ import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import Avatar from '@/components/root/image/avatar';
 import CloseButton from '../../button/close';
 
-function UploadCarouselCoverAccount({
+function UploadCarouselCover({
 	src = ['http://res.cloudinary.com/dkvhfe4uu/image/upload/v1730217804/user/image/pexels-vishnurnair-1105666_qf6gvs.jpg'],
 	...props
 }: UploadCarouselProps) {
@@ -146,4 +146,4 @@ function UploadCarouselCoverAccount({
 	);
 }
 
-export default UploadCarouselCoverAccount;
+export default UploadCarouselCover;

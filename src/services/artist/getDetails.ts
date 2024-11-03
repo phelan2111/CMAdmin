@@ -8,6 +8,7 @@ import { Helper } from '@/utils/helper';
 import AuthService from '@/utils/auth';
 import { initialStateItemTopic } from '@/pages/browse/variables';
 import { ResponseHasResponseProps } from '../types';
+import { EnumStatusBrowse } from '@/utils/enums';
 
 export type ResponseGetArtistDetails = {
 	createdAt: string;
@@ -17,10 +18,19 @@ export type ResponseGetArtistDetails = {
 	singerCover: string[];
 	singerDescription: string;
 	followers: number;
-	contact: ContactArtist;
 	status: number;
-	genreIds: string[];
-	artistId: string;
+	genres: GenresOfArtist[];
+	singerId: string;
+	socials?: {
+		facebook?: string;
+		instagram?: string;
+	};
+};
+export type GenresOfArtist = {
+	genreId: string;
+	nameGenre: string;
+	imageGenre: string;
+	status: EnumStatusBrowse;
 };
 export const initialArtistDetails: ResponseGetArtistDetails = {
 	createdAt: '',
@@ -30,15 +40,11 @@ export const initialArtistDetails: ResponseGetArtistDetails = {
 	singerCover: [],
 	singerDescription: '',
 	followers: 0,
-	contact: {},
 	status: 1,
-	genreIds: [],
-	artistId: '',
+	genres: [],
+	singerId: '',
 };
 
-export type ContactArtist = {
-	fackebook?: string;
-};
 export type PayloadArtistDetails = {
 	artistId: string;
 };

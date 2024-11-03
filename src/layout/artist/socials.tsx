@@ -9,7 +9,7 @@ type SocialsProps = {
 };
 function Socials(props: SocialsProps) {
 	return (
-		<div className='flex flex-col gap-2'>
+		<div className='flex flex-col gap-2 animate-translateRight'>
 			<div className='flex gap-2 items-center'>
 				{props.icon}
 				<p>{Localize(props.text)}</p>

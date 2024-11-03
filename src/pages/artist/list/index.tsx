@@ -1,15 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import ServiceArtistGetList from '@/services/artist/getSinger';
 import Controller from './controller';
-import { useLayoutEffect } from 'react';
+import { useBreadcrumb } from '@/hooks/useBreadcrumb';
+import { Helper } from '@/utils/helper';
 
 function ArtistPage() {
 	const { isLoadingGetListArtistService, onGetListArtist, response } = ServiceArtistGetList();
 
-	useLayoutEffect(() => {
-		onGetListArtist();
-	}, []);
-	return <Controller data={response} isLoading={isLoadingGetListArtistService} />;
+	useBreadcrumb([
+		{
+			id: Helper.randomKey(),
+			text: 'Artist',
+		},
+	]);
+
+	return <Controller onGetListArtist={onGetListArtist} data={response} isLoading={isLoadingGetListArtistService} />;
 }
 
 export default ArtistPage;

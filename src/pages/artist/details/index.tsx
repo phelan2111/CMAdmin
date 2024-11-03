@@ -1,24 +1,17 @@
 import Controller from './controller';
 import { useParams } from 'react-router-dom';
-import ServiceUploadUser from '@/services/user/upload';
-import ServiceUpdateInformationUser from '@/services/user/updateInformation';
 import LoadingDialog from '@/components/ui/loading/dialog';
-import { useMemo } from 'react';
 import { Helper } from '@/utils/helper';
 import { useBreadcrumb } from '@/hooks/useBreadcrumb';
 import ServiceArtistDetails from '@/services/artist/getDetails';
+import ServiceUpdateInformationArtist from '@/services/artist/updateInformation';
 
 function AccountDetails() {
 	const params = useParams();
 
 	const { isLoadingArtistDetailsService, onArtistDetails, response } = ServiceArtistDetails();
-	const { isLoadingUploadUserService, onUploadUser, responseUpload } = ServiceUploadUser();
 
-	const { isLoadingUpdateUserService, onUpdateUser } = ServiceUpdateInformationUser();
-
-	const loading = useMemo(() => {
-		return isLoadingUpdateUserService || isLoadingUploadUserService;
-	}, [isLoadingUpdateUserService, isLoadingUploadUserService]);
+	const { isLoadingUpdateArtistService, onUpdateArtist } = ServiceUpdateInformationArtist();
 
 	useBreadcrumb([
 		{
@@ -28,20 +21,18 @@ function AccountDetails() {
 		},
 		{
 			id: Helper.randomKey(),
-			text: response?.artistId,
+			text: response?.singerId,
 		},
 	]);
 
 	return (
-		<LoadingDialog loading={loading}>
+		<LoadingDialog loading={isLoadingUpdateArtistService}>
 			<Controller
 				isLoading={isLoadingArtistDetailsService}
 				artistId={params.artistId as string}
-				responseUpload={responseUpload}
 				artistDetails={response}
 				onGetTopicDetails={onArtistDetails}
-				onUpload={onUploadUser}
-				onUpdateUser={onUpdateUser}
+				onUpdateArtist={onUpdateArtist}
 			/>
 		</LoadingDialog>
 	);

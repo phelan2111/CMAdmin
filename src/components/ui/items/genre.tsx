@@ -8,13 +8,15 @@ type GenreItemProps = {
 	onClick?: VoidFunction;
 	hasInactive: boolean;
 	checkedDefault?: boolean;
+	disabled?: boolean;
+	className?: string;
 };
 
-function GenreItem(props: GenreItemProps) {
+function GenreItem({ className = '', ...props }: GenreItemProps) {
 	const [hasSelected, setHasSelected] = useState<boolean>(Boolean(props.checkedDefault));
 
 	return (
-		<div className={`relative ${props.hasInactive && 'opacity-40 pointer-events-none'}`}>
+		<div className={`relative ${props.hasInactive && 'opacity-40 pointer-events-none'} ${className}`}>
 			<HoverCard
 				onClick={() => {
 					setHasSelected((prev) => !prev);
@@ -30,7 +32,6 @@ function GenreItem(props: GenreItemProps) {
 					</div>
 				</div>
 			</HoverCard>
-			<div></div>
 		</div>
 	);
 }

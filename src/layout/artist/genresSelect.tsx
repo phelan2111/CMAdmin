@@ -8,15 +8,23 @@ import { FROM } from '@/utils/variables';
 import { EnumStatusBrowse } from '@/utils/enums';
 import { Helper } from '@/utils/helper';
 import { useFormContext } from 'react-hook-form';
+import { GenresOfArtist } from '@/services/artist/getDetails';
 
 type GenresSelectProps = {
 	name: string;
+	className?: string;
+	defaultValue?: GenresOfArtist[];
 };
-function GenresSelect({ name = '' }: GenresSelectProps) {
+function GenresSelect({ name = '', className = '', defaultValue = [] }: GenresSelectProps) {
 	const form = useFormContext();
 
+	const initialValue = useMemo(() => {
+		return form?.getValues()?.[name] ?? defaultValue;
+	}, [defaultValue, form, name]);
+
 	const { onGetListGenreOfBrowse, response, isLoadingGetListGenreOfBrowseService } = ServiceGetListGenreOfBrowse();
-	const [genresState, setGenresState] = useState<ResponseGetGenreOfBrowse[]>([]);
+
+	const [genresState, setGenresState] = useState<ResponseGetGenreOfBrowse[]>(initialValue);
 	const genres = useMemo(() => [...genresState], [genresState]);
 
 	const handleSelect = (dataItem: ResponseGetGenreOfBrowse) => {
@@ -27,7 +35,6 @@ function GenresSelect({ name = '' }: GenresSelectProps) {
 			genres.push(dataItem);
 		}
 		setGenresState(genres);
-		console.log('genres', genres);
 		form?.setValue(name, genres, { shouldValidate: true, shouldDirty: true, shouldTouch: true });
 	};
 
@@ -38,15 +45,21 @@ function GenresSelect({ name = '' }: GenresSelectProps) {
 		});
 	}, []);
 
+	console.log('genresState', genresState);
+
 	return (
 		<div className='grid grid-cols-6 gap-6'>
 			<SkeletonGenreItem isSkeleton={isLoadingGetListGenreOfBrowseService}>
 				{response?.list?.map((genre) => {
+					const { isExist } = Helper.findItem(genresState, '_id', genre._id);
+
 					return (
 						<GenreItem
+							className={className}
 							onClick={() => {
 								handleSelect(genre);
 							}}
+							checkedDefault={isExist}
 							hasInactive={genre.status === EnumStatusBrowse.hidden}
 							key={genre._id}
 							name={genre.nameGenre}

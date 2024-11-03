@@ -4,7 +4,7 @@ import { DataUpload } from '@/components/root/upload/normal';
 import Localize from '@/langs';
 import { Helper } from '@/utils/helper';
 import { ChangeEvent, Fragment, useEffect, useMemo, useRef, useState } from 'react';
-import { MdOutlineFileUpload } from 'react-icons/md';
+import { MdOutlineFileUpload, MdOutlineSaveAlt } from 'react-icons/md';
 import { UploadCarouselProps } from '../../../../../layout/account/upload/types';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import Avatar from '@/components/root/image/avatar';
@@ -13,9 +13,11 @@ import { useFormContext } from 'react-hook-form';
 import ServiceUploadSingerCovers from '@/services/artist/uploadMulti';
 import { ResponseUpload } from '@/services/types';
 import BallLoader from '@/components/ui/loader/ball';
+import UpdateButton from '@/components/ui/button/update';
 
 function UploadCarouselCoverArtistRequest({
 	name = '',
+	isDetails = false,
 	src = ['http://res.cloudinary.com/dkvhfe4uu/image/upload/v1730217804/user/image/pexels-vishnurnair-1105666_qf6gvs.jpg'],
 	...props
 }: UploadCarouselProps) {
@@ -75,7 +77,6 @@ function UploadCarouselCoverArtistRequest({
 			form?.setValue(name, uploadData, { shouldValidate: true, shouldDirty: true, shouldTouch: true });
 		}
 	}, [name, uploadData]);
-
 	useEffect(() => {
 		const element = ref.current;
 		const elementItem = refItem.current;
@@ -152,6 +153,17 @@ function UploadCarouselCoverArtistRequest({
 			</div>
 
 			<div className='absolute top-8 right-8 z-10 flex w-fit gap-2'>
+				{isDetails && (
+					<UpdateButton
+						disabled={uploadData.length === src.length}
+						className='font-semibold text-base !w-32 buttonFollow'
+						icon={<MdOutlineSaveAlt className='text-2xl' />}
+						text='SAVE'
+						onClick={() => {
+							props.onChange?.(uploadData);
+						}}
+					/>
+				)}
 				<label className='buttonFollow group !rounded-full' htmlFor='cover'>
 					<p className='bg-primary_dark text-primary_light flex items-center w-32 group-hover:bg-primary_dark/10 transition-all duration-500 gap-2 px-4 py-3 rounded-full text-base font-semibold'>
 						<MdOutlineFileUpload className='text-2xl' />

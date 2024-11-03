@@ -28,14 +28,13 @@ function TextField({
 	classHelperText = 'text-red-500',
 	type = 'text',
 	required = false,
-	defaultValue = '',
 	...props
 }: ITextFieldProps) {
 	const form = useFormContext();
 
 	const initialValue = useMemo(() => {
-		return defaultValue ?? form?.getValues()?.[name];
-	}, [defaultValue, form, name]);
+		return props.defaultValue ?? form?.getValues()?.[name];
+	}, [props.defaultValue, form, name]);
 	const messageError = useMemo(() => {
 		return form?.formState.errors?.[name]?.message ?? props.messageError;
 	}, [form?.formState.errors, name, props.messageError]);

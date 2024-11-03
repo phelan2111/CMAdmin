@@ -1,15 +1,20 @@
 import { Component } from 'react';
 import View from './view';
 import { ResponseGetListArtist } from '@/services/artist/getSinger';
-import { ResponseRequest } from '@/services/types';
+import { initialResponseRequest, PayloadRequestList, ResponseRequest } from '@/services/types';
+import { FROM, LIMIT, SORT } from '@/utils/variables';
+import { EnumStatusArtist } from '@/utils/enums';
+import { PagingState } from '@/components/root/grid/types';
+import { FilterStatusItem } from '@/components/ui/common/tool/filter/status';
 
 type PropsController = {
 	data: ResponseRequest<ResponseGetListArtist>;
 	isLoading: boolean;
+	onGetListArtist: (params: PayloadRequestList) => void;
 };
 type StateController = {
 	allState: {
-		user: ResponseRequest<ResponseGetListArtist>;
+		payload: PayloadRequestList;
 	};
 };
 
@@ -18,25 +23,67 @@ export default class Controller extends Component<PropsController, StateControll
 		super(props);
 		this.state = {
 			allState: {
-				user: {
-					list: [],
-					total: 0,
+				payload: {
+					from: FROM,
+					limit: LIMIT,
+					createdAt: SORT.DESC,
+					search: '',
+					status: EnumStatusArtist.inactive,
 				},
 			},
 		};
+		this.handleChangePagingAndReRequest = this.handleChangePagingAndReRequest.bind(this);
+		this.handleReRequest = this.handleReRequest.bind(this);
+		this.handleOnChangeSearch = this.handleOnChangeSearch.bind(this);
+		this.handleFilterStatus = this.handleFilterStatus.bind(this);
 	}
-	componentDidUpdate(previousProps: PropsController): void {
-		const { data } = this.props;
+	componentDidMount(): void {
+		this.handleReRequest();
+	}
+	handleReRequest() {
 		const { allState } = this.state;
-		if (previousProps.isLoading !== this.props.isLoading) {
-			allState.user = data;
+		const { onGetListArtist } = this.props;
+		onGetListArtist(allState.payload);
+	}
+
+	handleChangePagingAndReRequest(dataItem: PagingState) {
+		const { allState } = this.state;
+
+		allState.payload.from = dataItem.skip;
+		allState.payload.limit = dataItem.take;
+
+		this.setState({ allState });
+		this.handleReRequest();
+	}
+	handleOnChangeSearch(dataItem: string) {
+		const { allState } = this.state;
+
+		if (dataItem !== allState.payload.search) {
+			allState.payload.search = dataItem;
+
 			this.setState({ allState });
+			this.handleReRequest();
 		}
+	}
+	handleFilterStatus(dataItem: FilterStatusItem) {
+		const { allState } = this.state;
+
+		allState.payload.status = dataItem.value;
+
+		this.setState({ allState });
+		this.handleReRequest();
 	}
 
 	render() {
-		const { allState } = this.state;
-		const { isLoading } = this.props;
-		return <View isLoading={isLoading} data={allState.user} />;
+		const { isLoading, data = initialResponseRequest as ResponseRequest<ResponseGetListArtist> } = this.props;
+		return (
+			<View
+				isLoading={isLoading}
+				data={data}
+				onChangeFilterStatus={this.handleFilterStatus}
+				onChangeSearch={this.handleOnChangeSearch}
+				onChangePaging={this.handleChangePagingAndReRequest}
+			/>
+		);
 	}
 }

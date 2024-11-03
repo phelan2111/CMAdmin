@@ -1,3 +1,4 @@
+import { GenresOfArtist } from '@/services/artist/getDetails';
 import { ResponseGetGenreOfBrowse } from '@/services/browse/genre/getList';
 
 export type DataFormCreateSinger = {
@@ -13,4 +14,18 @@ export type DataFormCreateSinger = {
 export type Upload = {
 	src: string;
 	uploadId: string;
+};
+
+export type DataFormUpdateIntro = {
+	singerName: string;
+	singerDescription: string;
+};
+
+export type DataFormUpdateSocials = {
+	facebook?: string;
+	instagram?: string;
+};
+
+export type DataFormUpdateGenres = {
+	genres: GenresOfArtist[];
 };
