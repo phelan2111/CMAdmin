@@ -5,12 +5,12 @@ import Localize from '@/langs';
 import { Helper } from '@/utils/helper';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { MdOutlineFileUpload, MdOutlineSaveAlt } from 'react-icons/md';
-import { UploadAccountProps } from '../../../../layout/account/upload/types';
+import { UploadAvatarProps } from '../../../../layout/account/upload/types';
 
 function UploadCoverAccount({
 	src = 'http://res.cloudinary.com/dkvhfe4uu/image/upload/v1730217804/user/image/pexels-vishnurnair-1105666_qf6gvs.jpg',
 	...props
-}: UploadAccountProps) {
+}: UploadAvatarProps) {
 	const [uploadData, setUploadData] = useState<DataUpload>({
 		src,
 		uploadId: Helper.randomKey(),

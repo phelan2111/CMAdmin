@@ -8,13 +8,13 @@ import { MdOutlineFileUpload } from 'react-icons/md';
 import BallLoader from '@/components/ui/loader/ball';
 import ServiceUploadUser from '@/services/user/upload';
 import { ResponseUpload } from '@/services/types';
-import { UploadAccountProps } from '@/layout/account/upload/types';
+import { UploadAvatarProps } from '@/layout/account/upload/types';
 import { useFormContext } from 'react-hook-form';
 
 function UploadCoverRequestAccount({
 	name = '',
 	src = 'http://res.cloudinary.com/dkvhfe4uu/image/upload/v1730217804/user/image/pexels-vishnurnair-1105666_qf6gvs.jpg',
-}: UploadAccountProps) {
+}: UploadAvatarProps) {
 	const form = useFormContext();
 
 	const srcValue = useMemo(() => {

@@ -1,19 +1,18 @@
 import { Component } from 'react';
 import View from './view';
 import { UpdateStatusProps } from '.';
-import { EnumStatusAccount } from '@/utils/enums';
-import { ResponseGetUserDetails } from '@/services/user/getDetails';
-import { initialStateItemUser } from '../../variables';
-import { PayloadUserUpdateStatus } from '@/services/user/updateStatus';
+import { EnumStatusArtist } from '@/utils/enums';
+import { initialArtistDetails, ResponseGetArtistDetails } from '@/services/artist/getDetails';
+import { PayloadArtistUpdateStatus } from '@/services/artist/updateStatus';
 
 type ControllerState = {
 	allState: {
-		details: ResponseGetUserDetails;
+		details: ResponseGetArtistDetails;
 	};
 };
 
 interface ControllerProps extends UpdateStatusProps {
-	onUpdateStatus: (dataItem: PayloadUserUpdateStatus) => void;
+	onUpdateStatusSinger: (dataItem: PayloadArtistUpdateStatus) => void;
 }
 
 export default class Controller extends Component<ControllerProps, ControllerState> {
@@ -21,7 +20,7 @@ export default class Controller extends Component<ControllerProps, ControllerSta
 		super(props);
 		this.state = {
 			allState: {
-				details: initialStateItemUser,
+				details: initialArtistDetails,
 			},
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -34,16 +33,16 @@ export default class Controller extends Component<ControllerProps, ControllerSta
 	}
 
 	handleSubmit() {
-		const isActiveStatus = this.props.details.status === EnumStatusAccount.active;
+		const isActiveStatus = this.props.details.status === EnumStatusArtist.active;
 		if (isActiveStatus) {
-			this.props.onUpdateStatus({
-				status: EnumStatusAccount.lock,
-				userId: this.state.allState.details.userId,
+			this.props.onUpdateStatusSinger({
+				status: EnumStatusArtist.lock,
+				singerId: this.state.allState.details.singerId,
 			});
 		} else {
-			this.props.onUpdateStatus({
-				status: EnumStatusAccount.active,
-				userId: this.state.allState.details.userId,
+			this.props.onUpdateStatusSinger({
+				status: EnumStatusArtist.active,
+				singerId: this.state.allState.details.singerId,
 			});
 		}
 	}

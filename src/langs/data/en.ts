@@ -149,4 +149,12 @@ export const dataLocalizeEN: Record<string, string> = {
 	SINGER_NAME_REQUIRED: 'Singer name is a required field',
 	SINGER_DESCRIPTION_REQUIRED: 'Singer description is a required field',
 	GENRES_REQUIRED: 'genres must have 1 genres',
+	UPDATE_ARTIST_INTRO: 'Update artist intro',
+	UPDATE_ARTIST_SOCIALS: 'Update artist socials',
+	UPDATE_ARTIST_DESCRIPTION: 'You are changing data of artist.',
+	UPDATE_GENRE_OF_ARTIST: 'Update genre of artist',
+	LOCK_ARTIST: 'Lock artist',
+	UNLOCK_ARTIST: 'Unlock artist',
+	UNLOCK_ARTIST_DESCRIPTION: 'You will unlock account.',
+	LOCK_ARTIST_DESCRIPTION: 'You will lock account.',
 };

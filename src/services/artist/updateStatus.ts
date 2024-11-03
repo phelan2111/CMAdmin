@@ -5,18 +5,18 @@ import config from 'config/api.json';
 import { CODE, parseCodeToNameFunc } from '@/config/responseCode';
 import { Helper } from '@/utils/helper';
 import AuthService from '@/utils/auth';
-import { EnumStatusAccount } from '@/utils/enums';
+import { EnumStatusArtist } from '@/utils/enums';
 import { ResponseHasResponseProps } from '../types';
 
-export type PayloadUserUpdateStatus = {
-	userId: string;
-	status: EnumStatusAccount;
+export type PayloadArtistUpdateStatus = {
+	singerId: string;
+	status: EnumStatusArtist;
 };
 function ServiceUpdateStatusArtist(props?: ResponseHasResponseProps) {
 	const auth = AuthService.getPackageAuth();
 
 	const request: AxiosRequestConfig = {
-		url: config.api.user._,
+		url: config.api.artist._,
 		method: 'delete',
 		headers: {
 			token: auth?.token,
@@ -28,7 +28,7 @@ function ServiceUpdateStatusArtist(props?: ResponseHasResponseProps) {
 		request,
 	});
 
-	const handleMutate = (params: PayloadUserUpdateStatus) => {
+	const handleMutate = (params: PayloadArtistUpdateStatus) => {
 		mutate(params, {
 			onSuccess: (data) => {
 				Logger.debug('ServiceUpdateStatusArtist execute handleMutate success', data);
@@ -50,8 +50,8 @@ function ServiceUpdateStatusArtist(props?: ResponseHasResponseProps) {
 	};
 
 	return {
-		onUpdateStatusUser: handleMutate,
-		isLoadingUpdateStatusUserService: isPending,
+		onUpdateStatusSinger: handleMutate,
+		isLoadingUpdateStatusSingerService: isPending,
 	};
 }
 

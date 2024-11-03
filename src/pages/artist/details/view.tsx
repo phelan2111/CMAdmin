@@ -19,6 +19,7 @@ import AvatarUploadRequestSinger from '@/components/ui/upload/request/avatar/ava
 import UpdateInformation from '../update/information';
 import UpdateInformationSocials from '../update/socials';
 import UpdateGenresOfArtist from '../update/genres';
+import UpdateStatusArtist from '../update/status';
 
 type ViewProps = {
 	isLoading: boolean;
@@ -42,7 +43,33 @@ function View(props: ViewProps) {
 							</div>
 							<p>#{props.artistDetails.singerId}</p>
 						</div>
-						<ActionAccount status={props.artistDetails.status} onActive={() => {}} onLock={() => {}} />
+						<ActionAccount
+							status={props.artistDetails.status}
+							onActive={() => {
+								props.onUpdateArtist({
+									renderComponent: (
+										<UpdateStatusArtist
+											onSuccess={props.onFreshRequest}
+											content='UNLOCK_ARTIST_DESCRIPTION'
+											title='UNLOCK_ARTIST'
+											details={props.artistDetails}
+										/>
+									),
+								});
+							}}
+							onLock={() => {
+								props.onUpdateArtist({
+									renderComponent: (
+										<UpdateStatusArtist
+											onSuccess={props.onFreshRequest}
+											content='LOCK_ARTIST_DESCRIPTION'
+											title='LOCK_ARTIST'
+											details={props.artistDetails}
+										/>
+									),
+								});
+							}}
+						/>
 					</div>
 					<div className='animate-translateRight'>
 						<div className='h-72'>
@@ -60,8 +87,8 @@ function View(props: ViewProps) {
 													renderComponent: (
 														<UpdateInformation
 															onSuccess={props.onFreshRequest}
-															content='UNLOCK_ACCOUNT_DESCRIPTION'
-															title='UNLOCK_ACCOUNT'
+															content='UPDATE_ARTIST_DESCRIPTION'
+															title='UPDATE_ARTIST_INTRO'
 															details={props.artistDetails}
 														/>
 													),
@@ -94,8 +121,8 @@ function View(props: ViewProps) {
 													renderComponent: (
 														<UpdateInformationSocials
 															onSuccess={props.onFreshRequest}
-															content='UNLOCK_ACCOUNT_DESCRIPTION'
-															title='UNLOCK_ACCOUNT'
+															content='UPDATE_ARTIST_DESCRIPTION'
+															title='UPDATE_ARTIST_SOCIALS'
 															details={props.artistDetails}
 														/>
 													),
@@ -154,8 +181,8 @@ function View(props: ViewProps) {
 												renderComponent: (
 													<UpdateGenresOfArtist
 														onSuccess={props.onFreshRequest}
-														content='UNLOCK_ACCOUNT_DESCRIPTION'
-														title='UNLOCK_ACCOUNT'
+														content='UPDATE_ARTIST_DESCRIPTION'
+														title='UPDATE_GENRE_OF_ARTIST'
 														details={props.artistDetails}
 													/>
 												),

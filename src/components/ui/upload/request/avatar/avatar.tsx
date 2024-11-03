@@ -5,7 +5,7 @@ import Localize from '@/langs';
 import { Helper } from '@/utils/helper';
 import { ChangeEvent, useEffect, useMemo, useState } from 'react';
 import { MdOutlineFileUpload } from 'react-icons/md';
-import { UploadAccountProps } from '../../../../../layout/account/upload/types';
+import { UploadAvatarProps } from '../../../../../layout/account/upload/types';
 import ServiceUploadUser from '@/services/user/upload';
 import { ResponseUpload } from '@/services/types';
 import BallLoader from '@/components/ui/loader/ball';
@@ -14,7 +14,7 @@ import { useFormContext } from 'react-hook-form';
 function AvatarUploadRequestAccount({
 	name = '',
 	src = 'http://res.cloudinary.com/dkvhfe4uu/image/upload/v1730217712/user/image/pexels-pixabay-161154_sclyji.jpg',
-}: UploadAccountProps) {
+}: UploadAvatarProps) {
 	const form = useFormContext();
 
 	const srcValue = useMemo(() => {
