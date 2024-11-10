@@ -7,9 +7,10 @@ import AdminWrapper from '@/components/ui/wrapper/admin';
 import PrivateRoute from './private';
 import PublicRoute from './public';
 import { routeBrowse } from './browse';
-import { routeArtist } from './artist';
 import { routeAccount } from './account';
 import { routeOther } from './other';
+import { routeArtist } from './music/artist';
+import { routeSong } from './music/song';
 
 //KYC
 const SignIn = lazy(() => import('@/pages/kyc/signIn'));
@@ -40,7 +41,7 @@ const router = createBrowserRouter([
 						<AdminWrapper />
 					</PrivateRoute>
 				),
-				children: [...routeOther, ...routeAccount, ...routeArtist, ...routeBrowse],
+				children: [...routeOther, ...routeAccount, ...routeArtist, ...routeSong, ...routeBrowse],
 			},
 		],
 	},

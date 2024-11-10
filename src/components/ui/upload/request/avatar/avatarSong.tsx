@@ -11,8 +11,9 @@ import BallLoader from '@/components/ui/loader/ball';
 import { useFormContext } from 'react-hook-form';
 import ServiceUploadSinger from '@/services/music/artist/upload';
 import UpdateButton from '@/components/ui/button/update';
+import CoverImage from '@/components/root/image/cover';
 
-function AvatarUploadRequestSinger({
+function AvatarUploadRequestSong({
 	name = '',
 	src = 'http://res.cloudinary.com/dkvhfe4uu/image/upload/v1730217712/user/image/pexels-pixabay-161154_sclyji.jpg',
 	isDetails = false,
@@ -53,6 +54,18 @@ function AvatarUploadRequestSinger({
 	}, [name, uploadData]);
 
 	return (
+        <div>
+            <div className='relative w-full z-0'>
+			{isLoadingUploadSingerService && (
+				<div className='absolute top-0 left-0 w-full h-full bg-primary_dark/80 rounded-lg flex items-center justify-center z-20'>
+					<BallLoader />
+				</div>
+			)}
+			<div className='rounded-lg w-full h-72 overflow-hidden relative'>
+                <div className='backdrop-blur-xl bg-white/10 absolute top-0 right-0 w-full h-full rounded-lg' />
+                <CoverImage className='min-w-full h-72' src={uploadData.src} />
+			</div>
+		</div>
 		<div className='-translate-y-1/2 px-16 flex items-end relative z-10'>
 			<div className='relative'>
 				{isLoadingUploadSingerService && (
@@ -85,7 +98,8 @@ function AvatarUploadRequestSinger({
 				</div>
 			</div>
 		</div>
+        </div>
 	);
 }
 
-export default AvatarUploadRequestSinger;
+export default AvatarUploadRequestSong;

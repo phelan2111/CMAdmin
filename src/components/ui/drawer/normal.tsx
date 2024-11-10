@@ -35,10 +35,10 @@ const drawer: IItemDrawer[] = [
 	},
 	{
 		id: Helper.randomKey(),
-		path: PATH.HOME,
+		path: PATH.MUSIC._,
 		text: 'MUSIC',
 		icon: <GoStack className='text-xl' />,
-		classTargetedItem: 'h-[132px]',
+		classTargetedItem: 'h-[220px]',
 		children: [
 			{
 				id: Helper.randomKey(),
@@ -54,14 +54,21 @@ const drawer: IItemDrawer[] = [
 				icon: <GoStack className='text-xl' />,
 				classTargeted: 'bg-white/20',
 			},
+			{
+				id: Helper.randomKey(),
+				path: PATH.MUSIC.ARTIST._,
+				text: 'ARTIST',
+				icon: <GoCopilot className='text-xl' />,
+				classTargeted: 'bg-white/20',
+			},
+			{
+				id: Helper.randomKey(),
+				path: PATH.MUSIC.SONG._,
+				text: 'SONG',
+				icon: <GoCopilot className='text-xl' />,
+				classTargeted: 'bg-white/20',
+			},
 		],
-	},
-	{
-		id: Helper.randomKey(),
-		path: PATH.ARTIST._,
-		text: 'ARTIST',
-		icon: <GoCopilot className='text-xl' />,
-		classTargeted: 'bg-white/20',
 	},
 	{
 		id: Helper.randomKey(),
@@ -132,6 +139,7 @@ function DrawerNormal() {
 		if (params) {
 			const valueParams = Object.values(params)[0];
 			pathCurrent = location.pathname.replace(`/${valueParams}`, '');
+			pathCurrent = location.pathname.replace(`/create`, '');
 		}
 
 		for (let index = 0; index < drawer.length; index++) {

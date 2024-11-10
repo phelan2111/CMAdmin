@@ -26,9 +26,17 @@ export const PATH = {
 			DETAILS: '/browse/topic/:topicId',
 		},
 	},
-	ARTIST: {
-		_: '/artist',
-		CREATE: '/artist/create',
-		DETAILS: '/artist/:artistId',
+	MUSIC: {
+		_: '/music',
+		ARTIST: {
+			_: '/music/artist',
+			CREATE: '/music/artist/create',
+			DETAILS: '/music/artist/:artistId',
+		},
+		SONG: {
+			_: '/music/song',
+			CREATE: '/music/song/create',
+			DETAILS: '/music/song/:songId',
+		},
 	},
 };

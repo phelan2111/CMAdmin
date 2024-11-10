@@ -10,7 +10,7 @@ import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import Avatar from '@/components/root/image/avatar';
 import CloseButton from '../../../button/close';
 import { useFormContext } from 'react-hook-form';
-import ServiceUploadSingerCovers from '@/services/artist/uploadMulti';
+import ServiceUploadSingerCovers from '@/services/music/artist/uploadMulti';
 import { ResponseUpload } from '@/services/types';
 import BallLoader from '@/components/ui/loader/ball';
 import UpdateButton from '@/components/ui/button/update';
@@ -165,9 +165,9 @@ function UploadCarouselCoverArtistRequest({
 					/>
 				)}
 				<label className='buttonFollow group !rounded-full' htmlFor='cover'>
-					<p className='bg-primary_dark text-primary_light flex items-center w-32 group-hover:bg-primary_dark/10 transition-all duration-500 gap-2 px-4 py-3 rounded-full text-base font-semibold'>
+					<p className='bg-primary_dark text-primary_light flex items-center group-hover:bg-primary_dark/10 transition-all duration-500 gap-2 px-4 py-3 rounded-full text-base font-semibold'>
 						<MdOutlineFileUpload className='text-2xl' />
-						{Localize('UPLOAD')}
+						{Localize('UPLOAD_MULTIPLE')}
 					</p>
 					<input multiple onChange={handleOnChange} className='hidden' name='cover' id='cover' type='file' />
 				</label>

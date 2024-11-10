@@ -42,7 +42,7 @@ export default class Controller extends Component<ControllerProps, ControllerSta
 		const { allState } = this.state;
 		const { responseUpload, onCreateGenre } = this.props;
 
-		if (prevProps.responseUpload !== this.props.responseUpload && !Helper.isEmpty(responseUpload.link)) {
+		if (prevProps.responseUpload !== this.props.responseUpload && !Helper.isEmpty(responseUpload?.link)) {
 			onCreateGenre({
 				imageGenre: responseUpload.link,
 				nameGenre: this.state.allState.formState.genreName,
