@@ -163,4 +163,6 @@ export const dataLocalizeEN: Record<string, string> = {
 	SONG_NAME: 'Song name',
 	SONG_DESCRIPTION: 'Song description',
 	SET_UP: 'Set up',
+	VIDEO: 'Video',
+	MP3: 'Mp3',
 };

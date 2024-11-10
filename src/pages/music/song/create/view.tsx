@@ -8,6 +8,7 @@ import { DataFormCreateSinger } from '../types';
 import { array, string } from 'yup';
 import AvatarUploadRequestSong from '@/components/ui/upload/request/avatar/avatarSong';
 import SingersSelect from '@/layout/music/song/singerSelect';
+import SetupSong from '@/layout/music/song/setUp';
 
 type IViewProps = {
 	onSubmit: (dataItem: DataFormCreateSinger) => void;
@@ -38,8 +39,8 @@ function View(props: IViewProps) {
 								</div>
 								<div className='flex flex-col gap-8 pt-32 animate-translateRight w-full'>
 									<div className='flex gap-6 relative'>
-										<div className='flex flex-col gap-6 w-1/2 sticky top-0 h-fit'>
-											<div className='flex flex-col gap-8 bg-white/10 p-8 rounded-xl'>
+										<div className='w-1/2 bg-white/10 rounded-xl p-8 flex flex-col gap-8'>
+											<div className='flex flex-col gap-8 '>
 												<p className='text-3xl font-semibold'>{Localize('INTRODUCE')}</p>
 												<div className='flex flex-col gap-4'>
 													<Input required label='SONG_NAME' name='songName' />
@@ -52,14 +53,14 @@ function View(props: IViewProps) {
 													/>
 												</div>
 											</div>
-											<div className='flex flex-col gap-8 bg-white/10 p-8 rounded-xl'>
-												<p className='text-3xl font-semibold'>{Localize('ARTIST')}</p>
-												<SingersSelect name='genres' />
-											</div>
+											<p className='text-3xl font-semibold'>{Localize('ARTIST')}</p>
+											<SingersSelect name='genres' />
 										</div>
-										<div className='w-1/2 bg-white/10 rounded-xl p-8 flex flex-col gap-8'>
-											<p className='text-3xl font-semibold'>{Localize('SET_UP')}</p>
-											<SingersSelect className='w-full' name='genres' />
+										<div className='flex flex-col gap-6 w-1/2 sticky top-0 h-fit'>
+											<div className='flex flex-col gap-8 bg-white/10 p-8 rounded-xl'>
+												<p className='text-3xl font-semibold'>{Localize('SET_UP')}</p>
+												<SetupSong />
+											</div>
 										</div>
 									</div>
 									<Button disabled={!renderProps.isValid} type='submit' className='text-white !rounded-md h-14'>

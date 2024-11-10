@@ -9,10 +9,12 @@ export type ItemRadio = {
 	id?: string;
 	className?: string;
 };
-export interface RadioProps extends ITextFieldProps {
+export interface RadioProps extends Omit<ITextFieldProps, 'defaultValue' | 'onChange'> {
 	data: ItemRadio[];
 	classRadio?: string;
 	classSelected?: string;
+	defaultValue?: ItemRadio;
+	onChange: (dataItem: ItemRadio) => void;
 }
 
 function Radio({
@@ -38,6 +40,7 @@ function Radio({
 	const handleChange = (dataItem: ItemRadio) => {
 		setValue(dataItem);
 		form?.setValue(name, dataItem, { shouldValidate: true, shouldDirty: true, shouldTouch: true });
+		props.onChange?.(dataItem);
 	};
 
 	return (

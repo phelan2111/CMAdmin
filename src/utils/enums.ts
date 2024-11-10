@@ -35,3 +35,8 @@ export enum Gender {
 	female = 0,
 	male,
 }
+
+export enum TypeFileSetUpSong {
+	mp3 = 0,
+	video,
+}
