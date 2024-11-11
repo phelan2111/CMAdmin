@@ -14,7 +14,7 @@ export interface RadioProps extends Omit<ITextFieldProps, 'defaultValue' | 'onCh
 	classRadio?: string;
 	classSelected?: string;
 	defaultValue?: ItemRadio;
-	onChange: (dataItem: ItemRadio) => void;
+	onChange?: (dataItem: ItemRadio) => void;
 }
 
 function Radio({
