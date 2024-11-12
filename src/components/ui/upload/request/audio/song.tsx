@@ -1,16 +1,23 @@
 import Audio from '@/components/root/audio/video';
-import Image from '@/components/root/image/normal';
+import { DataUpload } from '@/components/root/upload/normal';
 import SetUpSongControl from '@/components/ui/control/setUpSong';
 import BallLoader from '@/components/ui/loader/ball';
+import WaveLoader from '@/components/ui/loader/wave';
 import Localize from '@/langs';
-import { useRef, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import { MdOutlineFileUpload } from 'react-icons/md';
 type DurationVideo = {
 	currentTime: number;
 	timeTotal: number;
 };
 
-function SongAudio() {
+type SongAudioProps = {
+	isLoading: boolean;
+	onChange: (dataItem: ChangeEvent<HTMLInputElement>) => void;
+	data: DataUpload;
+};
+
+function SongAudio(props: SongAudioProps) {
 	const ref = useRef<HTMLVideoElement>(null);
 	const [duration, setDuration] = useState<DurationVideo>({
 		currentTime: 0,
@@ -30,10 +37,14 @@ function SongAudio() {
 
 	return (
 		<div className='bg-primary_dark/50 shadow-bootstrapLarge flex flex-col gap-4 rounded-lg p-6 animate-translateRight relative'>
-			<div className='absolute top-0 left-0 w-full h-full bg-primary_dark/80 rounded-lg flex items-center justify-center z-20'>
-				<BallLoader />
+			{props.isLoading && (
+				<div className='absolute top-0 left-0 w-full h-full bg-primary_dark/80 rounded-lg flex items-center justify-center z-20'>
+					<BallLoader />
+				</div>
+			)}
+			<div className='h-[350px] flex items-center justify-center'>
+				<WaveLoader />
 			</div>
-			<Image className='w-full object-cover h-[350px]' src='https://i.pinimg.com/236x/23/ac/ef/23acefa20abaa7ad6ca22089df565d3a.jpg' />
 			<Audio
 				onLoadedData={(event) => {
 					setDuration({
@@ -48,16 +59,24 @@ function SongAudio() {
 					});
 				}}
 				ref={ref}
-				src='https://res.cloudinary.com/dkvhfe4uu/video/upload/v1726374670/mp3/LauLauNhacLaiLiveAtISeeYouConcert-HaNhi-9790842_rui7xw.mp3'
-				track='https://res.cloudinary.com/dkvhfe4uu/video/upload/v1726374670/mp3/LauLauNhacLaiLiveAtISeeYouConcert-HaNhi-9790842_rui7xw.mp3'
+				src={props.data.src}
+				track={props.data.src}
 			/>
 			<div className='absolute top-14 right-14 z-10 flex w-fit gap-2'>
-				<label className='buttonFollow group !rounded-full' htmlFor='cover'>
+				<label className='buttonFollow group !rounded-full' htmlFor='songAudio'>
 					<p className='bg-primary_dark text-primary_light flex items-center group-hover:bg-primary_dark/10 transition-all duration-500 gap-2 px-4 py-3 rounded-full text-base font-semibold'>
 						<MdOutlineFileUpload className='text-2xl' />
 						{Localize('UPLOAD')}
 					</p>
-					<input multiple onChange={() => {}} className='hidden' name='cover' id='cover' type='file' />
+					<input
+						accept='audio/mp3,audio/*;capture=microphone'
+						multiple
+						onChange={props.onChange}
+						className='hidden'
+						name='songAudio'
+						id='songAudio'
+						type='file'
+					/>
 				</label>
 			</div>
 			<SetUpSongControl timeCurrent={duration.currentTime} duration={duration.timeTotal} onPause={handlePause} onPlay={handlePlay} />

@@ -1,14 +1,14 @@
 import { Component } from 'react';
 import View from './view';
-import { ResponseGetListArtist } from '@/services/music/artist/getSinger';
 import { initialResponseRequest, PayloadRequestList, ResponseRequest } from '@/services/types';
 import { FROM, LIMIT, SORT } from '@/utils/variables';
-import { EnumStatusArtist } from '@/utils/enums';
+import { EnumStatusSong } from '@/utils/enums';
 import { PagingState } from '@/components/root/grid/types';
 import { FilterStatusItem } from '@/components/ui/common/tool/filter/status';
+import { ResponseGetListSong } from '@/services/music/song/getSong';
 
 type PropsController = {
-	data: ResponseRequest<ResponseGetListArtist>;
+	data: ResponseRequest<ResponseGetListSong>;
 	isLoading: boolean;
 	onGetListArtist: (params: PayloadRequestList) => void;
 };
@@ -28,7 +28,7 @@ export default class Controller extends Component<PropsController, StateControll
 					limit: LIMIT,
 					createdAt: SORT.DESC,
 					search: '',
-					status: EnumStatusArtist.inactive,
+					status: EnumStatusSong.display,
 				},
 			},
 		};
@@ -75,7 +75,7 @@ export default class Controller extends Component<PropsController, StateControll
 	}
 
 	render() {
-		const { isLoading, data = initialResponseRequest as ResponseRequest<ResponseGetListArtist> } = this.props;
+		const { isLoading, data = initialResponseRequest as ResponseRequest<ResponseGetListSong> } = this.props;
 		return (
 			<View
 				isLoading={isLoading}

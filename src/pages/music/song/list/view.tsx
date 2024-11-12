@@ -5,14 +5,14 @@ import SearchTool from '@/components/ui/common/tool/search/normal';
 import Wrapper from '@/components/ui/wrapper/normal';
 import { useRedirect } from '@/hooks/useRedirect';
 import Localize from '@/langs';
-import TableArtist from '@/layout/music/artist/table';
 import { PATH } from '@/routes/config';
-import { ResponseGetListArtist } from '@/services/music/artist/getSinger';
 import { ResponseRequest } from '@/services/types';
-import { dataFilterArtist } from '../variables';
+import { dataFilterSong } from '../variables';
+import TableSong from '@/layout/music/song/table';
+import { ResponseGetListSong } from '@/services/music/song/getSong';
 
 type ViewProps = {
-	data: ResponseRequest<ResponseGetListArtist>;
+	data: ResponseRequest<ResponseGetListSong>;
 	isLoading: boolean;
 	onChangePaging?: (dataPaging: PagingState) => void;
 	onChangeSearch: (dataItem: string) => void;
@@ -40,13 +40,13 @@ function View(props: ViewProps) {
 					</div>
 				</div>
 				<div className='rounded-xl px-3 py-3 flex items-center justify-between animate-translateRight'>
-					<FilterStatusTool onChange={props.onChangeFilterStatus} data={dataFilterArtist} />
+					<FilterStatusTool onChange={props.onChangeFilterStatus} data={dataFilterSong} />
 					<SearchTool onChange={props.onChangeSearch} />
 				</div>
 				<div className='flex flex-col gap-4 h-full animate-translateRight'>
-					<TableArtist
+					<TableSong
 						onClickRow={(dataItem) => {
-							redirectPage(`${PATH.MUSIC.ARTIST._}/${dataItem._id}`);
+							redirectPage(`${PATH.MUSIC.SONG._}/${dataItem.songId}`);
 						}}
 						data={props.data.list}
 						total={props.data.total}

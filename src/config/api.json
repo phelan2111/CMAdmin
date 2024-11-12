@@ -7,6 +7,12 @@
             "upload": "/singer/uploadAvatar",
             "uploadMulti": "/singer/uploadCovers"
         },
+        "song": {
+            "_": "/song",
+            "details": "/song/details",
+            "upload": "/song/uploadImage",
+            "media": "/song/uploadMedia"
+        },
         "user": {
             "_": "/user",
             "login": "/user/login",

@@ -24,12 +24,12 @@ function SingerItem({ className = '', ...props }: SingerItemProps) {
 					props.onClick?.();
 				}}
 				className={`w-full rounded-full transition-all duration-300 overflow-hidden cursor-pointer ${
-					hasSelected && 'bg-white text-primary_dark shadow-podcastsCard'
+					hasSelected && 'bg-white/80 text-primary_dark shadow-podcastsCard'
 				} `}>
 				<div className='flex items-center gap-4 bg-white/10 w-full p-2 pr-8'>
 					<Image className='size-24 !rounded-full object-cover' src={props.src} />
 					<div className='text-sm text-inherit flex flex-col gap-1'>
-                        <p>{Localize('ARTIST')}</p>
+						<p>{Localize('ARTIST')}</p>
 						<p className='font-semibold'>{props.name}</p>
 					</div>
 				</div>

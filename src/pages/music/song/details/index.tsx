@@ -3,13 +3,13 @@ import { useParams } from 'react-router-dom';
 import LoadingDialog from '@/components/ui/loading/dialog';
 import { Helper } from '@/utils/helper';
 import { useBreadcrumb } from '@/hooks/useBreadcrumb';
-import ServiceArtistDetails from '@/services/music/artist/getDetails';
 import ServiceUpdateInformationArtist from '@/services/music/artist/updateInformation';
+import ServiceSongDetails from '@/services/music/song/getDetails';
 
 function AccountDetails() {
 	const params = useParams();
 
-	const { isLoadingArtistDetailsService, onArtistDetails, response } = ServiceArtistDetails();
+	const { isLoadingSongDetailsService, onSongDetails, response } = ServiceSongDetails();
 
 	const { isLoadingUpdateArtistService, onUpdateArtist } = ServiceUpdateInformationArtist();
 
@@ -21,17 +21,17 @@ function AccountDetails() {
 		},
 		{
 			id: Helper.randomKey(),
-			text: response?.singerId,
+			text: response?.songId,
 		},
 	]);
 
 	return (
 		<LoadingDialog loading={isLoadingUpdateArtistService}>
 			<Controller
-				isLoading={isLoadingArtistDetailsService}
-				artistId={params.artistId as string}
-				artistDetails={response}
-				onGetTopicDetails={onArtistDetails}
+				isLoading={isLoadingSongDetailsService}
+				songId={params.songId as string}
+				songDetails={response}
+				onSongDetails={onSongDetails}
 				onUpdateArtist={onUpdateArtist}
 			/>
 		</LoadingDialog>

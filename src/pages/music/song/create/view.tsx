@@ -4,23 +4,29 @@ import TextAreaField from '@/components/root/inputs/textarea';
 import Input from '@/components/ui/input/input';
 import Wrapper from '@/components/ui/wrapper/normal';
 import Localize from '@/langs';
-import { DataFormCreateSinger } from '../types';
-import { array, string } from 'yup';
+import { array, number, object, string } from 'yup';
 import AvatarUploadRequestSong from '@/components/ui/upload/request/avatar/avatarSong';
 import SingersSelect from '@/layout/music/song/singerSelect';
 import SetupSong from '@/layout/music/song/setUp';
+import { DataFormCreateSong } from '../types';
 
 type IViewProps = {
-	onSubmit: (dataItem: DataFormCreateSinger) => void;
+	onSubmit: (dataItem: DataFormCreateSong) => void;
 };
 function View(props: IViewProps) {
 	return (
 		<div className='pr-4 py-8'>
 			<Form
 				validator={{
-					singerName: string().required('SINGER_NAME_REQUIRED'),
-					singerDescription: string().required('SINGER_DESCRIPTION_REQUIRED'),
-					genres: array().required('GENRES_REQUIRED'),
+					songName: string().required('SONG_NAME_REQUIRED'),
+					songDescription: string().required('SONG_DESCRIPTION_REQUIRED'),
+					singers: array().length(1).required('SINGER_REQUIRED'),
+					setup: object().shape({
+						type: number().required('SETUP_REQUIRED'),
+						uploadData: object().shape({
+							src: string().required('SETUP_REQUIRED'),
+						}),
+					}),
 				}}
 				onSubmit={props.onSubmit}
 				render={(renderProps) => {
@@ -45,7 +51,7 @@ function View(props: IViewProps) {
 												<div className='flex flex-col gap-4'>
 													<Input required label='SONG_NAME' name='songName' />
 													<TextAreaField
-														className='!bg-white !rounded-lg'
+														className='!bg-white/80 !rounded-lg'
 														classNameTextArea='!text-primary_dark'
 														required
 														label='SONG_DESCRIPTION'
@@ -54,12 +60,12 @@ function View(props: IViewProps) {
 												</div>
 											</div>
 											<p className='text-3xl font-semibold'>{Localize('ARTIST')}</p>
-											<SingersSelect name='genres' />
+											<SingersSelect name='singers' />
 										</div>
 										<div className='flex flex-col gap-6 w-1/2 sticky top-0 h-fit'>
 											<div className='flex flex-col gap-8 bg-white/10 p-8 rounded-xl'>
 												<p className='text-3xl font-semibold'>{Localize('SET_UP')}</p>
-												<SetupSong />
+												<SetupSong name='setup' />
 											</div>
 										</div>
 									</div>

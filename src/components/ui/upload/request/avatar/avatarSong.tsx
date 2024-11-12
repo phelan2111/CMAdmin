@@ -9,9 +9,9 @@ import { UploadAvatarProps } from '../../../../../layout/account/upload/types';
 import { ResponseUpload } from '@/services/types';
 import BallLoader from '@/components/ui/loader/ball';
 import { useFormContext } from 'react-hook-form';
-import ServiceUploadSinger from '@/services/music/artist/upload';
 import UpdateButton from '@/components/ui/button/update';
 import CoverImage from '@/components/root/image/cover';
+import ServiceUploadSong from '@/services/music/song/upload';
 
 function AvatarUploadRequestSong({
 	name = '',
@@ -25,7 +25,7 @@ function AvatarUploadRequestSong({
 		src,
 		uploadId: Helper.randomKey(),
 	});
-	const { isLoadingUploadSingerService, onUploadSinger } = ServiceUploadSinger({
+	const { isLoadingUploadSongService, onUploadSong } = ServiceUploadSong({
 		onSuccess: (res) => {
 			const dataItem = res as ResponseUpload;
 			const value: DataUpload = {
@@ -43,7 +43,7 @@ function AvatarUploadRequestSong({
 			const files = Object.values(fileList);
 			const formData = new FormData();
 			formData.append('file', files[0]);
-			onUploadSinger(formData);
+			onUploadSong(formData);
 		}
 	};
 
@@ -56,7 +56,7 @@ function AvatarUploadRequestSong({
 	return (
         <div>
             <div className='relative w-full z-0'>
-			{isLoadingUploadSingerService && (
+			{isLoadingUploadSongService && (
 				<div className='absolute top-0 left-0 w-full h-full bg-primary_dark/80 rounded-lg flex items-center justify-center z-20'>
 					<BallLoader />
 				</div>
@@ -68,7 +68,7 @@ function AvatarUploadRequestSong({
 		</div>
 		<div className='-translate-y-1/2 px-16 flex items-end relative z-10'>
 			<div className='relative'>
-				{isLoadingUploadSingerService && (
+				{isLoadingUploadSongService && (
 					<div className='absolute top-0 left-0 w-full h-full bg-primary_dark/80 rounded-full flex items-center justify-center z-20'>
 						<BallLoader />
 					</div>

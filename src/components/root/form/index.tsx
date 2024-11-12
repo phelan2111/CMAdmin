@@ -17,6 +17,7 @@ interface IFormRenderProps {
 	getFieldState: UseFormGetFieldState<{
 		test: string;
 	}>;
+	[name: string]: unknown;
 }
 interface IFormProps {
 	children?: ReactNode;

@@ -1,14 +1,16 @@
 import { GenresOfArtist } from '@/services/music/artist/getDetails';
-import { ResponseGetGenreOfBrowse } from '@/services/browse/genre/getList';
+import { ResponseGetListArtist } from '@/services/music/artist/getSinger';
+import { TypeFileSetUpSong } from '@/utils/enums';
 
-export type DataFormCreateSinger = {
-	singerDescription: string;
-	singerCover: Upload[];
-	singerAvatar: Upload;
-	singerName: string;
-	facebook: string;
-	instagram: string;
-	genres: ResponseGetGenreOfBrowse[];
+export type DataFormCreateSong = {
+	songDescription: string;
+	image: Upload;
+	setup: {
+		type: TypeFileSetUpSong;
+		uploadData: Upload;
+	};
+	songName: string;
+	singers: ResponseGetListArtist[];
 };
 
 export type Upload = {

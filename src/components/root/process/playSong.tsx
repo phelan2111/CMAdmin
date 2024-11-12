@@ -5,10 +5,10 @@ type ProcessPlaySongProps = {
 	duration: number;
 	timeCurrent: number;
 };
-function ProcessPlaySong({ duration = 0, timeCurrent }: ProcessPlaySongProps) {
+function ProcessPlaySong({ duration = 1, timeCurrent }: ProcessPlaySongProps) {
 	const widthProcess = useMemo(() => {
 		const widthOfPer = Math.ceil(400 / duration);
-		return widthOfPer;
+		return !isFinite(widthOfPer) ? 0 : widthOfPer;
 	}, [duration]);
 	const convertTime = (duration: number) => {
 		const minus = Math.floor(duration / 60);

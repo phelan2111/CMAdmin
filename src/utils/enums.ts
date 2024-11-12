@@ -40,3 +40,8 @@ export enum TypeFileSetUpSong {
 	mp3 = 0,
 	video,
 }
+
+export enum EnumStatusSong {
+	hidden = 0,
+	display = 1,
+}

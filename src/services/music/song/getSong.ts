@@ -9,34 +9,26 @@ import { Helper } from '@/utils/helper';
 import { ToastContext, ToastType } from '@/contexts/toast';
 import Localize from '@/langs';
 import AuthService from '@/utils/auth';
-import { EnumStatusArtist } from '@/utils/enums';
+import { EnumStatusSong } from '@/utils/enums';
 
-export type ResponseGetListArtist = {
-	_id: string;
-	singerName: string;
-	singerAvatar: string;
-	singerCover: string[];
-	singerDescription: string;
-	followers: number;
-	socials?: ContactArtist;
-	createdAt: Date;
-	updatedAt: Date;
-	status: EnumStatusArtist;
-	__v: number;
+export type ResponseGetListSong = {
+	songName: string;
+	image: string;
+	songDescription: string;
+	link: string;
+	views: number;
+	status: EnumStatusSong;
+	songId: string;
+	createdAt: string;
+	updatedAt: string;
 };
 
-export type ContactArtist = {
-	facebook?: string;
-	instagram?: string;
-	x?: string;
-};
-
-function ServiceArtistGetList(props?: ResponseHasResponseProps[]) {
+function ServiceSongGetList(props?: ResponseHasResponseProps[]) {
 	const { onToast } = useContext(ToastContext);
 	const auth = AuthService.getPackageAuth();
 
 	const request: AxiosRequestConfig = {
-		url: config.api.artist._,
+		url: config.api.song._,
 		method: 'get',
 		headers: {
 			token: auth?.token,
@@ -59,7 +51,7 @@ function ServiceArtistGetList(props?: ResponseHasResponseProps[]) {
 	const handleMutate = (params: PayloadRequestList) => {
 		mutate(params, {
 			onSuccess: (data) => {
-				Logger.debug('ServiceArtistGetList execute handleMutate success', data);
+				Logger.debug('ServiceSongGetList execute handleMutate success', data);
 				props?.map((o, index) => {
 					const funcName = parseCodeToNameFunc[data[index].code as unknown as CODE];
 					const hasFunc = Helper.isEmpty(o?.[funcName as string]);
@@ -71,7 +63,7 @@ function ServiceArtistGetList(props?: ResponseHasResponseProps[]) {
 				});
 			},
 			onError: (error) => {
-				Logger.error('ServiceArtistGetList execute handleMutate success', error.toString());
+				Logger.error('ServiceSongGetList execute handleMutate success', error.toString());
 				props?.map((o) => {
 					o.onError?.();
 				});
@@ -80,12 +72,12 @@ function ServiceArtistGetList(props?: ResponseHasResponseProps[]) {
 	};
 
 	return {
-		onGetListArtist: handleMutate,
-		isLoadingGetListArtistService: !isSuccess,
+		onGetListSong: handleMutate,
+		isLoadingGetListSongService: !isSuccess,
 		response: useMemo(() => {
-			return data.data as ResponseRequest<ResponseGetListArtist>;
+			return data.data as ResponseRequest<ResponseGetListSong>;
 		}, [data]),
 	};
 }
 
-export default ServiceArtistGetList;
+export default ServiceSongGetList;

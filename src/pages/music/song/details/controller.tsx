@@ -3,8 +3,8 @@ import View from './view';
 import { ModalContext } from '@/contexts/modal';
 import { FucCreateGenreProps } from '@/pages/browse/genre/types';
 import { DataUpload } from '@/components/root/upload/normal';
-import { initialArtistDetails, PayloadArtistDetails, ResponseGetArtistDetails } from '@/services/music/artist/getDetails';
 import { PayloadUpdateInformationArtist } from '@/services/music/artist/updateInformation';
+import { initialSongDetails, PayloadSongDetails, ResponseGetSongDetails } from '@/services/music/song/getDetails';
 
 enum TypeUpload {
 	cover = 0,
@@ -13,14 +13,14 @@ enum TypeUpload {
 
 type ControllerProps = {
 	isLoading: boolean;
-	artistId: string;
-	artistDetails: ResponseGetArtistDetails;
-	onGetTopicDetails: (dataItem: PayloadArtistDetails) => void;
+	songId: string;
+	songDetails: ResponseGetSongDetails;
+	onSongDetails: (dataItem: PayloadSongDetails) => void;
 	onUpdateArtist: (dataItem: PayloadUpdateInformationArtist) => void;
 };
 type ControllerState = {
 	allState: {
-		artistDetails: ResponseGetArtistDetails;
+		songDetails: ResponseGetSongDetails;
 		typeUpload: TypeUpload;
 	};
 };
@@ -33,7 +33,7 @@ export default class Controller extends Component<ControllerProps, ControllerSta
 		super(props);
 		this.state = {
 			allState: {
-				artistDetails: initialArtistDetails,
+				songDetails: initialSongDetails,
 				typeUpload: TypeUpload.avatar,
 			},
 		};
@@ -52,33 +52,21 @@ export default class Controller extends Component<ControllerProps, ControllerSta
 	componentDidUpdate(prevProps: Readonly<ControllerProps>): void {
 		const { allState } = this.state;
 
-		if (this.props.artistDetails && prevProps.artistDetails !== this.props.artistDetails) {
-			allState.artistDetails = this.props.artistDetails;
+		if (this.props.songDetails && prevProps.songDetails !== this.props.songDetails) {
+			allState.songDetails = this.props.songDetails;
 			this.setState({ allState });
 		}
 	}
 	handleRequest() {
-		const { onGetTopicDetails, artistId } = this.props;
-		onGetTopicDetails({ artistId });
+		const { onSongDetails, songId } = this.props;
+		onSongDetails({ songId });
 	}
 	handleUpdate(dataItem: FucCreateGenreProps) {
 		const { onModal } = this.context;
 		onModal(dataItem.renderComponent);
 	}
 	handleRequestUpdate(dataItem: Record<string, unknown>) {
-		const { artistDetails } = this.state.allState;
-		const { onUpdateArtist } = this.props;
-		const payload: PayloadUpdateInformationArtist = {
-			genres: artistDetails.genres,
-			singerAvatar: artistDetails.singerAvatar,
-			singerCover: artistDetails.singerCover,
-			singerDescription: artistDetails.singerDescription,
-			singerId: artistDetails.singerId,
-			singerName: artistDetails.singerName,
-			socials: artistDetails.socials,
-			...dataItem,
-		};
-		onUpdateArtist(payload);
+		console.log('dataItem', dataItem);
 	}
 	handleFreshRequest() {
 		this.handleRequest();
@@ -95,7 +83,7 @@ export default class Controller extends Component<ControllerProps, ControllerSta
 		return (
 			<View
 				isLoading={this.props.isLoading}
-				artistDetails={this.state.allState.artistDetails}
+				songDetails={this.state.allState.songDetails}
 				onUpdateArtist={this.handleUpdate}
 				onFreshRequest={this.handleFreshRequest}
 				onUploadCover={this.handleUploadCover}

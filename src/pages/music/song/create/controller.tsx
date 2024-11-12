@@ -1,10 +1,9 @@
 import { Component } from 'react';
 import View from './view';
-import { DataFormCreateSinger } from '../types';
-import { GenreOfSinger, PayloadCreateSinger } from '@/services/music/artist/create';
-import { Helper } from '@/utils/helper';
+import { DataFormCreateSong } from '../types';
+import { PayloadCreateSong, SingerOfSong } from '@/services/music/song/create';
 type ControllerProps = {
-	onCreateSinger: (dataItem: PayloadCreateSinger) => void;
+	onCreateSong: (dataItem: PayloadCreateSong) => void;
 };
 
 export default class Controller extends Component<ControllerProps> {
@@ -13,27 +12,25 @@ export default class Controller extends Component<ControllerProps> {
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	handleSubmit({ facebook, instagram, ...dataItem }: DataFormCreateSinger) {
-		const socials = Helper.cleanObject({
-			facebook: facebook,
-			instagram: instagram,
-		});
-		const genres: GenreOfSinger[] = dataItem.genres.map((i) => ({
-			nameGenre: i.nameGenre,
-			imageGenre: i.imageGenre,
+	handleSubmit(dataItem: DataFormCreateSong) {
+		const singers: SingerOfSong[] = dataItem.singers.map((i) => ({
+			followers: i.followers,
+			singerAvatar: i.singerAvatar,
+			singerCover: i.singerCover,
+			singerDescription: i.singerDescription,
+			singerId: i._id,
+			singerName: i.singerName,
+			socials: i.socials,
 			status: i.status,
-			genreId: i._id,
 		}));
-		const payload: PayloadCreateSinger = {
-			...dataItem,
-			singerAvatar: dataItem.singerAvatar.src,
-			singerCover: dataItem.singerCover.map((i) => i.src),
-			genres,
+		const payload: PayloadCreateSong = {
+			image: dataItem.image.src,
+			link: dataItem.setup.uploadData.src,
+			songDescription: dataItem.songDescription,
+			songName: dataItem.songName,
+			singers,
 		};
-		if (!Helper.isEmpty(socials)) {
-			payload.socials = socials;
-		}
-		this.props.onCreateSinger(payload);
+		this.props.onCreateSong(payload);
 	}
 
 	render() {

@@ -13,3 +13,10 @@ export type UploadCarouselProps = {
 	name?: string;
 	isDetails?: boolean;
 };
+
+export type UploadMediaProps = {
+	src?: string;
+	onChange?: (dataItem: DataUpload) => void;
+	name?: string;
+	isDetails?: boolean;
+};

@@ -21,7 +21,7 @@ export function useRequest(props: UseRequestProps) {
 				...props.request,
 				data: hasMethodGet ? undefined : data,
 				url: `${config.api.host}${props.request.url}`,
-				timeout: 10000,
+				timeout: 50000,
 				params: hasMethodGet ? data : undefined,
 			})
 				.then((res) => {

@@ -1,4 +1,6 @@
+import { Helper } from '@/utils/helper';
 import React, { forwardRef } from 'react';
+import WaveLoader from '@/components/ui/loader/wave';
 
 interface IVideoProps extends React.DetailedHTMLProps<React.VideoHTMLAttributes<HTMLVideoElement>, HTMLVideoElement> {
 	src: string;
@@ -12,6 +14,13 @@ interface IVideoProps extends React.DetailedHTMLProps<React.VideoHTMLAttributes<
 }
 
 const Video = forwardRef<HTMLVideoElement, IVideoProps>(({ autoPlay = false, className = '', ...props }, ref) => {
+	if (Helper.isEmpty(props.src)) {
+		return (
+			<div className='h-[350px] flex items-center justify-center'>
+				<WaveLoader />
+			</div>
+		);
+	}
 	return (
 		<video
 			{...props}

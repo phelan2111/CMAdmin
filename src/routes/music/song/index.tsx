@@ -5,7 +5,7 @@ import { PATH } from '@/routes/config';
 //ARTIST
 const SongList = lazy(() => import('@/pages/music/song/list'));
 const SongCreate = lazy(() => import('@/pages/music/song/create'));
-const ArtistDetails = lazy(() => import('@/pages/music/artist/details'));
+const SongDetails = lazy(() => import('@/pages/music/song/details'));
 
 export const routeSong: RouteObject[] = [
 	{
@@ -17,7 +17,7 @@ export const routeSong: RouteObject[] = [
 		element: <SongCreate />,
 	},
 	{
-		path: PATH.MUSIC.ARTIST.DETAILS,
-		element: <ArtistDetails />,
+		path: PATH.MUSIC.SONG.DETAILS,
+		element: <SongDetails />,
 	},
 ];
