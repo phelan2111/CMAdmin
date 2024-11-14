@@ -1,18 +1,18 @@
 import { Component } from 'react';
 import View from './view';
 import { UpdateStatusProps } from '.';
-import { EnumStatusArtist } from '@/utils/enums';
-import { initialArtistDetails, ResponseGetArtistDetails } from '@/services/music/artist/getDetails';
-import { PayloadArtistUpdateStatus } from '@/services/music/artist/updateStatus';
+import { EnumStatusSong } from '@/utils/enums';
+import { PayloadSongUpdateStatus } from '@/services/music/song/updateStatus';
+import { initialSongDetails, ResponseGetSongDetails } from '@/services/music/song/getDetails';
 
 type ControllerState = {
 	allState: {
-		details: ResponseGetArtistDetails;
+		details: ResponseGetSongDetails;
 	};
 };
 
 interface ControllerProps extends UpdateStatusProps {
-	onUpdateStatusSinger: (dataItem: PayloadArtistUpdateStatus) => void;
+	onUpdateStatusSong: (dataItem: PayloadSongUpdateStatus) => void;
 }
 
 export default class Controller extends Component<ControllerProps, ControllerState> {
@@ -20,7 +20,7 @@ export default class Controller extends Component<ControllerProps, ControllerSta
 		super(props);
 		this.state = {
 			allState: {
-				details: initialArtistDetails,
+				details: initialSongDetails,
 			},
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -33,16 +33,16 @@ export default class Controller extends Component<ControllerProps, ControllerSta
 	}
 
 	handleSubmit() {
-		const isActiveStatus = this.props.details.status === EnumStatusArtist.active;
+		const isActiveStatus = this.props.details.status === EnumStatusSong.display;
 		if (isActiveStatus) {
-			this.props.onUpdateStatusSinger({
-				status: EnumStatusArtist.lock,
-				singerId: this.state.allState.details.singerId,
+			this.props.onUpdateStatusSong({
+				status: EnumStatusSong.hidden,
+				songId: this.state.allState.details.songId,
 			});
 		} else {
-			this.props.onUpdateStatusSinger({
-				status: EnumStatusArtist.active,
-				singerId: this.state.allState.details.singerId,
+			this.props.onUpdateStatusSong({
+				status: EnumStatusSong.display,
+				songId: this.state.allState.details.songId,
 			});
 		}
 	}

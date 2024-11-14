@@ -12,6 +12,7 @@ type DurationVideo = {
 
 type SongUploadProps = {
 	isLoading: boolean;
+	isDetails?: boolean;
 	onChange: (dataItem: ChangeEvent<HTMLInputElement>) => void;
 	data: DataUpload;
 };
@@ -25,7 +26,7 @@ function SongUpload(props: SongUploadProps) {
 
 	const handlePlay = () => {
 		if (ref.current) {
-			ref.current.play();
+			(ref.current.currentTime = 0), ref.current.play();
 		}
 	};
 	const handlePause = () => {
@@ -62,23 +63,25 @@ function SongUpload(props: SongUploadProps) {
 					track={props.data.src}
 				/>
 			</div>
-			<div className='absolute top-14 right-14 z-10 flex w-fit gap-2'>
-				<label className='buttonFollow group !rounded-full' htmlFor='songVideo'>
-					<p className='bg-primary_dark text-primary_light flex items-center group-hover:bg-primary_dark/10 transition-all duration-500 gap-2 px-4 py-3 rounded-full text-base font-semibold'>
-						<MdOutlineFileUpload className='text-2xl' />
-						{Localize('UPLOAD')}
-					</p>
-					<input
-						accept='video/mp4,video/x-m4v,video/*'
-						multiple
-						onChange={props.onChange}
-						className='hidden'
-						name='songVideo'
-						id='songVideo'
-						type='file'
-					/>
-				</label>
-			</div>
+			{!props.isDetails && (
+				<div className='absolute top-14 right-14 z-10 flex w-fit gap-2'>
+					<label className='buttonFollow group !rounded-full' htmlFor='songVideo'>
+						<p className='bg-primary_dark text-primary_light flex items-center group-hover:bg-primary_dark/10 transition-all duration-500 gap-2 px-4 py-3 rounded-full text-base font-semibold'>
+							<MdOutlineFileUpload className='text-2xl' />
+							{Localize('UPLOAD')}
+						</p>
+						<input
+							accept='video/mp4,video/x-m4v,video/*'
+							multiple
+							onChange={props.onChange}
+							className='hidden'
+							name='songVideo'
+							id='songVideo'
+							type='file'
+						/>
+					</label>
+				</div>
+			)}
 			<SetUpSongControl timeCurrent={duration.currentTime} duration={duration.timeTotal} onPause={handlePause} onPlay={handlePlay} />
 		</div>
 	);

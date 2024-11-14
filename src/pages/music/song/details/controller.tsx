@@ -3,25 +3,19 @@ import View from './view';
 import { ModalContext } from '@/contexts/modal';
 import { FucCreateGenreProps } from '@/pages/browse/genre/types';
 import { DataUpload } from '@/components/root/upload/normal';
-import { PayloadUpdateInformationArtist } from '@/services/music/artist/updateInformation';
 import { initialSongDetails, PayloadSongDetails, ResponseGetSongDetails } from '@/services/music/song/getDetails';
-
-enum TypeUpload {
-	cover = 0,
-	avatar,
-}
+import { PayloadUpdateInformationSong } from '@/services/music/song/updateInformation';
 
 type ControllerProps = {
 	isLoading: boolean;
 	songId: string;
 	songDetails: ResponseGetSongDetails;
 	onSongDetails: (dataItem: PayloadSongDetails) => void;
-	onUpdateArtist: (dataItem: PayloadUpdateInformationArtist) => void;
+	onUpdateSong: (dataItem: PayloadUpdateInformationSong) => void;
 };
 type ControllerState = {
 	allState: {
 		songDetails: ResponseGetSongDetails;
-		typeUpload: TypeUpload;
 	};
 };
 
@@ -34,14 +28,12 @@ export default class Controller extends Component<ControllerProps, ControllerSta
 		this.state = {
 			allState: {
 				songDetails: initialSongDetails,
-				typeUpload: TypeUpload.avatar,
 			},
 		};
-		this.handleUpdate = this.handleUpdate.bind(this);
+		this.handleUpdateStatus = this.handleUpdateStatus.bind(this);
 		this.handleFreshRequest = this.handleFreshRequest.bind(this);
 		this.handleRequest = this.handleRequest.bind(this);
-		this.handleUploadCover = this.handleUploadCover.bind(this);
-		this.handleUploadAvatar = this.handleUploadAvatar.bind(this);
+		this.handleUploadImage = this.handleUploadImage.bind(this);
 		this.handleRequestUpdate = this.handleRequestUpdate.bind(this);
 	}
 
@@ -61,22 +53,30 @@ export default class Controller extends Component<ControllerProps, ControllerSta
 		const { onSongDetails, songId } = this.props;
 		onSongDetails({ songId });
 	}
-	handleUpdate(dataItem: FucCreateGenreProps) {
+	handleUpdateStatus(dataItem: FucCreateGenreProps) {
 		const { onModal } = this.context;
 		onModal(dataItem.renderComponent);
 	}
 	handleRequestUpdate(dataItem: Record<string, unknown>) {
-		console.log('dataItem', dataItem);
+		const { songDetails } = this.state.allState;
+
+		const payload: PayloadUpdateInformationSong = {
+			songId: songDetails.songId,
+			image: songDetails.image,
+			link: songDetails.link,
+			singers: songDetails.singer,
+			songDescription: songDetails.songDescription,
+			songName: songDetails.songName,
+			...dataItem,
+		};
+
+		this.props.onUpdateSong(payload);
 	}
 	handleFreshRequest() {
 		this.handleRequest();
 	}
-	handleUploadCover(dataItem: DataUpload[]) {
-		const singerCover = dataItem.map((i) => i.src);
-		this.handleRequestUpdate({ singerCover });
-	}
-	handleUploadAvatar(dataItem: DataUpload) {
-		this.handleRequestUpdate({ singerAvatar: dataItem.src });
+	handleUploadImage(dataItem: DataUpload) {
+		this.handleRequestUpdate({ image: dataItem.src });
 	}
 
 	render() {
@@ -84,10 +84,9 @@ export default class Controller extends Component<ControllerProps, ControllerSta
 			<View
 				isLoading={this.props.isLoading}
 				songDetails={this.state.allState.songDetails}
-				onUpdateArtist={this.handleUpdate}
+				onUpdateStatus={this.handleUpdateStatus}
 				onFreshRequest={this.handleFreshRequest}
-				onUploadCover={this.handleUploadCover}
-				onUploadAvatar={this.handleUploadAvatar}
+				onUploadImage={this.handleUploadImage}
 			/>
 		);
 	}

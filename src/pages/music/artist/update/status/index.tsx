@@ -20,7 +20,7 @@ function UpdateStatusArtist(props: UpdateStatusProps) {
 	const { isLoadingUpdateStatusSingerService, onUpdateStatusSinger } = ServiceUpdateStatusArtist({
 		onSuccess: () => {
 			onCloseModal();
-			onToast({ theme: ToastType.success, label: 'UPDATE_STATUS', content: 'UPDATE_SUCCESSFUL_USER' });
+			onToast({ theme: ToastType.success, label: 'UPDATE_STATUS', content: 'UPDATE_STATUS_ARTIST_SUCCESSFUL' });
 			props.onSuccess();
 		},
 		onSystemError: () => {

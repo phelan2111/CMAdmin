@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import ProcessPlaySong from '@/components/root/process/playSong';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IoIosPause, IoIosPlay } from 'react-icons/io';
 
 type SetUpSongControlProps = {
@@ -19,6 +20,14 @@ function SetUpSongControl({ duration = 0, timeCurrent = 0, ...props }: SetUpSong
 			props.onPause();
 		}
 	};
+
+	useEffect(() => {
+		const hasDone = duration < timeCurrent;
+		if (hasDone) {
+			setHasPlayed(false);
+		}
+	}, [timeCurrent]);
+
 	return (
 		<div className='flex flex-col gap-1 justify-center items-center'>
 			<div className='text-2xl flex gap-4 items-center'>

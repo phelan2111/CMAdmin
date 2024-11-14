@@ -7,7 +7,7 @@ type ProcessPlaySongProps = {
 };
 function ProcessPlaySong({ duration = 1, timeCurrent }: ProcessPlaySongProps) {
 	const widthProcess = useMemo(() => {
-		const widthOfPer = Math.ceil(400 / duration);
+		const widthOfPer = Math.floor(400 / duration);
 		return !isFinite(widthOfPer) ? 0 : widthOfPer;
 	}, [duration]);
 	const convertTime = (duration: number) => {

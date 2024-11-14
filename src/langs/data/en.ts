@@ -174,4 +174,10 @@ export const dataLocalizeEN: Record<string, string> = {
 		'Your choice will affect how the music image is displayed. If you choose mp3, the song image will be displayed, whereas if you choose video, it will be displayed as an MV.',
 	TYPE_VIEW: 'Display type',
 	VIEW: 'View',
+	UPDATE_STATUS_ARTIST_SUCCESSFUL: 'Update status artist successful',
+	UPDATE_STATUS_SONG_SUCCESSFUL: 'Update status song successful',
+	HIDDEN_SONG: 'Hidden song',
+	DISPLAY_SONG: 'Display song',
+	DISPLAY_SONG_DESCRIPTION: 'You will display this song.',
+	HIDDEN_SONG_DESCRIPTION: 'You will hidden this song.',
 };

@@ -20,8 +20,10 @@ function SingerItem({ className = '', ...props }: SingerItemProps) {
 		<div className={`relative ${props.hasInactive && 'opacity-40 pointer-events-none'} ${className}`}>
 			<HoverCard
 				onClick={() => {
-					setHasSelected((prev) => !prev);
-					props.onClick?.();
+					if (!props.disabled) {
+						setHasSelected((prev) => !prev);
+						props.onClick?.();
+					}
 				}}
 				className={`w-full rounded-full transition-all duration-300 overflow-hidden cursor-pointer ${
 					hasSelected && 'bg-white/80 text-primary_dark shadow-podcastsCard'

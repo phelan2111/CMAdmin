@@ -3,24 +3,24 @@ import LoadingModal from '@/components/root/loading/modal';
 import LoaderScreen from '@/components/ui/loader/screen';
 import { useModal, useToast } from '@/hooks/useContext';
 import { ToastType } from '@/contexts/toast';
-import { ResponseGetArtistDetails } from '@/services/music/artist/getDetails';
-import ServiceUpdateStatusArtist from '@/services/music/artist/updateStatus';
+import { ResponseGetSongDetails } from '@/services/music/song/getDetails';
+import ServiceUpdateStatusSong from '@/services/music/song/updateStatus';
 
 export type UpdateStatusProps = {
-	details: ResponseGetArtistDetails;
+	details: ResponseGetSongDetails;
 	title: string;
 	content: string;
 	onSuccess: VoidFunction;
 };
 
-function UpdateStatusArtist(props: UpdateStatusProps) {
+function UpdateStatusSong(props: UpdateStatusProps) {
 	const { onCloseModal } = useModal();
 	const { onToast } = useToast();
 
-	const { isLoadingUpdateStatusSingerService, onUpdateStatusSinger } = ServiceUpdateStatusArtist({
+	const { isLoadingUpdateStatusSongService, onUpdateStatusSong } = ServiceUpdateStatusSong({
 		onSuccess: () => {
 			onCloseModal();
-			onToast({ theme: ToastType.success, label: 'UPDATE_STATUS', content: 'UPDATE_SUCCESSFUL_USER' });
+			onToast({ theme: ToastType.success, label: 'UPDATE_STATUS', content: 'UPDATE_STATUS_SONG_SUCCESSFUL' });
 			props.onSuccess();
 		},
 		onSystemError: () => {
@@ -30,10 +30,10 @@ function UpdateStatusArtist(props: UpdateStatusProps) {
 	});
 
 	return (
-		<LoadingModal loading={isLoadingUpdateStatusSingerService} loader={<LoaderScreen />}>
-			<Controller onUpdateStatusSinger={onUpdateStatusSinger} {...props} />;
+		<LoadingModal loading={isLoadingUpdateStatusSongService} loader={<LoaderScreen />}>
+			<Controller onUpdateStatusSong={onUpdateStatusSong} {...props} />;
 		</LoadingModal>
 	);
 }
 
-export default UpdateStatusArtist;
+export default UpdateStatusSong;

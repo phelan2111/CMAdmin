@@ -3,6 +3,7 @@ import Wrapper from '@/components/ui/wrapper/normal';
 import Localize from '@/langs';
 import { FucCreateGenreProps } from '@/pages/browse/genre/types';
 import { DataUpload } from '@/components/root/upload/normal';
+import ActionAccount from '@/layout/account/action';
 import { ResponseGetSongDetails } from '@/services/music/song/getDetails';
 import AvatarUploadRequestSong from '@/components/ui/upload/request/avatar/avatarSong';
 import SetupSong from '@/layout/music/song/setUp';
@@ -10,15 +11,14 @@ import Item from '@/components/ui/items/normal';
 import SingerItem from '@/components/ui/items/singer';
 import StatusSong from '@/components/ui/status/song';
 import UpdateStatusSong from '../update/status';
-import ActionSong from '@/layout/music/song/action';
-import UpdateButton from '@/components/ui/button/update';
 
 type ViewProps = {
 	isLoading: boolean;
 	songDetails: ResponseGetSongDetails;
-	onUpdateStatus: (dataItem: FucCreateGenreProps) => void;
+	onUpdateArtist: (dataItem: FucCreateGenreProps) => void;
 	onFreshRequest: VoidFunction;
-	onUploadImage: (dateItem: DataUpload) => void;
+	onUploadCover: (dateItem: DataUpload[]) => void;
+	onUploadAvatar: (dateItem: DataUpload) => void;
 };
 
 function View(props: ViewProps) {
@@ -34,46 +34,32 @@ function View(props: ViewProps) {
 							</div>
 							<p>#{props.songDetails.songId}</p>
 						</div>
-						<ActionSong
+						<ActionAccount
 							status={props.songDetails.status}
-							onDisplay={() => {
-								props.onUpdateStatus({
+							onActive={() => {
+								props.onUpdateArtist({
 									renderComponent: (
 										<UpdateStatusSong
 											onSuccess={props.onFreshRequest}
-											content='DISPLAY_SONG_DESCRIPTION'
-											title='DISPLAY_SONG'
+											content='UNLOCK_ARTIST_DESCRIPTION'
+											title='UNLOCK_ARTIST'
 											details={props.songDetails}
 										/>
 									),
 								});
 							}}
-							onHidden={() => {
-								props.onUpdateStatus({
-									renderComponent: (
-										<UpdateStatusSong
-											onSuccess={props.onFreshRequest}
-											content='HIDDEN_SONG_DESCRIPTION'
-											title='HIDDEN_SONG'
-											details={props.songDetails}
-										/>
-									),
-								});
-							}}
+							onLock={() => {}}
 						/>
 					</div>
 					<div className='animate-translateRight'>
 						<div className='h-72'>
-							<AvatarUploadRequestSong onChange={props.onUploadImage} isDetails src={props.songDetails.image} name='image' />
+							<AvatarUploadRequestSong isDetails src={props.songDetails.image} name='image' />
 						</div>
 						<div className='flex flex-col gap-8 pt-32 animate-translateRight w-full'>
 							<div className='flex gap-6 relative'>
 								<div className='w-1/2 bg-white/10 rounded-xl p-8 flex flex-col gap-8'>
 									<div className='flex flex-col gap-8 '>
-										<div className='flex justify-between items-center'>
-											<p className='text-3xl font-semibold'>{Localize('INTRODUCE')}</p>
-											<UpdateButton onClick={() => {}} />
-										</div>
+										<p className='text-3xl font-semibold'>{Localize('INTRODUCE')}</p>
 										<div className='flex flex-col gap-4'>
 											<Item classLabel='min-w-36' label='SONG_NAME' content={props.songDetails.songName} />
 											<Item classLabel='min-w-36' label='SONG_DESCRIPTION' content={props.songDetails.songDescription} />

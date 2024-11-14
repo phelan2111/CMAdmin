@@ -23,7 +23,7 @@ const radioSongs: ItemRadio[] = [
 		label: 'MP3',
 	},
 ];
-function SetupSong({ name = '', src = '' }: UploadMediaProps) {
+function SetupSong({ name = '', src = '', ...props }: UploadMediaProps) {
 	const form = useFormContext();
 
 	const [typeUpload, setTypeUpload] = useState<TypeFileSetUpSong>(TypeFileSetUpSong.video);
@@ -69,6 +69,7 @@ function SetupSong({ name = '', src = '' }: UploadMediaProps) {
 		<div className='flex flex-col gap-8'>
 			<div className='flex flex-col gap-2'>
 				<Radio
+					disabled
 					label='TYPE_VIEW'
 					onChange={(dataItem) => {
 						setTypeUpload(dataItem.value as TypeFileSetUpSong);
@@ -79,7 +80,7 @@ function SetupSong({ name = '', src = '' }: UploadMediaProps) {
 				<p className='text-sm'>(* {Localize('NOTE_UPLOAD_SONG')} )</p>
 			</div>
 			<div className='h-[470px]'>
-				<SongVideoUpload data={uploadData} onChange={handleOnChange} isLoading={isLoadingUploadMediaSongService} />
+				<SongVideoUpload data={uploadData} isDetails={props.isDetails} onChange={handleOnChange} isLoading={isLoadingUploadMediaSongService} />
 			</div>
 		</div>
 	);

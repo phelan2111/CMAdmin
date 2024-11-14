@@ -1,37 +1,41 @@
-import { useRequest } from '@/hooks/useRequest';
 import { AxiosRequestConfig } from 'axios';
-import { Logger } from '@/utils/logger';
+import AuthService from '@/utils/auth';
 import config from 'config/api.json';
+import { useRequest } from '@/hooks/useRequest';
+import { Logger } from '@/utils/logger';
 import { CODE, parseCodeToNameFunc } from '@/config/responseCode';
 import { Helper } from '@/utils/helper';
-import AuthService from '@/utils/auth';
-import { EnumStatusArtist } from '@/utils/enums';
 import { ResponseHasResponseProps } from '../../types';
+import { Singer } from './getDetails';
 
-export type PayloadArtistUpdateStatus = {
-	singerId: string;
-	status: EnumStatusArtist;
+export type PayloadUpdateInformationSong = {
+	songName: string;
+	image: string;
+	songDescription: string;
+	singers: Singer[];
+	link: string;
+	songId: string;
 };
-function ServiceUpdateStatusArtist(props?: ResponseHasResponseProps) {
+function ServiceUpdateInformationSong(props?: ResponseHasResponseProps) {
 	const auth = AuthService.getPackageAuth();
 
 	const request: AxiosRequestConfig = {
-		url: config.api.artist._,
-		method: 'delete',
+		url: config.api.song._,
+		method: 'post',
 		headers: {
 			token: auth?.token,
 		},
 	};
 
 	const { mutate, isPending } = useRequest({
-		keyQuery: ['UPDATE_STATUS_ARTIST'],
+		keyQuery: ['UPDATE_INFORMATION_SONG'],
 		request,
 	});
 
-	const handleMutate = (params: PayloadArtistUpdateStatus) => {
-		mutate(params, {
+	const handleMutate = (payload: PayloadUpdateInformationSong) => {
+		mutate(payload, {
 			onSuccess: (data) => {
-				Logger.debug('ServiceUpdateStatusArtist execute handleMutate success', data);
+				Logger.debug('ServiceUpdateInformationSong execute handleMutate success', data);
 				const funcName = parseCodeToNameFunc[data.code as unknown as CODE];
 				if (!Helper.isEmpty(props)) {
 					const hasFunc = Helper.isEmpty(props?.[funcName as string]);
@@ -43,16 +47,16 @@ function ServiceUpdateStatusArtist(props?: ResponseHasResponseProps) {
 				}
 			},
 			onError: (error) => {
-				Logger.error('ServiceUpdateStatusArtist execute handleMutate error', error.toString());
+				Logger.error('ServiceUpdateInformationSong execute handleMutate error', error.toString());
 				props?.onError?.();
 			},
 		});
 	};
 
 	return {
-		onUpdateStatusSinger: handleMutate,
-		isLoadingUpdateStatusSingerService: isPending,
+		onUpdateSong: handleMutate,
+		isLoadingUpdateSongService: isPending,
 	};
 }
 
-export default ServiceUpdateStatusArtist;
+export default ServiceUpdateInformationSong;

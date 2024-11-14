@@ -24,6 +24,7 @@ function Radio({
 	classHelperText = 'text-red-500',
 	classSelected = '!bg-pink-300',
 	required = false,
+	disabled = false,
 	...props
 }: RadioProps) {
 	const form = useFormContext();
@@ -44,7 +45,7 @@ function Radio({
 	};
 
 	return (
-		<div className='flex flex-col gap-2 relative'>
+		<div className={`flex flex-col gap-2 relative ${disabled && 'pointer-events-none'}`}>
 			{props.label && (
 				<p className='text-base'>
 					{Localize(props.label)} {required && <span className='text-red-500'>(*)</span>}

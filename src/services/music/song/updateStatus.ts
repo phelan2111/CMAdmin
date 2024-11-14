@@ -5,18 +5,18 @@ import config from 'config/api.json';
 import { CODE, parseCodeToNameFunc } from '@/config/responseCode';
 import { Helper } from '@/utils/helper';
 import AuthService from '@/utils/auth';
-import { EnumStatusArtist } from '@/utils/enums';
+import { EnumStatusSong } from '@/utils/enums';
 import { ResponseHasResponseProps } from '../../types';
 
-export type PayloadArtistUpdateStatus = {
-	singerId: string;
-	status: EnumStatusArtist;
+export type PayloadSongUpdateStatus = {
+	songId: string;
+	status: EnumStatusSong;
 };
-function ServiceUpdateStatusArtist(props?: ResponseHasResponseProps) {
+function ServiceUpdateStatusSong(props?: ResponseHasResponseProps) {
 	const auth = AuthService.getPackageAuth();
 
 	const request: AxiosRequestConfig = {
-		url: config.api.artist._,
+		url: config.api.song._,
 		method: 'delete',
 		headers: {
 			token: auth?.token,
@@ -24,14 +24,14 @@ function ServiceUpdateStatusArtist(props?: ResponseHasResponseProps) {
 	};
 
 	const { mutate, isPending } = useRequest({
-		keyQuery: ['UPDATE_STATUS_ARTIST'],
+		keyQuery: ['UPDATE_STATUS_SONG'],
 		request,
 	});
 
-	const handleMutate = (params: PayloadArtistUpdateStatus) => {
+	const handleMutate = (params: PayloadSongUpdateStatus) => {
 		mutate(params, {
 			onSuccess: (data) => {
-				Logger.debug('ServiceUpdateStatusArtist execute handleMutate success', data);
+				Logger.debug('ServiceUpdateStatusSong execute handleMutate success', data);
 				const funcName = parseCodeToNameFunc[data.code as unknown as CODE];
 				if (!Helper.isEmpty(props)) {
 					const hasFunc = Helper.isEmpty(props?.[funcName as string]);
@@ -43,16 +43,16 @@ function ServiceUpdateStatusArtist(props?: ResponseHasResponseProps) {
 				}
 			},
 			onError: (error) => {
-				Logger.error('ServiceUpdateStatusArtist execute handleMutate error', error.toString());
+				Logger.error('ServiceUpdateStatusSong execute handleMutate error', error.toString());
 				props?.onError?.();
 			},
 		});
 	};
 
 	return {
-		onUpdateStatusSinger: handleMutate,
-		isLoadingUpdateStatusSingerService: isPending,
+		onUpdateStatusSong: handleMutate,
+		isLoadingUpdateStatusSongService: isPending,
 	};
 }
 
-export default ServiceUpdateStatusArtist;
+export default ServiceUpdateStatusSong;
