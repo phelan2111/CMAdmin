@@ -6,13 +6,13 @@ import { Logger } from '@/utils/logger';
 import { CODE, parseCodeToNameFunc } from '@/config/responseCode';
 import { Helper } from '@/utils/helper';
 import { ResponseHasResponseProps } from '../../types';
-import { Singer } from './getDetails';
+import { SingerOfSong } from './create';
 
 export type PayloadUpdateInformationSong = {
 	songName: string;
 	image: string;
 	songDescription: string;
-	singers: Singer[];
+	singers: SingerOfSong[];
 	link: string;
 	songId: string;
 };

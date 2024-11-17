@@ -180,4 +180,8 @@ export const dataLocalizeEN: Record<string, string> = {
 	DISPLAY_SONG: 'Display song',
 	DISPLAY_SONG_DESCRIPTION: 'You will display this song.',
 	HIDDEN_SONG_DESCRIPTION: 'You will hidden this song.',
+	DETAILS_SONG: 'Song Details',
+	UPDATE_INTRO_SONG: 'Update Intro Song',
+	UPDATE_SONG_DESCRIPTION: 'You are changing data of song.',
+	UPDATE_INTRODUCE_SONG_SUCCESSFUL: 'Update Introduce Song Successful',
 };

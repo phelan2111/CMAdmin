@@ -18,25 +18,25 @@ function View(props: IViewProps) {
 			<Form
 				onSubmit={props.onSubmit}
 				defaultValues={{
-					singerName: props.details.singerName,
-					singerDescription: props.details.singerDescription,
+					songName: props.details.songName,
+					songDescription: props.details.songDescription,
 				}}
 				validator={{
-					singerName: string().required('SINGER_NAME_REQUIRED'),
-					singerDescription: string().required('SINGER_DESCRIPTION_REQUIRED'),
+					songName: string().required(''),
+					songDescription: string().required(''),
 				}}
 				render={(renderProps) => {
 					return (
 						<div className='flex flex-col gap-8'>
 							<div className='flex flex-col gap-4'>
-								<InputDialog required label='ARTIST_NAME' name='singerName' />
+								<InputDialog required label='SONG_NAME' name='songName' />
 								<div className='animate-translateRight'>
 									<TextAreaField
 										className='!bg-white !rounded-lg'
 										classNameTextArea='!text-primary_dark'
 										required
-										label='ARTIST_DESCRIPTION'
-										name='singerDescription'
+										label='SONG_DESCRIPTION'
+										name='songDescription'
 									/>
 								</div>
 							</div>

@@ -45,8 +45,8 @@ function View(props: IViewProps) {
 								</div>
 								<div className='flex flex-col gap-8 pt-32 animate-translateRight w-full'>
 									<div className='flex gap-6 relative'>
-										<div className='w-1/2 bg-white/10 rounded-xl p-8 flex flex-col gap-8'>
-											<div className='flex flex-col gap-8 '>
+										<div className='w-1/2 flex flex-col gap-8'>
+											<div className='flex flex-col gap-8 bg-white/10 rounded-xl p-8 '>
 												<p className='text-3xl font-semibold'>{Localize('INTRODUCE')}</p>
 												<div className='flex flex-col gap-4'>
 													<Input required label='SONG_NAME' name='songName' />
@@ -59,8 +59,10 @@ function View(props: IViewProps) {
 													/>
 												</div>
 											</div>
-											<p className='text-3xl font-semibold'>{Localize('ARTIST')}</p>
-											<SingersSelect name='singers' />
+											<div className='bg-white/10 rounded-xl p-8 h-full flex flex-col gap-8'>
+												<p className='text-3xl font-semibold'>{Localize('ARTIST')}</p>
+												<SingersSelect name='singers' />
+											</div>
 										</div>
 										<div className='flex flex-col gap-6 w-1/2 sticky top-0 h-fit'>
 											<div className='flex flex-col gap-8 bg-white/10 p-8 rounded-xl'>

@@ -12,6 +12,8 @@ import StatusSong from '@/components/ui/status/song';
 import UpdateStatusSong from '../update/status';
 import ActionSong from '@/layout/music/song/action';
 import UpdateButton from '@/components/ui/button/update';
+import UpdateInformation from '../update/information';
+import UpdateArtistOfSong from '../update/artist';
 
 type ViewProps = {
 	isLoading: boolean;
@@ -29,7 +31,7 @@ function View(props: ViewProps) {
 					<div className='flex justify-between items-center animate-translateRight'>
 						<div className='leading-10 flex flex-col gap-2'>
 							<div className='flex items-end gap-4'>
-								<h1 className='text-5xl font-semibold'>{Localize('DETAILS_ACCOUNT')}</h1>
+								<h1 className='text-5xl font-semibold'>{Localize('DETAILS_SONG')}</h1>
 								<StatusSong status={props.songDetails.status} />
 							</div>
 							<p>#{props.songDetails.songId}</p>
@@ -68,22 +70,53 @@ function View(props: ViewProps) {
 						</div>
 						<div className='flex flex-col gap-8 pt-32 animate-translateRight w-full'>
 							<div className='flex gap-6 relative'>
-								<div className='w-1/2 bg-white/10 rounded-xl p-8 flex flex-col gap-8'>
-									<div className='flex flex-col gap-8 '>
+								<div className='w-1/2 flex flex-col gap-8'>
+									<div className='flex flex-col gap-8 bg-white/10 rounded-xl p-8'>
 										<div className='flex justify-between items-center'>
 											<p className='text-3xl font-semibold'>{Localize('INTRODUCE')}</p>
-											<UpdateButton onClick={() => {}} />
+											<UpdateButton
+												onClick={() => {
+													props.onUpdateStatus({
+														renderComponent: (
+															<UpdateInformation
+																onSuccess={props.onFreshRequest}
+																content='UPDATE_SONG_DESCRIPTION'
+																title='UPDATE_INTRO_SONG'
+																details={props.songDetails}
+															/>
+														),
+													});
+												}}
+											/>
 										</div>
 										<div className='flex flex-col gap-4'>
 											<Item classLabel='min-w-36' label='SONG_NAME' content={props.songDetails.songName} />
 											<Item classLabel='min-w-36' label='SONG_DESCRIPTION' content={props.songDetails.songDescription} />
 										</div>
 									</div>
-									<p className='text-3xl font-semibold'>{Localize('ARTIST')}</p>
-									<div className='grid grid-cols-2 gap-6'>
-										{props.songDetails.singer.map((i) => (
-											<SingerItem key={i.singerId} name={i.singerName} disabled hasInactive={false} src={i.singerAvatar} />
-										))}
+									<div className='flex flex-col gap-8 bg-white/10 rounded-xl p-8 h-full'>
+										<div className='flex justify-between items-center'>
+											<p className='text-3xl font-semibold'>{Localize('ARTIST')}</p>
+											<UpdateButton
+												onClick={() => {
+													props.onUpdateStatus({
+														renderComponent: (
+															<UpdateArtistOfSong
+																onSuccess={props.onFreshRequest}
+																content='UPDATE_SONG_DESCRIPTION'
+																title='UPDATE_INTRO_SONG'
+																details={props.songDetails}
+															/>
+														),
+													});
+												}}
+											/>
+										</div>
+										<div className='grid grid-cols-2 gap-6'>
+											{props.songDetails.singer.map((i) => (
+												<SingerItem key={i.singerId} name={i.singerName} disabled hasInactive={false} src={i.singerAvatar} />
+											))}
+										</div>
 									</div>
 								</div>
 								<div className='flex flex-col gap-6 w-1/2 sticky top-0 h-fit'>

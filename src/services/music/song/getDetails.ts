@@ -8,7 +8,7 @@ import { Helper } from '@/utils/helper';
 import AuthService from '@/utils/auth';
 import { initialStateItemTopic } from '@/pages/browse/variables';
 import { ResponseHasResponseProps } from '../../types';
-import { EnumStatusSong } from '@/utils/enums';
+import { EnumStatusArtist, EnumStatusSong } from '@/utils/enums';
 
 export type ResponseGetSongDetails = {
 	songName: string;
@@ -30,7 +30,7 @@ export interface Singer {
 	singerCover: string[];
 	singerDescription: string;
 	followers: number;
-	status: EnumStatusSong;
+	status: EnumStatusArtist;
 	singerId: string;
 	socials: Socials;
 }

@@ -5,6 +5,7 @@ import { FucCreateGenreProps } from '@/pages/browse/genre/types';
 import { DataUpload } from '@/components/root/upload/normal';
 import { initialSongDetails, PayloadSongDetails, ResponseGetSongDetails } from '@/services/music/song/getDetails';
 import { PayloadUpdateInformationSong } from '@/services/music/song/updateInformation';
+import { SingerOfSong } from '@/services/music/song/create';
 
 type ControllerProps = {
 	isLoading: boolean;
@@ -59,12 +60,22 @@ export default class Controller extends Component<ControllerProps, ControllerSta
 	}
 	handleRequestUpdate(dataItem: Record<string, unknown>) {
 		const { songDetails } = this.state.allState;
+		const singers: SingerOfSong[] = songDetails.singer.map((s) => ({
+			followers: s.followers,
+			singerAvatar: s.singerAvatar,
+			singerCover: s.singerCover,
+			singerDescription: s.singerDescription,
+			singerId: s.singerId,
+			singerName: s.singerName,
+			socials: s.socials,
+			status: s.status,
+		}));
 
 		const payload: PayloadUpdateInformationSong = {
 			songId: songDetails.songId,
 			image: songDetails.image,
 			link: songDetails.link,
-			singers: songDetails.singer,
+			singers,
 			songDescription: songDetails.songDescription,
 			songName: songDetails.songName,
 			...dataItem,

@@ -1,5 +1,5 @@
-import { GenresOfArtist } from '@/services/music/artist/getDetails';
 import { ResponseGetListArtist } from '@/services/music/artist/getSinger';
+import { SingerOfSong } from '@/services/music/song/create';
 import { TypeFileSetUpSong } from '@/utils/enums';
 
 export type DataFormCreateSong = {
@@ -19,8 +19,8 @@ export type Upload = {
 };
 
 export type DataFormUpdateIntro = {
-	singerName: string;
-	singerDescription: string;
+	songName: string;
+	songDescription: string;
 };
 
 export type DataFormUpdateSocials = {
@@ -28,6 +28,6 @@ export type DataFormUpdateSocials = {
 	instagram?: string;
 };
 
-export type DataFormUpdateGenres = {
-	genres: GenresOfArtist[];
+export type DataFormUpdateArtist = {
+	singer: SingerOfSong[];
 };

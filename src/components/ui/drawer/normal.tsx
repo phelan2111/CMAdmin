@@ -137,9 +137,17 @@ function DrawerNormal() {
 	useEffect(() => {
 		let pathCurrent = location.pathname;
 		if (params) {
-			const valueParams = Object.values(params)[0];
-			pathCurrent = location.pathname.replace(`/${valueParams}`, '');
 			pathCurrent = location.pathname.replace(`/create`, '');
+			const valueParams = Object.values(params);
+			const keyParams = Object.keys(params);
+			for (let index = 0; index < valueParams.length; index++) {
+				const value = valueParams[index];
+				pathCurrent = location.pathname.replace(`/${value}`, '');
+			}
+			for (let index = 0; index < keyParams.length; index++) {
+				const key = keyParams[index];
+				pathCurrent = location.pathname.replace(`/${params[key]}`, '');
+			}
 		}
 
 		for (let index = 0; index < drawer.length; index++) {

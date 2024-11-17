@@ -25,7 +25,7 @@ function View(props: IViewProps) {
 				render={(renderProps) => {
 					return (
 						<div className='flex flex-col gap-8'>
-							<div className='flex flex-col gap-4 h-[340px] overflow-y-auto scrollHiddenY'>
+							<div className='flex flex-col gap-4 h-[340px] px-6 py-4 overflow-y-auto scrollHiddenY'>
 								<GenresSelect className='border border-primary_dark/10 rounded-lg' name='genres' />
 							</div>
 							<Button disabled={!renderProps.isValid} type='submit' className='text-white !rounded-md h-14'>

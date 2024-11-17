@@ -1,9 +1,10 @@
 import { Component } from 'react';
 import View from './view';
 import { UpdateInformationProps } from '.';
-import { DataFormUpdateIntro } from '../../types';
+import { DataFormUpdateArtist } from '../../types';
 import { initialSongDetails, ResponseGetSongDetails } from '@/services/music/song/getDetails';
 import { PayloadUpdateInformationSong } from '@/services/music/song/updateInformation';
+import { SingerOfSong } from '@/services/music/song/create';
 
 type ControllerState = {
 	allState: {
@@ -32,15 +33,16 @@ export default class Controller extends Component<ControllerProps, ControllerSta
 		this.setState({ allState });
 	}
 
-	handleSubmit(dataItem: DataFormUpdateIntro) {
+	handleSubmit(dataItem: DataFormUpdateArtist) {
 		const { details } = this.state.allState;
+		const singers: SingerOfSong[] = dataItem.singer;
 		const payload: PayloadUpdateInformationSong = {
 			image: details.image,
 			link: details.link,
-			singers: details.singer,
-			songDescription: dataItem.songDescription,
 			songId: details.songId,
-			songName: dataItem.songName,
+			songDescription: details.songDescription,
+			songName: details.songName,
+			singers,
 		};
 		this.props.onUpdateSong(payload);
 	}
