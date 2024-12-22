@@ -19,7 +19,7 @@ function UpdateInformation(props: UpdateInformationProps) {
 	const { isLoadingUpdateSongService, onUpdateSong } = ServiceUpdateInformationSong({
 		onSuccess: () => {
 			onCloseModal();
-			onToast({ theme: ToastType.success, label: 'UPDATE_INTRO_SONG', content: 'UPDATE_INTRODUCE_SONG_SUCCESSFUL' });
+			onToast({ theme: ToastType.success, label: 'UPDATE_INTRODUCE_SONG', content: 'UPDATE_INTRODUCE_SONG_SUCCESSFUL' });
 			props.onSuccess();
 		},
 		onSystemError: () => {

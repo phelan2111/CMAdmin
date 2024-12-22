@@ -25,7 +25,6 @@ export default class Controller extends Component<ControllerProps, ControllerSta
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
-
 	componentDidMount(): void {
 		const { allState } = this.state;
 		allState.details = this.props.details;
@@ -33,16 +32,17 @@ export default class Controller extends Component<ControllerProps, ControllerSta
 	}
 
 	handleSubmit(dataItem: DataFormUpdateIntro) {
-		const { details } = this.state.allState;
+		const { details, onUpdateSong } = this.props;
+
 		const payload: PayloadUpdateInformationSong = {
 			image: details.image,
 			link: details.link,
 			singers: details.singer,
-			songDescription: dataItem.songDescription,
 			songId: details.songId,
-			songName: dataItem.songName,
+			type: details.type,
+			...dataItem,
 		};
-		this.props.onUpdateSong(payload);
+		onUpdateSong(payload);
 	}
 
 	render() {

@@ -22,20 +22,20 @@ function View(props: IViewProps) {
 					songDescription: props.details.songDescription,
 				}}
 				validator={{
-					songName: string().required(''),
-					songDescription: string().required(''),
+					songName: string().required('SONG_NAME_REQUIRED'),
+					songDescription: string().required('SONG_DESCRIPTION_REQUIRED'),
 				}}
 				render={(renderProps) => {
 					return (
 						<div className='flex flex-col gap-8'>
 							<div className='flex flex-col gap-4'>
-								<InputDialog required label='SONG_NAME' name='songName' />
+								<InputDialog required label='ARTIST_NAME' name='songName' />
 								<div className='animate-translateRight'>
 									<TextAreaField
 										className='!bg-white !rounded-lg'
 										classNameTextArea='!text-primary_dark'
 										required
-										label='SONG_DESCRIPTION'
+										label='ARTIST_DESCRIPTION'
 										name='songDescription'
 									/>
 								</div>

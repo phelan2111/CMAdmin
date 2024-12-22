@@ -5,11 +5,11 @@ import Localize from '@/langs';
 import { Helper } from '@/utils/helper';
 import { ChangeEvent, useEffect, useMemo, useState } from 'react';
 import { MdOutlineFileUpload } from 'react-icons/md';
-import { UploadAvatarProps } from '../../../../../layout/account/upload/types';
 import ServiceUploadUser from '@/services/user/upload';
 import { ResponseUpload } from '@/services/types';
 import BallLoader from '@/components/ui/loader/ball';
 import { useFormContext } from 'react-hook-form';
+import { UploadAvatarProps } from '../../types';
 
 function AvatarUploadRequestAccount({
 	name = '',

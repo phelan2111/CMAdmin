@@ -44,6 +44,7 @@ function SongUpload(props: SongUploadProps) {
 			)}
 			<div className='h-[350px]'>
 				<Video
+					key={props.data.src}
 					id='song'
 					onLoadedData={(event) => {
 						setDuration({
@@ -67,7 +68,7 @@ function SongUpload(props: SongUploadProps) {
 				<div className='absolute top-14 right-14 z-10 flex w-fit gap-2'>
 					<label className='buttonFollow group !rounded-full' htmlFor='songVideo'>
 						<p className='bg-primary_dark text-primary_light flex items-center group-hover:bg-primary_dark/10 transition-all duration-500 gap-2 px-4 py-3 rounded-full text-base font-semibold'>
-							<MdOutlineFileUpload className='text-2xl' />
+							<MdOutlineFileUpload className='text-2xl text-primary_light' />
 							{Localize('UPLOAD')}
 						</p>
 						<input

@@ -5,7 +5,6 @@ import { FucCreateGenreProps } from '@/pages/browse/genre/types';
 import { DataUpload } from '@/components/root/upload/normal';
 import { ResponseGetSongDetails } from '@/services/music/song/getDetails';
 import AvatarUploadRequestSong from '@/components/ui/upload/request/avatar/avatarSong';
-import SetupSong from '@/layout/music/song/setUp';
 import Item from '@/components/ui/items/normal';
 import SingerItem from '@/components/ui/items/singer';
 import StatusSong from '@/components/ui/status/song';
@@ -14,11 +13,15 @@ import ActionSong from '@/layout/music/song/action';
 import UpdateButton from '@/components/ui/button/update';
 import UpdateInformation from '../update/information';
 import UpdateArtistOfSong from '../update/artist';
+import UpdateSetUpSong from '../update/setUp';
+import SetupSong from '@/layout/music/song/setUp';
+import { Helper } from '@/utils/helper';
 
 type ViewProps = {
 	isLoading: boolean;
 	songDetails: ResponseGetSongDetails;
 	onUpdateStatus: (dataItem: FucCreateGenreProps) => void;
+	onUpdate: (dataItem: FucCreateGenreProps) => void;
 	onFreshRequest: VoidFunction;
 	onUploadImage: (dateItem: DataUpload) => void;
 };
@@ -76,13 +79,13 @@ function View(props: ViewProps) {
 											<p className='text-3xl font-semibold'>{Localize('INTRODUCE')}</p>
 											<UpdateButton
 												onClick={() => {
-													props.onUpdateStatus({
+													props.onUpdate({
 														renderComponent: (
 															<UpdateInformation
-																onSuccess={props.onFreshRequest}
+																title='UPDATE_INTRODUCE_SONG'
 																content='UPDATE_SONG_DESCRIPTION'
-																title='UPDATE_INTRO_SONG'
 																details={props.songDetails}
+																onSuccess={props.onFreshRequest}
 															/>
 														),
 													});
@@ -94,18 +97,18 @@ function View(props: ViewProps) {
 											<Item classLabel='min-w-36' label='SONG_DESCRIPTION' content={props.songDetails.songDescription} />
 										</div>
 									</div>
-									<div className='flex flex-col gap-8 bg-white/10 rounded-xl p-8 h-full'>
+									<div className='flex flex-col gap-6 mt-8'>
 										<div className='flex justify-between items-center'>
 											<p className='text-3xl font-semibold'>{Localize('ARTIST')}</p>
 											<UpdateButton
 												onClick={() => {
-													props.onUpdateStatus({
+													props.onUpdate({
 														renderComponent: (
 															<UpdateArtistOfSong
-																onSuccess={props.onFreshRequest}
+																title='UPDATE_INTRODUCE_SONG'
 																content='UPDATE_SONG_DESCRIPTION'
-																title='UPDATE_INTRO_SONG'
 																details={props.songDetails}
+																onSuccess={props.onFreshRequest}
 															/>
 														),
 													});
@@ -121,8 +124,35 @@ function View(props: ViewProps) {
 								</div>
 								<div className='flex flex-col gap-6 w-1/2 sticky top-0 h-fit'>
 									<div className='flex flex-col gap-8 bg-white/10 p-8 rounded-xl'>
-										<p className='text-3xl font-semibold'>{Localize('SET_UP')}</p>
-										<SetupSong src={props.songDetails.link} isDetails name='setup' />
+										<div className='flex justify-between items-center'>
+											<p className='text-3xl font-semibold'>{Localize('SET_UP')}</p>
+											<UpdateButton
+												onClick={() => {
+													props.onUpdate({
+														renderComponent: (
+															<UpdateSetUpSong
+																title='UPDATE_INTRODUCE_SONG'
+																content='UPDATE_SONG_DESCRIPTION'
+																details={props.songDetails}
+																onSuccess={props.onFreshRequest}
+															/>
+														),
+													});
+												}}
+											/>
+										</div>
+										<SetupSong
+											key={props.songDetails.link}
+											defaultValue={{
+												uploadData: {
+													src: props.songDetails.link,
+													uploadId: Helper.randomKey(),
+												},
+												type: props.songDetails.type,
+											}}
+											isDetails
+											name='setup'
+										/>
 									</div>
 								</div>
 							</div>

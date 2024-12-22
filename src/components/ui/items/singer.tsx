@@ -26,7 +26,7 @@ function SingerItem({ className = '', ...props }: SingerItemProps) {
 					}
 				}}
 				className={`w-full rounded-full transition-all duration-300 overflow-hidden cursor-pointer ${
-					hasSelected && 'bg-white/80 text-primary_dark shadow-podcastsCard'
+					hasSelected && 'bg-white text-primary_dark shadow-podcastsCard'
 				} `}>
 				<div className='flex items-center gap-4 bg-white/10 w-full p-2 pr-8'>
 					<Image className='size-24 !rounded-full object-cover' src={props.src} />

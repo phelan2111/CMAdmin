@@ -5,10 +5,10 @@ import Localize from '@/langs';
 import { array } from 'yup';
 import Button from '@/components/root/button';
 import SingersSelect from '@/layout/music/song/singerSelect';
-import { DataFormUpdateArtist } from '../../types';
+import { ResponseGetListArtist } from '@/services/music/artist/getSinger';
 
 interface IViewProps extends UpdateInformationProps {
-	onSubmit: (dataItem: DataFormUpdateArtist) => void;
+	onSubmit: (dataItem: ResponseGetListArtist[]) => void;
 }
 
 function View(props: IViewProps) {
@@ -17,16 +17,16 @@ function View(props: IViewProps) {
 			<Form
 				onSubmit={props.onSubmit}
 				defaultValues={{
-					singer: props.details.singer.map((i) => ({ ...i, _id: i.singerId })),
+					singers: props.details.singer.map((i) => ({ ...i, _id: i.singerId })),
 				}}
 				validator={{
-					singer: array().min(1).required(''),
+					singers: array().required('SINGER_REQUIRED'),
 				}}
 				render={(renderProps) => {
 					return (
 						<div className='flex flex-col gap-8'>
-							<div className='flex flex-col gap-4 h-[340px] px-6 py-5 overflow-y-auto scrollHiddenY'>
-								<SingersSelect name='singer' />
+							<div className='flex flex-col gap-4 h-[340px] overflow-y-scroll scrollHiddenY px-6 py-2'>
+								<SingersSelect name='singers' />
 							</div>
 							<Button disabled={!renderProps.isValid} type='submit' className='text-white !rounded-md h-14'>
 								{Localize('SUBMIT')}

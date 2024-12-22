@@ -8,7 +8,7 @@ import { Helper } from '@/utils/helper';
 import AuthService from '@/utils/auth';
 import { initialStateItemTopic } from '@/pages/browse/variables';
 import { ResponseHasResponseProps } from '../../types';
-import { EnumStatusArtist, EnumStatusSong } from '@/utils/enums';
+import { EnumStatusArtist, TypeFileSetUpSong } from '@/utils/enums';
 
 export type ResponseGetSongDetails = {
 	songName: string;
@@ -21,6 +21,7 @@ export type ResponseGetSongDetails = {
 	createdAt: string;
 	updatedAt: string;
 	singer: Singer[];
+	type: TypeFileSetUpSong
 };
 export interface Singer {
 	createdAt: string;
@@ -32,12 +33,13 @@ export interface Singer {
 	followers: number;
 	status: EnumStatusArtist;
 	singerId: string;
-	socials: Socials;
+	socials?: Socials;
 }
 
 export interface Socials {
-	facebook: string;
-	instagram: string;
+	facebook?: string;
+	instagram?: string;
+	x?: string;
 }
 export const initialSongDetails: ResponseGetSongDetails = {
 	songName: '',
@@ -45,11 +47,12 @@ export const initialSongDetails: ResponseGetSongDetails = {
 	songDescription: '',
 	link: '',
 	views: 0,
-	status: EnumStatusSong.display,
+	status: EnumStatusArtist.active,
 	songId: '',
 	createdAt: '',
 	updatedAt: '',
 	singer: [],
+	type: TypeFileSetUpSong.video
 };
 
 export type PayloadSongDetails = {

@@ -11,6 +11,7 @@ import { routeAccount } from './account';
 import { routeOther } from './other';
 import { routeArtist } from './music/artist';
 import { routeSong } from './music/song';
+import { routePlaylist } from './music/playlist';
 
 //KYC
 const SignIn = lazy(() => import('@/pages/kyc/signIn'));
@@ -41,7 +42,7 @@ const router = createBrowserRouter([
 						<AdminWrapper />
 					</PrivateRoute>
 				),
-				children: [...routeOther, ...routeAccount, ...routeArtist, ...routeSong, ...routeBrowse],
+				children: [...routeOther, ...routeAccount, ...routeArtist, ...routeSong, ...routeBrowse, ...routePlaylist],
 			},
 		],
 	},

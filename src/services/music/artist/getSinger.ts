@@ -19,8 +19,8 @@ export type ResponseGetListArtist = {
 	singerDescription: string;
 	followers: number;
 	socials?: ContactArtist;
-	createdAt: Date;
-	updatedAt: Date;
+	createdAt: string;
+	updatedAt: string;
 	status: EnumStatusArtist;
 	__v: number;
 };

@@ -38,5 +38,10 @@ export const PATH = {
 			CREATE: '/music/song/create',
 			DETAILS: '/music/song/:songId',
 		},
+		PLAYLIST: {
+			_: "/music/playlist",
+			CREATE: "/music/playlist/create"
+
+		}
 	},
 };

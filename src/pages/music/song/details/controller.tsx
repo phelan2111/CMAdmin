@@ -36,6 +36,7 @@ export default class Controller extends Component<ControllerProps, ControllerSta
 		this.handleRequest = this.handleRequest.bind(this);
 		this.handleUploadImage = this.handleUploadImage.bind(this);
 		this.handleRequestUpdate = this.handleRequestUpdate.bind(this);
+		this.handleUpdate = this.handleUpdate.bind(this);
 	}
 
 	componentDidMount(): void {
@@ -55,6 +56,10 @@ export default class Controller extends Component<ControllerProps, ControllerSta
 		onSongDetails({ songId });
 	}
 	handleUpdateStatus(dataItem: FucCreateGenreProps) {
+		const { onModal } = this.context;
+		onModal(dataItem.renderComponent);
+	}
+	handleUpdate(dataItem: FucCreateGenreProps) {
 		const { onModal } = this.context;
 		onModal(dataItem.renderComponent);
 	}
@@ -78,6 +83,7 @@ export default class Controller extends Component<ControllerProps, ControllerSta
 			singers,
 			songDescription: songDetails.songDescription,
 			songName: songDetails.songName,
+			type: songDetails.type,
 			...dataItem,
 		};
 
@@ -98,6 +104,7 @@ export default class Controller extends Component<ControllerProps, ControllerSta
 				onUpdateStatus={this.handleUpdateStatus}
 				onFreshRequest={this.handleFreshRequest}
 				onUploadImage={this.handleUploadImage}
+				onUpdate={this.handleUpdate}
 			/>
 		);
 	}

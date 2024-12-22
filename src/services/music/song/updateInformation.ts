@@ -6,15 +6,17 @@ import { Logger } from '@/utils/logger';
 import { CODE, parseCodeToNameFunc } from '@/config/responseCode';
 import { Helper } from '@/utils/helper';
 import { ResponseHasResponseProps } from '../../types';
-import { SingerOfSong } from './create';
+import { Singer } from './getDetails';
+import { TypeFileSetUpSong } from '@/utils/enums';
 
 export type PayloadUpdateInformationSong = {
 	songName: string;
 	image: string;
 	songDescription: string;
-	singers: SingerOfSong[];
+	singers: Singer[];
 	link: string;
 	songId: string;
+	type: TypeFileSetUpSong
 };
 function ServiceUpdateInformationSong(props?: ResponseHasResponseProps) {
 	const auth = AuthService.getPackageAuth();

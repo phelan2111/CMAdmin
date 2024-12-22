@@ -8,8 +8,8 @@ import { MdOutlineFileUpload } from 'react-icons/md';
 import BallLoader from '@/components/ui/loader/ball';
 import ServiceUploadUser from '@/services/user/upload';
 import { ResponseUpload } from '@/services/types';
-import { UploadAvatarProps } from '@/layout/account/upload/types';
 import { useFormContext } from 'react-hook-form';
+import { UploadAvatarProps } from '../../types';
 
 function UploadCoverRequestAccount({
 	name = '',

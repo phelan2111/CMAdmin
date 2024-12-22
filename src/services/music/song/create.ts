@@ -6,7 +6,7 @@ import { CODE, parseCodeToNameFunc } from '@/config/responseCode';
 import { Helper } from '@/utils/helper';
 import AuthService from '@/utils/auth';
 import { ResponseHasResponseProps } from '../../types';
-import { EnumStatusArtist } from '@/utils/enums';
+import { EnumStatusArtist, TypeFileSetUpSong } from '@/utils/enums';
 
 export type PayloadCreateSong = {
 	songName: string;
@@ -14,6 +14,7 @@ export type PayloadCreateSong = {
 	songDescription: string;
 	singers: SingerOfSong[];
 	link: string;
+	type: TypeFileSetUpSong
 };
 export type SingerOfSong = {
 	singerId: string;

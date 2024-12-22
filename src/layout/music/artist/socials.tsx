@@ -6,6 +6,7 @@ type SocialsProps = {
 	icon: ReactNode;
 	text: string;
 	name: string;
+	className?: string;
 };
 function Socials(props: SocialsProps) {
 	return (
@@ -14,7 +15,7 @@ function Socials(props: SocialsProps) {
 				{props.icon}
 				<p>{Localize(props.text)}</p>
 			</div>
-			<Input name={props.name} />
+			<Input className={props.className} name={props.name} />
 		</div>
 	);
 }

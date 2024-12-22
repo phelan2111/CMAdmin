@@ -8,9 +8,12 @@ import { IoMdClose } from 'react-icons/io';
 
 type SearchToolProps = {
 	onChange?: (valueInput: string) => void;
+	placeholder?: string;
+	label?: string;
+	className?: string;
 };
 
-function SearchTool(props: SearchToolProps) {
+function SearchTool({ label = 'SEARCH', placeholder = '', className = '!rounded-3xl pl-3 pr-6 w-72', ...props }: SearchToolProps) {
 	const [searchValue, setSearchValue] = useState('');
 
 	const value = useDebounce(searchValue, 850);
@@ -29,9 +32,9 @@ function SearchTool(props: SearchToolProps) {
 
 	return (
 		<div className='flex items-center gap-2'>
-			<p>{Localize('SEARCH')}</p>
-			<div className='relative'>
-				<TextField value={searchValue} onChange={handleOnChange} className='!rounded-3xl pl-3 pr-6 w-72' />
+			{!Helper.isEmpty(label) && <p>{Localize(label)}</p>}
+			<div className='relative w-full'>
+				<TextField placeholder={placeholder} value={searchValue} onChange={handleOnChange} className={className} />
 				<div
 					aria-hidden
 					onClick={handleReset}

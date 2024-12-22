@@ -2,14 +2,15 @@
 import Radio, { ItemRadio } from '@/components/root/inputs/radio';
 import { TypeFileSetUpSong } from '@/utils/enums';
 import { Helper } from '@/utils/helper';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useMemo, useState } from 'react';
 import SongVideoUpload from '@/components/ui/upload/request/video/song';
 import { DataUpload } from '@/components/root/upload/normal';
 import { useFormContext } from 'react-hook-form';
-import { UploadMediaProps } from '@/layout/account/upload/types';
 import ServiceUploadMediaSong from '@/services/music/song/uploadMedia';
 import { ResponseUpload } from '@/services/types';
 import Localize from '@/langs';
+import { UploadMediaProps } from './upload/types';
+import { ItemUploadMedia } from '@/components/ui/upload/types';
 
 const radioSongs: ItemRadio[] = [
 	{
@@ -23,14 +24,24 @@ const radioSongs: ItemRadio[] = [
 		label: 'MP3',
 	},
 ];
-function SetupSong({ name = '', src = '', ...props }: UploadMediaProps) {
+function SetupSong({ name = '', ...props }: UploadMediaProps) {
 	const form = useFormContext();
 
-	const [typeUpload, setTypeUpload] = useState<TypeFileSetUpSong>(TypeFileSetUpSong.video);
-	const [uploadData, setUploadData] = useState<DataUpload>({
-		src,
-		uploadId: Helper.randomKey(),
-	});
+	const initialValue: ItemUploadMedia = useMemo(() => {
+		if (!Helper.isEmpty(props.defaultValue ?? form?.getValues()?.[name])) {
+			return props.defaultValue ?? form?.getValues()?.[name];
+		}
+		return {
+			uploadData: {
+				uploadId: Helper.randomKey(),
+				src: '',
+			},
+			typeUpload: TypeFileSetUpSong.video,
+		};
+	}, [props.defaultValue, form, name]);
+
+	const [typeUpload, setTypeUpload] = useState<TypeFileSetUpSong>(initialValue.type);
+	const [uploadData, setUploadData] = useState<DataUpload>(initialValue.uploadData);
 
 	const { isLoadingUploadMediaSongService, onUploadMediaSong } = ServiceUploadMediaSong({
 		onSuccess: (res) => {
@@ -69,7 +80,7 @@ function SetupSong({ name = '', src = '', ...props }: UploadMediaProps) {
 		<div className='flex flex-col gap-8'>
 			<div className='flex flex-col gap-2'>
 				<Radio
-					disabled
+					disabled={props.isDetails}
 					label='TYPE_VIEW'
 					onChange={(dataItem) => {
 						setTypeUpload(dataItem.value as TypeFileSetUpSong);

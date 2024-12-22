@@ -5,7 +5,6 @@ import Localize from '@/langs';
 import { Helper } from '@/utils/helper';
 import { ChangeEvent, Fragment, useEffect, useMemo, useRef, useState } from 'react';
 import { MdOutlineFileUpload, MdOutlineSaveAlt } from 'react-icons/md';
-import { UploadCarouselProps } from '../../../../../layout/account/upload/types';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import Avatar from '@/components/root/image/avatar';
 import CloseButton from '../../../button/close';
@@ -14,6 +13,7 @@ import ServiceUploadSingerCovers from '@/services/music/artist/uploadMulti';
 import { ResponseUpload } from '@/services/types';
 import BallLoader from '@/components/ui/loader/ball';
 import UpdateButton from '@/components/ui/button/update';
+import { UploadCarouselProps } from '../../types';
 
 function UploadCarouselCoverArtistRequest({
 	name = '',

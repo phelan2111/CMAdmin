@@ -34,7 +34,7 @@ function SetUpSongControl({ duration = 0, timeCurrent = 0, ...props }: SetUpSong
 				<div
 					aria-hidden
 					onClick={handleToggle}
-					className='min-w-10 h-10 bg-primary_dark-20 rounded-full flex justify-center duration-500 items-center transition-transform hover:scale-110 cursor-pointer'>
+					className='min-w-10 h-10 bg-primary_dark-20 text-primary_light rounded-full flex justify-center duration-500 items-center transition-transform hover:scale-110 cursor-pointer'>
 					{!hasPlayed ? <IoIosPlay /> : <IoIosPause />}
 				</div>
 			</div>

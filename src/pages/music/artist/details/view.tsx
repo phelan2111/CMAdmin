@@ -71,110 +71,13 @@ function View(props: ViewProps) {
 							}}
 						/>
 					</div>
-					<div className='animate-translateRight'>
-						<div className='h-72'>
-							<UploadCarouselCoverArtistRequest src={props.artistDetails.singerCover} isDetails onChange={props.onUploadCover} />
-							<AvatarUploadRequestSinger isDetails src={props.artistDetails.singerAvatar} onChange={props.onUploadAvatar} />
-						</div>
-						<div className='flex gap-8 pt-32 animate-translateRight h-full'>
-							<div className='w-1/3 flex flex-col gap-6 h-fit sticky top-0'>
-								<div className='w-full bg-white/10 p-4 rounded-xl flex flex-col gap-6'>
-									<div className='flex justify-between items-center'>
-										<p className='text-2xl font-semibold'>{Localize('INTRODUCE')}</p>
-										<UpdateButton
-											onClick={() => {
-												props.onUpdateArtist({
-													renderComponent: (
-														<UpdateInformation
-															onSuccess={props.onFreshRequest}
-															content='UPDATE_ARTIST_DESCRIPTION'
-															title='UPDATE_ARTIST_INTRO'
-															details={props.artistDetails}
-														/>
-													),
-												});
-											}}
-										/>
-									</div>
-									<div className='flex flex-col gap-3'>
-										<Item classLabel='min-w-36' label='ARTIST_NAME' content={props.artistDetails.singerName} />
-										<Item classLabel='min-w-36' renderContent={() => {
-											return <p className='font-semibold line-clamp-3'>{props.artistDetails.singerDescription}</p>
-										}} label='ARTIST_DESCRIPTION' />
-										<Item classLabel='min-w-36' label='FOLLOWERS' content={`${props.artistDetails.followers}`} />
-										<Item
-											classLabel='min-w-36'
-											label='CREATE_AT'
-											content={dayjs(props.artistDetails.createdAt).format('DD-MM-YYYY HH:mm')}
-										/>
-										<Item
-											classLabel='min-w-36'
-											label='UPDATE_AT'
-											content={dayjs(props.artistDetails.updatedAt).format('DD-MM-YYYY HH:mm')}
-										/>
-									</div>
-								</div>
-								<div className='w-full bg-white/10 p-4 rounded-xl flex flex-col gap-6'>
-									<div className='flex justify-between items-center'>
-										<p className='text-2xl font-semibold'>{Localize('SOCIAL')}</p>
-										<UpdateButton
-											onClick={() => {
-												props.onUpdateArtist({
-													renderComponent: (
-														<UpdateInformationSocials
-															onSuccess={props.onFreshRequest}
-															content='UPDATE_ARTIST_DESCRIPTION'
-															title='UPDATE_ARTIST_SOCIALS'
-															details={props.artistDetails}
-														/>
-													),
-												});
-											}}
-										/>
-									</div>
-									<div className='flex flex-col gap-3'>
-										<Item
-											renderContent={() => {
-												const hasEmpty = Helper.isEmpty(props.artistDetails.socials?.facebook);
-												if (hasEmpty) {
-													return <p>-</p>;
-												}
-												return (
-													<a
-														className='font-medium underline'
-														target='_blank'
-														href={`${props.artistDetails.socials?.facebook}`}
-														rel='noreferrer'>
-														{props.artistDetails.socials?.facebook}
-													</a>
-												);
-											}}
-											classLabel='min-w-36'
-											label='FACEBOOK'
-										/>
-										<Item
-											renderContent={() => {
-												const hasEmpty = Helper.isEmpty(props.artistDetails.socials?.instagram);
-												if (hasEmpty) {
-													return <p>-</p>;
-												}
-												return (
-													<a
-														className='font-medium underline'
-														target='_blank'
-														href={`${props.artistDetails.socials?.instagram}`}
-														rel='noreferrer'>
-														{props.artistDetails.socials?.instagram}
-													</a>
-												);
-											}}
-											classLabel='min-w-36'
-											label='INSTAGRAM'
-										/>
-									</div>
-								</div>
+					<div className='animate-translateRight flex'>
+						<div className='w-2/3 bg-white/10 p-6 rounded-l-xl'>
+							<div className='h-72'>
+								<UploadCarouselCoverArtistRequest src={props.artistDetails.singerCover} isDetails onChange={props.onUploadCover} />
+								<AvatarUploadRequestSinger isDetails src={props.artistDetails.singerAvatar} onChange={props.onUploadAvatar} />
 							</div>
-							<div className='w-2/3 p-4 rounded-xl flex flex-col gap-6 h-full bg-white/10'>
+							<div className='mt-[120px] rounded-xl flex flex-col gap-6 h-fit'>
 								<div className='flex justify-between items-center'>
 									<p className='text-2xl font-semibold'>{Localize('GENRE')}</p>
 									<UpdateButton
@@ -218,6 +121,111 @@ function View(props: ViewProps) {
 										))}
 									</div>
 								</Empty>
+							</div>
+						</div>
+						<div className='w-1/3 bg-primary_dark-10 rounded-r-xl p-6'>
+							<div className='flex gap-8 animate-translateRight h-full'>
+								<div className='flex flex-col gap-20 h-fit sticky top-0'>
+									<div className='w-full rounded-xl flex flex-col gap-6'>
+										<div className='flex justify-between gap-4 items-center'>
+											<p className='text-2xl font-semibold'>{Localize('INTRODUCE')}</p>
+											<UpdateButton
+												onClick={() => {
+													props.onUpdateArtist({
+														renderComponent: (
+															<UpdateInformation
+																onSuccess={props.onFreshRequest}
+																content='UPDATE_ARTIST_DESCRIPTION'
+																title='UPDATE_ARTIST_INTRO'
+																details={props.artistDetails}
+															/>
+														),
+													});
+												}}
+											/>
+										</div>
+										<div className='flex flex-col gap-3'>
+											<Item classLabel='min-w-36' label='ARTIST_NAME' content={props.artistDetails.singerName} />
+											<Item
+												classLabel='min-w-36'
+												renderContent={() => {
+													return <p className='font-semibold line-clamp-3'>{props.artistDetails.singerDescription}</p>;
+												}}
+												label='ARTIST_DESCRIPTION'
+											/>
+											<Item classLabel='min-w-36' label='FOLLOWERS' content={`${props.artistDetails.followers}`} />
+											<Item
+												classLabel='min-w-36'
+												label='CREATE_AT'
+												content={dayjs(props.artistDetails.createdAt).format('DD-MM-YYYY HH:mm')}
+											/>
+											<Item
+												classLabel='min-w-36'
+												label='UPDATE_AT'
+												content={dayjs(props.artistDetails.updatedAt).format('DD-MM-YYYY HH:mm')}
+											/>
+										</div>
+									</div>
+									<div className='w-full flex flex-col gap-6'>
+										<div className='flex justify-between gap-4 items-center'>
+											<p className='text-2xl font-semibold'>{Localize('SOCIAL')}</p>
+											<UpdateButton
+												onClick={() => {
+													props.onUpdateArtist({
+														renderComponent: (
+															<UpdateInformationSocials
+																onSuccess={props.onFreshRequest}
+																content='UPDATE_ARTIST_DESCRIPTION'
+																title='UPDATE_ARTIST_SOCIALS'
+																details={props.artistDetails}
+															/>
+														),
+													});
+												}}
+											/>
+										</div>
+										<div className='flex flex-col gap-3'>
+											<Item
+												renderContent={() => {
+													const hasEmpty = Helper.isEmpty(props.artistDetails.socials?.facebook);
+													if (hasEmpty) {
+														return <p>-</p>;
+													}
+													return (
+														<a
+															className='font-medium underline'
+															target='_blank'
+															href={`${props.artistDetails.socials?.facebook}`}
+															rel='noreferrer'>
+															{props.artistDetails.socials?.facebook}
+														</a>
+													);
+												}}
+												classLabel='min-w-36'
+												label='FACEBOOK'
+											/>
+											<Item
+												renderContent={() => {
+													const hasEmpty = Helper.isEmpty(props.artistDetails.socials?.instagram);
+													if (hasEmpty) {
+														return <p>-</p>;
+													}
+													return (
+														<a
+															className='font-medium underline'
+															target='_blank'
+															href={`${props.artistDetails.socials?.instagram}`}
+															rel='noreferrer'>
+															{props.artistDetails.socials?.instagram}
+														</a>
+													);
+												}}
+												classLabel='min-w-36'
+												label='INSTAGRAM'
+											/>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
