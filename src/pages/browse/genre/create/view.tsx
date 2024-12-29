@@ -35,7 +35,7 @@ function View(props: ViewProps) {
 								<InputDialog required label='GENRE_NAME' name='genreName' />
 								<UploadBrowse />
 								<SelectDialog data={props.dataTopic} name='topic' />
-								<Button disabled={!renderProps.isValid} type='submit' className='text-white rounded-[6px] h-14'>
+								<Button disabled={!renderProps.formState.isValid} type='submit' className='text-white rounded-[6px] h-14'>
 									{Localize('SUBMIT')}
 								</Button>
 							</div>

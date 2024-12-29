@@ -40,7 +40,9 @@ function Radio({
 
 	const handleChange = (dataItem: ItemRadio) => {
 		setValue(dataItem);
-		form?.setValue(name, dataItem, { shouldValidate: true, shouldDirty: true, shouldTouch: true });
+		if (!Helper.isEmpty(name)) {
+			form?.setValue(name, dataItem, { shouldValidate: true, shouldDirty: true, shouldTouch: true });
+		}
 		props.onChange?.(dataItem);
 	};
 

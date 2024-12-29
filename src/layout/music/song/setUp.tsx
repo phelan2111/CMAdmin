@@ -64,7 +64,7 @@ function SetupSong({ name = '', ...props }: UploadMediaProps) {
 	};
 
 	useEffect(() => {
-		if (name) {
+		if (!Helper.isEmpty(name)) {
 			form?.setValue(
 				name,
 				{
@@ -74,7 +74,7 @@ function SetupSong({ name = '', ...props }: UploadMediaProps) {
 				{ shouldValidate: true, shouldDirty: true, shouldTouch: true },
 			);
 		}
-	}, [name, uploadData]);
+	}, [name, uploadData, typeUpload]);
 
 	return (
 		<div className='flex flex-col gap-8'>

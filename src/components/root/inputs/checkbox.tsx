@@ -9,6 +9,7 @@ interface ICheckboxProps {
 	};
 	className?: string;
 	name?: string;
+	onChange?: VoidFunction;
 }
 
 function Checkbox(props: ICheckboxProps) {
@@ -17,6 +18,7 @@ function Checkbox(props: ICheckboxProps) {
 
 	const handleChange = () => {
 		setIsChecked((prev) => !prev);
+		props.onChange?.();
 	};
 	return (
 		<div className={`flex ${isVertical ? 'flex-col gap-0.5' : 'flex-row gap-2 items-end'}`}>

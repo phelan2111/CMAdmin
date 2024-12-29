@@ -9,7 +9,8 @@ import { Helper } from '@/utils/helper';
 import { ToastContext, ToastType } from '@/contexts/toast';
 import Localize from '@/langs';
 import AuthService from '@/utils/auth';
-import { EnumStatusSong } from '@/utils/enums';
+import { EnumStatusSong, TypeFileSetUpSong } from '@/utils/enums';
+import { ResponseGetListArtist } from '../artist/getSinger';
 
 export type ResponseGetListSong = {
 	songName: string;
@@ -21,6 +22,8 @@ export type ResponseGetListSong = {
 	songId: string;
 	createdAt: string;
 	updatedAt: string;
+	singers: ResponseGetListArtist[];
+	type: TypeFileSetUpSong;
 };
 
 function ServiceSongGetList(props?: ResponseHasResponseProps[]) {

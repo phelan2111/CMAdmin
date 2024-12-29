@@ -28,7 +28,7 @@ function View(props: IViewProps) {
 							<div className='flex flex-col gap-4 h-[340px] px-6 py-4 overflow-y-auto scrollHiddenY'>
 								<GenresSelect className='border border-primary_dark/10 rounded-lg' name='genres' />
 							</div>
-							<Button disabled={!renderProps.isValid} type='submit' className='text-white !rounded-md h-14'>
+							<Button disabled={!renderProps.formState.isValid} type='submit' className='text-white !rounded-md h-14'>
 								{Localize('SUBMIT')}
 							</Button>
 						</div>

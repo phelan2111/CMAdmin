@@ -4,12 +4,18 @@ import Wrapper from '@/components/ui/wrapper/normal';
 import Localize from '@/langs';
 import IntroducePlaylist from '@/layout/music/playlist/introduce';
 import Playlist from '@/layout/music/playlist/playlist';
+import { FormCreatePlayList } from '../types';
 
 const View = () => {
 	return (
 		<div className='pr-4 py-8'>
 			<Form
+				defaultValues={{
+					namePlaylist: '',
+					descriptionPlaylist: '',
+				}}
 				render={(renderProps) => {
+					const valueCurrent: unknown = renderProps?.getValues() as unknown;
 					return (
 						<Wrapper className='flex flex-col !gap-6'>
 							<div className='flex justify-between items-center animate-translateRight'>
@@ -20,10 +26,10 @@ const View = () => {
 								</div>
 							</div>
 							<div className='flex flex-col h-full animate-translateRight'>
-								<IntroducePlaylist />
+								<IntroducePlaylist dataForm={valueCurrent as FormCreatePlayList} />
 								<Playlist />
 							</div>
-							<Button disabled={!renderProps.isValid} type='submit' className='text-white !rounded-md h-14 animate-translateRight'>
+							<Button disabled={!renderProps.formState} type='submit' className='text-white !rounded-md min-h-12 animate-translateRight'>
 								{Localize('SUBMIT')}
 							</Button>
 						</Wrapper>

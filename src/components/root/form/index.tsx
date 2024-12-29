@@ -1,18 +1,21 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Fragment, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { DefaultValues, FormProvider, UseFormGetFieldState, UseFormGetValues, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
 interface IFormRenderProps {
-	isDirty: boolean;
-	isLoading: boolean;
-	isSubmitted: boolean;
-	isSubmitSuccessful: boolean;
-	isSubmitting: boolean;
-	isValidating: boolean;
-	isValid: boolean;
-	disabled: boolean;
-	submitCount: number;
+	formState: {
+		isDirty: boolean;
+		isLoading: boolean;
+		isSubmitted: boolean;
+		isSubmitSuccessful: boolean;
+		isSubmitting: boolean;
+		isValidating: boolean;
+		isValid: boolean;
+		disabled: boolean;
+		submitCount: number;
+		errors: unknown;
+	};
 	getValues: UseFormGetValues<{ test: string }>;
 	getFieldState: UseFormGetFieldState<{
 		test: string;
@@ -27,15 +30,6 @@ interface IFormProps {
 	defaultValues?: DefaultValues<unknown>;
 }
 
-function RenderForm(render: (formRenderProps: IFormRenderProps) => ReactNode): ReactNode {
-	const { formState, getValues, getFieldState } = useForm({ defaultValues: { test: '' } });
-	return render?.({
-		...formState,
-		getValues,
-		getFieldState,
-	});
-}
-
 function Form({ validator = {}, defaultValues = {}, ...props }: IFormProps) {
 	const methods = useForm({
 		defaultValues,
@@ -43,7 +37,6 @@ function Form({ validator = {}, defaultValues = {}, ...props }: IFormProps) {
 		reValidateMode: 'onChange',
 		resolver: yupResolver(yup.object().shape(validator)),
 	});
-
 	const onSubmit = (data: never) => {
 		props.onSubmit && props.onSubmit(data);
 	};
@@ -62,14 +55,7 @@ function Form({ validator = {}, defaultValues = {}, ...props }: IFormProps) {
 	return (
 		<FormProvider {...methods}>
 			<form aria-hidden onSubmit={methods.handleSubmit(onSubmit as never)} onKeyDown={handleKeyDown} onKeyUp={handleKeyUp}>
-				{props.render
-					? RenderForm(() => {
-							if (props.render) {
-								return props.render(methods.formState as unknown as IFormRenderProps);
-							}
-							return <Fragment />;
-					  })
-					: props.children}
+				{props.render ? props.render(methods as unknown as IFormRenderProps) : props.children}
 			</form>
 		</FormProvider>
 	);

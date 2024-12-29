@@ -1,16 +1,33 @@
 import Avatar from '@/components/root/image/avatar';
 import Localize from '@/langs';
+import { TypeFileSetUpSong } from '@/utils/enums';
+import { useMemo } from 'react';
 import { MdPersonalVideo } from 'react-icons/md';
 
-const ItemSong = () => {
+type ItemSongProps = {
+	name: string;
+	artist: string[];
+	image: string;
+	typeSong: TypeFileSetUpSong;
+};
+
+const ItemSong = ({ artist = [''], image = '', name = '', ...props }: ItemSongProps) => {
+	const hasVideo = useMemo(() => {
+		return props.typeSong === TypeFileSetUpSong.video;
+	}, [props]);
+
 	return (
 		<div className='flex items-center gap-2'>
-			<Avatar className='rounded-lg size-10' src='https://i.pinimg.com/736x/20/c1/1f/20c11f3bbb1725623ed7add957c23363.jpg' />
+			<Avatar className='rounded-lg size-10' src={image} />
 			<div className='flex flex-col gap-1'>
-				<p className='font-medium'>Santa Tell Me</p>
-				<div className='text-xs flex items-centers gap-2'>
-					<MdPersonalVideo className='text-sm' /> <p>{Localize('MUSIC_VIDEO')}</p>
-					<p>• Ariana Grade</p>
+				<p className='font-medium'>{name}</p>
+				<div className='text-xs flex items-centers gap-1'>
+					{hasVideo && (
+						<div className='flex gap-2'>
+							<MdPersonalVideo className='text-sm' /> <p>{Localize('MUSIC_VIDEO')} •</p>
+						</div>
+					)}
+					<p>{artist.join(', ')}</p>
 				</div>
 			</div>
 		</div>

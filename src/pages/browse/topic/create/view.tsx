@@ -18,11 +18,11 @@ function View(props: ViewProps) {
 					topicName: string().required(),
 				}}
 				onSubmit={props.onSubmit}
-				render={() => {
+				render={(renderProps) => {
 					return (
 						<div className='flex flex-col gap-8'>
 							<InputDialog label='TOPIC_NAME' name='topicName' />
-							<Button type='submit' className='text-white rounded-[6px] h-14'>
+							<Button disabled={!renderProps.formState.isValid} type='submit' className='text-white rounded-[6px] h-14'>
 								{Localize('SUBMIT')}
 							</Button>
 						</div>

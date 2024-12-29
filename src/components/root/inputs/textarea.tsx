@@ -37,7 +37,11 @@ function TextAreaField({ classNameTextArea = '', className = '', name = '', requ
 	const isIconEnd = props.icon?.direction === 'end';
 
 	const handleChange = (valueInput: string) => {
+		props.onChange && props.onChange(value);
 		setValue(valueInput);
+		if (!Helper.isEmpty(name)) {
+			form?.setValue(name, valueInput, { shouldValidate: true, shouldDirty: true, shouldTouch: true });
+		}
 	};
 
 	return (
@@ -59,7 +63,6 @@ function TextAreaField({ classNameTextArea = '', className = '', name = '', requ
 					{...props}
 					onChange={(e) => {
 						handleChange(e.currentTarget.value);
-						props.onChange && props.onChange(e.currentTarget.value);
 					}}
 				/>
 				{isIconEnd && props.icon && props.icon.node}

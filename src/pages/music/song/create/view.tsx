@@ -9,6 +9,8 @@ import AvatarUploadRequestSong from '@/components/ui/upload/request/avatar/avata
 import SingersSelect from '@/layout/music/song/singerSelect';
 import SetupSong from '@/layout/music/song/setUp';
 import { DataFormCreateSong } from '../types';
+import { Helper } from '@/utils/helper';
+import { TypeFileSetUpSong } from '@/utils/enums';
 
 type IViewProps = {
 	onSubmit: (dataItem: DataFormCreateSong) => void;
@@ -17,10 +19,17 @@ function View(props: IViewProps) {
 	return (
 		<div className='pr-4 py-8'>
 			<Form
+				defaultValues={{
+					setUp: {
+						uploadId: Helper.randomKey(),
+						src: '',
+						type: TypeFileSetUpSong.video,
+					},
+				}}
 				validator={{
 					songName: string().required('SONG_NAME_REQUIRED'),
 					songDescription: string().required('SONG_DESCRIPTION_REQUIRED'),
-					singers: array().length(1).required('SINGER_REQUIRED'),
+					singers: array().min(1).required('SINGER_REQUIRED'),
 					setup: object().shape({
 						type: number().required('SETUP_REQUIRED'),
 						uploadData: object().shape({
@@ -71,7 +80,7 @@ function View(props: IViewProps) {
 											</div>
 										</div>
 									</div>
-									<Button disabled={!renderProps.isValid} type='submit' className='text-white !rounded-md h-14'>
+									<Button disabled={!renderProps.formState.isValid} type='submit' className='text-white !rounded-md h-14'>
 										{Localize('SUBMIT')}
 									</Button>
 								</div>

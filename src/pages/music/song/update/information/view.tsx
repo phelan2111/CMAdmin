@@ -40,7 +40,7 @@ function View(props: IViewProps) {
 									/>
 								</div>
 							</div>
-							<Button disabled={!renderProps.isValid} type='submit' className='text-white !rounded-md h-14'>
+							<Button disabled={!renderProps.formState.isValid} type='submit' className='text-white !rounded-md h-14'>
 								{Localize('SUBMIT')}
 							</Button>
 						</div>

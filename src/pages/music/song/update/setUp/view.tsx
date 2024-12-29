@@ -38,7 +38,7 @@ function View(props: IViewProps) {
 					return (
 						<div className='flex flex-col gap-8'>
 							<SetupSong name='setup' />
-							<Button disabled={!renderProps.isValid} type='submit' className='text-white !rounded-md h-14'>
+							<Button disabled={!renderProps.formState.isValid} type='submit' className='text-white !rounded-md h-14'>
 								{Localize('SUBMIT')}
 							</Button>
 						</div>

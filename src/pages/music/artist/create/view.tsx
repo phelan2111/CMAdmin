@@ -76,7 +76,7 @@ function View(props: IViewProps) {
 								</div>
 							</div>
 							<div className='w-full'>
-								<Button disabled={!renderProps.isValid} type='submit' className='text-white !rounded-md w-full'>
+								<Button disabled={!renderProps.formState.isValid} type='submit' className='text-white !rounded-md w-full'>
 									{Localize('SUBMIT')}
 								</Button>
 							</div>
