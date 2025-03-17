@@ -5,9 +5,11 @@ import 'styles/common/input/color.scss';
 
 type InputColorProps = {
 	label?: string;
+	onChange?: (valueInput: string) => void;
+	name?: string;
 };
 
-const InputColor = (props: InputColorProps) => {
+const InputColor = ({ name = '', ...props }: InputColorProps) => {
 	return (
 		<div className='flex items-center bg-white/10 py-1 rounded-full cursor-pointer group'>
 			{!Helper.isEmpty(props.label) && (
@@ -16,7 +18,7 @@ const InputColor = (props: InputColorProps) => {
 				</p>
 			)}
 
-			<TextField className='!bg-transparent' classNameInput='inputColor' type='color' />
+			<TextField name={name} className='!bg-transparent' classNameInput='inputColor' type='color' onChange={props.onChange} />
 		</div>
 	);
 };

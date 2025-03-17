@@ -13,6 +13,10 @@ const View = () => {
 				defaultValues={{
 					namePlaylist: '',
 					descriptionPlaylist: '',
+					theme: '#000',
+				}}
+				onSubmit={(events) => {
+					console.log('eventseventsevents', events);
 				}}
 				render={(renderProps) => {
 					const valueCurrent: unknown = renderProps?.getValues() as unknown;
@@ -25,7 +29,7 @@ const View = () => {
 									</div>
 								</div>
 							</div>
-							<div className='flex flex-col h-full animate-translateRight'>
+							<div className='flex flex-col h-full animate-translateRight  bg-gradient-to-b from-[#232323] rounded-xl'>
 								<IntroducePlaylist dataForm={valueCurrent as FormCreatePlayList} />
 								<Playlist />
 							</div>

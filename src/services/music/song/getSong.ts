@@ -55,13 +55,13 @@ function ServiceSongGetList(props?: ResponseHasResponseProps[]) {
 		mutate(params, {
 			onSuccess: (data) => {
 				Logger.debug('ServiceSongGetList execute handleMutate success', data);
-				props?.map((o, index) => {
-					const funcName = parseCodeToNameFunc[data[index].code as unknown as CODE];
+				props?.map((o) => {
+					const funcName = parseCodeToNameFunc[data.code as unknown as CODE];
 					const hasFunc = Helper.isEmpty(o?.[funcName as string]);
 					if (hasFunc) {
 						onToast({ theme: ToastType.error, label: Localize('SYSTEM_ERROR'), content: Localize('SOMETHING_WERE_WRONG') });
 					} else {
-						o?.[funcName as string](data[index]?.data);
+						o?.[funcName as string](data?.data);
 					}
 				});
 			},

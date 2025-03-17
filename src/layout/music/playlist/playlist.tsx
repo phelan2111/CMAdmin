@@ -6,14 +6,40 @@ import ItemSongOfPlaylist from '@/components/ui/items/songOfPlaylist';
 import Localize from '@/langs';
 import ItemSongSelect from './items/songSelect';
 import ServiceSongGetList, { ResponseGetListSong } from '@/services/music/song/getSong';
-import { PayloadRequestList } from '@/services/types';
-import { useEffect, useState } from 'react';
+import { PayloadRequestList, ResponseRequest } from '@/services/types';
+import { useEffect, useMemo, useState } from 'react';
 import { FROM, LIMIT, SORT } from '@/utils/variables';
 import { EnumStatusSong } from '@/utils/enums';
 import { Helper } from '@/utils/helper';
+import { useFormContext } from 'react-hook-form';
 
-const Playlist = () => {
-	const { onGetListSong, response } = ServiceSongGetList();
+type PlaylistProps = {
+	defaultValue?: string[];
+	name?: string;
+};
+const Playlist = ({ name = '', defaultValue = [] }: PlaylistProps) => {
+	const form = useFormContext();
+
+	const initialValue: string[] = useMemo(() => {
+		return form?.getValues()?.[name] ?? defaultValue;
+	}, [defaultValue, form, name]);
+
+	const { onGetListSong, response } = ServiceSongGetList([
+		{
+			onSuccess: (dataItem) => {
+				const res = dataItem as ResponseRequest<ResponseGetListSong>;
+				const initialList: ResponseGetListSong[] = [];
+				for (let index = 0; index < res.list.length; index++) {
+					const song = res.list[index];
+					const { isExist } = Helper.findItem(initialValue as never, 'songId', song.songId);
+					if (isExist) {
+						initialList.push(song);
+					}
+				}
+				setSongList(initialList);
+			},
+		},
+	]);
 	const [songList, setSongList] = useState<ResponseGetListSong[]>([]);
 
 	const [payload, setPayload] = useState<PayloadRequestList>({
@@ -47,10 +73,15 @@ const Playlist = () => {
 	useEffect(() => {
 		onGetListSong(payload);
 	}, [payload]);
+	useEffect(() => {
+		form.setValue('songList', {
+			value: songList,
+		});
+	}, [songList]);
 
 	return (
 		<div className='flex h-full'>
-			<div className='w-2/3 p-6 flex flex-col gap-6 bg-white/10 rounded-es-xl'>
+			<div className='w-2/3 px-6 flex flex-col gap-6  rounded-es-xl'>
 				<p className='text-2xl font-medium'>{Localize('SONGS_OF_PLAYLIST')}</p>
 				<EmptySongOfPlaylist totalColumn={songList.length}>
 					<div className='h-[270px] overflow-y-scroll scrollHiddenY snap-mandatory snap-y'>
@@ -60,7 +91,7 @@ const Playlist = () => {
 					</div>
 				</EmptySongOfPlaylist>
 			</div>
-			<div className='w-1/3 bg-primary_dark-10 p-6 flex flex-col gap-6 rounded-ee-xl select-none'>
+			<div className='w-1/3 bg-primary_dark-10 px-6 flex flex-col gap-6 rounded-ee-xl select-none'>
 				<p className='text-2xl font-medium'>{Localize('LIST_SONG')}</p>
 				<div className='flex flex-col gap-4'>
 					<SearchTool onChange={handleSearch} className='w-full' label='' placeholder='Search name or songId' />

@@ -4,16 +4,28 @@ import InputColor from '@/components/ui/input/color';
 import UploadRequest from '@/components/ui/upload/request/normal/playlist';
 import Localize from '@/langs';
 import { FormCreatePlayList } from '@/pages/music/playlist/types';
+import { useMemo } from 'react';
+import { useFormContext } from 'react-hook-form';
 
 type IntroducePlaylistProps = {
 	dataForm: FormCreatePlayList;
 };
 
 const IntroducePlaylist = (props: IntroducePlaylistProps) => {
+	const form = useFormContext();
+
+	const theme = useMemo(() => {
+		return form.getValues()?.theme;
+	}, [form]);
+
 	return (
 		<div className='flex'>
-			<div className='bg-white/10 p-10 w-2/3 rounded-ss-xl flex gap-6 items-end relative'>
-				<UploadRequest className='rounded-lg size-60' />
+			<div
+				style={{
+					background: `linear-gradient(${theme}30, transparent)`,
+				}}
+				className={`p-6 w-2/3 rounded-ss-xl flex gap-6 items-start relative`}>
+				<UploadRequest className='rounded-lg min-w-60 size-60' />
 				<div className='text-sm flex flex-col gap-1'>
 					<p>{Localize('PLAYLIST')}</p>
 					<p className='text-8xl font-bold py-4'>{props?.dataForm?.namePlaylist}</p>
@@ -27,7 +39,7 @@ const IntroducePlaylist = (props: IntroducePlaylistProps) => {
 					</div>
 				</div>
 				<div className='absolute top-4 right-4'>
-					<InputColor label='COLOR_THEME' />
+					<InputColor name='theme' label='COLOR_THEME' />
 				</div>
 			</div>
 			<div className='w-1/3 flex flex-col gap-4 bg-primary_dark-10 p-6 rounded-se-xl'>
@@ -36,7 +48,7 @@ const IntroducePlaylist = (props: IntroducePlaylistProps) => {
 					<TextField placeholder="Enter playlist's name" name='namePlaylist' label='NAME_PLAYLIST' />
 					<TextAreaField
 						placeholder="Enter playlist's description"
-						classNameTextArea='h-24'
+						classNameTextArea='!h-20'
 						name='descriptionPlaylist'
 						label='DESCRIPTION_PLAYLIST'
 					/>
