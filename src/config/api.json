@@ -33,6 +33,10 @@
                 "_": "/browse/topic",
                 "details": "/browse/topic/details"
             }
+        },
+        "playList": {
+            "_": "/playlist",
+            "uploadCover": "/playlist/uploadCover"
         }
     },
     "cookie": {

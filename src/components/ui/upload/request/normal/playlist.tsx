@@ -6,8 +6,8 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { ResponseUpload } from '@/services/types';
 import BallLoader from '@/components/ui/loader/ball';
 import { useFormContext } from 'react-hook-form';
-import ServiceUploadSong from '@/services/music/song/upload';
 import { UploadAvatarProps } from '../../types';
+import ServiceUploadCoverImagePlaylist from '@/services/music/playlist/upload';
 
 function UploadRequest({
 	name = '',
@@ -21,7 +21,7 @@ function UploadRequest({
 		src,
 		uploadId: Helper.randomKey(),
 	});
-	const { isLoadingUploadSongService, onUploadSong } = ServiceUploadSong({
+	const { isLoadingUploadCoverImagePlaylistService, onUploadCoverImagePlaylist } = ServiceUploadCoverImagePlaylist({
 		onSuccess: (res) => {
 			const dataItem = res as ResponseUpload;
 			const value: DataUpload = {
@@ -39,7 +39,7 @@ function UploadRequest({
 			const files = Object.values(fileList);
 			const formData = new FormData();
 			formData.append('file', files[0]);
-			onUploadSong(formData);
+			onUploadCoverImagePlaylist(formData);
 		}
 	};
 
@@ -52,7 +52,7 @@ function UploadRequest({
 	return (
 		<div className='flex items-end relative z-10'>
 			<div className='relative'>
-				{isLoadingUploadSongService && (
+				{isLoadingUploadCoverImagePlaylistService && (
 					<div className='absolute top-0 left-0 w-full h-full bg-primary_dark/80 rounded-full flex items-center justify-center z-20'>
 						<BallLoader />
 					</div>

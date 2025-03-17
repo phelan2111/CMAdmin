@@ -124,9 +124,9 @@ function View(props: ViewProps) {
 							</div>
 						</div>
 						<div className='w-1/3 bg-primary_dark-10 rounded-r-xl p-6'>
-							<div className='flex gap-8 animate-translateRight h-full'>
+							<div className='animate-translateRight h-full'>
 								<div className='flex flex-col gap-20 h-fit sticky top-0'>
-									<div className='w-full rounded-xl flex flex-col gap-6'>
+									<div className='rounded-xl flex flex-col gap-6'>
 										<div className='flex justify-between gap-4 items-center'>
 											<p className='text-2xl font-semibold'>{Localize('INTRODUCE')}</p>
 											<UpdateButton
@@ -193,7 +193,7 @@ function View(props: ViewProps) {
 													}
 													return (
 														<a
-															className='font-medium underline'
+															className='font-medium underline w-40 truncate'
 															target='_blank'
 															href={`${props.artistDetails.socials?.facebook}`}
 															rel='noreferrer'>
@@ -212,7 +212,7 @@ function View(props: ViewProps) {
 													}
 													return (
 														<a
-															className='font-medium underline'
+															className='font-medium underline w-40 truncate'
 															target='_blank'
 															href={`${props.artistDetails.socials?.instagram}`}
 															rel='noreferrer'>

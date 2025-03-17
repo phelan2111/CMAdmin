@@ -25,7 +25,7 @@ const IntroducePlaylist = (props: IntroducePlaylistProps) => {
 					background: `linear-gradient(${theme}30, transparent)`,
 				}}
 				className={`p-6 w-2/3 rounded-ss-xl flex gap-6 items-start relative`}>
-				<UploadRequest className='rounded-lg min-w-60 size-60' />
+				<UploadRequest name='image' className='rounded-lg min-w-60 size-60' />
 				<div className='text-sm flex flex-col gap-1'>
 					<p>{Localize('PLAYLIST')}</p>
 					<p className='text-8xl font-bold py-4'>{props?.dataForm?.namePlaylist}</p>
