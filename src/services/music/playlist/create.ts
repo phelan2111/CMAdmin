@@ -7,7 +7,7 @@ import { Helper } from '@/utils/helper';
 import AuthService from '@/utils/auth';
 import { ResponseHasResponseProps } from '../../types';
 
-export type PayloadCreateSong = {
+export type PayloadCreatePlaylist = {
 	namePlaylist: string;
 	image: string;
 	descriptionPlaylist: string;
@@ -15,8 +15,8 @@ export type PayloadCreateSong = {
 	songs: string[];
 };
 
-export type ResponseCreateSong = {
-	songId: string;
+export type ResponseCreatePlaylist = {
+	playlistId: string;
 };
 function ServiceCreatePlaylist(props?: ResponseHasResponseProps) {
 	const auth = AuthService.getPackageAuth();
@@ -34,7 +34,7 @@ function ServiceCreatePlaylist(props?: ResponseHasResponseProps) {
 		request,
 	});
 
-	const handleMutate = (params: PayloadCreateSong) => {
+	const handleMutate = (params: PayloadCreatePlaylist) => {
 		mutate(params, {
 			onSuccess: (data) => {
 				Logger.debug('ServiceCreatePlaylist execute handleMutate success', data);

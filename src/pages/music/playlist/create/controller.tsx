@@ -1,12 +1,30 @@
 import { Component } from 'react';
 import View from './view';
+import { PayloadCreatePlaylist } from '@/services/music/playlist/create';
+import { FormCreatePlayList } from '../types';
 
-// type ControllerState = {};
+type ControllerProps = {
+	onCreate: (payload: PayloadCreatePlaylist) => void;
+};
 
-// type ControllerProps = {};
+export default class Controller extends Component<ControllerProps> {
+	constructor(props: ControllerProps) {
+		super(props);
+		this.handleSubmit = this.handleSubmit.bind(this);
+	}
 
-export default class Controller extends Component {
+	handleSubmit(dataForm: FormCreatePlayList) {
+		const payload: PayloadCreatePlaylist = {
+			descriptionPlaylist: dataForm.descriptionPlaylist,
+			image: dataForm.image.src,
+			namePlaylist: dataForm.namePlaylist,
+			songs: dataForm.songList.value.map((i) => i.songId),
+			theme: dataForm.theme,
+		};
+		this.props.onCreate(payload);
+	}
+
 	render() {
-		return <View />;
+		return <View onSubmit={this.handleSubmit} />;
 	}
 }

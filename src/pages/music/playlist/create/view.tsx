@@ -6,7 +6,11 @@ import IntroducePlaylist from '@/layout/music/playlist/introduce';
 import Playlist from '@/layout/music/playlist/playlist';
 import { FormCreatePlayList } from '../types';
 
-const View = () => {
+type ViewProps = {
+	onSubmit: (payload: FormCreatePlayList) => void;
+};
+
+const View = (props: ViewProps) => {
 	return (
 		<div className='pr-4 py-8'>
 			<Form
@@ -15,9 +19,7 @@ const View = () => {
 					descriptionPlaylist: '',
 					theme: '#000',
 				}}
-				onSubmit={(events) => {
-					console.log('eventseventsevents', events);
-				}}
+				onSubmit={props.onSubmit}
 				render={(renderProps) => {
 					const valueCurrent: unknown = renderProps?.getValues() as unknown;
 					return (
