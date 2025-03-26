@@ -1,14 +1,14 @@
-import { ResponseGetListArtist } from '@/services/music/artist/getSinger';
 import { Helper } from '@/utils/helper';
 import { useMemo } from 'react';
 
 type ItemSongOfPlaylistProps = {
 	img: string;
 	name: string;
-	artist: ResponseGetListArtist[];
+	artist: Record<string, unknown>[];
+	viewSaved?: number;
 };
 
-const ItemSongOfPlaylist = (props: ItemSongOfPlaylistProps) => {
+const ItemSongOfPlaylist = ({ viewSaved = 0, ...props }: ItemSongOfPlaylistProps) => {
 	const artist = useMemo(() => {
 		return props.artist.map((s) => s.singerName);
 	}, [props.artist]);
@@ -25,7 +25,7 @@ const ItemSongOfPlaylist = (props: ItemSongOfPlaylistProps) => {
 					</div>
 				</div>
 			</div>
-			<p>{Helper.formatNumber(19213123123)}</p>
+			<p>{Helper.formatNumber(viewSaved)}</p>
 			<p>2:17</p>
 		</div>
 	);

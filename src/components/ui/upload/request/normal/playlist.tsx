@@ -8,6 +8,8 @@ import BallLoader from '@/components/ui/loader/ball';
 import { useFormContext } from 'react-hook-form';
 import { UploadAvatarProps } from '../../types';
 import ServiceUploadCoverImagePlaylist from '@/services/music/playlist/upload';
+import { MdOutlineFileUpload } from 'react-icons/md';
+import Localize from '@/langs';
 
 function UploadRequest({
 	name = '',
@@ -53,12 +55,27 @@ function UploadRequest({
 		<div className='flex items-end relative z-10'>
 			<div className='relative'>
 				{isLoadingUploadCoverImagePlaylistService && (
-					<div className='absolute top-0 left-0 w-full h-full bg-primary_dark/80 rounded-full flex items-center justify-center z-20'>
+					<div className='absolute top-0 left-0 w-full h-full bg-primary_dark/80 rounded-lg flex items-center justify-center z-20'>
 						<BallLoader />
 					</div>
 				)}
 				<Avatar className={`relative ${className}`} src={uploadData.src} />
-				<input multiple={multi} onChange={handleOnChange} className='w-full h-full absolute top-0 opacity-0' name='avatar' id='avatar' type='file' />
+				<div className='w-fit absolute bottom-4 right-4 cursor-pointer overflow-hidden'>
+					<label className='buttonFollow group relative rounded-lg min-w-60 size-60' htmlFor='avatar'>
+						<p className='bg-primary_light text-primary_dark flex items-center w-32 group-hover:bg-primary_light/80 transition-all duration-500 gap-2 px-4 py-3 rounded-full text-base font-semibold'>
+							<MdOutlineFileUpload className='text-2xl' />
+							{Localize('UPLOAD')}
+						</p>
+						<input
+							multiple={multi}
+							onChange={handleOnChange}
+							className='w-full h-full absolute top-0 opacity-0'
+							name='avatar'
+							id='avatar'
+							type='file'
+						/>
+					</label>
+				</div>
 			</div>
 		</div>
 	);

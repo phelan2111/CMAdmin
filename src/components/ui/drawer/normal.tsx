@@ -38,15 +38,8 @@ const drawer: IItemDrawer[] = [
 		path: PATH.MUSIC._,
 		text: 'MUSIC',
 		icon: <GoStack className='text-xl' />,
-		classTargetedItem: 'h-[220px]',
+		classTargetedItem: 'h-[176px]',
 		children: [
-			{
-				id: Helper.randomKey(),
-				path: PATH.HOME,
-				text: 'ALBUM',
-				icon: <GoStack className='text-xl' />,
-				classTargeted: 'bg-white/20',
-			},
 			{
 				id: Helper.randomKey(),
 				path: PATH.MUSIC.PLAYLIST._,

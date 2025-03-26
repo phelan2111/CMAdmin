@@ -198,4 +198,5 @@ export const dataLocalizeEN: Record<string, string> = {
 	SAVES: 'saves',
 	SONGS: 'songs',
 	ABOUT: 'about',
+	VIEW_SAVED: 'View saved',
 };

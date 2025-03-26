@@ -39,9 +39,9 @@ export const PATH = {
 			DETAILS: '/music/song/:songId',
 		},
 		PLAYLIST: {
-			_: "/music/playlist",
-			CREATE: "/music/playlist/create"
-
-		}
+			_: '/music/playlist',
+			CREATE: '/music/playlist/create',
+			DETAILS: '/music/playlist/:playlistId',
+		},
 	},
 };

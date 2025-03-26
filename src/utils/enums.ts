@@ -15,6 +15,11 @@ export enum EnumStatusAccount {
 	inactive,
 }
 
+export enum EnumStatusPlaylist {
+	hidden = 0,
+	display = 1,
+}
+
 export enum EnumStatusArtist {
 	lock = 0,
 	active = 1,

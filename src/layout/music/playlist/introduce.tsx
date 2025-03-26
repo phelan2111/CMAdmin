@@ -26,16 +26,18 @@ const IntroducePlaylist = (props: IntroducePlaylistProps) => {
 				}}
 				className={`p-6 w-2/3 rounded-ss-xl flex gap-6 items-start relative`}>
 				<UploadRequest name='image' className='rounded-lg min-w-60 size-60' />
-				<div className='text-sm flex flex-col gap-1'>
+				<div className='text-sm flex flex-col gap-1 justify-between h-full'>
 					<p>{Localize('PLAYLIST')}</p>
 					<p className='text-8xl font-bold py-4'>{props?.dataForm?.namePlaylist}</p>
-					<p>{props?.dataForm?.descriptionPlaylist}</p>
-					<div className='flex items-center gap-1'>
-						<p className='font-bold'>Cohesive</p>
-						<p>
-							{' '}
-							• 0 {Localize('saves')} • 0 {Localize('songs')} , {Localize('about')} 0
-						</p>
+					<div className='flex flex-col gap-1'>
+						<p className='line-clamp-2'>{props?.dataForm?.descriptionPlaylist}</p>
+						<div className='flex items-center gap-1'>
+							<p className='font-bold'>Cohesive</p>
+							<p>
+								{' '}
+								• 0 {Localize('SAVES')} • 0 {Localize('SONGS')}
+							</p>
+						</div>
 					</div>
 				</div>
 				<div className='absolute top-4 right-4'>

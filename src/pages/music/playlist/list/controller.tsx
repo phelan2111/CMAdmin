@@ -1,16 +1,16 @@
 import { Component } from 'react';
 import View from './view';
-import { ResponseGetListArtist } from '@/services/music/artist/getSinger';
 import { initialResponseRequest, PayloadRequestList, ResponseRequest } from '@/services/types';
 import { FROM, LIMIT, SORT } from '@/utils/variables';
-import { EnumStatusArtist } from '@/utils/enums';
+import { EnumStatusPlaylist } from '@/utils/enums';
 import { PagingState } from '@/components/root/grid/types';
 import { FilterStatusItem } from '@/components/ui/common/tool/filter/status';
+import { ResponsePlaylist } from '@/services/music/playlist/getPlaylist';
 
 type PropsController = {
-	data: ResponseRequest<ResponseGetListArtist>;
+	data: ResponseRequest<ResponsePlaylist>;
 	isLoading: boolean;
-	onGetListArtist: (params: PayloadRequestList) => void;
+	onGetPlaylist: (params: PayloadRequestList) => void;
 };
 type StateController = {
 	allState: {
@@ -28,7 +28,7 @@ export default class Controller extends Component<PropsController, StateControll
 					limit: LIMIT,
 					createdAt: SORT.DESC,
 					search: '',
-					status: EnumStatusArtist.inactive,
+					status: EnumStatusPlaylist.display,
 				},
 			},
 		};
@@ -42,8 +42,8 @@ export default class Controller extends Component<PropsController, StateControll
 	}
 	handleReRequest() {
 		const { allState } = this.state;
-		const { onGetListArtist } = this.props;
-		onGetListArtist(allState.payload);
+		const { onGetPlaylist } = this.props;
+		onGetPlaylist(allState.payload);
 	}
 
 	handleChangePagingAndReRequest(dataItem: PagingState) {
@@ -75,7 +75,7 @@ export default class Controller extends Component<PropsController, StateControll
 	}
 
 	render() {
-		const { isLoading, data = initialResponseRequest as ResponseRequest<ResponseGetListArtist> } = this.props;
+		const { isLoading, data = initialResponseRequest as ResponseRequest<ResponsePlaylist> } = this.props;
 		return (
 			<View
 				isLoading={isLoading}

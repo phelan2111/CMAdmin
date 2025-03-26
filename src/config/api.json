@@ -36,7 +36,8 @@
         },
         "playList": {
             "_": "/playlist",
-            "uploadCover": "/playlist/uploadCover"
+            "uploadCover": "/playlist/uploadCover",
+            "details": "/playlist/details"
         }
     },
     "cookie": {
