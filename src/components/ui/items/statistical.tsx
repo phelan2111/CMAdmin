@@ -13,7 +13,7 @@ function ItemStatistical({ fromColor = 'from-pink-500', icon = <GoArchive />, ..
 			<div className={`w-20 h-20 flex justify-center items-center rounded-md bg-gradient-to-t text-2xl ${fromColor}`}>{icon}</div>
 			<div className='flex flex-col justify-around h-full gap-2'>
 				<p className='text-2xl font-bold'>{props.content}</p>
-				<p className='text-sm'>{props.title}</p>
+				<p className='text-sm lowercase'>{props.title}</p>
 			</div>
 		</div>
 	);

@@ -3,8 +3,13 @@ import Localize from '@/langs';
 import VisitsChart from '@/layout/dashboard/chart/visitsOfMusic';
 import PodcastChart from '@/layout/dashboard/chart/visitsOfPodcast';
 import StatisticalList from '@/layout/dashboard/list/statistical';
+import { Summary } from '@/services/other/summary';
 
-function View() {
+type ViewProps = {
+	summary: Summary;
+};
+
+function View(props: ViewProps) {
 	return (
 		<div className='pr-4 py-8'>
 			<Wrapper>
@@ -13,7 +18,7 @@ function View() {
 					<p>It is a long established fact that a reader will be distra</p>
 				</div>
 				<div className='flex flex-col gap-4'>
-					<StatisticalList />
+					<StatisticalList summary={props.summary} />
 					<div className='flex gap-6'>
 						<VisitsChart />
 						<PodcastChart />

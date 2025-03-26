@@ -38,6 +38,9 @@
             "_": "/playlist",
             "uploadCover": "/playlist/uploadCover",
             "details": "/playlist/details"
+        },
+        "other": {
+            "summary": "/other/summary"
         }
     },
     "cookie": {

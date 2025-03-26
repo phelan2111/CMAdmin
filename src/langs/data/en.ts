@@ -210,4 +210,5 @@ export const dataLocalizeEN: Record<string, string> = {
 	UPDATE_INFORMATION_PLAYLIST: 'Update information playlist',
 	UPDATE_INFORMATION_DESCRIPTION: 'You are changing data of playlist.',
 	SONG_REQUIRED: 'Playlist must have 1 song',
+	USERS: 'Users',
 };
