@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { Helper } from '@/utils/helper';
 import { useMemo } from 'react';
 
 type ProcessPlaySongProps = {
@@ -10,19 +11,11 @@ function ProcessPlaySong({ duration = 1, timeCurrent }: ProcessPlaySongProps) {
 		const widthOfPer = Math.floor(400 / duration);
 		return !isFinite(widthOfPer) ? 0 : widthOfPer;
 	}, [duration]);
-	const convertTime = (duration: number) => {
-		const minus = Math.floor(duration / 60);
-		const second = duration - minus * 60;
-		return {
-			minus: minus.toFixed(0),
-			second: second.toFixed(0),
-		};
-	};
 
 	return (
 		<div className='flex text-xs gap-2 items-center'>
 			<div>
-				{convertTime(timeCurrent).minus}:{convertTime(timeCurrent).second}
+				{Helper.convertTime(timeCurrent).minus}:{Helper.convertTime(timeCurrent).second}
 			</div>
 			<div className='w-[400px] h-1 rounded-xl overflow-hidden bg-primary_dark-20'>
 				<div
@@ -33,7 +26,7 @@ function ProcessPlaySong({ duration = 1, timeCurrent }: ProcessPlaySongProps) {
 				/>
 			</div>
 			<div>
-				{convertTime(duration).minus}:{convertTime(duration).second}
+				{Helper.convertTime(duration).minus}:{Helper.convertTime(duration).second}
 			</div>
 		</div>
 	);

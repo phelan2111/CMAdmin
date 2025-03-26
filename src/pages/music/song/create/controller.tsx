@@ -30,6 +30,7 @@ export default class Controller extends Component<ControllerProps> {
 			songName: dataItem.songName,
 			singers,
 			type: dataItem.setup.type,
+			duration: dataItem.setup.uploadData.duration,
 		};
 		this.props.onCreateSong(payload);
 	}

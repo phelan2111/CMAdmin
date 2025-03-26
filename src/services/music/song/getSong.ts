@@ -24,6 +24,7 @@ export type ResponseGetListSong = {
 	updatedAt: string;
 	singers: ResponseGetListArtist[];
 	type: TypeFileSetUpSong;
+	duration?: number;
 };
 
 function ServiceSongGetList(props?: ResponseHasResponseProps[]) {

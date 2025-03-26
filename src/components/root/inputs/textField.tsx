@@ -62,7 +62,7 @@ function TextField({
 				className={`relative flex h-fit bg-white/10 items-center gap-1 hover:bg-white/40 transition-all duration-500 focus-within:bg-white/40 px-2 rounded-sm ${className}`}>
 				{isIconStart && props.icon && props.icon.node}
 				<input
-					value={Helper.isEmpty(Localize(value)) ? value : Localize(value)}
+					value={Helper.isEmpty(Localize(JSON.stringify(value))) ? value : Localize(value)}
 					type={type}
 					name={name}
 					placeholder={props.placeholder}

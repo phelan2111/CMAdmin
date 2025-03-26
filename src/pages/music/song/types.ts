@@ -16,6 +16,7 @@ export type DataFormCreateSong = {
 export type Upload = {
 	src: string;
 	uploadId: string;
+	duration?: number;
 };
 
 export type DataFormUpdateIntro = {

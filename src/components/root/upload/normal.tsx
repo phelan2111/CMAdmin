@@ -7,6 +7,7 @@ export type DataUpload = {
 	file?: File;
 	uploadId: string;
 	src: string;
+	duration?: number;
 };
 export type RenderUploadProps = {
 	onDelete: (dataItem: DataUpload) => void;

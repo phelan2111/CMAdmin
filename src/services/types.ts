@@ -29,4 +29,5 @@ export type ResponseUpload = {
 	link: string;
 	name: string;
 	createAt: number;
+	duration?: number;
 };

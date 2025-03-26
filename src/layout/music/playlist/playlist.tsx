@@ -71,7 +71,9 @@ const Playlist = ({ name = '', classnameBlockLeft = 'w-2/3', classnameBlockRight
 				<EmptySongOfPlaylist key={songList.length} totalColumn={songList.length}>
 					<div className='h-[270px] overflow-y-scroll scrollHiddenY snap-mandatory snap-y'>
 						{songList.map((song) => {
-							return <ItemSongOfPlaylist artist={song.singers} name={song.songName} key={song.songId} img={song.image} />;
+							return (
+								<ItemSongOfPlaylist duration={song.duration} artist={song.singers} name={song.songName} key={song.songId} img={song.image} />
+							);
 						})}
 					</div>
 				</EmptySongOfPlaylist>

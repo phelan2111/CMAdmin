@@ -7,6 +7,7 @@ import TextField from '@/components/root/inputs/textField';
 import TextAreaField from '@/components/root/inputs/textarea';
 import Form from '@/components/root/form';
 import { FormUpdateInformation } from '../../types';
+import { string } from 'yup';
 
 interface IViewProps extends UpdateStatusProps {
 	onSubmit: (dataItem: FormUpdateInformation) => void;
@@ -22,7 +23,12 @@ function View(props: IViewProps) {
 					descriptionPlaylist: props.details.descriptionPlaylist,
 					theme: props.details.theme,
 				}}
-				render={({ getValues }) => {
+				validator={{
+					namePlaylist: string().required(),
+					descriptionPlaylist: string().required(),
+					theme: string().required(),
+				}}
+				render={({ getValues, formState }) => {
 					return (
 						<div className='flex flex-col gap-10'>
 							<div className='flex bg-gradient-to-b from-[#232323] rounded-lg overflow-hidden text-white'>
@@ -65,7 +71,7 @@ function View(props: IViewProps) {
 									</div>
 								</div>
 							</div>
-							<Button type='submit' className='text-white rounded-[6px] h-14'>
+							<Button disabled={!formState.isDirty || !formState.isValid} type='submit' className='text-white rounded-[6px] h-14'>
 								{Localize('SUBMIT')}
 							</Button>
 						</div>

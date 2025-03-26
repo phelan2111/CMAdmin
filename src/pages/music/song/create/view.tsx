@@ -4,7 +4,7 @@ import TextAreaField from '@/components/root/inputs/textarea';
 import Input from '@/components/ui/input/input';
 import Wrapper from '@/components/ui/wrapper/normal';
 import Localize from '@/langs';
-import { array, number, object, string } from 'yup';
+import { array, object, string } from 'yup';
 import AvatarUploadRequestSong from '@/components/ui/upload/request/avatar/avatarSong';
 import SingersSelect from '@/layout/music/song/singerSelect';
 import SetupSong from '@/layout/music/song/setUp';
@@ -20,6 +20,8 @@ function View(props: IViewProps) {
 		<div className='pr-4 py-8'>
 			<Form
 				defaultValues={{
+					songName: '',
+					songDescription: '',
 					setUp: {
 						uploadId: Helper.randomKey(),
 						src: '',
@@ -31,7 +33,6 @@ function View(props: IViewProps) {
 					songDescription: string().required('SONG_DESCRIPTION_REQUIRED'),
 					singers: array().min(1).required('SINGER_REQUIRED'),
 					setup: object().shape({
-						type: number().required('SETUP_REQUIRED'),
 						uploadData: object().shape({
 							src: string().required('SETUP_REQUIRED'),
 						}),

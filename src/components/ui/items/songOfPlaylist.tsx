@@ -6,9 +6,10 @@ type ItemSongOfPlaylistProps = {
 	name: string;
 	artist: Record<string, unknown>[];
 	viewSaved?: number;
+	duration?: number;
 };
 
-const ItemSongOfPlaylist = ({ viewSaved = 0, ...props }: ItemSongOfPlaylistProps) => {
+const ItemSongOfPlaylist = ({ viewSaved = 0, duration = 0, ...props }: ItemSongOfPlaylistProps) => {
 	const artist = useMemo(() => {
 		return props.artist.map((s) => s.singerName);
 	}, [props.artist]);
@@ -26,7 +27,11 @@ const ItemSongOfPlaylist = ({ viewSaved = 0, ...props }: ItemSongOfPlaylistProps
 				</div>
 			</div>
 			<p>{Helper.formatNumber(viewSaved)}</p>
-			<p>2:17</p>
+			<p>
+				{Helper.convertTime(duration).minus}
+				<span className='text-xs'>m</span> : {Helper.convertTime(duration).second}
+				<span className='text-xs'>s</span>
+			</p>
 		</div>
 	);
 };

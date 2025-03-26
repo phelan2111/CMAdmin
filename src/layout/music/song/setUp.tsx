@@ -49,6 +49,7 @@ function SetupSong({ name = '', ...props }: UploadMediaProps) {
 			const value: DataUpload = {
 				src: dataItem.link,
 				uploadId: Helper.randomKey(),
+				duration: dataItem.duration,
 			};
 			setUploadData(value);
 		},

@@ -70,4 +70,16 @@ export class Helper {
 		}
 		return obj;
 	}
+
+	static convertTime(duration: number) {
+		const minus = Math.floor(duration / 60);
+		const second = duration - minus * 60;
+		const hours = Math.floor(duration / 3600);
+
+		return {
+			minus: minus.toFixed(0),
+			second: second.toFixed(0),
+			hours: hours.toFixed(0),
+		};
+	}
 }

@@ -14,7 +14,8 @@ export type PayloadCreateSong = {
 	songDescription: string;
 	singers: SingerOfSong[];
 	link: string;
-	type: TypeFileSetUpSong
+	type: TypeFileSetUpSong;
+	duration?: number;
 };
 export type SingerOfSong = {
 	singerId: string;
