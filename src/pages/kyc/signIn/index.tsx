@@ -23,7 +23,7 @@ function SignIn() {
 				dayjs().unix() * 18000,
 			);
 			AuthService.setPackageProfile(res, expireAt);
-			redirectPage(PATH.HOME);
+			redirectPage(PATH.DASHBOARD);
 		},
 		onWrongPassword: () => {
 			onToast({ theme: ToastType.error, label: 'ACCOUNT_WRONG', content: 'USERNAME_OR_PASSWORD' });
