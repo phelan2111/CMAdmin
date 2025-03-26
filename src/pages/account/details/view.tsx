@@ -10,7 +10,7 @@ import dayjs from 'dayjs';
 import Empty from '@/components/ui/empty/normal';
 import EmptyComponent from '@/components/ui/common/empty';
 import PlaylistItem from '@/components/ui/items/playlist';
-import ActionAccount from '@/layout/account/action';
+import ActionStatus from '@/layout/account/action';
 import UpdateButton from '@/components/ui/button/update';
 import { Helper } from '@/utils/helper';
 import { Gender } from '@/utils/enums';
@@ -42,7 +42,7 @@ function View(props: ViewProps) {
 							</div>
 							<p>#{props.userDetails.userId}</p>
 						</div>
-						<ActionAccount
+						<ActionStatus
 							onActive={() => {
 								props.onUpdateUser({
 									renderComponent: (

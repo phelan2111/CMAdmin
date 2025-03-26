@@ -6,6 +6,7 @@ import { useMemo } from 'react';
 type ItemSongSelectProps = {
 	song: ResponseGetListSong;
 	onChange: (dataItem: ResponseGetListSong) => void;
+	checked?: boolean;
 };
 const ItemSongSelect = (props: ItemSongSelectProps) => {
 	const artist = useMemo(() => {
@@ -15,6 +16,7 @@ const ItemSongSelect = (props: ItemSongSelectProps) => {
 	return (
 		<div className='flex snap-start items-center gap-3 hover:bg-white/10 cursor-pointer px-3 py-2 transition-colors duration-300 border-b last-of-type:border-transparent'>
 			<Checkbox
+				checked={props.checked}
 				onChange={() => {
 					props.onChange(props.song);
 				}}

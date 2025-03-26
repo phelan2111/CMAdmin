@@ -5,6 +5,7 @@ import Localize from '@/langs';
 import IntroducePlaylist from '@/layout/music/playlist/introduce';
 import Playlist from '@/layout/music/playlist/playlist';
 import { FormCreatePlayList } from '../types';
+import { array, string } from 'yup';
 
 type ViewProps = {
 	onSubmit: (payload: FormCreatePlayList) => void;
@@ -18,6 +19,13 @@ const View = (props: ViewProps) => {
 					namePlaylist: '',
 					descriptionPlaylist: '',
 					theme: '#000',
+					songs: [],
+				}}
+				validator={{
+					songs: array().min(1).required(),
+					namePlaylist: string().required(),
+					descriptionPlaylist: string().required(),
+					theme: string().required(),
 				}}
 				onSubmit={props.onSubmit}
 				render={(renderProps) => {
@@ -31,11 +39,11 @@ const View = (props: ViewProps) => {
 									</div>
 								</div>
 							</div>
-							<div className='flex flex-col h-full animate-translateRight  bg-gradient-to-b from-[#232323] rounded-xl'>
+							<div className='flex flex-col h-full animate-translateRight bg-gradient-to-b from-[#232323] rounded-xl'>
 								<IntroducePlaylist dataForm={valueCurrent as FormCreatePlayList} />
-								<Playlist />
+								<Playlist name='songs' />
 							</div>
-							<Button disabled={!renderProps.formState} type='submit' className='text-white !rounded-md min-h-12 animate-translateRight'>
+							<Button disabled={!renderProps.formState.isValid} type='submit' className='text-white !rounded-md min-h-12 animate-translateRight'>
 								{Localize('SUBMIT')}
 							</Button>
 						</Wrapper>

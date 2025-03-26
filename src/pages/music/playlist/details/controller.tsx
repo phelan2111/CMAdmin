@@ -84,7 +84,7 @@ export default class Controller extends Component<ControllerProps, ControllerSta
 			<View
 				isLoading={this.props.isLoading}
 				playlistDetails={this.state.allState.playlistDetails}
-				onUpdateArtist={this.handleUpdate}
+				onUpdatePlaylist={this.handleUpdate}
 				onFreshRequest={this.handleFreshRequest}
 				onUploadCover={this.handleUploadCover}
 				onUploadAvatar={this.handleUploadAvatar}

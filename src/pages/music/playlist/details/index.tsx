@@ -9,14 +9,14 @@ import ServiceGetPlaylistDetails from '@/services/music/playlist/details';
 function PlaylistDetails() {
 	const params = useParams();
 
-	const { onPlayListDetails, isLoadingCreateSongService, response } = ServiceGetPlaylistDetails();
+	const { onPlayListDetails, isLoadingPlaylistDetailsService, response } = ServiceGetPlaylistDetails();
 
 	const { isLoadingUpdateArtistService, onUpdateArtist } = ServiceUpdateInformationArtist();
 
 	useBreadcrumb([
 		{
 			id: Helper.randomKey(),
-			text: 'Artist',
+			text: 'Playlist',
 			hasPrev: true,
 		},
 		{
@@ -28,7 +28,7 @@ function PlaylistDetails() {
 	return (
 		<LoadingDialog loading={isLoadingUpdateArtistService}>
 			<Controller
-				isLoading={isLoadingCreateSongService}
+				isLoading={isLoadingPlaylistDetailsService}
 				playlistId={params.playlistId as string}
 				playlistDetails={response}
 				onPlayListDetails={onPlayListDetails}

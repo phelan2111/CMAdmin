@@ -5,7 +5,7 @@ import { Helper } from '@/utils/helper';
 import ServiceGetListPlaylist from '@/services/music/playlist/getPlaylist';
 
 function PlaylistPage() {
-	const { isLoadingCreateSongService, onGetPlayList, response } = ServiceGetListPlaylist();
+	const { isLoadingGetPlaylistService, onGetPlayList, response } = ServiceGetListPlaylist();
 
 	useBreadcrumb([
 		{
@@ -14,7 +14,7 @@ function PlaylistPage() {
 		},
 	]);
 
-	return <Controller onGetPlaylist={onGetPlayList} data={response} isLoading={isLoadingCreateSongService} />;
+	return <Controller onGetPlaylist={onGetPlayList} data={response} isLoading={isLoadingGetPlaylistService} />;
 }
 
 export default PlaylistPage;

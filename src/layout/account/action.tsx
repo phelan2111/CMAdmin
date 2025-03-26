@@ -4,13 +4,13 @@ import { EnumStatusAccount } from '@/utils/enums';
 import { CiLock, CiUnlock } from 'react-icons/ci';
 import { Fragment } from 'react/jsx-runtime';
 
-type ActionAccountProps = {
+type ActionStatusProps = {
 	status: EnumStatusAccount;
 	onActive: VoidFunction;
 	onLock: VoidFunction;
 };
 
-function ActionAccount(props: ActionAccountProps) {
+function ActionStatus(props: ActionStatusProps) {
 	const isLock = props.status === EnumStatusAccount.lock;
 	const isActive = props.status === EnumStatusAccount.active;
 
@@ -37,4 +37,4 @@ function ActionAccount(props: ActionAccountProps) {
 	return <Fragment />;
 }
 
-export default ActionAccount;
+export default ActionStatus;

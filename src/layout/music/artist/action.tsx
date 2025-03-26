@@ -10,7 +10,7 @@ type ActionArtistProps = {
 	onLock: VoidFunction;
 };
 
-function ActionAccount(props: ActionArtistProps) {
+function ActionStatus(props: ActionArtistProps) {
 	const isLock = props.status === EnumStatusArtist.lock;
 	const isActive = props.status === EnumStatusArtist.active;
 
@@ -37,4 +37,4 @@ function ActionAccount(props: ActionArtistProps) {
 	return <Fragment />;
 }
 
-export default ActionAccount;
+export default ActionStatus;

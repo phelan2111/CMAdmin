@@ -45,7 +45,6 @@ function GenresSelect({ name = '', className = '', defaultValue = [] }: GenresSe
 		});
 	}, []);
 
-	console.log('genresState', genresState);
 
 	return (
 		<div className='grid grid-cols-6 gap-6'>

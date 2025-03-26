@@ -18,7 +18,7 @@ export default class Controller extends Component<ControllerProps> {
 			descriptionPlaylist: dataForm.descriptionPlaylist,
 			image: dataForm.image.src,
 			namePlaylist: dataForm.namePlaylist,
-			songs: dataForm.songList.value.map((i) => i.songId),
+			songs: dataForm.songs.map((i) => i.songId),
 			theme: dataForm.theme,
 		};
 		this.props.onCreate(payload);

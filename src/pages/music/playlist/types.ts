@@ -3,7 +3,13 @@ export type FormCreatePlayList = {
 	descriptionPlaylist: string;
 	theme: string;
 	image: Image;
-	songList: SongList;
+	songs: ItemSong[];
+};
+
+export type FormUpdateInformation = {
+	descriptionPlaylist: string;
+	namePlaylist: string;
+	theme: string;
 };
 
 export interface Image {
@@ -11,11 +17,7 @@ export interface Image {
 	uploadId: string;
 }
 
-export interface SongList {
-	value: Value[];
-}
-
-export interface Value {
+export interface ItemSong {
 	songName: string;
 	image: string;
 	songDescription: string;
@@ -45,3 +47,28 @@ export interface Socials {
 	facebook: string;
 	instagram: string;
 }
+
+
+export type FormUpdateSongs = {
+	songs: ItemSongFormUpdate[];
+};
+
+export type ItemSongFormUpdate = {
+	songName: string;
+	image: string;
+	songDescription: string;
+	link: string;
+	views: number;
+	status: number;
+	songId: string;
+	type: number;
+	singers: ItemSingerFormUpdate[];
+};
+
+export type ItemSingerFormUpdate = {
+	singerName: string;
+	singerAvatar: string;
+	singerId: string;
+	status: number;
+	followers: number;
+};

@@ -5,7 +5,7 @@ import Localize from '@/langs';
 type EmptySongOfPlaylistProps = { totalColumn: number; children: ReactNode };
 
 function EmptySongOfPlaylist(props: EmptySongOfPlaylistProps) {
-	if (props.totalColumn > 0) {
+	if (props?.totalColumn > 0) {
 		return <Fragment>{props.children}</Fragment>;
 	}
 	return (

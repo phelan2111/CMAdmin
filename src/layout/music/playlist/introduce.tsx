@@ -28,7 +28,7 @@ const IntroducePlaylist = (props: IntroducePlaylistProps) => {
 				<UploadRequest name='image' className='rounded-lg min-w-60 size-60' />
 				<div className='text-sm flex flex-col gap-1 justify-between h-full'>
 					<p>{Localize('PLAYLIST')}</p>
-					<p className='text-8xl font-bold py-4'>{props?.dataForm?.namePlaylist}</p>
+					<p className='text-6xl font-bold py-4'>{props?.dataForm?.namePlaylist}</p>
 					<div className='flex flex-col gap-1'>
 						<p className='line-clamp-2'>{props?.dataForm?.descriptionPlaylist}</p>
 						<div className='flex items-center gap-1'>

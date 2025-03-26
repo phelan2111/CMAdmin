@@ -10,11 +10,12 @@ interface ICheckboxProps {
 	className?: string;
 	name?: string;
 	onChange?: VoidFunction;
+	checked?: boolean;
 }
 
-function Checkbox(props: ICheckboxProps) {
+function Checkbox({ checked = false, ...props }: ICheckboxProps) {
 	const isVertical = props.label?.direction === 'vertical';
-	const [isChecked, setIsChecked] = useState<boolean>(false);
+	const [isChecked, setIsChecked] = useState<boolean>(checked);
 
 	const handleChange = () => {
 		setIsChecked((prev) => !prev);

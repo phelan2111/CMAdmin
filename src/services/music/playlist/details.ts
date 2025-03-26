@@ -99,7 +99,7 @@ function ServiceGetPlaylistDetails(props?: ResponseHasResponseProps) {
 			},
 		],
 	} = useRequest({
-		keyQuery: ['CREATE_PLAYLIST'],
+		keyQuery: ['DETAILS_PLAYLIST'],
 		request,
 	});
 
@@ -124,7 +124,7 @@ function ServiceGetPlaylistDetails(props?: ResponseHasResponseProps) {
 
 	return {
 		onPlayListDetails: handleMutate,
-		isLoadingCreateSongService: isPending,
+		isLoadingPlaylistDetailsService: isPending,
 		response: useMemo(() => {
 			return data.data as ResponsePlaylistDetails;
 		}, [data]),

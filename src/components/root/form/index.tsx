@@ -16,7 +16,7 @@ interface IFormRenderProps {
 		submitCount: number;
 		errors: unknown;
 	};
-	getValues: UseFormGetValues<{ test: string }>;
+	getValues: UseFormGetValues<Record<string, unknown>>;
 	getFieldState: UseFormGetFieldState<{
 		test: string;
 	}>;

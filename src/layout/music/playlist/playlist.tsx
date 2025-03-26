@@ -6,7 +6,7 @@ import ItemSongOfPlaylist from '@/components/ui/items/songOfPlaylist';
 import Localize from '@/langs';
 import ItemSongSelect from './items/songSelect';
 import ServiceSongGetList, { ResponseGetListSong } from '@/services/music/song/getSong';
-import { PayloadRequestList, ResponseRequest } from '@/services/types';
+import { PayloadRequestList } from '@/services/types';
 import { useEffect, useMemo, useState } from 'react';
 import { FROM, LIMIT, SORT } from '@/utils/variables';
 import { EnumStatusSong } from '@/utils/enums';
@@ -16,31 +16,18 @@ import { useFormContext } from 'react-hook-form';
 type PlaylistProps = {
 	defaultValue?: string[];
 	name?: string;
+	classnameBlockRight?: string;
+	classnameBlockLeft?: string;
 };
-const Playlist = ({ name = '', defaultValue = [] }: PlaylistProps) => {
+const Playlist = ({ name = '', classnameBlockLeft = 'w-2/3', classnameBlockRight = 'w-1/3', defaultValue = [] }: PlaylistProps) => {
 	const form = useFormContext();
 
-	const initialValue: string[] = useMemo(() => {
+	const initialValue: ResponseGetListSong[] = useMemo(() => {
 		return form?.getValues()?.[name] ?? defaultValue;
 	}, [defaultValue, form, name]);
 
-	const { onGetListSong, response } = ServiceSongGetList([
-		{
-			onSuccess: (dataItem) => {
-				const res = dataItem as ResponseRequest<ResponseGetListSong>;
-				const initialList: ResponseGetListSong[] = [];
-				for (let index = 0; index < res.list.length; index++) {
-					const song = res.list[index];
-					const { isExist } = Helper.findItem(initialValue as never, 'songId', song.songId);
-					if (isExist) {
-						initialList.push(song);
-					}
-				}
-				setSongList(initialList);
-			},
-		},
-	]);
-	const [songList, setSongList] = useState<ResponseGetListSong[]>([]);
+	const { onGetListSong, response } = ServiceSongGetList();
+	const [songList, setSongList] = useState<ResponseGetListSong[]>(initialValue);
 
 	const [payload, setPayload] = useState<PayloadRequestList>({
 		from: FROM,
@@ -72,18 +59,16 @@ const Playlist = ({ name = '', defaultValue = [] }: PlaylistProps) => {
 
 	useEffect(() => {
 		onGetListSong(payload);
-	}, [payload]);
+	}, [JSON.stringify(payload)]);
 	useEffect(() => {
-		form.setValue('songList', {
-			value: songList,
-		});
+		form.setValue(name, songList, { shouldValidate: true, shouldDirty: true, shouldTouch: true });
 	}, [songList]);
 
 	return (
-		<div className='flex h-full'>
-			<div className='w-2/3 px-6 flex flex-col gap-6  rounded-es-xl'>
+		<div className='flex h-full w-full'>
+			<div className={`px-6 flex flex-col gap-6  rounded-es-xl ${classnameBlockLeft}`}>
 				<p className='text-2xl font-medium'>{Localize('SONGS_OF_PLAYLIST')}</p>
-				<EmptySongOfPlaylist totalColumn={songList.length}>
+				<EmptySongOfPlaylist key={songList.length} totalColumn={songList.length}>
 					<div className='h-[270px] overflow-y-scroll scrollHiddenY snap-mandatory snap-y'>
 						{songList.map((song) => {
 							return <ItemSongOfPlaylist artist={song.singers} name={song.songName} key={song.songId} img={song.image} />;
@@ -91,14 +76,16 @@ const Playlist = ({ name = '', defaultValue = [] }: PlaylistProps) => {
 					</div>
 				</EmptySongOfPlaylist>
 			</div>
-			<div className='w-1/3 bg-primary_dark-10 px-6 flex flex-col gap-6 rounded-ee-xl select-none'>
+			<div className={`bg-primary_dark-10 px-6 flex flex-col gap-6 rounded-ee-xl select-none ${classnameBlockRight}`}>
 				<p className='text-2xl font-medium'>{Localize('LIST_SONG')}</p>
 				<div className='flex flex-col gap-4'>
 					<SearchTool onChange={handleSearch} className='w-full' label='' placeholder='Search name or songId' />
 					<div className='h-[200px] overflow-y-scroll scrollHiddenY snap-mandatory snap-y'>
 						<EmptySong totalColumn={response?.total}>
 							{response?.list?.map((song) => {
-								return <ItemSongSelect onChange={handleSelectedSong} song={song} key={song.songId} />;
+								const { isExist } = Helper.findItem(songList, 'songId', song.songId);
+
+								return <ItemSongSelect checked={isExist} onChange={handleSelectedSong} song={song} key={song.songId} />;
 							})}
 						</EmptySong>
 					</div>

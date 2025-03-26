@@ -47,7 +47,7 @@ function ServiceGetListPlaylist(props?: ResponseHasResponseProps) {
 			},
 		],
 	} = useRequest({
-		keyQuery: ['CREATE_PLAYLIST'],
+		keyQuery: ['GET_PLAYLIST'],
 		request,
 	});
 
@@ -72,7 +72,7 @@ function ServiceGetListPlaylist(props?: ResponseHasResponseProps) {
 
 	return {
 		onGetPlayList: handleMutate,
-		isLoadingCreateSongService: isPending,
+		isLoadingGetPlaylistService: isPending,
 		response: useMemo(() => {
 			return data.data as ResponseRequest<ResponsePlaylist>;
 		}, [data]),

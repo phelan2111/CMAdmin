@@ -5,7 +5,7 @@ import { FucCreateGenreProps } from '@/pages/browse/genre/types';
 import { DataUpload } from '@/components/root/upload/normal';
 import { ResponseGetArtistDetails } from '@/services/music/artist/getDetails';
 import StatusArtist from '@/components/ui/status/artist';
-import ActionAccount from '@/layout/account/action';
+import ActionStatus from '@/layout/account/action';
 import UpdateButton from '@/components/ui/button/update';
 import Item from '@/components/ui/items/normal';
 import Empty from '@/components/ui/empty/normal';
@@ -43,7 +43,7 @@ function View(props: ViewProps) {
 							</div>
 							<p>#{props.artistDetails.singerId}</p>
 						</div>
-						<ActionAccount
+						<ActionStatus
 							status={props.artistDetails.status}
 							onActive={() => {
 								props.onUpdateArtist({
