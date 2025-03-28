@@ -34,23 +34,20 @@ export default defineConfig({
 		},
 	},
 	build: {
+		target: 'esnext',
+		outDir: 'dist',
+		sourcemap: false,
 		rollupOptions: {
 			output: {
-				assetFileNames: (assetInfo: any) => {
-					let extType = assetInfo.name.split('.').at(1);
-					if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
-						extType = 'img';
-					}
-					return `assets/${extType}/[name]-[hash][extname]`;
-				},
-				chunkFileNames: 'assets/js/[name]-[hash].js',
-				entryFileNames: 'assets/js/[name]-[hash].js',
+				entryFileNames: 'index.js',
+				chunkFileNames: 'js/chunk-[hash].js',
+				assetFileNames: 'assets/assets-[hash].[ext]',
 			},
 		},
 	},
 	server: {
 		open: true,
 		port: 3000,
-		host: true,
+		host: '0.0.0.0',
 	},
 });
