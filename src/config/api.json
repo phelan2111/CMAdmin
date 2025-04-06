@@ -1,6 +1,6 @@
 {
     "api": {
-        "host": "http://172.16.6.102:8000",
+        "host": "https://d85b-115-77-68-142.ngrok-free.app",
         "artist": {
             "_": "/singer",
             "details": "/singer/details",
