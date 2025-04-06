@@ -5,6 +5,7 @@ import { Fragment, useMemo, useState } from 'react';
 import Localize from '@/langs';
 import { Helper } from '@/utils/helper';
 import { FROM, LIMIT } from '@/utils/variables';
+
 type PagingProps = {
 	onChange?: (dataPaging: PagingState) => void;
 	totalRecord: number;

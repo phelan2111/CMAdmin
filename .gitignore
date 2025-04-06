@@ -12,6 +12,8 @@ dist
 build
 build-ssr
 dist-ssr
+cert.pem
+key.pem
 *.local
 
 # Editor directories and files

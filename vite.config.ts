@@ -1,9 +1,10 @@
+/* eslint-disable import/default */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import path from 'path';
-// eslint-disable-next-line import/default
 import eslint from 'vite-plugin-eslint';
+import fs from 'fs';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -47,7 +48,11 @@ export default defineConfig({
 	},
 	server: {
 		open: true,
-		port: 3000,
+		https: {
+			key: fs.readFileSync(path.resolve(__dirname, './key.pem')),
+			cert: fs.readFileSync(path.resolve(__dirname, './cert.pem')),
+		},
+		port: 4000,
 		host: '0.0.0.0',
 	},
 });
