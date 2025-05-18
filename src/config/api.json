@@ -1,6 +1,6 @@
 {
     "api": {
-        "host": "https://d85b-115-77-68-142.ngrok-free.app",
+        "host": "https://cohesivemusicbe-production.up.railway.app",
         "artist": {
             "_": "/singer",
             "details": "/singer/details",
