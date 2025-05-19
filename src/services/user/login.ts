@@ -22,6 +22,7 @@ export type ResponseLogin = {
 	};
 	token: string;
 };
+const ADMIN_ROLE = 0;
 
 function ServiceUserLogin(props?: ResponseHasResponseProps) {
 	const { onToast } = useContext(ToastContext);
@@ -37,22 +38,28 @@ function ServiceUserLogin(props?: ResponseHasResponseProps) {
 	});
 
 	const handleMutate = (payload: PayloadLogin) => {
-		mutate(payload, {
-			onSuccess: (data) => {
-				Logger.debug('ServiceUserLogin execute handleMutate success', data);
-				const funcName = parseCodeToNameFunc[data.code as unknown as CODE];
-				const hasFunc = Helper.isEmpty(props?.[funcName as string]);
-				if (hasFunc) {
-					onToast({ theme: ToastType.error, label: Localize('SYSTEM_ERROR'), content: Localize('SOMETHING_WERE_WRONG') });
-				} else {
-					props?.[funcName as string](data?.data);
-				}
+		mutate(
+			{
+				...payload,
+				role: ADMIN_ROLE,
 			},
-			onError: (error) => {
-				Logger.error('ServiceUserLogin execute handleMutate success', error.toString());
-				props?.onError?.();
+			{
+				onSuccess: (data) => {
+					Logger.debug('ServiceUserLogin execute handleMutate success', data);
+					const funcName = parseCodeToNameFunc[data.code as unknown as CODE];
+					const hasFunc = Helper.isEmpty(props?.[funcName as string]);
+					if (hasFunc) {
+						onToast({ theme: ToastType.error, label: Localize('SYSTEM_ERROR'), content: Localize('SOMETHING_WERE_WRONG') });
+					} else {
+						props?.[funcName as string](data?.data);
+					}
+				},
+				onError: (error) => {
+					Logger.error('ServiceUserLogin execute handleMutate success', error.toString());
+					props?.onError?.();
+				},
 			},
-		});
+		);
 	};
 
 	return {

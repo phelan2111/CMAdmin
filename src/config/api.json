@@ -15,7 +15,7 @@
         },
         "user": {
             "_": "/user",
-            "login": "/user/login",
+            "login": "/user/loginWithBO",
             "verifyUserName": "/user/verifyUsername",
             "verifyOTP": "/user/verifyOTP",
             "register": "/user/register",
