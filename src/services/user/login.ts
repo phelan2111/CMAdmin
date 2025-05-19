@@ -14,11 +14,13 @@ type PayloadLogin = {
 	password: string;
 };
 export type ResponseLogin = {
-	email: string;
-	firstName: string;
-	lastName: string;
+	info: {
+		email: string;
+		firstName: string;
+		lastName: string;
+		role: number;
+	};
 	token: string;
-	role: number;
 };
 
 function ServiceUserLogin(props?: ResponseHasResponseProps) {

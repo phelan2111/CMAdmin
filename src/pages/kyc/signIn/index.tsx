@@ -22,7 +22,7 @@ function SignIn() {
 				},
 				dayjs().unix() * 18000,
 			);
-			AuthService.setPackageProfile(res, expireAt);
+			AuthService.setPackageProfile(res.info, expireAt);
 			redirectPage(PATH.DASHBOARD);
 		},
 		onWrongPassword: () => {
