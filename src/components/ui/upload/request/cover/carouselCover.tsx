@@ -18,7 +18,7 @@ import { UploadCarouselProps } from '../../types';
 function UploadCarouselCoverArtistRequest({
 	name = '',
 	isDetails = false,
-	src = ['http://res.cloudinary.com/dkvhfe4uu/image/upload/v1730217804/user/image/pexels-vishnurnair-1105666_qf6gvs.jpg'],
+	src = ['https://res.cloudinary.com/dkvhfe4uu/image/upload/v1748598425/singer/image/cover/pexels-maoriginalphotography-1485894_gt0xpz.jpg'],
 	...props
 }: UploadCarouselProps) {
 	const form = useFormContext();

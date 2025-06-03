@@ -13,7 +13,7 @@ import { UploadAvatarProps } from '../../types';
 
 function UploadCoverRequestAccount({
 	name = '',
-	src = 'http://res.cloudinary.com/dkvhfe4uu/image/upload/v1730217804/user/image/pexels-vishnurnair-1105666_qf6gvs.jpg',
+	src = 'https://res.cloudinary.com/dkvhfe4uu/image/upload/v1748598392/singer/image/avatar/pexels-steve-30889893_haorin.jpg',
 }: UploadAvatarProps) {
 	const form = useFormContext();
 

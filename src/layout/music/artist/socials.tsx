@@ -15,7 +15,7 @@ function Socials(props: SocialsProps) {
 				{props.icon}
 				<p>{Localize(props.text)}</p>
 			</div>
-			<Input className={props.className} name={props.name} />
+			<Input className={props.className} classNameInput='!text-white' name={props.name} />
 		</div>
 	);
 }

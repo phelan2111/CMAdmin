@@ -8,7 +8,7 @@ import { MdOutlineFileUpload, MdOutlineSaveAlt } from 'react-icons/md';
 import { UploadAvatarProps } from '../../../../layout/account/upload/types';
 
 function UploadCoverAccount({
-	src = 'http://res.cloudinary.com/dkvhfe4uu/image/upload/v1730217804/user/image/pexels-vishnurnair-1105666_qf6gvs.jpg',
+	src = 'https://res.cloudinary.com/dkvhfe4uu/image/upload/v1748598392/singer/image/avatar/pexels-steve-30889893_haorin.jpg',
 	...props
 }: UploadAvatarProps) {
 	const [uploadData, setUploadData] = useState<DataUpload>({

@@ -11,7 +11,7 @@ import Avatar from '@/components/root/image/avatar';
 import CloseButton from '../../button/close';
 
 function UploadCarouselCover({
-	src = ['http://res.cloudinary.com/dkvhfe4uu/image/upload/v1730217804/user/image/pexels-vishnurnair-1105666_qf6gvs.jpg'],
+	src = ['https://res.cloudinary.com/dkvhfe4uu/image/upload/v1748598392/singer/image/avatar/pexels-steve-30889893_haorin.jpg'],
 	...props
 }: UploadCarouselProps) {
 	const [uploadData, setUploadData] = useState<DataUpload[]>(src.map((i) => ({ src: i, uploadId: Helper.randomKey() })));

@@ -56,7 +56,7 @@ function View(props: IViewProps) {
 														<TextField required label='ARTIST_NAME' name='singerName' />
 														<TextAreaField
 															className='!rounded-lg'
-															classNameTextArea='!text-primary_dark'
+															classNameTextArea='!text-white'
 															required
 															label='ARTIST_DESCRIPTION'
 															name='singerDescription'
