@@ -1,6 +1,6 @@
 {
     "api": {
-        "host": "http://localhost:3000",
+        "host": "cohesivemusicbe-production.up.railway.app",
         "artist": {
             "_": "/singer",
             "details": "/singer/details",
