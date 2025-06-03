@@ -16,7 +16,7 @@ import { ToastContext, ToastType } from '@/contexts/toast';
 
 function AvatarUploadRequestSong({
 	name = '',
-	src = 'http://res.cloudinary.com/dkvhfe4uu/image/upload/v1730217712/user/image/pexels-pixabay-161154_sclyji.jpg',
+	src = 'https://res.cloudinary.com/dkvhfe4uu/image/upload/v1748598392/singer/image/avatar/pexels-steve-30889893_haorin.jpg',
 	isDetails = false,
 	...props
 }: UploadAvatarProps) {
