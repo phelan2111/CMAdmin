@@ -3,6 +3,7 @@ import Video from '@/components/root/video/video';
 import SetUpSongControl from '@/components/ui/control/setUpSong';
 import BallLoader from '@/components/ui/loader/ball';
 import Localize from '@/langs';
+import { TypeFileSetUpSong } from '@/utils/enums';
 import { ChangeEvent, useRef, useState } from 'react';
 import { MdOutlineFileUpload } from 'react-icons/md';
 type DurationVideo = {
@@ -15,6 +16,7 @@ type SongUploadProps = {
 	isDetails?: boolean;
 	onChange: (dataItem: ChangeEvent<HTMLInputElement>) => void;
 	data: DataUpload;
+	typeUpload: TypeFileSetUpSong;
 };
 
 function SongUpload(props: SongUploadProps) {
@@ -71,15 +73,20 @@ function SongUpload(props: SongUploadProps) {
 							<MdOutlineFileUpload className='text-2xl text-primary_light' />
 							{Localize('UPLOAD')}
 						</p>
-						<input
-							accept='video/mp4,video/x-m4v,video/*'
-							multiple
-							onChange={props.onChange}
-							className='hidden'
-							name='songVideo'
-							id='songVideo'
-							type='file'
-						/>
+						{props.typeUpload === TypeFileSetUpSong.mp3 && (
+							<input accept='audio/*' multiple onChange={props.onChange} className='hidden' name='songVideo' id='songVideo' type='file' />
+						)}
+						{props.typeUpload === TypeFileSetUpSong.video && (
+							<input
+								accept='video/mp4,video/x-m4v,video/*'
+								multiple
+								onChange={props.onChange}
+								className='hidden'
+								name='songVideo'
+								id='songVideo'
+								type='file'
+							/>
+						)}
 					</label>
 				</div>
 			)}

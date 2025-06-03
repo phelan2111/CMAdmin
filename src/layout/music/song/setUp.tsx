@@ -92,7 +92,13 @@ function SetupSong({ name = '', ...props }: UploadMediaProps) {
 				<p className='text-sm'>(* {Localize('NOTE_UPLOAD_SONG')} )</p>
 			</div>
 			<div className='h-[470px]'>
-				<SongVideoUpload data={uploadData} isDetails={props.isDetails} onChange={handleOnChange} isLoading={isLoadingUploadMediaSongService} />
+				<SongVideoUpload
+					typeUpload={typeUpload}
+					data={uploadData}
+					isDetails={props.isDetails}
+					onChange={handleOnChange}
+					isLoading={isLoadingUploadMediaSongService}
+				/>
 			</div>
 		</div>
 	);
