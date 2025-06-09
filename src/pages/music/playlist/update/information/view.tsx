@@ -38,7 +38,7 @@ function View(props: IViewProps) {
 									}}
 									className={`p-6 w-2/3 flex gap-6 items-start relative`}>
 									<div>
-										<img className='rounded-lg object-cover min-w-60 size-60' src={props.details.image} alt='' />
+										<img loading='lazy' className='rounded-lg object-cover min-w-60 size-60' src={props.details.image} alt='' />
 									</div>
 									<div className='text-sm flex flex-col gap-1 justify-between h-full'>
 										<p>{Localize('PLAYLIST')}</p>

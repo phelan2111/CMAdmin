@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import background from '@/assets/kyc/backoffcice_KYC.jpg';
+import background from '@/assets/kyc/backoffcice_KYC.webp';
 import DrawerNormal from '../drawer/normal';
 import Header from '../header';
 

@@ -1,6 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { PATH } from './config';
-import { lazy } from 'react';
 import AuthWrapper from '@/components/ui/wrapper/auth';
 import ThemeColor from '@/components/root/themes/color';
 import AdminWrapper from '@/components/ui/wrapper/admin';
@@ -12,9 +11,9 @@ import { routeOther } from './other';
 import { routeArtist } from './music/artist';
 import { routeSong } from './music/song';
 import { routePlaylist } from './music/playlist';
+import SignIn from '@/pages/kyc/signIn';
 
 //KYC
-const SignIn = lazy(() => import('@/pages/kyc/signIn'));
 
 const router = createBrowserRouter([
 	{

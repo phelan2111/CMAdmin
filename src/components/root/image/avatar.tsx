@@ -18,15 +18,7 @@ function Avatar({ className = 'h-8 w-8 ', ...props }: IAvatarProps) {
 			</div>
 		);
 	}
-	return (
-		<img
-			onClick={props.onClick}
-			aria-hidden
-			className={`rounded-full object-cover ${className}`}
-			src={props.src}
-			alt={props.src}
-		/>
-	);
+	return <img loading='lazy' onClick={props.onClick} aria-hidden className={`rounded-full object-cover ${className}`} src={props.src} alt={props.src} />;
 }
 
 export default Avatar;

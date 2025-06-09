@@ -1,6 +1,6 @@
 import Localize from '@/langs';
 import LogoComponent from '../common/logo';
-import background from '@/assets/kyc/backoffcice_KYC.jpg';
+import background from '@/assets/kyc/backoffcice_KYC.webp';
 
 type LoaderScreenProps = {
 	className?: string;
