@@ -10,7 +10,7 @@ function SongPage() {
 	useBreadcrumb([
 		{
 			id: Helper.randomKey(),
-			text: 'Artist',
+			text: 'Song',
 		},
 	]);
 

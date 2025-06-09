@@ -46,6 +46,7 @@ function SongUpload(props: SongUploadProps) {
 			)}
 			<div className='h-[350px]'>
 				<Video
+					typeUpload={props.typeUpload}
 					key={props.data.src}
 					id='song'
 					onLoadedData={(event) => {

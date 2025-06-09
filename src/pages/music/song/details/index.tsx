@@ -28,7 +28,7 @@ function AccountDetails() {
 	useBreadcrumb([
 		{
 			id: Helper.randomKey(),
-			text: 'Artist',
+			text: 'Song',
 			hasPrev: true,
 		},
 		{

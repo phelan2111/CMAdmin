@@ -86,7 +86,7 @@ function SetupSong({ name = '', ...props }: UploadMediaProps) {
 					onChange={(dataItem) => {
 						setTypeUpload(dataItem.value as TypeFileSetUpSong);
 					}}
-					defaultValue={radioSongs[0]}
+					defaultValue={radioSongs.find(i => i.value === initialValue.type)}
 					data={radioSongs}
 				/>
 				<p className='text-sm'>(* {Localize('NOTE_UPLOAD_SONG')} )</p>
