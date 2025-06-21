@@ -1,6 +1,6 @@
 {
     "api": {
-        "host": "https://cohesivemusicbe-production.up.railway.app",
+        "host": "https://cohesivemusic-be.onrender.com",
         "artist": {
             "_": "/singer",
             "details": "/singer/details",
