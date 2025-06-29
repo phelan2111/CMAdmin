@@ -18,7 +18,7 @@ const View = (props: ViewProps) => {
 				defaultValues={{
 					namePlaylist: '',
 					descriptionPlaylist: '',
-					theme: '#000',
+					theme: '#000000',
 					songs: [],
 				}}
 				validator={{
